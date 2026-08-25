@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  const VERSION = '20260825s';
-  const CALCULATION_VERSION = 'placidus-20260825-1';
+  const VERSION = '20260825t';
+  const CALCULATION_VERSION = 'placidus-topocentric-20260825-2';
   const SIGN_KEYS = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
   const ELEMENTS = ['fire','earth','air','water'];
   const MODALITIES = ['cardinal','fixed','mutable'];
@@ -127,8 +127,17 @@
     }
     return new Date(guess);
   }
-  function eclipticLongitude(body, date) {
-    return norm(Astronomy.Ecliptic(Astronomy.GeoVector(Astronomy.Body[body], date, true)).elon);
+  function eclipticLongitude(body, date, observer) {
+    const geocentric = Astronomy.GeoVector(Astronomy.Body[body], date, true);
+    if (!observer) return norm(Astronomy.Ecliptic(geocentric).elon);
+    const observerVector = Astronomy.ObserverVector(date, observer, false);
+    const topocentric = new Astronomy.Vector(
+      geocentric.x - observerVector.x,
+      geocentric.y - observerVector.y,
+      geocentric.z - observerVector.z,
+      geocentric.t
+    );
+    return norm(Astronomy.Ecliptic(topocentric).elon);
   }
   // Placidus cusps: classic iterative semi-arc algorithm. The implementation
   // follows the independently validated MIT-licensed Caelus house algorithm.
@@ -186,8 +195,9 @@
     const knownTime = !child.birthTimeUnknown && Boolean(child.birthTime);
     const time = knownTime ? child.birthTime : '12:00';
     const date = localDateTimeToUtc(child.birthDate, time, child.timezone);
+    const observer = knownTime ? new Astronomy.Observer(Number(child.latitude), Number(child.longitude), 0) : null;
     const positions = {};
-    BODY_NAMES.forEach((body) => { positions[body] = {longitude:eclipticLongitude(body, date)}; });
+    BODY_NAMES.forEach((body) => { positions[body] = {longitude:eclipticLongitude(body, date, observer)}; });
     let moonAmbiguous = false;
     let moonSigns = [signIndex(positions.Moon.longitude)];
     if (!knownTime) {
@@ -220,7 +230,7 @@
     const counts = {fire:0,earth:0,air:0,water:0};
     ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn'].forEach((body) => { if (!(moonAmbiguous && body === 'Moon')) counts[SIGN_ELEMENT[positions[body].sign]] += 1; });
     const dominantElement = Object.keys(counts).sort((a,b) => counts[b]-counts[a])[0];
-    const chart = {calculationVersion:CALCULATION_VERSION, calculatedAt:new Date().toISOString(), engine:'Astronomy Engine 2.x / VSOP87 · Placidus houses', houseSystem:'Placidus', dateUtc:date.toISOString(), knownTime, moonAmbiguous, moonSigns, ascendant, houseCusps, positions, aspects, dominantElement};
+    const chart = {calculationVersion:CALCULATION_VERSION, calculatedAt:new Date().toISOString(), engine:'Astronomy Engine 2.x / VSOP87 · topocentric positions · Placidus houses', houseSystem:'Placidus', coordinateMode:knownTime?'topocentric':'geocentric', dateUtc:date.toISOString(), knownTime, moonAmbiguous, moonSigns, ascendant, houseCusps, positions, aspects, dominantElement};
     if (force || child.natalChart?.calculationVersion !== CALCULATION_VERSION) {
       child.natalChart = chart;
       child.sunSign = signName(positions.Sun.sign);

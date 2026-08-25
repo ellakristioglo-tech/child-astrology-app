@@ -41,6 +41,11 @@
     { id: 618405, name: 'Comrat', latitude: 46.29488, longitude: 28.65713, country_code: 'MD', timezone: 'Europe/Chisinau', country: 'Moldova', admin1: 'Gagauzia', population: 22911, feature_code: 'PPLA' },
     { id: 3178229, name: 'Como', latitude: 45.80819, longitude: 9.0832, country_code: 'IT', timezone: 'Europe/Rome', country: 'Italy', admin1: 'Lombardy', population: 84808, feature_code: 'PPLA2' }
   ];
+  const FEATURED_LABELS = {
+    ru: { 2759794: ['Северная Голландия', 'Нидерланды'], 2759798: ['Северная Голландия', 'Нидерланды'], 618405: ['Гагаузия', 'Молдова'], 3178229: ['Ломбардия', 'Италия'] },
+    ua: { 2759794: ['Північна Голландія', 'Нідерланди'], 2759798: ['Північна Голландія', 'Нідерланди'], 618405: ['Гагаузія', 'Молдова'], 3178229: ['Ломбардія', 'Італія'] },
+    nl: { 2759794: ['Noord-Holland', 'Nederland'], 2759798: ['Noord-Holland', 'Nederland'], 618405: ['Gagaoezië', 'Moldavië'], 3178229: ['Lombardije', 'Italië'] }
+  };
   const TOTAL_STEPS = 5;
   const cityCache = new Map();
   let wizard = null;
@@ -218,15 +223,20 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const payload = await response.json();
       const queryKey = query.toLocaleLowerCase();
-      const featured = FEATURED_CITIES.filter((city) => city.name.toLocaleLowerCase().startsWith(queryKey)).map(normaliseCity);
+      const featured = FEATURED_CITIES.filter((city) => city.name.toLocaleLowerCase().startsWith(queryKey)).map((city) => {
+        const labels = FEATURED_LABELS[currentLanguage]?.[city.id];
+        return normaliseCity(labels ? { ...city, admin1: labels[0], country: labels[1] } : city);
+      });
       const fetched = (payload.results || [])
         .filter((city) => String(city.feature_code || '').startsWith('PPL'))
         .map(normaliseCity)
         .filter((city) => city.city && city.country && city.label)
         .sort((a, b) => b.population - a.population);
+      const fetchedById = new Map(fetched.map((city) => [city.id, city]));
+      const featuredFirst = featured.map((city) => fetchedById.get(city.id) || city);
       const seen = new Set();
-      const cities = [...featured, ...fetched].filter((city) => {
-        const key = `${city.city}|${city.region}|${city.country}`.toLocaleLowerCase();
+      const cities = [...featuredFirst, ...fetched].filter((city) => {
+        const key = city.id ? `id:${city.id}` : `${city.latitude}|${city.longitude}`;
         if (seen.has(key)) return false;
         seen.add(key);
         return true;

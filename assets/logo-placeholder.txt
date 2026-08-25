@@ -1,0 +1,1 @@
+The logo image is referenced by the interface and installed app icon assets.

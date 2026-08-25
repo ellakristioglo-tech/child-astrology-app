@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  const VERSION = '20260825t';
-  const CALCULATION_VERSION = 'placidus-topocentric-20260825-2';
+  const VERSION = '20260825u';
+  const CALCULATION_VERSION = 'placidus-topocentric-20260825-3';
   const SIGN_KEYS = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
   const ELEMENTS = ['fire','earth','air','water'];
   const MODALITIES = ['cardinal','fixed','mutable'];
@@ -214,7 +214,7 @@
       BODY_NAMES.forEach((body) => { positions[body].house = houseFromCusps(positions[body].longitude, houseCusps); });
     }
     BODY_NAMES.forEach((body) => { positions[body].sign = signIndex(positions[body].longitude); });
-    const aspectTargets = [{key:'conjunction',angle:0,orb:8},{key:'sextile',angle:60,orb:5},{key:'square',angle:90,orb:7},{key:'trine',angle:120,orb:7},{key:'opposition',angle:180,orb:8}];
+    const aspectTargets = [{key:'conjunction',angle:0},{key:'sextile',angle:60},{key:'square',angle:90},{key:'trine',angle:120},{key:'opposition',angle:180}];
     const aspects = [];
     for (let i = 0; i < BODY_NAMES.length; i += 1) for (let j = i + 1; j < BODY_NAMES.length; j += 1) {
       const a = BODY_NAMES[i], b = BODY_NAMES[j];
@@ -222,8 +222,10 @@
       const raw = Math.abs(positions[a].longitude - positions[b].longitude);
       const distance = Math.min(raw, 360 - raw);
       aspectTargets.forEach((target) => {
+        const luminaryAspect = [a,b].some((body) => body === 'Sun' || body === 'Moon');
+        const allowedOrb = luminaryAspect ? ({conjunction:10,sextile:6,square:8,trine:8,opposition:10}[target.key]) : 5;
         const orb = Math.abs(distance - target.angle);
-        if (orb <= target.orb) aspects.push({a,b,type:target.key,angle:target.angle,orb});
+        if (orb <= allowedOrb) aspects.push({a,b,type:target.key,angle:target.angle,orb,allowedOrb});
       });
     }
     aspects.sort((a,b) => a.orb - b.orb);

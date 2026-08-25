@@ -217,7 +217,6 @@
     const moonElement = ELEMENT_GUIDE[l][SIGN_ELEMENT[moon.sign]];
     const mercuryElement = ELEMENT_GUIDE[l][SIGN_ELEMENT[mercury.sign]];
     const venusElement = ELEMENT_GUIDE[l][SIGN_ELEMENT[venus.sign]];
-    const marsElement = ELEMENT_GUIDE[l][SIGN_ELEMENT[mars.sign]];
     const sunAspect = relevantAspect(chart,'Sun',used), moonAspect = chart.knownTime ? relevantAspect(chart,'Moon',used) : null, mercuryAspect = relevantAspect(chart,'Mercury',used), venusAspect = relevantAspect(chart,'Venus',used), marsAspect = relevantAspect(chart,'Mars',used);
     const dominant = fill(t().dominant,{element:t().elementNames[chart.dominantElement]});
     const moonLabel = chart.moonAmbiguous ? chart.moonSigns.map(signName).join(' / ') : signName(moon.sign);
@@ -238,7 +237,7 @@
     content.push(section('strengths', list(strengths)));
     content.push(section('challenges', paragraphs([t().challengeHard, challengeAspect ? aspectText(challengeAspect) : '',t().challengeBalance])));
     content.push(section('social', paragraphs([venusElement.social,houseText('Venus',chart),aspectText(venusAspect)])));
-    content.push(section('sport', paragraphs([sportIntro,marsElement.emotion,houseText('Mars',chart),aspectText(marsAspect)])));
+    content.push(section('sport', paragraphs([sportIntro,houseText('Mars',chart),aspectText(marsAspect)])));
     content.push(section('parents', list(t().parentActions)));
     const planetRows = BODY_NAMES.map((body) => `<tr><td>${esc(t().planetNames[body])}</td><td>${esc(degreeText(chart.positions[body]))}</td><td>${chart.positions[body].house||'—'}</td></tr>`).join('');
     const aspectRows = chart.aspects.slice(0,12).map((a) => `<li>${esc(t().planetNames[a.a])} — ${esc(t().planetNames[a.b])}: ${esc(t().aspectNames[a.type])}, ${a.orb.toFixed(2)}°</li>`).join('');

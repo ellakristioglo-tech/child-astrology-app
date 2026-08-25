@@ -171,18 +171,15 @@
       const input = document.getElementById('childWizardDate');
       tryOpenPicker(input);
       input?.addEventListener('click', () => tryOpenPicker(input));
-      input?.addEventListener('change', () => window.setTimeout(nextStep, 120));
     }
     if (wizard.step === 2) {
       const input = document.getElementById('childWizardTime');
       const unknown = document.getElementById('childWizardTimeUnknown');
       if (!wizard.data.birthTimeUnknown) tryOpenPicker(input);
       input?.addEventListener('click', () => tryOpenPicker(input));
-      input?.addEventListener('change', () => window.setTimeout(nextStep, 120));
       unknown?.addEventListener('change', () => {
         input.disabled = unknown.checked;
-        if (unknown.checked) window.setTimeout(nextStep, 120);
-        else tryOpenPicker(input);
+        if (!unknown.checked) tryOpenPicker(input);
       });
     }
     if (wizard.step === 3) {

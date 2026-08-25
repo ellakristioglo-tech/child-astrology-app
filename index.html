@@ -10,11 +10,11 @@
     <link rel="manifest" href="manifest.webmanifest?v=20260825m">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=20260825m">
     <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png?v=20260825m">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="app.css?v=20260825m">
+    <link rel="stylesheet" href="app.css?v=20260825n">
     <link rel="stylesheet" href="branding.css?v=20260825e">
     <link rel="stylesheet" href="child-modal.css?v=20260825g">
-    <link rel="stylesheet" href="mobile-nav.css?v=20260825m">
+    <link rel="stylesheet" href="mobile-nav.css?v=20260825n">
+    <link rel="stylesheet" href="icon-theme.css?v=20260825n">
 </head>
 <body>
     <div class="app">
@@ -25,26 +25,25 @@
                 <div class="logo-subtitle">EK • Ella Kristioglo</div>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link active" data-section="home" onclick="showSection('home', event)"><span class="nav-icon">🏠</span><span data-lang="nav_home">Home</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="children" onclick="showSection('children', event)"><span class="nav-icon">👶</span><span data-lang="nav_children">Mijn kinderen</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="notes" onclick="showSection('notes', event)"><span class="nav-icon">📝</span><span data-lang="nav_notes">Notities</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="tarot" onclick="showSection('tarot', event)"><span class="nav-icon">🎴</span><span data-lang="nav_tarot">Tarot</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="method" onclick="showSection('method', event)"><span class="nav-icon">✨</span><span data-lang="nav_method">Methode</span></a></li>
-                <li class="nav-item"><a class="nav-link" onclick="showSection('sports', event)"><span class="nav-icon">🏃</span><span data-lang="nav_sports">Спорт</span></a></li>
-                <li class="nav-item"><a class="nav-link" onclick="showSection('learning', event)"><span class="nav-icon">📚</span><span data-lang="nav_learning">Школа</span></a></li>
-                <li class="nav-item"><a class="nav-link" onclick="showSection('tips', event)"><span class="nav-icon">💡</span><span data-lang="nav_tips">10 советов</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="consultation" onclick="showSection('consultation', event)"><span class="nav-icon">📱</span><span data-lang="nav_consultation">Consultaties</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="settings" onclick="showSection('settings', event)"><span class="nav-icon">⚙️</span><span data-lang="nav_settings">Instellingen</span></a></li>
+                <li class="nav-item"><a class="nav-link active" data-section="home" onclick="showSection('home', event)"><span class="nav-icon"><img src="assets/nav-icons/home.png?v=20260825n" alt=""></span><span data-lang="nav_home">Home</span></a></li>
+                <li class="nav-item"><a class="nav-link" data-section="children" onclick="showSection('children', event)"><span class="nav-icon"><img src="assets/nav-icons/children.png?v=20260825n" alt=""></span><span data-lang="nav_children">Mijn kinderen</span></a></li>
+                <li class="nav-item"><a class="nav-link" data-section="notes" onclick="showSection('notes', event)"><span class="nav-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></span><span data-lang="nav_notes">Notities</span></a></li>
+                <li class="nav-item"><a class="nav-link" data-section="tarot" onclick="showSection('tarot', event)"><span class="nav-icon"><img src="assets/nav-icons/tarot.png?v=20260825n" alt=""></span><span data-lang="nav_tarot">Tarot</span></a></li>
+                <li class="nav-item"><a class="nav-link" data-section="method" onclick="showSection('method', event)"><span class="nav-icon"><img src="assets/nav-icons/method.png?v=20260825n" alt=""></span><span data-lang="nav_method">Methode</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('sports', event)"><span class="nav-icon"><img src="assets/nav-icons/method.png?v=20260825n" alt=""></span><span data-lang="nav_sports">Спорт</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('learning', event)"><span class="nav-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></span><span data-lang="nav_learning">Школа</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('tips', event)"><span class="nav-icon"><img src="assets/nav-icons/home.png?v=20260825n" alt=""></span><span data-lang="nav_tips">10 советов</span></a></li>
+                <li class="nav-item"><a class="nav-link" data-section="consultation" onclick="showSection('consultation', event)"><span class="nav-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></span><span data-lang="nav_consultation">Consultaties</span></a></li>
+                <li class="nav-item"><a class="nav-link" data-section="settings" onclick="showSection('settings', event)"><span class="nav-icon"><img src="assets/nav-icons/settings.png?v=20260825n" alt=""></span><span data-lang="nav_settings">Instellingen</span></a></li>
             </ul>
         </nav>
         <main class="main-content">
             <section id="home" class="section active">
-                <div class="welcome-banner"><h2 data-lang="home_title">Welcome to Child Astrology</h2><p data-lang="home_welcome">Understand your child more deeply. Not a label or prediction, but new questions, observations and ways to support them.</p></div>
                 <div class="quick-actions">
-                    <div class="action-card" onclick="showSection('children', event)"><div class="action-icon">👶</div><div class="action-title" data-lang="action_add_child">Добавить ребёнка</div><div class="action-desc" data-lang="action_add_child_desc">Создайте профиль и начните наблюдения</div></div>
-                    <div class="action-card" onclick="showSection('notes', event)"><div class="action-icon">📝</div><div class="action-title" data-lang="action_new_note">Новая пометка</div><div class="action-desc" data-lang="action_new_note_desc">Запишите свои наблюдения</div></div>
-                    <div class="action-card" onclick="showSection('tarot', event)"><div class="action-icon">🎴</div><div class="action-title" data-lang="action_tarot">Tarot voor reflectie</div><div class="action-desc" data-lang="action_tarot_desc">Получите карту для размышлений</div></div>
-                    <div class="action-card" onclick="showSection('consultation', event)"><div class="action-icon">📱</div><div class="action-title" data-lang="action_consultation">Консультация</div><div class="action-desc" data-lang="action_consultation_desc">Свяжитесь с Эллой через WhatsApp</div></div>
+                    <div class="action-card" onclick="showSection('children', event)"><div class="action-icon"><img src="assets/nav-icons/children.png?v=20260825n" alt=""></div><div class="action-title" data-lang="action_add_child">Добавить ребёнка</div><div class="action-desc" data-lang="action_add_child_desc">Создайте профиль и начните наблюдения</div></div>
+                    <div class="action-card" onclick="showSection('notes', event)"><div class="action-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></div><div class="action-title" data-lang="action_new_note">Новая пометка</div><div class="action-desc" data-lang="action_new_note_desc">Запишите свои наблюдения</div></div>
+                    <div class="action-card" onclick="showSection('tarot', event)"><div class="action-icon"><img src="assets/nav-icons/tarot.png?v=20260825n" alt=""></div><div class="action-title" data-lang="action_tarot">Tarot voor reflectie</div><div class="action-desc" data-lang="action_tarot_desc">Получите карту для размышлений</div></div>
+                    <div class="action-card" onclick="showSection('consultation', event)"><div class="action-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></div><div class="action-title" data-lang="action_consultation">Консультация</div><div class="action-desc" data-lang="action_consultation_desc">Свяжитесь с Эллой через WhatsApp</div></div>
                 </div>
             </section>
             <section id="children" class="section"><div class="card"><h2 class="card-title">👶 <span data-lang="children_title">Mijn kinderen</span></h2><div class="child-grid" id="childrenGrid"></div><button class="btn btn-primary" onclick="addChild()" style="margin-top:25px"><span>➕</span><span data-lang="btn_add_child">Kind toevoegen</span></button></div></section>
@@ -59,12 +58,12 @@
         </main>
     </div>
     <nav class="mobile-bottom-nav" aria-label="Primary navigation">
-        <a class="mobile-nav-link nav-link active" data-section="home" onclick="showSection('home', event)" aria-label="Home"><i class="fa-solid fa-house" aria-hidden="true"></i><span data-lang="nav_home">Home</span></a>
-        <a class="mobile-nav-link nav-link" data-section="children" onclick="showSection('children', event)" aria-label="Children"><i class="fa-regular fa-heart" aria-hidden="true"></i><span data-lang="nav_children_short">Children</span></a>
-        <a class="mobile-nav-link nav-link" data-section="consultation" onclick="showSection('consultation', event)" aria-label="Consultations"><i class="fa-regular fa-user" aria-hidden="true"></i><span data-lang="nav_consultation_short">Consultations</span></a>
-        <a class="mobile-nav-link nav-link" data-section="tarot" onclick="showSection('tarot', event)" aria-label="Tarot"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i><span data-lang="nav_tarot">Tarot</span></a>
-        <a class="mobile-nav-link nav-link" data-section="method" onclick="showSection('method', event)" aria-label="Method"><i class="fa-solid fa-book-open" aria-hidden="true"></i><span data-lang="nav_method">Method</span></a>
-        <a class="mobile-nav-link nav-link" data-section="settings" onclick="showSection('settings', event)" aria-label="Settings"><i class="fa-solid fa-gear" aria-hidden="true"></i><span data-lang="nav_settings">Settings</span></a>
+        <a class="mobile-nav-link nav-link active" data-section="home" onclick="showSection('home', event)" aria-label="Home"><img class="mobile-nav-icon" src="assets/nav-icons/home.png?v=20260825n" alt=""><span data-lang="nav_home">Home</span></a>
+        <a class="mobile-nav-link nav-link" data-section="children" onclick="showSection('children', event)" aria-label="Children"><img class="mobile-nav-icon" src="assets/nav-icons/children.png?v=20260825n" alt=""><span data-lang="nav_children_short">Children</span></a>
+        <a class="mobile-nav-link nav-link" data-section="consultation" onclick="showSection('consultation', event)" aria-label="Consultations"><img class="mobile-nav-icon" src="assets/nav-icons/consultations.png?v=20260825n" alt=""><span data-lang="nav_consultation_short">Consultations</span></a>
+        <a class="mobile-nav-link nav-link" data-section="tarot" onclick="showSection('tarot', event)" aria-label="Tarot"><img class="mobile-nav-icon" src="assets/nav-icons/tarot.png?v=20260825n" alt=""><span data-lang="nav_tarot">Tarot</span></a>
+        <a class="mobile-nav-link nav-link" data-section="method" onclick="showSection('method', event)" aria-label="Method"><img class="mobile-nav-icon" src="assets/nav-icons/method.png?v=20260825n" alt=""><span data-lang="nav_method">Method</span></a>
+        <a class="mobile-nav-link nav-link" data-section="settings" onclick="showSection('settings', event)" aria-label="Settings"><img class="mobile-nav-icon" src="assets/nav-icons/settings.png?v=20260825n" alt=""><span data-lang="nav_settings">Settings</span></a>
     </nav>
 <script src="translations.js?v=20260825m"></script>
 <script src="ui-translations-fix.js?v=20260825m"></script>
@@ -74,5 +73,6 @@
 <script src="tips-data.js"></script>
 <script src="app.js?v=20260825m"></script>
 <script src="child-modal.js?v=20260825j"></script>
+<script src="icon-theme.js?v=20260825n"></script>
 </body>
 </html>

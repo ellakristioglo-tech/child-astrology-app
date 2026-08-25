@@ -1,0 +1,16 @@
+{
+  "name": "Child Astrology - EK | Ella Kristioglo",
+  "short_name": "Child Astrology",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1a1a3e",
+  "theme_color": "#1a1a3e",
+  "icons": [
+    {
+      "src": "assets/icon-180.jpg",
+      "sizes": "180x180",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

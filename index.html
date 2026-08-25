@@ -1,2 +1,56 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Child Astrology - EK | Ella Kristioglo</title></head><body><h1>Child Astrology</h1><p>Site rebuild in progress.</p></body></html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Astrology - EK | Ella Kristioglo</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <div class="app">
+        <nav class="sidebar">
+            <div class="logo">
+                <h1>CHILD ASTROLOGY</h1>
+                <div class="logo-subtitle">EK • Ella Kristioglo</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a class="nav-link active" onclick="showSection('home', event)"><span class="nav-icon">🏠</span><span data-lang="nav_home">Home</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('children', event)"><span class="nav-icon">👶</span><span data-lang="nav_children">Mijn kinderen</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('notes', event)"><span class="nav-icon">📝</span><span data-lang="nav_notes">Пометки</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('tarot', event)"><span class="nav-icon">🎴</span><span data-lang="nav_tarot">Tarot</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('method', event)"><span class="nav-icon">✨</span><span data-lang="nav_method">Methode</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('sports', event)"><span class="nav-icon">🏃</span><span data-lang="nav_sports">Спорт</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('learning', event)"><span class="nav-icon">📚</span><span data-lang="nav_learning">Школа</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('tips', event)"><span class="nav-icon">💡</span><span data-lang="nav_tips">10 советов</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('consultation', event)"><span class="nav-icon">📱</span><span data-lang="nav_consultation">Consultaties</span></a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showSection('settings', event)"><span class="nav-icon">⚙️</span><span data-lang="nav_settings">Instellingen</span></a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <section id="home" class="section active">
+                <div class="welcome-banner"><h2>✨ Welkom bij Child Astrology ✨</h2><p data-lang="home_welcome">Понимайте ребёнка глубже<br>Не ярлык и не предсказание, а новые вопросы, наблюдения и способы поддержки.<br><strong>Бережно · точно · понятно родителю</strong></p></div>
+                <div class="quick-actions">
+                    <div class="action-card" onclick="showSection('children', event)"><div class="action-icon">👶</div><div class="action-title" data-lang="action_add_child">Добавить ребёнка</div><div class="action-desc" data-lang="action_add_child_desc">Создайте профиль и начните наблюдения</div></div>
+                    <div class="action-card" onclick="showSection('notes', event)"><div class="action-icon">📝</div><div class="action-title" data-lang="action_new_note">Новая пометка</div><div class="action-desc" data-lang="action_new_note_desc">Запишите свои наблюдения</div></div>
+                    <div class="action-card" onclick="showSection('tarot', event)"><div class="action-icon">🎴</div><div class="action-title" data-lang="action_tarot">Tarot voor reflectie</div><div class="action-desc" data-lang="action_tarot_desc">Получите карту для размышлений</div></div>
+                    <div class="action-card" onclick="showSection('consultation', event)"><div class="action-icon">📱</div><div class="action-title" data-lang="action_consultation">Консультация</div><div class="action-desc" data-lang="action_consultation_desc">Свяжитесь с Эллой через WhatsApp</div></div>
+                </div>
+            </section>
+            <section id="children" class="section"><div class="card"><h2 class="card-title">👶 <span data-lang="children_title">Mijn kinderen</span></h2><div class="child-grid" id="childrenGrid"></div><button class="btn btn-primary" onclick="addChild()" style="margin-top:25px"><span>➕</span><span data-lang="btn_add_child">Kind toevoegen</span></button></div></section>
+            <section id="notes" class="section"><div class="card"><h2 class="card-title"><span data-lang="notes_title">Пометки и наблюдения</span></h2><div class="note-form"><h3 style="color:var(--cosmic-purple);margin-bottom:20px" data-lang="new_note_title">Новая пометка</h3><div class="form-group"><label data-lang="note_child">Ребёнок</label><select id="noteChildSelect"><option value="">Выберите ребёнка</option></select></div><div class="form-group"><label data-lang="note_title">Заголовок</label><input type="text" id="noteTitle" placeholder="Например: Наблюдение за настроением"></div><div class="form-group"><label data-lang="note_content">Содержание</label><textarea id="noteContent" placeholder="Опишите ваши наблюдения..."></textarea></div><div class="form-group"><label data-lang="note_tags">Теги (через запятую)</label><input type="text" id="noteTags" placeholder="#поведение #эмоции #достижения"></div><button class="btn btn-primary" onclick="saveNote()"><span>💾</span><span data-lang="btn_save_note">Сохранить пометку</span></button></div><div id="notesList"></div></div></section>
+            <section id="tarot" class="section"><div class="card"><h2 class="card-title">🎴 <span data-lang="tarot_title">Tarot voor reflectie</span></h2><div class="tarot-container"><p style="font-size:18px;margin-bottom:30px" data-lang="tarot_desc">Kaarten worden programmatisch en willekeurig gekozen uit een volledige set van 78 kaarten. Ze voorspellen het lot van een kind niet, maar bieden een andere blik op de situatie.</p><div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:30px 0"><button class="btn btn-primary" onclick="drawTarot(1)" data-lang="tarot_one">🎴 Één kaart</button><button class="btn btn-primary" onclick="drawTarot(3)" data-lang="tarot_three">🎴🎴 Drie kaarten</button></div><div id="tarotDisplay" class="tarot-display"></div></div></div></section>
+            <section id="method" class="section"><div class="card"><h2 class="card-title">✨ <span data-lang="method_title">De 6-stappen Methode</span></h2><div class="method-step"><div class="step-number">1</div><div class="step-title" data-lang="method_step1_title">Observeer</div><div data-lang="method_step1_desc">Let op gedrag, emoties en reacties van uw kind zonder oordeel.</div></div><div class="method-step"><div class="step-number">2</div><div class="step-title" data-lang="method_step2_title">Verbind</div><div data-lang="method_step2_desc">Maak contact met uw eigen gevoel en dat van uw kind.</div></div><div class="method-step"><div class="step-number">3</div><div class="step-title" data-lang="method_step3_title">Reflecteer</div><div data-lang="method_step3_desc">Gebruik de tarotkaarten of astrologische inzichten.</div></div><div class="method-step"><div class="step-number">4</div><div class="step-title" data-lang="method_step4_title">Begrijp</div><div data-lang="method_step4_desc">Ontdek patronen en onderliggende behoeften.</div></div><div class="method-step"><div class="step-number">5</div><div class="step-title" data-lang="method_step5_title">Ondersteun</div><div data-lang="method_step5_desc">Kies bewuste manieren om uw kind te ondersteunen.</div></div><div class="method-step"><div class="step-number">6</div><div class="step-title" data-lang="method_step6_title">Evalueer</div><div data-lang="method_step6_desc">Kijk terug op wat heeft gewerkt en vier de vooruitgang!</div></div></div></section>
+            <section id="sports" class="section"><div class="card"><h2 class="card-title"><span data-lang="sports_title">Спорт по знаку Марса</span></h2><div class="info-block"><div class="info-title" data-lang="sports_intro">За спорт отвечает планета Марс. Найдите знак зодиака, где находится Марс в натальной карте вашего ребёнка.</div></div><div id="sportsContent"></div></div></section>
+            <section id="learning" class="section"><div class="card"><h2 class="card-title">📚 <span data-lang="learning_title">Как обучать вашего ребёнка</span></h2><div class="info-block"><div class="info-title" data-lang="learning_intro">Меркурий в натальной карте показывает, как ребёнок учится и воспринимает информацию.</div></div><div id="learningContent"></div></div></section>
+            <section id="tips" class="section"><div class="card"><h2 class="card-title">💡 <span data-lang="tips_title">10 советов для родителей</span></h2><div id="tipsContent"></div></div></section>
+            <section id="consultation" class="section"><div class="card"><h2 class="card-title"><span data-lang="consultation_title">Persoonlijke Consultatie</span></h2><div class="consultation-card"><div style="font-size:80px;margin-bottom:20px">📱</div><h3 style="color:var(--cosmic-purple);font-size:26px;margin-bottom:20px" data-lang="consultation_subtitle">Stuur Ella persoonlijk een bericht</h3><p style="margin-bottom:30px;line-height:1.6" data-lang="consultation_desc">Wil je jouw situatie persoonlijk bespreken? Open WhatsApp en stuur Ella een bericht.</p><a href="https://wa.me/31612345678" class="btn btn-primary" target="_blank" style="background:linear-gradient(135deg,#25D366,#128C7E);color:white"><span>📱</span><span data-lang="btn_whatsapp">Bericht via WhatsApp</span></a></div></div></section>
+            <section id="settings" class="section"><div class="card"><h2 class="card-title">⚙️ <span data-lang="settings_title">Instellingen</span></h2><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🌍 <span data-lang="settings_language">Taal / Language</span></h3><div class="language-buttons"><button class="lang-btn active" onclick="changeLanguage('nl',event)">NL</button><button class="lang-btn" onclick="changeLanguage('ru',event)">RU</button><button class="lang-btn" onclick="changeLanguage('ua',event)">UA</button><button class="lang-btn" onclick="changeLanguage('en',event)">EN</button></div></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🔒 <span data-lang="settings_privacy">Privacy</span></h3><p data-lang="settings_privacy_desc">Alle gegevens worden lokaal opgeslagen op je apparaat. Wij verzamelen geen persoonlijke informatie.</p></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">👤 <span data-lang="settings_about">Over de auteur</span></h3><p><strong>Ella Kristioglo</strong><br>Child Astrology specialist</p></div></div></section>
+        </main>
+    </div>
+<script src="translations.js"></script>
+<script src="sports-data.js"></script>
+<script src="learning-data.js"></script>
+<script src="tips-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

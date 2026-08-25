@@ -1,0 +1,1 @@
+Brand assets are stored under /assets and used by the site header and installed app icon.

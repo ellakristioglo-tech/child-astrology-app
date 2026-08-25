@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  const VERSION = '20260825p';
+  const VERSION = '20260825s';
+  const CALCULATION_VERSION = 'placidus-20260825-1';
   const SIGN_KEYS = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
   const ELEMENTS = ['fire','earth','air','water'];
   const MODALITIES = ['cardinal','fixed','mutable'];
@@ -13,7 +14,7 @@
       language:'Язык', fullAnalysis:'Полный разбор', recalculate:'Пересчитать карту', delete:'Удалить', noChildren:'Пока нет добавленных детей', unknownTime:'Время неизвестно', close:'Закрыть',
       title:'Персональный разбор ребёнка', portrait:'Основной портрет', character:'Характер', emotions:'Эмоции и восстановление', communication:'Общение', learning:'Обучение', strengths:'Сильные стороны', challenges:'Что может даваться сложнее', social:'Социализация', sport:'Спорт и движение', parents:'Что важно родителям', facts:'Расчёт карты', planets:'Планеты', aspects:'Основные аспекты', houses:'Дома',
       reliableOnly:'Без точного времени рождения мы не используем дома и другие показатели, зависящие от времени. Показаны только надёжно рассчитываемые части карты.', moonAmbiguous:'В этот день Луна меняла знак. Поэтому мы не закрепляем за ребёнком один лунный сценарий и предлагаем наблюдать оба варианта.',
-      houseMethod:'Дома рассчитаны по системе целых знаков с учётом исторического часового пояса. Психологический разбор строится по планетам, знакам, домам и аспектам.',
+      houseMethod:'Дома рассчитаны по системе Плацидуса с учётом точного местного времени, координат и исторического часового пояса. Асцендент используется только как математическая граница 1-го дома и не берётся за основу психологического разбора.',
       disclaimer:'Это не диагноз и не предсказание. Сверяйте выводы с живыми наблюдениями за ребёнком.', calculationError:'Не удалось рассчитать карту. Проверьте дату, время и выбранный город.', missingPlace:'Для точного расчёта откройте профиль заново и выберите город из выпадающего списка.',
       dominant:'В карте заметнее всего стихия {element}. Это задаёт общий способ реагирования, но не отменяет другие качества.', houseLine:'{planet} в {house}-м доме: эта тема особенно проявляется через {theme}.',
       aspectHard:'Связь {a} и {b} через {aspect} создаёт внутреннее напряжение между темами «{roleA}» и «{roleB}». Здесь полезны пауза, понятные границы и возможность попробовать ещё раз без стыда.',
@@ -34,7 +35,7 @@
       language:'Мова', fullAnalysis:'Повний розбір', recalculate:'Перерахувати карту', delete:'Видалити', noChildren:'Поки немає доданих дітей', unknownTime:'Час невідомий', close:'Закрити',
       title:'Персональний розбір дитини', portrait:'Основний портрет', character:'Характер', emotions:'Емоції та відновлення', communication:'Спілкування', learning:'Навчання', strengths:'Сильні сторони', challenges:'Що може даватися складніше', social:'Соціалізація', sport:'Спорт і рух', parents:'Що важливо батькам', facts:'Розрахунок карти', planets:'Планети', aspects:'Основні аспекти', houses:'Будинки',
       reliableOnly:'Без точного часу народження ми не використовуємо будинки та інші залежні від часу показники. Показані лише надійно розраховані частини карти.', moonAmbiguous:'Цього дня Місяць змінював знак. Тому ми не закріплюємо один місячний сценарій і радимо спостерігати обидва варіанти.',
-      houseMethod:'Будинки розраховані за системою цілих знаків з урахуванням історичного часового поясу. Психологічний розбір будується за планетами, знаками, будинками й аспектами.',
+      houseMethod:'Будинки розраховані за системою Плацидуса з урахуванням точного місцевого часу, координат та історичного часового поясу. Асцендент використовується лише як математична межа 1-го будинку й не є основою психологічного розбору.',
       disclaimer:'Це не діагноз і не передбачення. Зіставляйте висновки з живими спостереженнями за дитиною.', calculationError:'Не вдалося розрахувати карту. Перевірте дату, час і вибране місто.', missingPlace:'Для точного розрахунку відкрийте профіль знову та виберіть місто зі списку.',
       dominant:'У карті найбільш помітна стихія {element}. Вона задає загальний спосіб реагування, але не скасовує інших якостей.', houseLine:'{planet} у {house}-му будинку: ця тема особливо проявляється через {theme}.',
       aspectHard:'Зв’язок {a} і {b} через {aspect} створює напруження між темами «{roleA}» і «{roleB}». Тут допомагають пауза, зрозумілі межі та можливість спробувати ще раз без сорому.', aspectSoft:'Зв’язок {a} і {b} через {aspect} допомагає поєднувати «{roleA}» і «{roleB}». Це ресурс, який розкривається через практику й довіру.', aspectConj:'З’єднання {a} і {b} робить теми «{roleA}» і «{roleB}» майже нероздільними. Реакція може бути яскравою, тому важливо помічати її до накопичення.', noStrongAspect:'У цій темі немає одного домінантного аспекту: корисніше дивитися на знак, будинок і реальні реакції дитини.',
@@ -49,7 +50,7 @@
       language:'Language', fullAnalysis:'Full child analysis', recalculate:'Recalculate chart', delete:'Delete', noChildren:'No children added yet', unknownTime:'Time unknown', close:'Close',
       title:'Personal child analysis', portrait:'Core portrait', character:'Character', emotions:'Emotions and recovery', communication:'Communication', learning:'Learning', strengths:'Strengths', challenges:'What may take more effort', social:'Social life', sport:'Sport and movement', parents:'What parents should know', facts:'Chart calculation', planets:'Planets', aspects:'Major aspects', houses:'Houses',
       reliableOnly:'Without an exact birth time, houses and other time-dependent factors are not used. Only reliably calculated parts of the chart are shown.', moonAmbiguous:'The Moon changed signs on this date. We therefore do not assign one lunar pattern and suggest observing both possibilities.',
-      houseMethod:'Houses use Whole Sign Houses with the historical time zone. The interpretation is based on planets, signs, houses and aspects.', disclaimer:'This is not a diagnosis or prediction. Compare every insight with real observations of the child.', calculationError:'The chart could not be calculated. Check the date, time and selected city.', missingPlace:'For an accurate calculation, reopen the profile and select a city from the suggestion list.',
+      houseMethod:'Houses are calculated with the Placidus system using the exact local time, coordinates and historical time zone. The Ascendant is used only as the mathematical cusp of house 1 and is not the basis of the psychological interpretation.', disclaimer:'This is not a diagnosis or prediction. Compare every insight with real observations of the child.', calculationError:'The chart could not be calculated. Check the date, time and selected city.', missingPlace:'For an accurate calculation, reopen the profile and select a city from the suggestion list.',
       dominant:'The {element} element is strongest in this chart. It shapes the general response style without cancelling other qualities.', houseLine:'{planet} in house {house}: this theme is especially expressed through {theme}.',
       aspectHard:'The {aspect} between {a} and {b} creates tension between “{roleA}” and “{roleB}”. A pause, clear boundaries and a chance to try again without shame are helpful here.', aspectSoft:'The {aspect} between {a} and {b} helps “{roleA}” and “{roleB}” work together. This resource grows through practice and trust.', aspectConj:'The conjunction of {a} and {b} closely merges “{roleA}” and “{roleB}”. Reactions may be vivid, so early recognition matters.', noStrongAspect:'There is no single dominant aspect here; the sign, house and the child’s real reactions are more useful.',
       strengthItems:['careful observation','learning through experience','loyalty to personal interests','a clear sense of personal pace','ability to recover with support'], challengeHard:'Challenging aspects do not mean a problem. They point to a skill that may need more time and safe practice.', challengeBalance:'If the child resists or tires quickly, check the load and sense of safety before asking for performance.',
@@ -63,7 +64,7 @@
       language:'Taal', fullAnalysis:'Volledige kindanalyse', recalculate:'Horoscoop opnieuw berekenen', delete:'Verwijderen', noChildren:'Nog geen kinderen toegevoegd', unknownTime:'Tijd onbekend', close:'Sluiten',
       title:'Persoonlijke analyse van het kind', portrait:'Kernportret', character:'Karakter', emotions:'Emoties en herstel', communication:'Communicatie', learning:'Leren', strengths:'Sterke kanten', challenges:'Wat meer moeite kan kosten', social:'Socialisatie', sport:'Sport en beweging', parents:'Wat ouders moeten weten', facts:'Berekening van de kaart', planets:'Planeten', aspects:'Belangrijkste aspecten', houses:'Huizen',
       reliableOnly:'Zonder exacte geboortetijd gebruiken we geen huizen of andere tijdsafhankelijke factoren. Alleen betrouwbaar berekende delen worden getoond.', moonAmbiguous:'De Maan wisselde die dag van teken. Daarom leggen we niet één emotioneel patroon vast en adviseren we beide mogelijkheden te observeren.',
-      houseMethod:'De huizen zijn berekend met Whole Sign Houses en de historische tijdzone. De interpretatie is gebaseerd op planeten, tekens, huizen en aspecten.', disclaimer:'Dit is geen diagnose of voorspelling. Vergelijk elk inzicht met echte observaties van het kind.', calculationError:'De kaart kon niet worden berekend. Controleer datum, tijd en gekozen plaats.', missingPlace:'Open het profiel opnieuw en kies een stad uit de suggestielijst voor een nauwkeurige berekening.',
+      houseMethod:'De huizen zijn berekend volgens het Placidus-systeem met de exacte lokale tijd, coördinaten en historische tijdzone. De Ascendant wordt alleen gebruikt als de wiskundige cusp van huis 1 en vormt niet de basis van de psychologische interpretatie.', disclaimer:'Dit is geen diagnose of voorspelling. Vergelijk elk inzicht met echte observaties van het kind.', calculationError:'De kaart kon niet worden berekend. Controleer datum, tijd en gekozen plaats.', missingPlace:'Open het profiel opnieuw en kies een stad uit de suggestielijst voor een nauwkeurige berekening.',
       dominant:'Het element {element} is het sterkst in deze kaart. Het kleurt de algemene reactiestijl zonder andere kwaliteiten uit te sluiten.', houseLine:'{planet} in huis {house}: dit thema komt vooral tot uiting via {theme}.',
       aspectHard:'Het {aspect} tussen {a} en {b} geeft spanning tussen “{roleA}” en “{roleB}”. Een pauze, duidelijke grenzen en opnieuw mogen proberen zonder schaamte helpen hier.', aspectSoft:'Het {aspect} tussen {a} en {b} laat “{roleA}” en “{roleB}” samenwerken. Deze kwaliteit groeit door oefening en vertrouwen.', aspectConj:'De conjunctie van {a} en {b} verbindt “{roleA}” en “{roleB}” sterk. Reacties kunnen duidelijk zijn; vroeg herkennen helpt.', noStrongAspect:'Hier is geen enkel aspect dominant; teken, huis en echte reacties van het kind geven meer informatie.',
       strengthItems:['goed waarnemen','leren door ervaring','trouw aan eigen interesses','gevoel voor eigen tempo','herstellen met passende steun'], challengeHard:'Spannende aspecten betekenen geen probleem. Ze tonen een vaardigheid die meer tijd en veilige oefening kan vragen.', challengeBalance:'Als het kind weerstand toont of snel moe wordt, kijk eerst naar belasting en veiligheid.',
@@ -129,14 +130,56 @@
   function eclipticLongitude(body, date) {
     return norm(Astronomy.Ecliptic(Astronomy.GeoVector(Astronomy.Body[body], date, true)).elon);
   }
-  function ascendantLongitude(date, latitude, longitude) {
-    const theta = norm(Astronomy.SiderealTime(date) * 15 + Number(longitude)) * Math.PI / 180;
-    const phi = Number(latitude) * Math.PI / 180;
+  // Placidus cusps: classic iterative semi-arc algorithm. The implementation
+  // follows the independently validated MIT-licensed Caelus house algorithm.
+  function placidusCusps(date, latitude, longitude) {
+    const rad = Math.PI / 180;
+    const tau = Math.PI * 2;
+    const modRad = (value) => ((value % tau) + tau) % tau;
+    const armc = norm(Astronomy.SiderealTime(date) * 15 + Number(longitude)) * rad;
+    const phi = Number(latitude) * rad;
     const days = (date.getTime() - Date.UTC(2000,0,1,12)) / 86400000;
-    const epsilon = (23.439291 - 0.00000036 * days) * Math.PI / 180;
-    return norm(Math.atan2(-Math.cos(theta), Math.sin(theta) * Math.cos(epsilon) + Math.tan(phi) * Math.sin(epsilon)) * 180 / Math.PI + 180);
+    const epsilon = (23.439291 - 0.00000036 * days) * rad;
+    if (Math.abs(phi) >= Math.PI / 2 - epsilon) throw new Error('placidus-polar');
+    const intermediate = (offsetDegrees, fraction) => {
+      let lambda = modRad(armc + offsetDegrees * rad);
+      for (let index = 0; index < 50; index += 1) {
+        const declination = Math.asin(Math.sin(epsilon) * Math.sin(lambda));
+        const value = Math.max(-1, Math.min(1, Math.tan(phi) * Math.tan(declination)));
+        const ascensionalDifference = Math.asin(value);
+        const rightAscension = modRad(armc + offsetDegrees * rad + fraction * ascensionalDifference);
+        const next = modRad(Math.atan2(Math.sin(rightAscension), Math.cos(rightAscension) * Math.cos(epsilon)));
+        const delta = modRad(next - lambda + Math.PI) - Math.PI;
+        lambda = next;
+        if (Math.abs(delta) < 1e-10) break;
+      }
+      return lambda;
+    };
+    const midheaven = modRad(Math.atan2(Math.sin(armc), Math.cos(armc) * Math.cos(epsilon)));
+    const ascendant = modRad(Math.atan2(Math.cos(armc), -(Math.sin(armc) * Math.cos(epsilon) + Math.tan(phi) * Math.sin(epsilon))));
+    const cusps = new Array(12).fill(0);
+    cusps[0] = ascendant;
+    cusps[9] = midheaven;
+    cusps[10] = intermediate(30, 1 / 3);
+    cusps[11] = intermediate(60, 2 / 3);
+    cusps[1] = intermediate(120, 2 / 3);
+    cusps[2] = intermediate(150, 1 / 3);
+    cusps[3] = modRad(midheaven + Math.PI);
+    cusps[6] = modRad(ascendant + Math.PI);
+    cusps[4] = modRad(cusps[10] + Math.PI);
+    cusps[5] = modRad(cusps[11] + Math.PI);
+    cusps[7] = modRad(cusps[1] + Math.PI);
+    cusps[8] = modRad(cusps[2] + Math.PI);
+    return cusps.map((cusp) => norm(cusp / rad));
   }
-  function wholeSignHouse(longitude, ascendant) { return Math.floor(norm(longitude - Math.floor(ascendant / 30) * 30) / 30) + 1; }
+  function houseFromCusps(longitude, cusps) {
+    for (let index = 0; index < 12; index += 1) {
+      const span = norm(cusps[(index + 1) % 12] - cusps[index]);
+      const offset = norm(longitude - cusps[index]);
+      if (offset < span - 1e-8) return index + 1;
+    }
+    throw new Error('house-not-found');
+  }
 
   function calculateChart(child, force) {
     if (!window.Astronomy || !child.birthDate || !child.timezone || child.latitude == null || child.longitude == null) throw new Error('missing-data');
@@ -154,9 +197,11 @@
       moonAmbiguous = moonSigns.length > 1;
     }
     let ascendant = null;
+    let houseCusps = null;
     if (knownTime) {
-      ascendant = ascendantLongitude(date, child.latitude, child.longitude);
-      BODY_NAMES.forEach((body) => { positions[body].house = wholeSignHouse(positions[body].longitude, ascendant); });
+      houseCusps = placidusCusps(date, child.latitude, child.longitude);
+      ascendant = houseCusps[0];
+      BODY_NAMES.forEach((body) => { positions[body].house = houseFromCusps(positions[body].longitude, houseCusps); });
     }
     BODY_NAMES.forEach((body) => { positions[body].sign = signIndex(positions[body].longitude); });
     const aspectTargets = [{key:'conjunction',angle:0,orb:8},{key:'sextile',angle:60,orb:5},{key:'square',angle:90,orb:7},{key:'trine',angle:120,orb:7},{key:'opposition',angle:180,orb:8}];
@@ -175,8 +220,8 @@
     const counts = {fire:0,earth:0,air:0,water:0};
     ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn'].forEach((body) => { if (!(moonAmbiguous && body === 'Moon')) counts[SIGN_ELEMENT[positions[body].sign]] += 1; });
     const dominantElement = Object.keys(counts).sort((a,b) => counts[b]-counts[a])[0];
-    const chart = {calculatedAt:new Date().toISOString(), engine:'Astronomy Engine 2.x / VSOP87', dateUtc:date.toISOString(), knownTime, moonAmbiguous, moonSigns, ascendant, positions, aspects, dominantElement};
-    if (force || !child.natalChart) {
+    const chart = {calculationVersion:CALCULATION_VERSION, calculatedAt:new Date().toISOString(), engine:'Astronomy Engine 2.x / VSOP87 · Placidus houses', houseSystem:'Placidus', dateUtc:date.toISOString(), knownTime, moonAmbiguous, moonSigns, ascendant, houseCusps, positions, aspects, dominantElement};
+    if (force || child.natalChart?.calculationVersion !== CALCULATION_VERSION) {
       child.natalChart = chart;
       child.sunSign = signName(positions.Sun.sign);
       child.moonSign = moonAmbiguous ? moonSigns.map(signName).join(' / ') : signName(positions.Moon.sign);
@@ -203,7 +248,17 @@
     if (!house) return '';
     return fill(t().houseLine, {planet:t().planetNames[body],house,theme:t().houseThemes[house-1]});
   }
-  function degreeText(position) { return `${signName(position.sign)} ${String((position.longitude % 30).toFixed(2)).replace('.', lang()==='en'?'.':',')}°`; }
+  function degreeText(position) {
+    const circleSeconds = 360 * 3600;
+    const totalSeconds = Math.round(norm(position.longitude) * 3600) % circleSeconds;
+    const roundedSign = Math.floor(totalSeconds / (30 * 3600));
+    const signSeconds = totalSeconds - roundedSign * 30 * 3600;
+    const degrees = Math.floor(signSeconds / 3600);
+    const minutes = Math.floor((signSeconds % 3600) / 60);
+    const seconds = signSeconds % 60;
+    return `${signName(roundedSign)} ${degrees}°${String(minutes).padStart(2,'0')}′${String(seconds).padStart(2,'0')}″`;
+  }
+  function cuspDegreeText(longitude) { return degreeText({longitude, sign:signIndex(longitude)}); }
   function icon(name) { return `<img class="analysis-card-icon" src="assets/nav-icons/${ICONS[name]}.png?v=${VERSION}" alt="">`; }
   function section(name, body) { return `<article class="analysis-section analysis-${name}">${icon(name)}<div><h3>${esc(t()[name])}</h3>${body}</div></article>`; }
   function paragraphs(items) { return items.filter(Boolean).map((item) => `<p>${esc(item)}</p>`).join(''); }
@@ -241,7 +296,8 @@
     content.push(section('parents', list(t().parentActions)));
     const planetRows = BODY_NAMES.map((body) => `<tr><td>${esc(t().planetNames[body])}</td><td>${esc(degreeText(chart.positions[body]))}</td><td>${chart.positions[body].house||'—'}</td></tr>`).join('');
     const aspectRows = chart.aspects.slice(0,12).map((a) => `<li>${esc(t().planetNames[a.a])} — ${esc(t().planetNames[a.b])}: ${esc(t().aspectNames[a.type])}, ${a.orb.toFixed(2)}°</li>`).join('');
-    const facts = `<details class="analysis-facts"><summary>${esc(t().facts)}</summary>${chart.knownTime?`<p>${esc(t().houseMethod)}</p>`:`<p>${esc(t().reliableOnly)}</p>`}<h4>${esc(t().planets)}</h4><div class="analysis-table-wrap"><table><thead><tr><th>${esc(t().planets)}</th><th>°</th><th>${esc(t().houses)}</th></tr></thead><tbody>${planetRows}</tbody></table></div><h4>${esc(t().aspects)}</h4><ul>${aspectRows}</ul><small>${esc(chart.engine)}</small></details>`;
+    const cuspRows = chart.knownTime && chart.houseCusps ? chart.houseCusps.map((cusp,index) => `<tr><td>${index+1}</td><td>${esc(cuspDegreeText(cusp))}</td></tr>`).join('') : '';
+    const facts = `<details class="analysis-facts"><summary>${esc(t().facts)}</summary>${chart.knownTime?`<p>${esc(t().houseMethod)}</p>`:`<p>${esc(t().reliableOnly)}</p>`}<h4>${esc(t().planets)}</h4><div class="analysis-table-wrap"><table><thead><tr><th>${esc(t().planets)}</th><th>°</th><th>${esc(t().houses)}</th></tr></thead><tbody>${planetRows}</tbody></table></div>${cuspRows?`<h4>${esc(t().houses)} · Placidus</h4><div class="analysis-table-wrap"><table><tbody>${cuspRows}</tbody></table></div>`:''}<h4>${esc(t().aspects)}</h4><ul>${aspectRows}</ul><small>${esc(chart.engine)}</small></details>`;
     return `<header class="analysis-hero"><div><span class="analysis-kicker">CHILD ASTROLOGY · Ella Kristioglo</span><h2>${esc(child.name)}</h2><p>${esc(t().title)}</p></div><button class="analysis-close" type="button" aria-label="${esc(t().close)}">×</button></header>${!chart.knownTime?`<div class="analysis-notice">${esc(t().reliableOnly)}</div>`:''}<div class="analysis-grid">${content.join('')}</div>${facts}<p class="analysis-disclaimer">${esc(t().disclaimer)}</p>`;
   }
 

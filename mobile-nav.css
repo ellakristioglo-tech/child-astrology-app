@@ -1,0 +1,30 @@
+.mobile-bottom-nav{display:none}
+
+@media(max-width:768px){
+  body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  .app{min-height:calc(100vh - 88px)}
+  .sidebar{padding:14px 18px;overflow:visible}
+  .sidebar .logo{margin:0;padding:0;border:0}
+  .sidebar .brand-logo{max-width:260px;margin:0 auto;border-radius:14px}
+  .sidebar .nav-menu{display:none}
+  .main-content{padding:20px 16px 28px}
+  .card{padding:22px 18px;border-radius:20px}
+  .welcome-banner{padding:28px 18px}
+  .welcome-banner h2{font-size:29px}
+  .quick-actions{grid-template-columns:1fr 1fr;gap:14px}
+  .action-card{padding:22px 14px}
+  .mobile-bottom-nav{position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:9000;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch;min-height:70px;padding:8px 7px 7px;background:rgba(255,255,255,.97);border:1px solid rgba(74,44,122,.13);border-radius:23px;box-shadow:0 14px 45px rgba(16,18,58,.25);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+  .mobile-bottom-nav .mobile-nav-link{position:relative;display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:6px 2px;color:#7f8495;text-decoration:none;border-radius:16px;font-size:9px;line-height:1.05;text-align:center;cursor:pointer;transition:color .2s,background .2s,transform .2s}
+  .mobile-bottom-nav .mobile-nav-link i{font-size:20px;line-height:1;color:inherit}
+  .mobile-bottom-nav .mobile-nav-link span{display:block;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mobile-bottom-nav .mobile-nav-link.active{background:rgba(212,175,55,.12);color:var(--cosmic-purple);font-weight:700}
+  .mobile-bottom-nav .mobile-nav-link.active::after{content:'';position:absolute;bottom:2px;width:5px;height:5px;border-radius:50%;background:var(--gold-primary)}
+  .mobile-bottom-nav .mobile-nav-link:active{transform:scale(.95)}
+  .mobile-bottom-nav .mobile-nav-link:hover{transform:none}
+}
+
+@media(max-width:430px){
+  .quick-actions{grid-template-columns:1fr}
+  .mobile-bottom-nav .mobile-nav-link{font-size:8px}
+  .mobile-bottom-nav .mobile-nav-link i{font-size:19px}
+}

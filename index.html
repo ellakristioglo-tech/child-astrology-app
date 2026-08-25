@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="child-modal.css?v=20260825g">
     <link rel="stylesheet" href="mobile-nav.css?v=20260825n">
     <link rel="stylesheet" href="icon-theme.css?v=20260825n">
+    <link rel="stylesheet" href="child-analysis.css?v=20260825p">
 </head>
 <body>
     <div class="app">
@@ -38,6 +39,15 @@
             </ul>
         </nav>
         <main class="main-content">
+            <div class="main-toolbar" aria-label="Language selection">
+                <span class="toolbar-language-label" data-analysis-label="language">Language</span>
+                <div class="main-language-buttons">
+                    <button class="lang-btn" data-language="ru" onclick="changeLanguage('ru',event)">RU</button>
+                    <button class="lang-btn" data-language="ua" onclick="changeLanguage('ua',event)">UA</button>
+                    <button class="lang-btn" data-language="en" onclick="changeLanguage('en',event)">EN</button>
+                    <button class="lang-btn" data-language="nl" onclick="changeLanguage('nl',event)">NL</button>
+                </div>
+            </div>
             <section id="home" class="section active">
                 <div class="quick-actions">
                     <div class="action-card" onclick="showSection('children', event)"><div class="action-icon"><img src="assets/nav-icons/children.png?v=20260825n" alt=""></div><div class="action-title" data-lang="action_add_child">Добавить ребёнка</div><div class="action-desc" data-lang="action_add_child_desc">Создайте профиль и начните наблюдения</div></div>
@@ -71,8 +81,10 @@
 <script src="sports-data.js"></script>
 <script src="learning-data.js"></script>
 <script src="tips-data.js"></script>
-<script src="app.js?v=20260825m"></script>
+<script src="vendor/astronomy.browser.min.js?v=20260825p"></script>
+<script src="app.js?v=20260825p"></script>
 <script src="child-modal.js?v=20260825j"></script>
+<script src="child-analysis.js?v=20260825p"></script>
 <script src="icon-theme.js?v=20260825n"></script>
 </body>
 </html>

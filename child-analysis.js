@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  const VERSION = '20260826d';
-  const CALCULATION_VERSION = 'placidus-topocentric-20260825-3';
+  const VERSION = '20260826e';
+  const CALCULATION_VERSION = 'placidus-topocentric-retrograde-20260826-4';
   const SIGN_KEYS = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
   const ELEMENTS = ['fire','earth','air','water'];
   const MODALITIES = ['cardinal','fixed','mutable'];
@@ -12,7 +12,13 @@
   const I18N = {
     ru: {
       language:'Язык', fullAnalysis:'Полный разбор', recalculate:'Пересчитать карту', delete:'Удалить', noChildren:'Пока нет добавленных детей', unknownTime:'Время неизвестно', close:'Закрыть',
-      title:'Персональный разбор ребёнка', portrait:'Основной портрет', character:'Характер', emotions:'Эмоции и восстановление', communication:'Общение', learning:'Обучение', strengths:'Сильные стороны', challenges:'Что может даваться сложнее', health:'Самочувствие: что наблюдать', social:'Социализация', sport:'Спорт и движение', parents:'Что важно родителям', facts:'Расчёт карты', planets:'Планеты', aspects:'Основные аспекты', houses:'Дома',
+      title:'Персональный разбор ребёнка', portrait:'Основной портрет', character:'Характер', emotions:'Эмоции и восстановление', communication:'Общение', speech:'Речь и Меркурий', learning:'Обучение', strengths:'Сильные стороны', challenges:'Что может даваться сложнее', health:'Самочувствие: что наблюдать', social:'Социализация', sport:'Спорт и движение', parents:'Что важно родителям', facts:'Расчёт карты', planets:'Планеты', aspects:'Основные аспекты', houses:'Дома',
+      mercuryRetroIntro:'На момент рождения Меркурий двигался ретроградно. В астрологической традиции это связывают с более индивидуальным способом обдумывать и выражать мысли: ребёнок может дольше подбирать слова и отвечать после паузы — или, наоборот, говорить быстро, много и перескакивать между темами. Научных доказательств, что ретроградный Меркурий вызывает задержку речи или болтливость, нет. Это только гипотеза для наблюдения.',
+      mercuryRetroSlow:'В этой карте больше оснований наблюдать внутреннюю подготовку речи: ребёнку может требоваться дополнительное время, чтобы понять вопрос, подобрать слово и сформулировать ответ.',
+      mercuryRetroFast:'В этой карте больше оснований наблюдать быстрый речевой поток: мысль может опережать формулировку, поэтому ребёнок иногда перебивает, повторяется или резко меняет тему.',
+      mercuryRetroMixed:'Возможны оба режима: в безопасной знакомой обстановке ребёнок говорит много, а под давлением, при усталости или с незнакомым человеком замолкает и отвечает медленнее.',
+      speechActions:['Задайте один короткий вопрос и спокойно подождите 5–10 секунд, не заканчивая фразу за ребёнка.','Расширяйте речь без исправления: на «машина едет» ответьте «Да, красная машина едет быстро».','Каждый день читайте, пойте и играйте в диалог; чаще комментируйте происходящее и реже проверяйте ребёнка вопросами.','Наблюдайте отдельно за пониманием речи, жестами, новыми словами, связными фразами и тем, насколько ребёнка понимают другие.','Не сравнивайте с другими детьми и не объясняйте реальные трудности только натальной картой.'],
+      speechReferral:'Если речь или понимание заметно не соответствуют возрасту, новые навыки долго не появляются, ребёнку трудно сообщать о потребностях либо он потерял уже приобретённые слова или навыки, не ждите. Обсудите это с педиатром, семейным врачом или consultatiebureau, пройдите оценку у логопеда и попросите проверить слух. Специалист учитывает возраст, используемые языки, развитие, здоровье и результаты наблюдения.',
       reliableOnly:'Без точного времени рождения мы не используем дома и другие показатели, зависящие от времени. Показаны только надёжно рассчитываемые части карты.', moonAmbiguous:'В этот день Луна меняла знак. Поэтому мы не закрепляем за ребёнком один лунный сценарий и предлагаем наблюдать оба варианта.',
       houseMethod:'Дома рассчитаны по системе Плацидуса с учётом точного местного времени, координат и исторического часового пояса. Асцендент используется только как математическая граница 1-го дома и не берётся за основу психологического разбора.',
       disclaimer:'Это не диагноз и не предсказание. Сверяйте выводы с живыми наблюдениями за ребёнком.', calculationError:'Не удалось рассчитать карту. Проверьте дату, время и выбранный город.', missingPlace:'Для точного расчёта откройте профиль заново и выберите город из выпадающего списка.',
@@ -34,7 +40,13 @@
     },
     ua: {
       language:'Мова', fullAnalysis:'Повний розбір', recalculate:'Перерахувати карту', delete:'Видалити', noChildren:'Поки немає доданих дітей', unknownTime:'Час невідомий', close:'Закрити',
-      title:'Персональний розбір дитини', portrait:'Основний портрет', character:'Характер', emotions:'Емоції та відновлення', communication:'Спілкування', learning:'Навчання', strengths:'Сильні сторони', challenges:'Що може даватися складніше', health:'Самопочуття: за чим спостерігати', social:'Соціалізація', sport:'Спорт і рух', parents:'Що важливо батькам', facts:'Розрахунок карти', planets:'Планети', aspects:'Основні аспекти', houses:'Будинки',
+      title:'Персональний розбір дитини', portrait:'Основний портрет', character:'Характер', emotions:'Емоції та відновлення', communication:'Спілкування', speech:'Мовлення і Меркурій', learning:'Навчання', strengths:'Сильні сторони', challenges:'Що може даватися складніше', health:'Самопочуття: за чим спостерігати', social:'Соціалізація', sport:'Спорт і рух', parents:'Що важливо батькам', facts:'Розрахунок карти', planets:'Планети', aspects:'Основні аспекти', houses:'Будинки',
+      mercuryRetroIntro:'На момент народження Меркурій рухався ретроградно. В астрологічній традиції це пов’язують з індивідуальним способом обдумувати й висловлювати думки: дитина може довше добирати слова та відповідати після паузи — або, навпаки, говорити швидко, багато й перескакувати між темами. Наукових доказів, що ретроградний Меркурій спричиняє затримку мовлення чи балакучість, немає. Це лише гіпотеза для спостереження.',
+      mercuryRetroSlow:'У цій карті більше підстав спостерігати внутрішню підготовку мовлення: дитині може бути потрібно більше часу, щоб зрозуміти запитання, дібрати слово й сформулювати відповідь.',
+      mercuryRetroFast:'У цій карті більше підстав спостерігати швидкий мовленнєвий потік: думка може випереджати формулювання, тому дитина іноді перебиває, повторюється або різко змінює тему.',
+      mercuryRetroMixed:'Можливі обидва режими: у безпечному знайомому середовищі дитина говорить багато, а під тиском, при втомі або з незнайомою людиною замовкає й відповідає повільніше.',
+      speechActions:['Поставте одне коротке запитання й спокійно зачекайте 5–10 секунд, не закінчуючи фразу за дитину.','Розширюйте мовлення без виправлення: на «машина їде» відповідайте «Так, червона машина їде швидко».','Щодня читайте, співайте й грайте в діалог; частіше коментуйте події та рідше перевіряйте дитину запитаннями.','Окремо спостерігайте за розумінням мовлення, жестами, новими словами, зв’язними фразами й тим, наскільки дитину розуміють інші.','Не порівнюйте з іншими дітьми й не пояснюйте реальні труднощі лише натальною картою.'],
+      speechReferral:'Якщо мовлення або розуміння помітно не відповідають віку, нові навички довго не з’являються, дитині складно повідомляти про потреби або вона втратила вже набуті слова чи навички, не чекайте. Зверніться до педіатра, сімейного лікаря або consultatiebureau, пройдіть оцінювання в логопеда й попросіть перевірити слух. Фахівець врахує вік, мови дитини, розвиток, здоров’я та спостереження.',
       reliableOnly:'Без точного часу народження ми не використовуємо будинки та інші залежні від часу показники. Показані лише надійно розраховані частини карти.', moonAmbiguous:'Цього дня Місяць змінював знак. Тому ми не закріплюємо один місячний сценарій і радимо спостерігати обидва варіанти.',
       houseMethod:'Будинки розраховані за системою Плацидуса з урахуванням точного місцевого часу, координат та історичного часового поясу. Асцендент використовується лише як математична межа 1-го будинку й не є основою психологічного розбору.',
       disclaimer:'Це не діагноз і не передбачення. Зіставляйте висновки з живими спостереженнями за дитиною.', calculationError:'Не вдалося розрахувати карту. Перевірте дату, час і вибране місто.', missingPlace:'Для точного розрахунку відкрийте профіль знову та виберіть місто зі списку.',
@@ -50,7 +62,13 @@
     },
     en: {
       language:'Language', fullAnalysis:'Full child analysis', recalculate:'Recalculate chart', delete:'Delete', noChildren:'No children added yet', unknownTime:'Time unknown', close:'Close',
-      title:'Personal child analysis', portrait:'Core portrait', character:'Character', emotions:'Emotions and recovery', communication:'Communication', learning:'Learning', strengths:'Strengths', challenges:'What may take more effort', health:'Wellbeing: what to observe', social:'Social life', sport:'Sport and movement', parents:'What parents should know', facts:'Chart calculation', planets:'Planets', aspects:'Major aspects', houses:'Houses',
+      title:'Personal child analysis', portrait:'Core portrait', character:'Character', emotions:'Emotions and recovery', communication:'Communication', speech:'Speech and Mercury', learning:'Learning', strengths:'Strengths', challenges:'What may take more effort', health:'Wellbeing: what to observe', social:'Social life', sport:'Sport and movement', parents:'What parents should know', facts:'Chart calculation', planets:'Planets', aspects:'Major aspects', houses:'Houses',
+      mercuryRetroIntro:'Mercury was retrograde at birth. Astrological tradition links this with an individual way of processing and expressing thoughts: a child may take longer to find words and answer after a pause, or may speak quickly, at length and move rapidly between topics. There is no scientific evidence that retrograde Mercury causes delayed speech or talkativeness. Treat this only as an observation prompt.',
+      mercuryRetroSlow:'This chart gives more reason to observe internal preparation before speaking: the child may need extra time to understand a question, retrieve a word and shape an answer.',
+      mercuryRetroFast:'This chart gives more reason to observe a fast flow of speech: thought may run ahead of wording, so the child may interrupt, repeat or switch topics abruptly.',
+      mercuryRetroMixed:'Both modes may appear: the child may speak freely in a safe, familiar setting, yet become quiet and answer more slowly under pressure, when tired or with unfamiliar people.',
+      speechActions:['Ask one brief question and wait calmly for 5–10 seconds without finishing the sentence for the child.','Expand rather than correct: after “car goes”, respond “Yes, the red car is going fast”.','Read, sing and play conversational games every day; comment more and test with questions less.','Observe comprehension, gestures, new words, connected phrases and how well other people understand the child as separate skills.','Do not compare with other children or explain real communication difficulties through the birth chart alone.'],
+      speechReferral:'If speech or understanding is clearly outside age expectations, new skills are not emerging, communication of needs is difficult, or previously acquired words or skills are lost, do not wait. Contact a paediatrician, family doctor or consultatiebureau, arrange an assessment with a speech-language therapist and ask for a hearing check. The professional will consider age, languages used, overall development, health and observed behaviour.',
       reliableOnly:'Without an exact birth time, houses and other time-dependent factors are not used. Only reliably calculated parts of the chart are shown.', moonAmbiguous:'The Moon changed signs on this date. We therefore do not assign one lunar pattern and suggest observing both possibilities.',
       houseMethod:'Houses are calculated with the Placidus system using the exact local time, coordinates and historical time zone. The Ascendant is used only as the mathematical cusp of house 1 and is not the basis of the psychological interpretation.', disclaimer:'This is not a diagnosis or prediction. Compare every insight with real observations of the child.', calculationError:'The chart could not be calculated. Check the date, time and selected city.', missingPlace:'For an accurate calculation, reopen the profile and select a city from the suggestion list.',
       dominant:'The {element} element is strongest in this chart. It shapes the general response style without cancelling other qualities.', houseLine:'{planet} in house {house}: this theme is especially expressed through {theme}.',
@@ -65,7 +83,13 @@
     },
     nl: {
       language:'Taal', fullAnalysis:'Volledige kindanalyse', recalculate:'Horoscoop opnieuw berekenen', delete:'Verwijderen', noChildren:'Nog geen kinderen toegevoegd', unknownTime:'Tijd onbekend', close:'Sluiten',
-      title:'Persoonlijke analyse van het kind', portrait:'Kernportret', character:'Karakter', emotions:'Emoties en herstel', communication:'Communicatie', learning:'Leren', strengths:'Sterke kanten', challenges:'Wat meer moeite kan kosten', health:'Welzijn: waarop letten', social:'Socialisatie', sport:'Sport en beweging', parents:'Wat ouders moeten weten', facts:'Berekening van de kaart', planets:'Planeten', aspects:'Belangrijkste aspecten', houses:'Huizen',
+      title:'Persoonlijke analyse van het kind', portrait:'Kernportret', character:'Karakter', emotions:'Emoties en herstel', communication:'Communicatie', speech:'Spraak en Mercurius', learning:'Leren', strengths:'Sterke kanten', challenges:'Wat meer moeite kan kosten', health:'Welzijn: waarop letten', social:'Socialisatie', sport:'Sport en beweging', parents:'Wat ouders moeten weten', facts:'Berekening van de kaart', planets:'Planeten', aspects:'Belangrijkste aspecten', houses:'Huizen',
+      mercuryRetroIntro:'Mercurius liep retrograde bij de geboorte. Binnen de astrologische traditie wordt dit verbonden met een eigen manier van denken en formuleren: een kind kan langer naar woorden zoeken en pas na een pauze antwoorden, of juist snel en veel praten en vlug van onderwerp wisselen. Er is geen wetenschappelijk bewijs dat een retrograde Mercurius een spraakachterstand of praatzucht veroorzaakt. Gebruik dit uitsluitend als observatiehypothese.',
+      mercuryRetroSlow:'Deze horoscoop geeft meer aanleiding om op innerlijke voorbereiding van spraak te letten: het kind kan extra tijd nodig hebben om een vraag te begrijpen, een woord te vinden en een antwoord te formuleren.',
+      mercuryRetroFast:'Deze horoscoop geeft meer aanleiding om op een snelle spraakstroom te letten: de gedachte kan voor de formulering uitlopen, waardoor het kind soms onderbreekt, herhaalt of plots van onderwerp verandert.',
+      mercuryRetroMixed:'Beide patronen kunnen voorkomen: in een veilige vertrouwde omgeving praat het kind veel, terwijl het onder druk, bij vermoeidheid of bij onbekenden stil wordt en langzamer antwoordt.',
+      speechActions:['Stel één korte vraag en wacht rustig 5–10 seconden zonder de zin voor het kind af te maken.','Breid taal uit zonder te corrigeren: op “auto rijdt” antwoordt u “Ja, de rode auto rijdt snel”.','Lees, zing en speel dagelijks met beurtwisseling; geef vaker commentaar en toets minder met vragen.','Observeer taalbegrip, gebaren, nieuwe woorden, samenhangende zinnen en verstaanbaarheid als afzonderlijke vaardigheden.','Vergelijk niet met andere kinderen en verklaar echte communicatieproblemen nooit alleen vanuit de geboortehoroscoop.'],
+      speechReferral:'Als spreken of begrijpen duidelijk niet bij de leeftijd past, nieuwe vaardigheden lang uitblijven, het kind behoeften moeilijk kan uiten of eerder verworven woorden of vaardigheden verliest, wacht dan niet. Bespreek dit met de huisarts, kinderarts of het consultatiebureau, laat een logopedist onderzoek doen en vraag om een gehoorcontrole. De professional kijkt naar leeftijd, gebruikte talen, algemene ontwikkeling, gezondheid en observaties.',
       reliableOnly:'Zonder exacte geboortetijd gebruiken we geen huizen of andere tijdsafhankelijke factoren. Alleen betrouwbaar berekende delen worden getoond.', moonAmbiguous:'De Maan wisselde die dag van teken. Daarom leggen we niet één emotioneel patroon vast en adviseren we beide mogelijkheden te observeren.',
       houseMethod:'De huizen zijn berekend volgens het Placidus-systeem met de exacte lokale tijd, coördinaten en historische tijdzone. De Ascendant wordt alleen gebruikt als de wiskundige cusp van huis 1 en vormt niet de basis van de psychologische interpretatie.', disclaimer:'Dit is geen diagnose of voorspelling. Vergelijk elk inzicht met echte observaties van het kind.', calculationError:'De kaart kon niet worden berekend. Controleer datum, tijd en gekozen plaats.', missingPlace:'Open het profiel opnieuw en kies een stad uit de suggestielijst voor een nauwkeurige berekening.',
       dominant:'Het element {element} is het sterkst in deze kaart. Het kleurt de algemene reactiestijl zonder andere kwaliteiten uit te sluiten.', houseLine:'{planet} in huis {house}: dit thema komt vooral tot uiting via {theme}.',
@@ -144,7 +168,7 @@
   };
 
   const BODY_NAMES = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
-  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',learning:'method',strengths:'home',challenges:'settings',health:'consultations',social:'children',sport:'method',sensory:'consultations',parents:'consultations',facts:'settings'};
+  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',speech:'consultations',learning:'method',strengths:'home',challenges:'settings',health:'consultations',social:'children',sport:'method',sensory:'consultations',parents:'consultations',facts:'settings'};
 
   function lang() { return I18N[currentLanguage] ? currentLanguage : 'nl'; }
   function t() { return I18N[lang()]; }
@@ -177,6 +201,12 @@
       geocentric.t
     );
     return norm(Astronomy.Ecliptic(topocentric).elon);
+  }
+  function dailyLongitudeMotion(body, date) {
+    const halfDay = 12 * 60 * 60 * 1000;
+    const before = eclipticLongitude(body, new Date(date.getTime() - halfDay), null);
+    const after = eclipticLongitude(body, new Date(date.getTime() + halfDay), null);
+    return ((after - before + 540) % 360) - 180;
   }
   // Placidus cusps: classic iterative semi-arc algorithm. The implementation
   // follows the independently validated MIT-licensed Caelus house algorithm.
@@ -236,7 +266,14 @@
     const date = localDateTimeToUtc(child.birthDate, time, child.timezone);
     const observer = knownTime ? new Astronomy.Observer(Number(child.latitude), Number(child.longitude), 0) : null;
     const positions = {};
-    BODY_NAMES.forEach((body) => { positions[body] = {longitude:eclipticLongitude(body, date, observer)}; });
+    BODY_NAMES.forEach((body) => {
+      const dailyMotion = dailyLongitudeMotion(body, date);
+      positions[body] = {
+        longitude:eclipticLongitude(body, date, observer),
+        dailyMotion,
+        retrograde:dailyMotion < -0.0001
+      };
+    });
     let moonAmbiguous = false;
     let moonSigns = [signIndex(positions.Moon.longitude)];
     if (!knownTime) {
@@ -355,6 +392,20 @@
     return section('sensory', `${paragraphs([guide.intro,why])}${list(actions)}<p class="analysis-safety">${esc(guide.safety)}</p>`);
   }
 
+  function mercurySpeechSection(chart) {
+    if (!chart.positions.Mercury?.retrograde) return '';
+    const mercury = chart.positions.Mercury;
+    const linked = chart.aspects.filter((aspect) => aspect.a === 'Mercury' || aspect.b === 'Mercury');
+    const otherBody = (aspect) => aspect.a === 'Mercury' ? aspect.b : aspect.a;
+    const slowLink = linked.some((aspect) => ['Saturn','Neptune'].includes(otherBody(aspect)) && ['conjunction','square','opposition'].includes(aspect.type));
+    const fastLink = linked.some((aspect) => ['Mars','Jupiter','Uranus'].includes(otherBody(aspect)));
+    const element = SIGN_ELEMENT[mercury.sign];
+    const slowSetting = slowLink || ['earth','water'].includes(element) || (chart.knownTime && mercury.house === 12);
+    const fastSetting = fastLink || ['fire','air'].includes(element) || (chart.knownTime && [3,5,11].includes(mercury.house));
+    const pattern = slowSetting && !fastSetting ? t().mercuryRetroSlow : fastSetting && !slowSetting ? t().mercuryRetroFast : t().mercuryRetroMixed;
+    return section('speech', `${paragraphs([t().mercuryRetroIntro,pattern])}${list(t().speechActions)}<p class="analysis-safety">${esc(t().speechReferral)}</p>`);
+  }
+
   function buildAnalysis(child, chart) {
     const l = lang();
     const used = new Set();
@@ -379,6 +430,7 @@
     content.push(section('character', paragraphs([sunTrait[0], houseText('Sun',chart), aspectText(sunAspect)])));
     content.push(section('emotions', paragraphs([chart.moonAmbiguous?t().moonAmbiguous:moonElement.emotion, houseText('Moon',chart), chart.knownTime?aspectText(moonAspect):''])));
     content.push(section('communication', paragraphs([mercuryElement.communication, houseText('Mercury',chart)])));
+    content.push(mercurySpeechSection(chart));
     content.push(section('learning', paragraphs([learningIntro, aspectText(mercuryAspect)])));
     content.push(section('strengths', list(strengths)));
     content.push(section('challenges', paragraphs([t().challengeHard, challengeAspect ? aspectText(challengeAspect) : '',t().challengeBalance])));
@@ -387,7 +439,7 @@
     content.push(section('sport', paragraphs([sportIntro,houseText('Mars',chart),aspectText(marsAspect)])));
     content.push(sensorySection(chart));
     content.push(section('parents', list(t().parentActions)));
-    const planetRows = BODY_NAMES.map((body) => `<tr><td>${esc(t().planetNames[body])}</td><td>${esc(degreeText(chart.positions[body]))}</td><td>${chart.positions[body].house||'—'}</td></tr>`).join('');
+    const planetRows = BODY_NAMES.map((body) => `<tr><td>${esc(t().planetNames[body])}${chart.positions[body].retrograde?' ℞':''}</td><td>${esc(degreeText(chart.positions[body]))}</td><td>${chart.positions[body].house||'—'}</td></tr>`).join('');
     const aspectRows = chart.aspects.slice(0,12).map((a) => `<li>${esc(t().planetNames[a.a])} — ${esc(t().planetNames[a.b])}: ${esc(t().aspectNames[a.type])}, ${a.orb.toFixed(2)}°</li>`).join('');
     const cuspRows = chart.knownTime && chart.houseCusps ? chart.houseCusps.map((cusp,index) => `<tr><td>${index+1}</td><td>${esc(cuspDegreeText(cusp))}</td></tr>`).join('') : '';
     const facts = `<details class="analysis-facts"><summary>${esc(t().facts)}</summary>${chart.knownTime?`<p>${esc(t().houseMethod)}</p>`:`<p>${esc(t().reliableOnly)}</p>`}<h4>${esc(t().planets)}</h4><div class="analysis-table-wrap"><table><thead><tr><th>${esc(t().planets)}</th><th>°</th><th>${esc(t().houses)}</th></tr></thead><tbody>${planetRows}</tbody></table></div>${cuspRows?`<h4>${esc(t().houses)} · Placidus</h4><div class="analysis-table-wrap"><table><tbody>${cuspRows}</tbody></table></div>`:''}<h4>${esc(t().aspects)}</h4><ul>${aspectRows}</ul><small>${esc(chart.engine)}</small></details>`;
@@ -419,7 +471,7 @@
     grid.innerHTML = children.map((child) => {
       let chart = child.natalChart;
       try { chart = calculateChart(child, false); } catch (_) { chart = null; }
-      const badges = chart ? ['Sun','Moon','Mercury','Mars'].map((body) => `<span class="zodiac-badge">${esc(t().planetNames[body])}: ${esc(body==='Moon'&&chart.moonAmbiguous?chart.moonSigns.map(signName).join(' / '):signName(chart.positions[body].sign))}</span>`).join('') : '';
+      const badges = chart ? ['Sun','Moon','Mercury','Mars'].map((body) => `<span class="zodiac-badge">${esc(t().planetNames[body])}${chart.positions[body].retrograde?' ℞':''}: ${esc(body==='Moon'&&chart.moonAmbiguous?chart.moonSigns.map(signName).join(' / '):signName(chart.positions[body].sign))}</span>`).join('') : '';
       return `<article class="child-card"><div class="child-name">${esc(child.name)}</div>${child.birthDate?`<div class="child-info">${esc(child.birthDate)}</div>`:''}<div class="child-info">${child.birthTimeUnknown?esc(t().unknownTime):esc(child.birthTime||'')}</div>${child.birthPlace?`<div class="child-info">${esc(child.birthPlace)}</div>`:''}<div class="zodiac-badges">${badges}</div><div class="child-card-actions"><button class="btn btn-primary" type="button" onclick="showChildAnalysis(${Number(child.id)})">${esc(t().fullAnalysis)}</button><button class="btn btn-secondary" type="button" onclick="deleteChild(${Number(child.id)})">${esc(t().delete)}</button></div></article>`;
     }).join('');
   }

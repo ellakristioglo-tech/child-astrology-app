@@ -1,0 +1,58 @@
+.consultation-shell{padding:28px}
+.consultant-header{display:grid;grid-template-columns:58px 1fr;gap:16px;align-items:center;margin-bottom:22px}
+.consultant-header img{width:58px;height:58px;border-radius:17px;object-fit:cover;box-shadow:0 9px 24px rgba(58,39,104,.2)}
+.consultant-header h2{margin:0 0 5px;color:var(--cosmic-purple);font-family:Georgia,serif;font-size:30px}
+.consultant-header p{margin:0;color:#667080;line-height:1.5}
+.consultant-controls{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:16px;align-items:end;margin-bottom:16px}
+.consultant-field label{display:block;margin-bottom:7px;color:#3a275f;font-size:13px;font-weight:800}
+.consultant-field select,.consultant-compose textarea{width:100%;border:1px solid rgba(74,44,122,.22);border-radius:15px;background:#fff;color:#273142;font:inherit;outline:none}
+.consultant-field select{height:50px;padding:0 14px}
+.consultant-field select:focus,.consultant-compose textarea:focus{border-color:var(--gold-primary);box-shadow:0 0 0 3px rgba(212,175,55,.16)}
+.consultant-context{min-height:50px;padding:12px 15px;border:1px solid rgba(212,175,55,.42);border-radius:15px;background:#fff9e8;color:#5b4a20;font-size:13px;line-height:1.45}
+.consultant-chips{display:flex;gap:8px;overflow-x:auto;padding:1px 1px 12px;scrollbar-width:none}
+.consultant-chips::-webkit-scrollbar{display:none}
+.consultant-chip{flex:0 0 auto;padding:9px 13px;border:1px solid rgba(74,44,122,.18);border-radius:999px;background:#fff;color:#4a2c7a;font-size:13px;font-weight:700;cursor:pointer}
+.consultant-chip:hover{border-color:var(--gold-primary);background:#fff9df}
+.consultant-messages{display:flex;min-height:280px;max-height:470px;overflow:auto;flex-direction:column;gap:12px;padding:18px;border:1px solid rgba(74,44,122,.12);border-radius:19px;background:linear-gradient(180deg,#f9f7ff,#fff)}
+.consultant-empty{margin:auto;max-width:560px;text-align:center;color:#6c7281;line-height:1.6}
+.consultant-empty strong{display:block;margin-bottom:6px;color:#3a275f;font-size:18px}
+.consultant-message{max-width:88%;padding:13px 15px;border-radius:17px;line-height:1.52;white-space:pre-line}
+.consultant-message.user{align-self:flex-end;border-bottom-right-radius:5px;background:linear-gradient(135deg,#4a2c7a,#7545a4);color:#fff}
+.consultant-message.assistant{align-self:flex-start;border:1px solid rgba(74,44,122,.12);border-bottom-left-radius:5px;background:#fff;color:#293244;box-shadow:0 7px 22px rgba(44,31,79,.07)}
+.consultant-message.assistant strong{color:#45256f}
+.consultant-compose{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}
+.consultant-compose textarea{min-height:58px;max-height:150px;padding:14px;resize:vertical}
+.consultant-send{align-self:stretch;min-width:120px;justify-content:center;margin:0}
+.consultant-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px}
+.consultant-clear{border:0;background:transparent;color:#756f80;text-decoration:underline;cursor:pointer}
+.consultant-personal{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:20px;padding:16px 18px;border:1px solid rgba(37,211,102,.28);border-radius:18px;background:#f2fff7}
+.consultant-personal p{margin:0;color:#345344;line-height:1.45}
+.consultant-personal a{flex:0 0 auto;margin:0;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff}
+.consultant-note{margin:13px 2px 0;color:#777180;font-size:12px;line-height:1.45}
+.consultant-error{margin:12px 0;padding:11px 13px;border:1px solid #d79a9a;border-radius:12px;background:#fff2f2;color:#7f2c2c}
+.install-guide{margin-bottom:22px;padding:18px;border:1px solid rgba(212,175,55,.35);border-radius:18px;background:linear-gradient(135deg,#fffdf6,#f8f5ff)}
+.install-guide summary{display:flex;align-items:center;gap:11px;color:var(--cosmic-purple);font-size:19px;font-weight:800;cursor:pointer;list-style:none}
+.install-guide summary::-webkit-details-marker{display:none}
+.install-guide summary::before{content:'↓';display:grid;width:36px;height:36px;place-items:center;border-radius:11px;background:#f2e4a8;color:#352150;font-size:21px}
+.install-guide[open] summary::before{content:'✓'}
+.install-guide-body{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.install-platform{padding:15px;border:1px solid rgba(74,44,122,.12);border-radius:15px;background:#fff}
+.install-platform h4{margin:0 0 10px;color:#3d2862}
+.install-platform ol{margin:0;padding-left:19px}
+.install-platform li{margin-bottom:8px;line-height:1.45}
+.install-hint{grid-column:1/-1;margin:0;color:#6f6978;font-size:13px;line-height:1.5}
+@media(max-width:768px){
+  .consultation-shell{padding:18px 14px}
+  .consultant-header{grid-template-columns:48px 1fr;gap:12px}
+  .consultant-header img{width:48px;height:48px;border-radius:14px}
+  .consultant-header h2{font-size:24px}
+  .consultant-controls{grid-template-columns:1fr}
+  .consultant-messages{min-height:250px;max-height:48vh;padding:13px}
+  .consultant-message{max-width:94%;font-size:14px}
+  .consultant-compose{grid-template-columns:1fr}
+  .consultant-send{min-height:50px}
+  .consultant-personal{align-items:stretch;flex-direction:column}
+  .consultant-personal a{justify-content:center}
+  .install-guide-body{grid-template-columns:1fr}
+  .install-hint{grid-column:auto}
+}

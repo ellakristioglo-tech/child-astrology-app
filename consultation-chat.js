@@ -216,6 +216,7 @@
     const history = getHistory(id);
     const previousQuestion = [...history].reverse().find((item) => item.role === 'user')?.text;
     const topic = detectTopic(question,previousQuestion);
+    document.dispatchEvent(new CustomEvent('app:consultation-question',{detail:{topic}}));
     history.push(
       {role:'user',text:question},
       {role:'assistant',type:'chart-guidance',question,topic,language:lang(),text:responseFor(child,chart,question,history,topic)}

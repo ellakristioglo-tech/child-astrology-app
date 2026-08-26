@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const VERSION = '20260826c';
+  const VERSION = '20260826d';
   const CALCULATION_VERSION = 'placidus-topocentric-20260825-3';
   const SIGN_KEYS = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
   const ELEMENTS = ['fire','earth','air','water'];
@@ -80,6 +80,41 @@
     }
   };
 
+  const SENSORY_GUIDE = {
+    ru: {
+      title:'Сенсорная разгрузка',
+      intro:'Если ребёнок бегает без остановки, врезается в предметы, толкается или долго не может успокоиться, сначала помогите телу сбросить напряжение. Запреты и разговоры оставьте на момент, когда ребёнок уже немного восстановился.',
+      why:'Почему это предложено: {reasons}. В астрологии такие сочетания традиционно связывают с быстрой реакцией, чувствительностью к среде или потребностью в телесной опоре. Это гипотеза для наблюдения, а не диагноз.',
+      reasons:{activation:'заметная связь эмоций и двигательной энергии',sensitivity:'повышенная восприимчивость к атмосфере и стимулам',boundaries:'потребность в понятных телесных границах и ритме',retreat:'важность уединения и восстановления после нагрузки'},
+      actions:{heavy:'«Тяжёлая работа»: 10–15 секунд толкать стену, переносить безопасные лёгкие предметы, лазать или висеть под присмотром.',pressure:'Глубокое давление: предложите крепкое объятие или игру «бурито» в одеяле — только с согласия ребёнка, с открытой головой и без давления на шею или грудь.',quiet:'Тихое место: палатка, шалаш или уголок с приглушённым светом. Если ребёнок туда ушёл, дайте ему побыть без вопросов и требований.',breath:'Длинный выдох: мыльные пузыри, дудочка, сдувание ватного шарика. Для жевания выбирайте только безопасную по возрасту пищу и всегда наблюдайте за ребёнком.',rhythm:'Медленный ритм: спокойно покачать на руках, фитболе или в гамаке. Быстрое качание может, наоборот, возбуждать.',transition:'После торгового центра, праздника или гостей запланируйте 20–40 минут тишины: приглушите свет, выключите экран и уберите лишние звуки.'},
+      safety:'Не используйте утяжелённый рюкзак, тяжёлые одеяла или давление матрасом без рекомендации врача или детского эрготерапевта. Остановитесь, если ребёнку неприятно, больно или трудно дышать. Повторяющиеся трудности с координацией и саморегуляцией обсудите с педиатром или эрготерапевтом.'
+    },
+    ua: {
+      title:'Сенсорне розвантаження',
+      intro:'Якщо дитина безупинно бігає, врізається в предмети, штовхається або довго не може заспокоїтися, спочатку допоможіть тілу скинути напруження. Заборони й розмови залиште на момент, коли дитина вже трохи відновилася.',
+      why:'Чому це запропоновано: {reasons}. В астрології такі поєднання традиційно пов’язують зі швидкою реакцією, чутливістю до середовища або потребою в тілесній опорі. Це гіпотеза для спостереження, а не діагноз.',
+      reasons:{activation:'помітний зв’язок емоцій і рухової енергії',sensitivity:'підвищена сприйнятливість до атмосфери та стимулів',boundaries:'потреба у зрозумілих тілесних межах і ритмі',retreat:'важливість усамітнення й відновлення після навантаження'},
+      actions:{heavy:'«Важка робота»: 10–15 секунд штовхати стіну, переносити безпечні легкі предмети, лазити або висіти під наглядом.',pressure:'Глибокий тиск: запропонуйте міцні обійми або гру «буріто» в ковдрі — лише за згодою дитини, з відкритою головою та без тиску на шию чи груди.',quiet:'Тихе місце: намет, курінь або куточок із приглушеним світлом. Якщо дитина туди пішла, дайте їй побути без запитань і вимог.',breath:'Довгий видих: мильні бульбашки, сопілка або здування ватної кульки. Для жування обирайте лише безпечну за віком їжу та завжди наглядайте.',rhythm:'Повільний ритм: спокійно погойдайте на руках, фітболі або в гамаку. Швидке гойдання може, навпаки, збуджувати.',transition:'Після торгового центру, свята чи гостей заплануйте 20–40 хвилин тиші: приглушіть світло, вимкніть екран і приберіть зайві звуки.'},
+      safety:'Не використовуйте обтяжений рюкзак, важкі ковдри чи тиск матрацом без рекомендації лікаря або дитячого ерготерапевта. Зупиніться, якщо дитині неприємно, боляче чи важко дихати. Повторювані труднощі з координацією та саморегуляцією обговоріть із педіатром або ерготерапевтом.'
+    },
+    en: {
+      title:'Sensory reset',
+      intro:'If the child runs without stopping, bumps into things, pushes or cannot settle for a long time, help the body release tension first. Save explanations and limits for the moment when the child has begun to recover.',
+      why:'Why this is suggested: {reasons}. In astrology, these patterns are traditionally associated with quick reactions, sensitivity to stimulation or a need for physical grounding. This is an observation prompt, not a diagnosis.',
+      reasons:{activation:'a strong link between emotion and motor energy',sensitivity:'greater sensitivity to atmosphere and stimulation',boundaries:'a need for clear physical boundaries and rhythm',retreat:'a need for quiet recovery after stimulation'},
+      actions:{heavy:'“Heavy work”: push against a wall for 10–15 seconds, carry safe light objects, climb or hang with adult supervision.',pressure:'Deep pressure: offer a firm hug or a blanket “burrito” game only with the child’s consent, with the head free and no pressure on the neck or chest.',quiet:'Create a quiet den, tent or dim corner. If the child goes there, allow time without questions or demands.',breath:'Use a long exhale: blow bubbles, use a whistle or blow a cotton ball across a table. Offer only age-safe chewing foods and supervise.',rhythm:'Use slow rhythm: gentle rocking in arms, on a therapy ball or in a hammock. Fast rocking can be stimulating instead.',transition:'After shops, parties or visitors, plan 20–40 minutes of quiet: dim the lights, turn off screens and reduce sound.'},
+      safety:'Do not use weighted backpacks, heavy blankets or mattress pressure without advice from a doctor or paediatric occupational therapist. Stop if the child dislikes it, feels pain or has difficulty breathing. Discuss repeated coordination or regulation difficulties with a paediatrician or occupational therapist.'
+    },
+    nl: {
+      title:'Sensorische ontlading',
+      intro:'Als een kind zonder stoppen rent, vaak botst, duwt of lang niet tot rust komt, help dan eerst het lichaam spanning af te voeren. Bespreek grenzen pas wanneer het kind al wat hersteld is.',
+      why:'Waarom dit wordt voorgesteld: {reasons}. In de astrologie worden zulke patronen traditioneel verbonden met snelle reacties, gevoeligheid voor prikkels of behoefte aan lichamelijke houvast. Dit is een observatiehypothese, geen diagnose.',
+      reasons:{activation:'een duidelijke koppeling tussen emotie en bewegingsenergie',sensitivity:'grotere gevoeligheid voor sfeer en prikkels',boundaries:'behoefte aan duidelijke lichaamsgrenzen en ritme',retreat:'behoefte aan rustige hersteltijd na prikkels'},
+      actions:{heavy:'“Zwaar werk”: 10–15 seconden tegen een muur duwen, veilige lichte voorwerpen dragen, klimmen of hangen onder toezicht.',pressure:'Diepe druk: bied een stevige knuffel of een “burrito”-spel in een deken aan, alleen met toestemming van het kind, met het hoofd vrij en zonder druk op nek of borst.',quiet:'Maak een rustige tent, hut of gedimde hoek. Gaat het kind daarheen, geef dan tijd zonder vragen of opdrachten.',breath:'Gebruik een lange uitademing: bellen blazen, op een fluitje blazen of een watje wegblazen. Geef alleen leeftijdsveilig voedsel om op te kauwen en houd toezicht.',rhythm:'Gebruik een langzaam ritme: rustig wiegen in de armen, op een oefenbal of in een hangmat. Snel wiegen kan juist activeren.',transition:'Plan na winkels, feestjes of bezoek 20–40 minuten rust: dim het licht, zet schermen uit en verminder geluid.'},
+      safety:'Gebruik geen verzwaarde rugzak, zware deken of matrasdruk zonder advies van een arts of kinderergotherapeut. Stop als het kind het onaangenaam vindt, pijn heeft of moeilijk ademt. Bespreek terugkerende problemen met coördinatie of zelfregulatie met een kinderarts of ergotherapeut.'
+    }
+  };
+
   const SIGN_TRAITS = {
     ru:[['быстро включается, любит действовать прямо и проверять себя делом','важно давать безопасный выход энергии и небольшие самостоятельные задачи'],['движется в своём темпе, ценит предсказуемость и телесный комфорт','перемены лучше вводить заранее и без давления'],['оживает от вопросов, разговора и смены впечатлений','интерес удерживается через разнообразие и короткие задачи'],['тонко считывает атмосферу и нуждается в ощущении близости','спокойный контакт работает лучше жёсткого требования'],['раскрывается, когда его замечают и дают проявить талант','искренняя конкретная похвала сильнее общей лести'],['замечает детали, ищет пользу и хочет понимать порядок действий','важно не превращать аккуратность в страх ошибки'],['ориентирован на отношения, справедливость и красивую подачу','решение даётся легче после спокойного обсуждения вариантов'],['глубоко включается, долго помнит значимые переживания и ценит честность','нельзя высмеивать чувства или требовать немедленной откровенности'],['тянется к большому смыслу, свободе и новым горизонтам','лучше мотивируют цель и возможность увидеть результат шире'],['серьёзно относится к обязательствам и постепенно наращивает мастерство','задачу полезно разбивать на этапы и отмечать прогресс'],['мыслит независимо, любит необычные решения и пространство выбора','рамки работают, если их смысл понятен и внутри есть свобода'],['восприимчив к образам, настроению и невысказанным сигналам','нужны мягкие переходы, творчество и время побыть в тишине']],
     ua:[['швидко включається, любить діяти прямо й перевіряти себе справою','давайте безпечний вихід енергії та невеликі самостійні завдання'],['рухається у власному темпі, цінує передбачуваність і тілесний комфорт','зміни краще вводити заздалегідь і без тиску'],['оживає від запитань, розмов і зміни вражень','інтерес утримують різноманітність і короткі завдання'],['тонко відчуває атмосферу й потребує близькості','спокійний контакт працює краще за жорстку вимогу'],['розкривається, коли його помічають і дають проявити талант','конкретна щира похвала сильніша за загальні лестощі'],['помічає деталі, шукає користь і порядок дій','не перетворюйте акуратність на страх помилки'],['орієнтується на стосунки, справедливість і красиву подачу','рішення легше приходить після спокійного обговорення'],['глибоко включається, довго пам’ятає важливі переживання й цінує чесність','не висміюйте почуття й не вимагайте негайної відвертості'],['тягнеться до сенсу, свободи й нових горизонтів','мотивують мета та широка перспектива'],['серйозно ставиться до обов’язків і поступово нарощує майстерність','діліть завдання на етапи й відмічайте прогрес'],['мислить незалежно, любить незвичні рішення та вибір','межі працюють, коли зрозумілий їх сенс'],['чутливий до образів, настрою й невисловлених сигналів','потрібні м’які переходи, творчість і тиша']],
@@ -109,7 +144,7 @@
   };
 
   const BODY_NAMES = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
-  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',learning:'method',strengths:'home',challenges:'settings',health:'consultations',social:'children',sport:'method',parents:'consultations',facts:'settings'};
+  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',learning:'method',strengths:'home',challenges:'settings',health:'consultations',social:'children',sport:'method',sensory:'consultations',parents:'consultations',facts:'settings'};
 
   function lang() { return I18N[currentLanguage] ? currentLanguage : 'nl'; }
   function t() { return I18N[lang()]; }
@@ -276,7 +311,10 @@
   }
   function cuspDegreeText(longitude) { return degreeText({longitude, sign:signIndex(longitude)}); }
   function icon(name) { return `<img class="analysis-card-icon" src="assets/nav-icons/${ICONS[name]}.png?v=${VERSION}" alt="">`; }
-  function section(name, body) { return `<article class="analysis-section analysis-${name}">${icon(name)}<div><h3>${esc(t()[name])}</h3>${body}</div></article>`; }
+  function section(name, body) {
+    const title = name === 'sensory' ? SENSORY_GUIDE[lang()].title : t()[name];
+    return `<article class="analysis-section analysis-${name}">${icon(name)}<div><h3>${esc(title)}</h3>${body}</div></article>`;
+  }
   function paragraphs(items) {
     const seen = new Set();
     return items.filter(Boolean).filter((item) => {
@@ -287,6 +325,35 @@
     }).map((item) => `<p>${esc(item)}</p>`).join('');
   }
   function list(items) { return `<ul>${[...new Set(items.filter(Boolean))].map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`; }
+
+  function sensorySection(chart) {
+    const guide = SENSORY_GUIDE[lang()];
+    const hard = new Set(['conjunction','square','opposition']);
+    const hasLink = (groupA, groupB) => chart.aspects.some((aspect) => hard.has(aspect.type) && (
+      (groupA.includes(aspect.a) && groupB.includes(aspect.b)) ||
+      (groupA.includes(aspect.b) && groupB.includes(aspect.a))
+    ));
+    const houseIn = (body, houses) => chart.knownTime && houses.includes(chart.positions[body]?.house);
+    const flags = [];
+    if (hasLink(['Moon','Mercury','Mars'],['Mars','Uranus']) || (['fire','air'].includes(chart.dominantElement) && SIGN_ELEMENT[chart.positions.Mars.sign] === 'fire')) flags.push('activation');
+    if (SIGN_ELEMENT[chart.positions.Moon.sign] === 'water' || hasLink(['Moon','Mercury'],['Neptune','Uranus'])) flags.push('sensitivity');
+    if (hasLink(['Moon','Mars'],['Saturn']) || houseIn('Mars',[1,6]) || chart.dominantElement === 'earth') flags.push('boundaries');
+    if (houseIn('Moon',[12]) || houseIn('Mercury',[3,12]) || houseIn('Neptune',[12]) || SIGN_ELEMENT[chart.positions.Moon.sign] === 'water') flags.push('retreat');
+    if (!flags.length) flags.push(chart.dominantElement === 'water' ? 'sensitivity' : chart.dominantElement === 'earth' ? 'boundaries' : 'activation');
+
+    const actionKeys = [];
+    const add = (...keys) => keys.forEach((key) => { if (!actionKeys.includes(key)) actionKeys.push(key); });
+    flags.forEach((flag) => {
+      if (flag === 'activation') add('heavy','breath','rhythm');
+      if (flag === 'sensitivity') add('quiet','breath','transition');
+      if (flag === 'boundaries') add('pressure','heavy','rhythm');
+      if (flag === 'retreat') add('quiet','transition','rhythm');
+    });
+    const reasons = flags.map((flag) => guide.reasons[flag]).join('; ');
+    const why = fill(guide.why,{reasons});
+    const actions = actionKeys.slice(0,5).map((key) => guide.actions[key]);
+    return section('sensory', `${paragraphs([guide.intro,why])}${list(actions)}<p class="analysis-safety">${esc(guide.safety)}</p>`);
+  }
 
   function buildAnalysis(child, chart) {
     const l = lang();
@@ -318,6 +385,7 @@
     content.push(section('health', list(t().healthItems)));
     content.push(section('social', paragraphs([venusElement.social,houseText('Venus',chart),aspectText(venusAspect)])));
     content.push(section('sport', paragraphs([sportIntro,houseText('Mars',chart),aspectText(marsAspect)])));
+    content.push(sensorySection(chart));
     content.push(section('parents', list(t().parentActions)));
     const planetRows = BODY_NAMES.map((body) => `<tr><td>${esc(t().planetNames[body])}</td><td>${esc(degreeText(chart.positions[body]))}</td><td>${chart.positions[body].house||'—'}</td></tr>`).join('');
     const aspectRows = chart.aspects.slice(0,12).map((a) => `<li>${esc(t().planetNames[a.a])} — ${esc(t().planetNames[a.b])}: ${esc(t().aspectNames[a.type])}, ${a.orb.toFixed(2)}°</li>`).join('');

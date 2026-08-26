@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const VERSION = '20260826e';
+  const VERSION = '20260826f';
   const CALCULATION_VERSION = 'placidus-topocentric-retrograde-20260826-4';
   const SIGN_KEYS = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
   const ELEMENTS = ['fire','earth','air','water'];
@@ -139,6 +139,45 @@
     }
   };
 
+  const ACTIVITY_GUIDE = {
+    ru: {
+      title:'Темп, внимание и саморегуляция',
+      intro:'В астрологической традиции Марс связывают с двигательным импульсом, Меркурий — со скоростью обработки информации, а Уран — с быстрым переключением и потребностью в свободе. Их знаки, точные аспекты и дома могут подсказать, что стоит наблюдать. Научных доказательств, что натальная карта определяет гиперактивность или СДВГ, нет: это не диагноз.',
+      why:'В этой карте можно понаблюдать: {reasons}. Это не означает, что трудность обязательно проявится.',
+      reasons:{motor:'высокую потребность в движении и быстрый телесный старт',mental:'быстрый поток мыслей, вопросов и переключений',reactive:'резкую реакцию на запрет, ожидание или перегрузку',steady:'индивидуальный темп без одного выраженного астрологического акцента'},
+      actions:['Давайте одну короткую инструкцию за раз, затем попросите ребёнка показать или повторить следующий шаг.','Используйте видимый план и таймер; предупреждайте о переходе за 10 и за 2 минуты.','Чередуйте 10–20 минут работы с заранее запланированным движением. Спорт и движение — способ регуляции, а не наказание.','Уберите со стола лишние стимулы и предложите выбор из двух конкретных способов выполнить задачу.','Хвалите сразу и конкретно: называйте действие, которое получилось, а не оценивайте личность.','В течение двух недель отмечайте ситуацию, сон, голод, шум, длительность реакции и то, что помогло; сравните наблюдения дома и в школе.'],
+      underFour:'До 4 лет высокая подвижность и короткое внимание часто соответствуют возрасту. Не приклеивайте ярлык; оценивайте безопасность, развитие и то, насколько поведение мешает повседневной жизни.',
+      referral:'Обратитесь к huisarts, педиатру, jeugdarts или consultatiebureau, если проявления заметно сильнее возрастной нормы, сохраняются около 6 месяцев, мешают обучению, отношениям или безопасности и видны как минимум в двух средах, например дома и в школе. Диагноз ставит только квалифицированный специалист. Важно также проверить сон, тревогу, слух и зрение, развитие речи и обучения и другие возможные причины.'
+    },
+    ua: {
+      title:'Темп, увага та саморегуляція',
+      intro:'В астрологічній традиції Марс пов’язують із руховим імпульсом, Меркурій — зі швидкістю обробки інформації, а Уран — зі швидким перемиканням і потребою у свободі. Їхні знаки, точні аспекти й будинки можуть підказати, за чим спостерігати. Наукових доказів, що натальна карта визначає гіперактивність або РДУГ, немає: це не діагноз.',
+      why:'У цій карті можна поспостерігати: {reasons}. Це не означає, що труднощі обов’язково проявляться.',
+      reasons:{motor:'високу потребу в русі та швидкий тілесний старт',mental:'швидкий потік думок, запитань і перемикань',reactive:'різку реакцію на заборону, очікування або перевантаження',steady:'індивідуальний темп без одного вираженого астрологічного акценту'},
+      actions:['Давайте одну коротку інструкцію за раз, потім попросіть дитину показати або повторити наступний крок.','Використовуйте наочний план і таймер; попереджайте про перехід за 10 і за 2 хвилини.','Чергуйте 10–20 хвилин роботи із запланованим рухом. Спорт і рух — спосіб регуляції, а не покарання.','Приберіть зайві стимули зі столу й запропонуйте вибір із двох конкретних способів виконати завдання.','Хваліть одразу й конкретно: називайте вдалу дію, а не оцінюйте особистість.','Протягом двох тижнів відмічайте ситуацію, сон, голод, шум, тривалість реакції й те, що допомогло; порівняйте спостереження вдома та в школі.'],
+      underFour:'До 4 років висока рухливість і коротка увага часто відповідають віку. Не приклеюйте ярлик; оцінюйте безпеку, розвиток і вплив на повсякденне життя.',
+      referral:'Зверніться до сімейного лікаря, педіатра, jeugdarts або consultatiebureau, якщо прояви значно сильніші за вікову норму, тривають близько 6 місяців, заважають навчанню, стосункам чи безпеці та помітні щонайменше у двох середовищах, наприклад удома й у школі. Діагноз встановлює лише кваліфікований фахівець. Важливо також перевірити сон, тривогу, слух і зір, розвиток мовлення й навчання та інші можливі причини.'
+    },
+    en: {
+      title:'Pace, attention and self-regulation',
+      intro:'Astrological tradition links Mars with motor drive, Mercury with information-processing speed and Uranus with rapid switching and a need for freedom. Their signs, exact aspects and houses may suggest what to observe. There is no scientific evidence that a natal chart determines hyperactivity or ADHD; this is not a diagnosis.',
+      why:'In this chart, it may be useful to observe: {reasons}. This does not mean a difficulty will necessarily appear.',
+      reasons:{motor:'a strong need for movement and a quick physical start',mental:'a rapid flow of thoughts, questions and attention shifts',reactive:'a sharp response to limits, waiting or overload',steady:'an individual pace without one pronounced astrological emphasis'},
+      actions:['Give one brief instruction at a time, then ask the child to show or repeat the next step.','Use a visible plan and timer; warn about transitions 10 minutes and 2 minutes beforehand.','Alternate 10–20 minutes of work with planned movement. Sport and movement are regulation tools, not punishment.','Remove unnecessary distractions from the desk and offer two concrete ways to complete the task.','Praise immediately and specifically: name the successful action rather than judging the child.','For two weeks, note the situation, sleep, hunger, noise, duration and what helped; compare observations at home and at school.'],
+      underFour:'Under age 4, high activity and a short attention span are often developmentally typical. Avoid labels; consider safety, development and impact on daily life.',
+      referral:'Speak with a GP, paediatrician, youth doctor or child health clinic if the behaviour is clearly beyond the developmental level, continues for about 6 months, affects learning, relationships or safety, and appears in at least two settings such as home and school. Only a qualified professional can diagnose ADHD. Sleep, anxiety, hearing and vision, speech and learning development, and other possible causes should also be assessed.'
+    },
+    nl: {
+      title:'Tempo, aandacht en zelfregulatie',
+      intro:'In de astrologische traditie wordt Mars verbonden met bewegingsdrang, Mercurius met de snelheid van informatieverwerking en Uranus met snel schakelen en behoefte aan vrijheid. Hun tekens, exacte aspecten en huizen kunnen aangeven wat u kunt observeren. Er is geen wetenschappelijk bewijs dat een geboortehoroscoop hyperactiviteit of ADHD bepaalt; dit is geen diagnose.',
+      why:'Bij deze horoscoop kunt u letten op: {reasons}. Dit betekent niet dat een probleem zeker zal optreden.',
+      reasons:{motor:'een sterke bewegingsbehoefte en snelle lichamelijke start',mental:'een snelle stroom van gedachten, vragen en aandachtswisselingen',reactive:'een felle reactie op grenzen, wachten of overprikkeling',steady:'een eigen tempo zonder één uitgesproken astrologisch accent'},
+      actions:['Geef één korte instructie tegelijk en laat het kind daarna de volgende stap tonen of herhalen.','Gebruik een zichtbaar plan en een timer; kondig overgangen 10 en 2 minuten vooraf aan.','Wissel 10–20 minuten werk af met geplande beweging. Sport en bewegen helpen reguleren en zijn geen straf.','Haal onnodige prikkels van tafel en bied twee concrete manieren om de taak uit te voeren.','Geef direct en specifiek complimenten: benoem het geslaagde gedrag, niet de persoonlijkheid.','Noteer twee weken lang situatie, slaap, honger, geluid, duur en wat hielp; vergelijk thuis en school.'],
+      underFour:'Onder 4 jaar zijn veel bewegen en een korte aandachtsspanne vaak passend bij de ontwikkeling. Vermijd labels en kijk naar veiligheid, ontwikkeling en invloed op het dagelijks leven.',
+      referral:'Bespreek het met huisarts, kinderarts, jeugdarts of consultatiebureau als het gedrag duidelijk niet bij het ontwikkelingsniveau past, ongeveer 6 maanden aanhoudt, leren, relaties of veiligheid belemmert en in minstens twee omgevingen voorkomt, bijvoorbeeld thuis en op school. Alleen een bevoegde professional kan ADHD diagnosticeren. Laat ook slaap, angst, gehoor en zicht, spraak- en leerontwikkeling en andere mogelijke oorzaken beoordelen.'
+    }
+  };
+
   const SIGN_TRAITS = {
     ru:[['быстро включается, любит действовать прямо и проверять себя делом','важно давать безопасный выход энергии и небольшие самостоятельные задачи'],['движется в своём темпе, ценит предсказуемость и телесный комфорт','перемены лучше вводить заранее и без давления'],['оживает от вопросов, разговора и смены впечатлений','интерес удерживается через разнообразие и короткие задачи'],['тонко считывает атмосферу и нуждается в ощущении близости','спокойный контакт работает лучше жёсткого требования'],['раскрывается, когда его замечают и дают проявить талант','искренняя конкретная похвала сильнее общей лести'],['замечает детали, ищет пользу и хочет понимать порядок действий','важно не превращать аккуратность в страх ошибки'],['ориентирован на отношения, справедливость и красивую подачу','решение даётся легче после спокойного обсуждения вариантов'],['глубоко включается, долго помнит значимые переживания и ценит честность','нельзя высмеивать чувства или требовать немедленной откровенности'],['тянется к большому смыслу, свободе и новым горизонтам','лучше мотивируют цель и возможность увидеть результат шире'],['серьёзно относится к обязательствам и постепенно наращивает мастерство','задачу полезно разбивать на этапы и отмечать прогресс'],['мыслит независимо, любит необычные решения и пространство выбора','рамки работают, если их смысл понятен и внутри есть свобода'],['восприимчив к образам, настроению и невысказанным сигналам','нужны мягкие переходы, творчество и время побыть в тишине']],
     ua:[['швидко включається, любить діяти прямо й перевіряти себе справою','давайте безпечний вихід енергії та невеликі самостійні завдання'],['рухається у власному темпі, цінує передбачуваність і тілесний комфорт','зміни краще вводити заздалегідь і без тиску'],['оживає від запитань, розмов і зміни вражень','інтерес утримують різноманітність і короткі завдання'],['тонко відчуває атмосферу й потребує близькості','спокійний контакт працює краще за жорстку вимогу'],['розкривається, коли його помічають і дають проявити талант','конкретна щира похвала сильніша за загальні лестощі'],['помічає деталі, шукає користь і порядок дій','не перетворюйте акуратність на страх помилки'],['орієнтується на стосунки, справедливість і красиву подачу','рішення легше приходить після спокійного обговорення'],['глибоко включається, довго пам’ятає важливі переживання й цінує чесність','не висміюйте почуття й не вимагайте негайної відвертості'],['тягнеться до сенсу, свободи й нових горизонтів','мотивують мета та широка перспектива'],['серйозно ставиться до обов’язків і поступово нарощує майстерність','діліть завдання на етапи й відмічайте прогрес'],['мислить незалежно, любить незвичні рішення та вибір','межі працюють, коли зрозумілий їх сенс'],['чутливий до образів, настрою й невисловлених сигналів','потрібні м’які переходи, творчість і тиша']],
@@ -168,7 +207,7 @@
   };
 
   const BODY_NAMES = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
-  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',speech:'consultations',learning:'method',strengths:'home',challenges:'settings',health:'consultations',social:'children',sport:'method',sensory:'consultations',parents:'consultations',facts:'settings'};
+  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',speech:'consultations',learning:'method',activity:'method',strengths:'home',challenges:'settings',health:'consultations',social:'children',sport:'method',sensory:'consultations',parents:'consultations',facts:'settings'};
 
   function lang() { return I18N[currentLanguage] ? currentLanguage : 'nl'; }
   function t() { return I18N[lang()]; }
@@ -349,7 +388,8 @@
   function cuspDegreeText(longitude) { return degreeText({longitude, sign:signIndex(longitude)}); }
   function icon(name) { return `<img class="analysis-card-icon" src="assets/nav-icons/${ICONS[name]}.png?v=${VERSION}" alt="">`; }
   function section(name, body) {
-    const title = name === 'sensory' ? SENSORY_GUIDE[lang()].title : t()[name];
+    const specialTitles = {sensory:SENSORY_GUIDE[lang()].title,activity:ACTIVITY_GUIDE[lang()].title};
+    const title = specialTitles[name] || t()[name];
     return `<article class="analysis-section analysis-${name}">${icon(name)}<div><h3>${esc(title)}</h3>${body}</div></article>`;
   }
   function paragraphs(items) {
@@ -406,6 +446,34 @@
     return section('speech', `${paragraphs([t().mercuryRetroIntro,pattern])}${list(t().speechActions)}<p class="analysis-safety">${esc(t().speechReferral)}</p>`);
   }
 
+  function childAge(child) {
+    if (!child.birthDate) return null;
+    const birth = new Date(`${child.birthDate}T12:00:00`);
+    if (Number.isNaN(birth.getTime())) return null;
+    const today = new Date();
+    let age = today.getFullYear() - birth.getFullYear();
+    if (today.getMonth() < birth.getMonth() || (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) age -= 1;
+    return age;
+  }
+
+  function activitySection(chart, child) {
+    const guide = ACTIVITY_GUIDE[lang()];
+    const strong = new Set(['conjunction','square','opposition']);
+    const hasLink = (groupA, groupB) => chart.aspects.some((aspect) => strong.has(aspect.type) && (
+      (groupA.includes(aspect.a) && groupB.includes(aspect.b)) ||
+      (groupA.includes(aspect.b) && groupB.includes(aspect.a))
+    ));
+    const houseIn = (body, houses) => chart.knownTime && houses.includes(chart.positions[body]?.house);
+    const flags = [];
+    if (hasLink(['Mars'],['Uranus','Jupiter']) || SIGN_ELEMENT[chart.positions.Mars.sign] === 'fire' || houseIn('Mars',[1,5,6,11])) flags.push('motor');
+    if (hasLink(['Mercury'],['Uranus','Mars']) || ['fire','air'].includes(SIGN_ELEMENT[chart.positions.Mercury.sign]) || houseIn('Mercury',[3,5,11])) flags.push('mental');
+    if (hasLink(['Moon'],['Uranus','Mars']) || (['fire','air'].includes(chart.dominantElement) && houseIn('Moon',[1,5,11]))) flags.push('reactive');
+    if (!flags.length) flags.push('steady');
+    const reasons = flags.map((flag) => guide.reasons[flag]).join('; ');
+    const age = childAge(child);
+    return section('activity', `${paragraphs([guide.intro,fill(guide.why,{reasons}),age !== null && age < 4 ? guide.underFour : ''])}${list(guide.actions)}<p class="analysis-safety">${esc(guide.referral)}</p>`);
+  }
+
   function buildAnalysis(child, chart) {
     const l = lang();
     const used = new Set();
@@ -432,6 +500,7 @@
     content.push(section('communication', paragraphs([mercuryElement.communication, houseText('Mercury',chart)])));
     content.push(mercurySpeechSection(chart));
     content.push(section('learning', paragraphs([learningIntro, aspectText(mercuryAspect)])));
+    content.push(activitySection(chart,child));
     content.push(section('strengths', list(strengths)));
     content.push(section('challenges', paragraphs([t().challengeHard, challengeAspect ? aspectText(challengeAspect) : '',t().challengeBalance])));
     content.push(section('health', list(t().healthItems)));

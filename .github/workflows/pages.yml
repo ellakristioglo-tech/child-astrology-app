@@ -25,6 +25,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Prepare automatic app updates
+        shell: bash
+        run: |
+          printf '{"version":"%s"}\n' "$GITHUB_SHA" > version.json
+          sed -i "s/__APP_BUILD_VERSION__/${GITHUB_SHA}/g" index.html pwa-update.js sw.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

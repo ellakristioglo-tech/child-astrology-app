@@ -279,7 +279,6 @@
     const place = wizard.data.place;
     children.push({ id: Date.now(), name: wizard.data.name, birthDate: wizard.data.birthDate, birthTime: wizard.data.birthTime, birthTimeUnknown: wizard.data.birthTimeUnknown, birthPlace: place.label, birthCity: place.city, birthRegion: place.region, birthCountry: place.country, birthCountryCode: place.countryCode, latitude: place.latitude, longitude: place.longitude, timezone: place.timezone, sunSign: '', moonSign: '', mercurySign: '', marsSign: '' });
     localStorage.setItem('children', JSON.stringify(children));
-    document.dispatchEvent(new CustomEvent('app:child-created'));
     const done = copy().done;
     closeAddChildModal();
     loadChildren();

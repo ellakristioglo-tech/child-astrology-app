@@ -284,6 +284,7 @@
     loadChildren();
     updateChildSelect();
     showSavedToast(done);
+    document.dispatchEvent(new CustomEvent('app:child-created'));
   }
 
   function showSavedToast(message) {

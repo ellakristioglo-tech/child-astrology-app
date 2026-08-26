@@ -515,7 +515,7 @@
     return `<header class="analysis-hero"><div><span class="analysis-kicker">CHILD ASTROLOGY · Ella Kristioglo</span><h2>${esc(child.name)}</h2><p>${esc(t().title)}</p></div><button class="analysis-close" type="button" aria-label="${esc(t().close)}">×</button></header>${!chart.knownTime?`<div class="analysis-notice">${esc(t().reliableOnly)}</div>`:''}<div class="analysis-grid">${content.join('')}</div>${facts}<p class="analysis-disclaimer">${esc(t().disclaimer)}</p>`;
   }
 
-  function openAnalysis(id, force) {
+  function openAnalysis(id, force, shouldTrack = true) {
     const child = children.find((item) => Number(item.id) === Number(id));
     if (!child) return;
     let chart;
@@ -530,6 +530,7 @@
     modal.querySelector('.child-analysis-overlay').addEventListener('click', (event) => { if (event.target.classList.contains('child-analysis-overlay')) closeAnalysis(); });
     modal.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeAnalysis(); });
     document.body.appendChild(modal); document.body.classList.add('analysis-open');
+    if (shouldTrack) document.dispatchEvent(new CustomEvent('app:child-analysis'));
   }
   function closeAnalysis() { document.querySelector('.child-analysis-modal')?.remove(); document.body.classList.remove('analysis-open'); }
 
@@ -551,7 +552,7 @@
     syncLanguageButtons();
     renderChildren();
     const openId = document.querySelector('.child-analysis-dialog')?.dataset.childId;
-    if (openId) openAnalysis(openId,false);
+    if (openId) openAnalysis(openId,false,false);
   };
   function syncLanguageButtons() {
     document.querySelectorAll('.lang-btn').forEach((button) => button.classList.toggle('active',button.dataset.language === currentLanguage || button.textContent.trim().toLowerCase() === currentLanguage));

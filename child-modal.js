@@ -5,7 +5,7 @@
       nameTitle: 'Как зовут ребёнка?', nameLabel: 'Имя или псевдоним', namePlaceholder: 'Например, София', nameHelp: 'Это имя будет показано в профиле ребёнка.', nameError: 'Введите имя или псевдоним.',
       dateTitle: 'Когда родился ребёнок?', dateLabel: 'Полная дата рождения', dateHelp: 'Нажмите на поле — откроется календарь.', dateError: 'Выберите дату рождения.', futureDateError: 'Дата рождения не может быть в будущем.',
       timeTitle: 'Во сколько родился ребёнок?', timeLabel: 'Точное время рождения', timeHelp: 'Укажите часы и минуты или отметьте, что время неизвестно.', unknownTime: 'Время рождения неизвестно', timeError: 'Выберите время или отметьте «Время рождения неизвестно».',
-      placeTitle: 'Где родился ребёнок?', placeLabel: 'Место рождения', placePlaceholder: 'Начните вводить город', placeHelp: 'Введите минимум 3 буквы. Выберите город из списка, чтобы страна и регион сохранились правильно.', typeMore: 'Введите минимум 3 буквы.', loading: 'Ищем города…', notFound: 'Город не найден. Проверьте написание.', searchError: 'Поиск города временно недоступен. Проверьте интернет и попробуйте снова.', placeError: 'Выберите подходящий город из списка.', selected: 'Выбрано', attribution: 'Данные о городах: GeoNames через Open-Meteo',
+      placeTitle: 'Где родился ребёнок?', placeLabel: 'Место рождения', placePlaceholder: 'Начните вводить город', placeHelp: 'Введите минимум 3 буквы. Поиск выполняется на вашем устройстве.', typeMore: 'Введите минимум 3 буквы.', loading: 'Ищем города…', notFound: 'Город не найден. Проверьте написание.', searchError: 'Локальный список городов не загрузился. Обновите страницу.', placeError: 'Выберите подходящий город из списка.', selected: 'Выбрано', attribution: 'Локальный список GeoNames · CC BY 4.0', calculationError: 'Не удалось рассчитать карту. Проверьте данные.',
       reviewTitle: 'Проверьте данные', reviewHelp: 'После сохранения эти данные появятся в профиле ребёнка.', name: 'Имя', date: 'Дата рождения', time: 'Время рождения', place: 'Место рождения', unknown: 'Неизвестно', done: 'Профиль ребёнка сохранён! ✨'
     },
     ua: {
@@ -13,7 +13,7 @@
       nameTitle: 'Як звати дитину?', nameLabel: "Ім’я або псевдонім", namePlaceholder: 'Наприклад, Софія', nameHelp: "Це ім’я буде показано в профілі дитини.", nameError: "Введіть ім’я або псевдонім.",
       dateTitle: 'Коли народилася дитина?', dateLabel: 'Повна дата народження', dateHelp: 'Натисніть на поле — відкриється календар.', dateError: 'Виберіть дату народження.', futureDateError: 'Дата народження не може бути в майбутньому.',
       timeTitle: 'О котрій годині народилася дитина?', timeLabel: 'Точний час народження', timeHelp: 'Вкажіть години й хвилини або позначте, що час невідомий.', unknownTime: 'Час народження невідомий', timeError: 'Виберіть час або позначте «Час народження невідомий».',
-      placeTitle: 'Де народилася дитина?', placeLabel: 'Місце народження', placePlaceholder: 'Почніть вводити місто', placeHelp: 'Введіть щонайменше 3 літери. Виберіть місто зі списку, щоб країна та регіон збереглися правильно.', typeMore: 'Введіть щонайменше 3 літери.', loading: 'Шукаємо міста…', notFound: 'Місто не знайдено. Перевірте написання.', searchError: 'Пошук міста тимчасово недоступний. Перевірте інтернет і спробуйте ще раз.', placeError: 'Виберіть потрібне місто зі списку.', selected: 'Вибрано', attribution: 'Дані про міста: GeoNames через Open-Meteo',
+      placeTitle: 'Де народилася дитина?', placeLabel: 'Місце народження', placePlaceholder: 'Почніть вводити місто', placeHelp: 'Введіть щонайменше 3 літери. Пошук виконується на вашому пристрої.', typeMore: 'Введіть щонайменше 3 літери.', loading: 'Шукаємо міста…', notFound: 'Місто не знайдено. Перевірте написання.', searchError: 'Локальний список міст не завантажився. Оновіть сторінку.', placeError: 'Виберіть потрібне місто зі списку.', selected: 'Вибрано', attribution: 'Локальний список GeoNames · CC BY 4.0', calculationError: 'Не вдалося розрахувати карту. Перевірте дані.',
       reviewTitle: 'Перевірте дані', reviewHelp: 'Після збереження ці дані з’являться у профілі дитини.', name: "Ім’я", date: 'Дата народження', time: 'Час народження', place: 'Місце народження', unknown: 'Невідомо', done: 'Профіль дитини збережено! ✨'
     },
     en: {
@@ -21,7 +21,7 @@
       nameTitle: "What is the child's name?", nameLabel: 'Name or nickname', namePlaceholder: 'For example, Sofia', nameHelp: "This name will be shown in the child's profile.", nameError: 'Enter a name or nickname.',
       dateTitle: 'When was the child born?', dateLabel: 'Full birth date', dateHelp: 'Tap the field to open the calendar.', dateError: 'Select the birth date.', futureDateError: 'The birth date cannot be in the future.',
       timeTitle: 'What time was the child born?', timeLabel: 'Exact birth time', timeHelp: 'Enter hours and minutes, or mark the birth time as unknown.', unknownTime: 'Birth time is unknown', timeError: 'Select a time or mark the birth time as unknown.',
-      placeTitle: 'Where was the child born?', placeLabel: 'Birth place', placePlaceholder: 'Start typing a city', placeHelp: 'Enter at least 3 letters. Select a city from the list so its country and region are saved correctly.', typeMore: 'Enter at least 3 letters.', loading: 'Searching for cities…', notFound: 'City not found. Check the spelling.', searchError: 'City search is temporarily unavailable. Check your connection and try again.', placeError: 'Select the correct city from the list.', selected: 'Selected', attribution: 'Location data: GeoNames via Open-Meteo',
+      placeTitle: 'Where was the child born?', placeLabel: 'Birth place', placePlaceholder: 'Start typing a city', placeHelp: 'Enter at least 3 letters. Search happens locally on this device.', typeMore: 'Enter at least 3 letters.', loading: 'Searching for cities…', notFound: 'City not found. Check the spelling.', searchError: 'The local city list did not load. Refresh the page.', placeError: 'Select the correct city from the list.', selected: 'Selected', attribution: 'Local GeoNames city list · CC BY 4.0', calculationError: 'The chart could not be calculated. Check the details.',
       reviewTitle: 'Review the details', reviewHelp: "After saving, these details will appear in the child's profile.", name: 'Name', date: 'Birth date', time: 'Birth time', place: 'Birth place', unknown: 'Unknown', done: 'Child profile saved! ✨'
     },
     nl: {
@@ -29,28 +29,15 @@
       nameTitle: 'Hoe heet het kind?', nameLabel: 'Naam of roepnaam', namePlaceholder: 'Bijvoorbeeld Sofia', nameHelp: 'Deze naam wordt in het profiel van het kind getoond.', nameError: 'Vul een naam of roepnaam in.',
       dateTitle: 'Wanneer is het kind geboren?', dateLabel: 'Volledige geboortedatum', dateHelp: 'Tik op het veld om de kalender te openen.', dateError: 'Kies de geboortedatum.', futureDateError: 'De geboortedatum kan niet in de toekomst liggen.',
       timeTitle: 'Hoe laat is het kind geboren?', timeLabel: 'Exacte geboortetijd', timeHelp: 'Vul uren en minuten in of geef aan dat de tijd onbekend is.', unknownTime: 'Geboortetijd is onbekend', timeError: 'Kies een tijd of geef aan dat de geboortetijd onbekend is.',
-      placeTitle: 'Waar is het kind geboren?', placeLabel: 'Geboorteplaats', placePlaceholder: 'Begin een plaatsnaam te typen', placeHelp: 'Vul minimaal 3 letters in. Kies een plaats uit de lijst zodat land en regio correct worden opgeslagen.', typeMore: 'Vul minimaal 3 letters in.', loading: 'Plaatsen zoeken…', notFound: 'Plaats niet gevonden. Controleer de spelling.', searchError: 'Plaats zoeken is tijdelijk niet beschikbaar. Controleer je internetverbinding en probeer opnieuw.', placeError: 'Kies de juiste plaats uit de lijst.', selected: 'Geselecteerd', attribution: 'Locatiegegevens: GeoNames via Open-Meteo',
+      placeTitle: 'Waar is het kind geboren?', placeLabel: 'Geboorteplaats', placePlaceholder: 'Begin een plaatsnaam te typen', placeHelp: 'Vul minimaal 3 letters in. Zoeken gebeurt lokaal op dit apparaat.', typeMore: 'Vul minimaal 3 letters in.', loading: 'Plaatsen zoeken…', notFound: 'Plaats niet gevonden. Controleer de spelling.', searchError: 'De lokale plaatsenlijst is niet geladen. Vernieuw de pagina.', placeError: 'Kies de juiste plaats uit de lijst.', selected: 'Geselecteerd', attribution: 'Lokale GeoNames-plaatsenlijst · CC BY 4.0', calculationError: 'De horoscoop kon niet worden berekend. Controleer de gegevens.',
       reviewTitle: 'Controleer de gegevens', reviewHelp: 'Na het opslaan verschijnen deze gegevens in het profiel van het kind.', name: 'Naam', date: 'Geboortedatum', time: 'Geboortetijd', place: 'Geboorteplaats', unknown: 'Onbekend', done: 'Profiel van het kind opgeslagen! ✨'
     }
   };
 
-  const API_LANGUAGE = { ru: 'ru', ua: 'uk', en: 'en', nl: 'nl' };
-  const FEATURED_CITIES = [
-    { id: 2759794, name: 'Amsterdam', latitude: 52.37403, longitude: 4.88969, country_code: 'NL', timezone: 'Europe/Amsterdam', country: 'The Netherlands', admin1: 'North Holland', population: 741636, feature_code: 'PPLC' },
-    { id: 2759798, name: 'Amstelveen', latitude: 52.30083, longitude: 4.86389, country_code: 'NL', timezone: 'Europe/Amsterdam', country: 'The Netherlands', admin1: 'North Holland', population: 92108, feature_code: 'PPL' },
-    { id: 618405, name: 'Comrat', latitude: 46.29488, longitude: 28.65713, country_code: 'MD', timezone: 'Europe/Chisinau', country: 'Moldova', admin1: 'Gagauzia', population: 22911, feature_code: 'PPLA' },
-    { id: 3178229, name: 'Como', latitude: 45.80819, longitude: 9.0832, country_code: 'IT', timezone: 'Europe/Rome', country: 'Italy', admin1: 'Lombardy', population: 84808, feature_code: 'PPLA2' }
-  ];
-  const FEATURED_LABELS = {
-    ru: { 2759794: ['Северная Голландия', 'Нидерланды'], 2759798: ['Северная Голландия', 'Нидерланды'], 618405: ['Гагаузия', 'Молдова'], 3178229: ['Ломбардия', 'Италия'] },
-    ua: { 2759794: ['Північна Голландія', 'Нідерланди'], 2759798: ['Північна Голландія', 'Нідерланди'], 618405: ['Гагаузія', 'Молдова'], 3178229: ['Ломбардія', 'Італія'] },
-    nl: { 2759794: ['Noord-Holland', 'Nederland'], 2759798: ['Noord-Holland', 'Nederland'], 618405: ['Gagaoezië', 'Moldavië'], 3178229: ['Lombardije', 'Italië'] }
-  };
   const TOTAL_STEPS = 5;
   const cityCache = new Map();
   let wizard = null;
   let searchTimer = null;
-  let searchController = null;
 
   const copy = () => COPY[currentLanguage] || COPY.nl;
   const escapeHtml = (value) => String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
@@ -68,23 +55,6 @@
       used.add(key);
       return true;
     });
-  }
-
-  function normaliseCity(result) {
-    const parts = uniqueParts([result.name, result.admin1, result.country]);
-    return {
-      id: result.id,
-      city: result.name || '',
-      region: result.admin1 || result.admin2 || '',
-      country: result.country || '',
-      countryCode: result.country_code || '',
-      latitude: Number(result.latitude),
-      longitude: Number(result.longitude),
-      timezone: result.timezone || '',
-      population: Number(result.population) || 0,
-      featureCode: result.feature_code || '',
-      label: parts.join(' — ')
-    };
   }
 
   function stepMarkup(step, text) {
@@ -212,36 +182,11 @@
     const text = copy();
     const cacheKey = `${currentLanguage}:${query.toLocaleLowerCase()}`;
     if (cityCache.has(cacheKey)) return showCityResults(cityCache.get(cacheKey));
-    searchController?.abort();
-    searchController = new AbortController();
     try {
-      const params = new URLSearchParams({ name: query, count: '25', language: API_LANGUAGE[currentLanguage] || 'en', format: 'json' });
-      const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?${params}`, { signal: searchController.signal });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const payload = await response.json();
-      const queryKey = query.toLocaleLowerCase();
-      const featured = FEATURED_CITIES.filter((city) => city.name.toLocaleLowerCase().startsWith(queryKey)).map((city) => {
-        const labels = FEATURED_LABELS[currentLanguage]?.[city.id];
-        return normaliseCity(labels ? { ...city, admin1: labels[0], country: labels[1] } : city);
-      });
-      const fetched = (payload.results || [])
-        .filter((city) => String(city.feature_code || '').startsWith('PPL'))
-        .map(normaliseCity)
-        .filter((city) => city.city && city.country && city.label)
-        .sort((a, b) => b.population - a.population);
-      const fetchedById = new Map(fetched.map((city) => [city.id, city]));
-      const featuredFirst = featured.map((city) => fetchedById.get(city.id) || city);
-      const seen = new Set();
-      const cities = [...featuredFirst, ...fetched].filter((city) => {
-        const key = city.id ? `id:${city.id}` : `${city.latitude}|${city.longitude}`;
-        if (seen.has(key)) return false;
-        seen.add(key);
-        return true;
-      }).slice(0, 10);
+      const cities = await window.LocalCitySearch.search(query, currentLanguage, 10);
       cityCache.set(cacheKey, cities);
       showCityResults(cities);
     } catch (error) {
-      if (error.name === 'AbortError') return;
       const status = document.getElementById('childCityStatus');
       const results = document.getElementById('childCityResults');
       if (status) status.textContent = text.searchError;
@@ -277,8 +222,15 @@
   function saveChildProfile() {
     if (!wizard) return;
     const place = wizard.data.place;
-    children.push({ id: Date.now(), name: wizard.data.name, birthDate: wizard.data.birthDate, birthTime: wizard.data.birthTime, birthTimeUnknown: wizard.data.birthTimeUnknown, birthPlace: place.label, birthCity: place.city, birthRegion: place.region, birthCountry: place.country, birthCountryCode: place.countryCode, latitude: place.latitude, longitude: place.longitude, timezone: place.timezone, sunSign: '', moonSign: '', mercurySign: '', marsSign: '' });
-    localStorage.setItem('children', JSON.stringify(children));
+    const child = { id: Date.now(), name: wizard.data.name, birthDate: wizard.data.birthDate, birthTime: wizard.data.birthTime, birthTimeUnknown: wizard.data.birthTimeUnknown, birthPlace: place.label, birthCity: place.city, birthRegion: place.region, birthCountry: place.country, birthCountryCode: place.countryCode, latitude: place.latitude, longitude: place.longitude, timezone: place.timezone, sunSign: '', moonSign: '', mercurySign: '', marsSign: '' };
+    children.push(child);
+    try {
+      window.calculateChildNatalChart(child, true);
+    } catch (_) {
+      children.pop();
+      showError(copy().calculationError);
+      return;
+    }
     const done = copy().done;
     closeAddChildModal();
     loadChildren();
@@ -311,7 +263,6 @@
 
   window.closeAddChildModal = function closeAddChildModal() {
     window.clearTimeout(searchTimer);
-    searchController?.abort();
     document.querySelector('.add-child-modal')?.remove();
     document.body.classList.remove('child-modal-open');
     wizard = null;

@@ -1,7 +1,11 @@
 const BUILD_VERSION = '__APP_BUILD_VERSION__';
 const CACHE_PREFIX = 'child-astrology-';
 const CACHE_NAME = CACHE_PREFIX + BUILD_VERSION;
-const OFFLINE_SHELL = ['./', './index.html', './manifest.webmanifest'];
+const OFFLINE_SHELL = [
+    './', './index.html', './manifest.webmanifest',
+    './city-search.js', './assets/cities-15000.min.json',
+    './legal.html', './legal.css', './legal.js'
+];
 
 self.addEventListener('install', function onInstall(event) {
     event.waitUntil(

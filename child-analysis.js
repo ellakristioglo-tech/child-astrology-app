@@ -299,6 +299,19 @@
   }
 
   function calculateChart(child, force) {
+    const persistWithoutCoordinates = () => {
+      if (!Array.isArray(window.children) && typeof children === 'undefined') return;
+      const list = typeof children !== 'undefined' ? children : window.children;
+      const stored = list.find((item) => item === child || String(item.id) === String(child.id));
+      if (!stored) return;
+      delete stored.latitude;
+      delete stored.longitude;
+      localStorage.setItem('children', JSON.stringify(list));
+    };
+    if (!force && child.natalChart?.calculationVersion === CALCULATION_VERSION) {
+      persistWithoutCoordinates();
+      return child.natalChart;
+    }
     if (!window.Astronomy || !child.birthDate || !child.timezone || child.latitude == null || child.longitude == null) throw new Error('missing-data');
     const knownTime = !child.birthTimeUnknown && Boolean(child.birthTime);
     const time = knownTime ? child.birthTime : '12:00';
@@ -348,14 +361,12 @@
     ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn'].forEach((body) => { if (!(moonAmbiguous && body === 'Moon')) counts[SIGN_ELEMENT[positions[body].sign]] += 1; });
     const dominantElement = Object.keys(counts).sort((a,b) => counts[b]-counts[a])[0];
     const chart = {calculationVersion:CALCULATION_VERSION, calculatedAt:new Date().toISOString(), engine:'Astronomy Engine 2.x / VSOP87 · topocentric positions · Placidus houses', houseSystem:'Placidus', coordinateMode:knownTime?'topocentric':'geocentric', dateUtc:date.toISOString(), knownTime, moonAmbiguous, moonSigns, ascendant, houseCusps, positions, aspects, dominantElement};
-    if (force || child.natalChart?.calculationVersion !== CALCULATION_VERSION) {
-      child.natalChart = chart;
-      child.sunSign = signName(positions.Sun.sign);
-      child.moonSign = moonAmbiguous ? moonSigns.map(signName).join(' / ') : signName(positions.Moon.sign);
-      child.mercurySign = signName(positions.Mercury.sign);
-      child.marsSign = signName(positions.Mars.sign);
-      localStorage.setItem('children', JSON.stringify(children));
-    }
+    child.natalChart = chart;
+    child.sunSign = signName(positions.Sun.sign);
+    child.moonSign = moonAmbiguous ? moonSigns.map(signName).join(' / ') : signName(positions.Moon.sign);
+    child.mercurySign = signName(positions.Mercury.sign);
+    child.marsSign = signName(positions.Mars.sign);
+    persistWithoutCoordinates();
     return chart;
   }
 

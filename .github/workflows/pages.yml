@@ -23,6 +23,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build local city search data
+        shell: bash
+        run: |
+          curl --fail --silent --show-error --location \
+            https://download.geonames.org/export/dump/cities15000.zip \
+            --output /tmp/cities15000.zip
+          unzip -q /tmp/cities15000.zip cities15000.txt -d /tmp
+          node scripts/generate-cities.mjs /tmp/cities15000.txt assets/cities-15000.min.json
+      - name: Privacy and security regression tests
+        run: node --test tests/*.test.js
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Prepare automatic app updates

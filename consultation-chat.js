@@ -3,6 +3,7 @@
 
   const STORAGE_KEY = 'childAstrologyConsultationHistory';
   const selectedKey = 'childAstrologyConsultationChild';
+  const RETENTION_MS = 90 * 24 * 60 * 60 * 1000;
   const SIGN_ELEMENTS = ['fire','earth','air','water','fire','earth','air','water','fire','earth','air','water'];
   const SIGN_MODALITIES = ['cardinal','fixed','mutable','cardinal','fixed','mutable','cardinal','fixed','mutable','cardinal','fixed','mutable'];
   const PLANET_BY_TOPIC = {emotion:'Moon',fear:'Moon',learning:'Mercury',communication:'Mercury',sport:'Mars',health:'Moon',other:'Sun'};
@@ -90,17 +91,37 @@
   };
 
   const SAFETY = {
-    ru:{medical:'Я не сохраняю этот вопрос и не буду объяснять состояние ребёнка астрологией. Для симптомов, диагноза, лечения или психического состояния обратитесь к педиатру или профильному специалисту.',crisis:'Я не сохраняю этот вопрос. Если ребёнок может причинить вред себе или другому человеку либо есть непосредственная опасность, немедленно обратитесь в экстренную службу 112 и оставайтесь рядом с ребёнком.'},
-    ua:{medical:'Я не зберігаю це запитання й не пояснюватиму стан дитини астрологією. Щодо симптомів, діагнозу, лікування або психічного стану зверніться до педіатра чи профільного фахівця.',crisis:'Я не зберігаю це запитання. Якщо дитина може завдати шкоди собі або іншій людині чи є безпосередня небезпека, негайно телефонуйте 112 і залишайтеся поруч із дитиною.'},
-    en:{medical:'I will not save this question or explain a child’s condition through astrology. For symptoms, diagnosis, treatment or mental health, contact a paediatrician or qualified professional.',crisis:'I will not save this question. If the child may harm themselves or someone else, or there is immediate danger, call emergency services (112 in the EU) now and stay with the child.'},
-    nl:{medical:'Ik bewaar deze vraag niet en leg de toestand van een kind niet uit via astrologie. Neem voor symptomen, diagnose, behandeling of psychische gezondheid contact op met een kinderarts of bevoegde professional.',crisis:'Ik bewaar deze vraag niet. Kan het kind zichzelf of iemand anders iets aandoen, of is er direct gevaar? Bel dan onmiddellijk 112 en blijf bij het kind.'}
+    ru:{medical:'Я не сохраняю этот вопрос и не буду объяснять состояние ребёнка астрологией. Для симптомов, диагноза, лечения или психического состояния обратитесь к педиатру или профильному специалисту.',restricted:'Я не сохраняю этот вопрос. Астрология не используется для выводов о религии, сексуальности, интеллекте, опасности человека, смерти или для важных учебных, юридических и финансовых решений.',crisis:'Я не сохраняю этот вопрос. Если ребёнок может причинить вред себе или другому человеку либо есть непосредственная опасность, немедленно обратитесь в экстренную службу 112 и оставайтесь рядом с ребёнком.'},
+    ua:{medical:'Я не зберігаю це запитання й не пояснюватиму стан дитини астрологією. Щодо симптомів, діагнозу, лікування або психічного стану зверніться до педіатра чи профільного фахівця.',restricted:'Я не зберігаю це запитання. Астрологія не використовується для висновків про релігію, сексуальність, інтелект, небезпечність, смерть або для важливих освітніх, юридичних чи фінансових рішень.',crisis:'Я не зберігаю це запитання. Якщо дитина може завдати шкоди собі або іншій людині чи є безпосередня небезпека, негайно телефонуйте 112 і залишайтеся поруч із дитиною.'},
+    en:{medical:'I will not save this question or explain a child’s condition through astrology. For symptoms, diagnosis, treatment or mental health, contact a paediatrician or qualified professional.',restricted:'I will not save this question. Astrology is not used to infer religion, sexuality, intelligence, dangerousness or death, or to make significant education, legal or financial decisions.',crisis:'I will not save this question. If the child may harm themselves or someone else, or there is immediate danger, call emergency services (112 in the EU) now and stay with the child.'},
+    nl:{medical:'Ik bewaar deze vraag niet en leg de toestand van een kind niet uit via astrologie. Neem voor symptomen, diagnose, behandeling of psychische gezondheid contact op met een kinderarts of bevoegde professional.',restricted:'Ik bewaar deze vraag niet. Astrologie wordt niet gebruikt voor conclusies over religie, seksualiteit, intelligentie, gevaarlijkheid of overlijden, of voor belangrijke onderwijs-, juridische of financiële beslissingen.',crisis:'Ik bewaar deze vraag niet. Kan het kind zichzelf of iemand anders iets aandoen, of is er direct gevaar? Bel dan onmiddellijk 112 en blijf bij het kind.'}
   };
 
   function lang() { return ['ru','ua','en','nl'].includes(currentLanguage) ? currentLanguage : 'nl'; }
   function l() { return UI[lang()]; }
   function esc(value) { return String(value ?? '').replace(/[&<>'"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
   function fill(text, values) { return String(text).replace(/\{(\w+)\}/g, (_, key) => values[key] ?? ''); }
-  function histories() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (_) { return {}; } }
+  function disclosureText() { return lang()==='ru'?'Автоматический ответ создаётся на этом устройстве по фиксированным правилам. Это не человек и не внешний ИИ; вопрос никуда не отправляется.':lang()==='ua'?'Автоматична відповідь створюється на цьому пристрої за фіксованими правилами. Це не людина й не зовнішній ШІ; запитання нікуди не надсилається.':lang()==='en'?'The automatic response is created on this device from fixed rules. It is not a person or external AI, and the question is not sent anywhere.':'Het automatische antwoord wordt op dit apparaat gemaakt met vaste regels. Het is geen persoon of externe AI; de vraag wordt nergens heen gestuurd.'; }
+  function histories() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      const now = Date.now();
+      let changed = false;
+      Object.keys(parsed).forEach((id) => {
+        const kept = Array.isArray(parsed[id]) ? parsed[id].filter((item) => {
+          const created = Date.parse(item.createdAt || '');
+          return Number.isFinite(created) && now - created <= RETENTION_MS;
+        }) : [];
+        if (kept.length !== parsed[id]?.length) changed = true;
+        if (kept.length) parsed[id] = kept; else { delete parsed[id]; changed = true; }
+      });
+      if (changed) {
+        if (Object.keys(parsed).length) localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+        else localStorage.removeItem(STORAGE_KEY);
+      }
+      return parsed;
+    } catch (_) { localStorage.removeItem(STORAGE_KEY); return {}; }
+  }
   function getHistory(id) { return histories()[String(id)] || []; }
   function saveHistory(id, items) { const all = histories(); all[String(id)] = items.slice(-30); localStorage.setItem(STORAGE_KEY, JSON.stringify(all)); }
   function selectedId() { const stored = localStorage.getItem(selectedKey); return children.some((c) => String(c.id) === stored) ? stored : (children[0] ? String(children[0].id) : ''); }
@@ -122,8 +143,9 @@
   }
   function sensitiveKind(question) {
     const value = String(question || '').toLowerCase();
-    if (/самоуб|суицид|поконч|убить себя|нашкодити собі|самогуб|suicid|kill myself|harm (himself|herself|themselves)|zelfmoord|zichzelf iets aandoen/.test(value)) return 'crisis';
-    if (/диагноз|диагност|лечен|лекарств|таблет|аутиз|adhd|сдвг|депресс|психиатр|діагноз|лікуван|ліки|аутиз|депрес|diagnos|treat|medicat|autis|depress|psychiatr|behandel|geneesmiddel/.test(value)) return 'medical';
+    if (/самоуб|суицид|поконч|убить|насили|изби|нашкодити собі|самогуб|вбити|насиль|suicid|kill|harm (himself|herself|themselves)|abuse|violence|zelfmoord|doden|geweld|mishandel/.test(value)) return 'crisis';
+    if (/диагноз|диагност|лечен|лекарств|таблет|аутиз|adhd|сдвг|депресс|психиатр|болез|симптом|темпера|боль|сып|каш|рвот|тошнот|аппетит|не спит|діагноз|лікуван|ліки|аутиз|депрес|хвороб|симптом|темпера|біль|висип|каш|блюв|нудот|апетит|не спить|diagnos|treat|medicat|autis|depress|psychiatr|disease|symptom|fever|pain|rash|cough|vomit|nause|appetite|cannot sleep|behandel|geneesmiddel|ziekte|symptoom|koorts|pijn|uitslag|hoest|braken|misselijk|eetlust|slaapt niet/.test(value)) return 'medical';
+    if (/религи|вера|сексуал|ориентац|iq|интеллект|преступ|опасн|смерт|умрет|юрид|финанс|вибір школи|релігі|віра|сексуал|орієнтац|інтелект|злочин|небезпеч|смерт|помре|юрид|фінанс|religio|sexual|orientation|intelligen|criminal|dangerous|death|will die|legal|financial|school decision|religie|geloof|seksu|oriënt|intelligent|crimine|gevaarlijk|overlijd|jurid|financi/.test(value)) return 'restricted';
     return '';
   }
   function showSafety(kind) {
@@ -209,6 +231,7 @@
     const id = selectedId();
     const child = children.find((item) => String(item.id) === id);
     root.innerHTML = `<header class="consultant-header"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""><div><h2>${esc(ui.title)}</h2><p>${esc(ui.intro)}</p></div></header>
+      <div class="consultant-disclosure"><strong>${esc(disclosureText())}</strong></div>
       <div class="consultant-controls"><div class="consultant-field"><label for="consultantChild">${esc(ui.child)}</label><select id="consultantChild"${children.length?'':' disabled'}>${children.length?children.map((item)=>`<option value="${Number(item.id)}"${String(item.id)===id?' selected':''}>${esc(item.name)}</option>`).join(''):`<option>${esc(ui.noChild)}</option>`}</select></div><div class="consultant-context">${esc(children.length?ui.context:ui.addChild)}</div></div>
       <div class="consultant-chips">${ui.chips.map(([topic,text])=>`<button class="consultant-chip" type="button" data-topic="${topic}"${child?'':' disabled'}>${esc(text)}</button>`).join('')}</div>
       <div id="consultantMessages" class="consultant-messages"></div>
@@ -238,9 +261,10 @@
     const previousQuestion = [...history].reverse().find((item) => item.role === 'user')?.text;
     const topic = detectTopic(question,previousQuestion);
     document.dispatchEvent(new CustomEvent('app:consultation-question',{detail:{topic}}));
+    const createdAt = new Date().toISOString();
     history.push(
-      {role:'user',text:question},
-      {role:'assistant',type:'chart-guidance',question,topic,language:lang(),text:responseFor(child,chart,question,history,topic)}
+      {role:'user',text:question,createdAt},
+      {role:'assistant',type:'chart-guidance',question,topic,language:lang(),text:responseFor(child,chart,question,history,topic),createdAt}
     );
     saveHistory(id,history);
     input.value='';

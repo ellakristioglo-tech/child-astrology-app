@@ -1,5 +1,16 @@
 # Third-party notices
 
+## GeoNames city data
+
+The bundled `assets/cities-15000.min.json` city list is derived from the
+GeoNames `cities15000` dataset. City search runs locally and does not send the
+user's query to GeoNames or another geocoding service at runtime.
+
+GeoNames data is licensed under the Creative Commons Attribution 4.0 License:
+https://creativecommons.org/licenses/by/4.0/
+
+Source: https://www.geonames.org/
+
 ## Caelus house calculation
 
 The Placidus house-cusp implementation in `child-analysis.js` is adapted from

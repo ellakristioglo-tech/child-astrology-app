@@ -56,3 +56,4 @@
   .install-guide-body{grid-template-columns:1fr}
   .install-hint{grid-column:auto}
 }
+.consultant-disclosure{margin:16px 0;padding:13px 15px;border:1px solid rgba(72,43,117,.16);border-radius:15px;background:#f7f2ff;color:#49366b;font-size:13px;line-height:1.45}

@@ -6,6 +6,12 @@
     'children','notes','childAstrologyConsultationHistory','childAstrologyConsultationChild',
     'familyScentCodeV1','child_astrology_local_analytics_v1','language'
   ];
+  const APP_KEYS = [
+    ...EXPORT_KEYS,
+    PARENT_KEY,
+    'child_astrology_analytics_consent_v2',
+    'child_astrology_analytics_consent'
+  ];
   const COPY = {
     ru:{title:'Приватность и данные',summary:'Профили, натальные расчёты, заметки и история консультаций хранятся только на этом устройстве. Необязательная Google Analytics включается только с вашего согласия.',ga:'В Google Analytics никогда не отправляются имена, даты, время и место рождения, координаты, данные карты или текст вопроса. Передаются только технические события, язык и безопасные общие категории.',ai:'Ответы в помощнике формируются автоматически и не заменяют врача, психолога, логопеда, учителя или другого специалиста. Приложение не ставит диагнозы.',export:'Скачать мои данные',clearChat:'Удалить историю вопросов',clearAll:'Удалить все данные',analytics:'Настройки аналитики',allow:'Разрешить',deny:'Запретить',unset:'Не выбрано',granted:'Разрешено',denied:'Запрещено',confirmExport:'Файл с данными создан на вашем устройстве.',confirmChat:'Удалить всю историю вопросов на этом устройстве?',confirmAll:'Удалить профили детей, заметки, расчёты и настройки с этого устройства? Это действие нельзя отменить.',parentTitle:'Перед добавлением ребёнка',parentText:'Подтвердите, что вы родитель, законный представитель или имеете разрешение на внесение данных ребёнка.',parentCheck:'Мне исполнилось 18 лет, и я имею право использовать эти данные.',nickname:'Можно указать псевдоним вместо полного имени ребёнка.',continue:'Продолжить',cancel:'Отмена',policy:'Подробнее о правилах приватности'},
     ua:{title:'Приватність і дані',summary:'Профілі, натальні розрахунки, нотатки та історія консультацій зберігаються лише на цьому пристрої. Необов’язкова Google Analytics вмикається тільки за вашою згодою.',ga:'У Google Analytics ніколи не надсилаються імена, дати, час і місце народження, координати, дані карти або текст запитання. Надсилаються лише технічні події, мова й безпечні загальні категорії.',ai:'Відповіді в помічнику формуються автоматично й не замінюють лікаря, психолога, логопеда, учителя чи іншого фахівця. Застосунок не ставить діагнози.',export:'Завантажити мої дані',clearChat:'Видалити історію запитань',clearAll:'Видалити всі дані',analytics:'Налаштування аналітики',allow:'Дозволити',deny:'Заборонити',unset:'Не вибрано',granted:'Дозволено',denied:'Заборонено',confirmExport:'Файл із даними створено на вашому пристрої.',confirmChat:'Видалити всю історію запитань на цьому пристрої?',confirmAll:'Видалити профілі дітей, нотатки, розрахунки й налаштування з цього пристрою? Дію не можна скасувати.',parentTitle:'Перед додаванням дитини',parentText:'Підтвердьте, що ви є одним із батьків, законним представником або маєте дозвіл на внесення даних дитини.',parentCheck:'Мені виповнилося 18 років, і я маю право використовувати ці дані.',nickname:'Можна вказати псевдонім замість повного імені дитини.',continue:'Продовжити',cancel:'Скасувати',policy:'Докладніше про правила приватності'},
@@ -34,7 +40,7 @@
     link.href=URL.createObjectURL(blob);link.download=`child-astrology-data-${new Date().toISOString().slice(0,10)}.json`;link.click();window.setTimeout(()=>URL.revokeObjectURL(link.href),1000);
   }
   function clearChat(){if(!window.confirm(t().confirmChat))return;localStorage.removeItem('childAstrologyConsultationHistory');document.dispatchEvent(new Event('app:privacy-data-changed'));render()}
-  function clearAll(){if(!window.confirm(t().confirmAll))return;Object.keys(localStorage).forEach((key)=>{if(!key.startsWith('child_astrology_owner_analytics'))localStorage.removeItem(key)});location.reload()}
+  function clearAll(){if(!window.confirm(t().confirmAll))return;window.AppAnalytics?.setConsent?.(false);APP_KEYS.forEach((key)=>localStorage.removeItem(key));location.reload()}
   function parentGate(next){
     if(localStorage.getItem(PARENT_KEY)==='yes'){next();return}
     document.querySelector('.parent-consent-modal')?.remove();const ui=t(),modal=document.createElement('div');modal.className='parent-consent-modal';

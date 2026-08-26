@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const VERSION = '20260825u';
+  const VERSION = '20260826c';
   const CALCULATION_VERSION = 'placidus-topocentric-20260825-3';
   const SIGN_KEYS = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
   const ELEMENTS = ['fire','earth','air','water'];
@@ -12,7 +12,7 @@
   const I18N = {
     ru: {
       language:'Язык', fullAnalysis:'Полный разбор', recalculate:'Пересчитать карту', delete:'Удалить', noChildren:'Пока нет добавленных детей', unknownTime:'Время неизвестно', close:'Закрыть',
-      title:'Персональный разбор ребёнка', portrait:'Основной портрет', character:'Характер', emotions:'Эмоции и восстановление', communication:'Общение', learning:'Обучение', strengths:'Сильные стороны', challenges:'Что может даваться сложнее', social:'Социализация', sport:'Спорт и движение', parents:'Что важно родителям', facts:'Расчёт карты', planets:'Планеты', aspects:'Основные аспекты', houses:'Дома',
+      title:'Персональный разбор ребёнка', portrait:'Основной портрет', character:'Характер', emotions:'Эмоции и восстановление', communication:'Общение', learning:'Обучение', strengths:'Сильные стороны', challenges:'Что может даваться сложнее', health:'Самочувствие: что наблюдать', social:'Социализация', sport:'Спорт и движение', parents:'Что важно родителям', facts:'Расчёт карты', planets:'Планеты', aspects:'Основные аспекты', houses:'Дома',
       reliableOnly:'Без точного времени рождения мы не используем дома и другие показатели, зависящие от времени. Показаны только надёжно рассчитываемые части карты.', moonAmbiguous:'В этот день Луна меняла знак. Поэтому мы не закрепляем за ребёнком один лунный сценарий и предлагаем наблюдать оба варианта.',
       houseMethod:'Дома рассчитаны по системе Плацидуса с учётом точного местного времени, координат и исторического часового пояса. Асцендент используется только как математическая граница 1-го дома и не берётся за основу психологического разбора.',
       disclaimer:'Это не диагноз и не предсказание. Сверяйте выводы с живыми наблюдениями за ребёнком.', calculationError:'Не удалось рассчитать карту. Проверьте дату, время и выбранный город.', missingPlace:'Для точного расчёта откройте профиль заново и выберите город из выпадающего списка.',
@@ -23,6 +23,7 @@
       noStrongAspect:'В этой теме нет одного доминирующего аспекта: полезнее смотреть на знак, дом и реальные реакции ребёнка.',
       strengthItems:['наблюдательность','способность учиться через опыт','верность своим интересам','чувство собственного ритма','умение восстанавливаться при поддержке'],
       challengeHard:'Напряжённые аспекты не означают проблему. Они показывают навык, которому ребёнку может потребоваться больше времени и безопасной практики.', challengeBalance:'Если ребёнок устаёт или сопротивляется, сначала проверьте нагрузку и чувство безопасности, а уже потом требуйте результат.',
+      healthItems:['Натальная карта не показывает болезни. Для здоровья важнее реальные симптомы, обследование и рекомендации врача.','Отмечайте изменения сна, аппетита, энергии, боли и поведения: когда начались, сколько длятся и что им предшествовало.','Повторяющиеся или усиливающиеся симптомы обсудите с педиатром. При затруднённом дыхании, нарушении сознания, судорогах, сильной боли или резком ухудшении нужна срочная медицинская помощь.'],
       parentActions:['Сначала назовите то, что видите: «Ты расстроился» или «Тебе сейчас трудно», и только потом предлагайте решение.','Объясняйте коротко, по одному шагу, после чего просите ребёнка показать или пересказать своими словами.','Сравнивайте ребёнка только с его собственным прошлым результатом.','При выборе школы, учителя или тренера смотрите не только на программу, но и на тон общения взрослого.','Проверяйте рекомендации наблюдением: то, что успокаивает и развивает именно вашего ребёнка, важнее любого описания.'],
       elementNames:{fire:'Огня',earth:'Земли',air:'Воздуха',water:'Воды'},
       aspectNames:{conjunction:'соединение',sextile:'секстиль',square:'квадратуру',trine:'трин',opposition:'оппозицию'},
@@ -33,13 +34,14 @@
     },
     ua: {
       language:'Мова', fullAnalysis:'Повний розбір', recalculate:'Перерахувати карту', delete:'Видалити', noChildren:'Поки немає доданих дітей', unknownTime:'Час невідомий', close:'Закрити',
-      title:'Персональний розбір дитини', portrait:'Основний портрет', character:'Характер', emotions:'Емоції та відновлення', communication:'Спілкування', learning:'Навчання', strengths:'Сильні сторони', challenges:'Що може даватися складніше', social:'Соціалізація', sport:'Спорт і рух', parents:'Що важливо батькам', facts:'Розрахунок карти', planets:'Планети', aspects:'Основні аспекти', houses:'Будинки',
+      title:'Персональний розбір дитини', portrait:'Основний портрет', character:'Характер', emotions:'Емоції та відновлення', communication:'Спілкування', learning:'Навчання', strengths:'Сильні сторони', challenges:'Що може даватися складніше', health:'Самопочуття: за чим спостерігати', social:'Соціалізація', sport:'Спорт і рух', parents:'Що важливо батькам', facts:'Розрахунок карти', planets:'Планети', aspects:'Основні аспекти', houses:'Будинки',
       reliableOnly:'Без точного часу народження ми не використовуємо будинки та інші залежні від часу показники. Показані лише надійно розраховані частини карти.', moonAmbiguous:'Цього дня Місяць змінював знак. Тому ми не закріплюємо один місячний сценарій і радимо спостерігати обидва варіанти.',
       houseMethod:'Будинки розраховані за системою Плацидуса з урахуванням точного місцевого часу, координат та історичного часового поясу. Асцендент використовується лише як математична межа 1-го будинку й не є основою психологічного розбору.',
       disclaimer:'Це не діагноз і не передбачення. Зіставляйте висновки з живими спостереженнями за дитиною.', calculationError:'Не вдалося розрахувати карту. Перевірте дату, час і вибране місто.', missingPlace:'Для точного розрахунку відкрийте профіль знову та виберіть місто зі списку.',
       dominant:'У карті найбільш помітна стихія {element}. Вона задає загальний спосіб реагування, але не скасовує інших якостей.', houseLine:'{planet} у {house}-му будинку: ця тема особливо проявляється через {theme}.',
       aspectHard:'Зв’язок {a} і {b} через {aspect} створює напруження між темами «{roleA}» і «{roleB}». Тут допомагають пауза, зрозумілі межі та можливість спробувати ще раз без сорому.', aspectSoft:'Зв’язок {a} і {b} через {aspect} допомагає поєднувати «{roleA}» і «{roleB}». Це ресурс, який розкривається через практику й довіру.', aspectConj:'З’єднання {a} і {b} робить теми «{roleA}» і «{roleB}» майже нероздільними. Реакція може бути яскравою, тому важливо помічати її до накопичення.', noStrongAspect:'У цій темі немає одного домінантного аспекту: корисніше дивитися на знак, будинок і реальні реакції дитини.',
       strengthItems:['спостережливість','здатність вчитися через досвід','вірність своїм інтересам','відчуття власного ритму','уміння відновлюватися за підтримки'], challengeHard:'Напружені аспекти не означають проблему. Вони показують навичку, якій може знадобитися більше часу та безпечної практики.', challengeBalance:'Якщо дитина втомлюється чи опирається, спочатку перевірте навантаження й відчуття безпеки.',
+      healthItems:['Натальна карта не показує хвороб. Для здоров’я важливіші реальні симптоми, обстеження та рекомендації лікаря.','Відзначайте зміни сну, апетиту, енергії, біль і поведінку: коли вони почалися, скільки тривають і що їм передувало.','Повторювані або сильніші симптоми обговоріть із педіатром. За утрудненого дихання, порушення свідомості, судом, сильного болю чи різкого погіршення потрібна невідкладна медична допомога.'],
       parentActions:['Спочатку назвіть те, що бачите, і лише потім пропонуйте рішення.','Пояснюйте коротко, по одному кроку, а потім попросіть показати або переказати своїми словами.','Порівнюйте дитину лише з її власним попереднім результатом.','Обираючи школу, вчителя чи тренера, оцінюйте також тон спілкування дорослого.','Перевіряйте рекомендації спостереженням: реакція саме вашої дитини важливіша за будь-який опис.'],
       elementNames:{fire:'Вогню',earth:'Землі',air:'Повітря',water:'Води'}, aspectNames:{conjunction:'з’єднання',sextile:'секстиль',square:'квадратуру',trine:'трин',opposition:'опозицію'},
       role:{Sun:'воля та відчуття себе',Moon:'безпека й емоції',Mercury:'мислення й мова',Venus:'симпатії та контакт',Mars:'дія й межі',Jupiter:'зростання й упевненість',Saturn:'правила й самоконтроль',Uranus:'свобода й зміни',Neptune:'уява й чутливість',Pluto:'інтенсивність і внутрішня сила'},
@@ -48,12 +50,13 @@
     },
     en: {
       language:'Language', fullAnalysis:'Full child analysis', recalculate:'Recalculate chart', delete:'Delete', noChildren:'No children added yet', unknownTime:'Time unknown', close:'Close',
-      title:'Personal child analysis', portrait:'Core portrait', character:'Character', emotions:'Emotions and recovery', communication:'Communication', learning:'Learning', strengths:'Strengths', challenges:'What may take more effort', social:'Social life', sport:'Sport and movement', parents:'What parents should know', facts:'Chart calculation', planets:'Planets', aspects:'Major aspects', houses:'Houses',
+      title:'Personal child analysis', portrait:'Core portrait', character:'Character', emotions:'Emotions and recovery', communication:'Communication', learning:'Learning', strengths:'Strengths', challenges:'What may take more effort', health:'Wellbeing: what to observe', social:'Social life', sport:'Sport and movement', parents:'What parents should know', facts:'Chart calculation', planets:'Planets', aspects:'Major aspects', houses:'Houses',
       reliableOnly:'Without an exact birth time, houses and other time-dependent factors are not used. Only reliably calculated parts of the chart are shown.', moonAmbiguous:'The Moon changed signs on this date. We therefore do not assign one lunar pattern and suggest observing both possibilities.',
       houseMethod:'Houses are calculated with the Placidus system using the exact local time, coordinates and historical time zone. The Ascendant is used only as the mathematical cusp of house 1 and is not the basis of the psychological interpretation.', disclaimer:'This is not a diagnosis or prediction. Compare every insight with real observations of the child.', calculationError:'The chart could not be calculated. Check the date, time and selected city.', missingPlace:'For an accurate calculation, reopen the profile and select a city from the suggestion list.',
       dominant:'The {element} element is strongest in this chart. It shapes the general response style without cancelling other qualities.', houseLine:'{planet} in house {house}: this theme is especially expressed through {theme}.',
       aspectHard:'The {aspect} between {a} and {b} creates tension between “{roleA}” and “{roleB}”. A pause, clear boundaries and a chance to try again without shame are helpful here.', aspectSoft:'The {aspect} between {a} and {b} helps “{roleA}” and “{roleB}” work together. This resource grows through practice and trust.', aspectConj:'The conjunction of {a} and {b} closely merges “{roleA}” and “{roleB}”. Reactions may be vivid, so early recognition matters.', noStrongAspect:'There is no single dominant aspect here; the sign, house and the child’s real reactions are more useful.',
       strengthItems:['careful observation','learning through experience','loyalty to personal interests','a clear sense of personal pace','ability to recover with support'], challengeHard:'Challenging aspects do not mean a problem. They point to a skill that may need more time and safe practice.', challengeBalance:'If the child resists or tires quickly, check the load and sense of safety before asking for performance.',
+      healthItems:['A natal chart cannot identify illness. Real symptoms, medical assessment and a clinician’s advice matter for health.','Note changes in sleep, appetite, energy, pain and behaviour: when they began, how long they last and what happened beforehand.','Discuss recurring or worsening symptoms with a paediatrician. Difficulty breathing, altered consciousness, seizures, severe pain or sudden deterioration need urgent medical care.'],
       parentActions:['Name what you see before offering a solution.','Explain one short step at a time, then ask the child to show or retell it.','Compare the child only with their own previous result.','When choosing a school, teacher or coach, assess the adult’s tone as well as the programme.','Test every suggestion through observation; the response of your actual child matters most.'],
       elementNames:{fire:'Fire',earth:'Earth',air:'Air',water:'Water'}, aspectNames:{conjunction:'conjunction',sextile:'sextile',square:'square',trine:'trine',opposition:'opposition'},
       role:{Sun:'will and sense of self',Moon:'safety and emotion',Mercury:'thinking and speech',Venus:'affection and connection',Mars:'action and boundaries',Jupiter:'growth and confidence',Saturn:'rules and self-control',Uranus:'freedom and change',Neptune:'imagination and sensitivity',Pluto:'intensity and inner power'},
@@ -62,12 +65,13 @@
     },
     nl: {
       language:'Taal', fullAnalysis:'Volledige kindanalyse', recalculate:'Horoscoop opnieuw berekenen', delete:'Verwijderen', noChildren:'Nog geen kinderen toegevoegd', unknownTime:'Tijd onbekend', close:'Sluiten',
-      title:'Persoonlijke analyse van het kind', portrait:'Kernportret', character:'Karakter', emotions:'Emoties en herstel', communication:'Communicatie', learning:'Leren', strengths:'Sterke kanten', challenges:'Wat meer moeite kan kosten', social:'Socialisatie', sport:'Sport en beweging', parents:'Wat ouders moeten weten', facts:'Berekening van de kaart', planets:'Planeten', aspects:'Belangrijkste aspecten', houses:'Huizen',
+      title:'Persoonlijke analyse van het kind', portrait:'Kernportret', character:'Karakter', emotions:'Emoties en herstel', communication:'Communicatie', learning:'Leren', strengths:'Sterke kanten', challenges:'Wat meer moeite kan kosten', health:'Welzijn: waarop letten', social:'Socialisatie', sport:'Sport en beweging', parents:'Wat ouders moeten weten', facts:'Berekening van de kaart', planets:'Planeten', aspects:'Belangrijkste aspecten', houses:'Huizen',
       reliableOnly:'Zonder exacte geboortetijd gebruiken we geen huizen of andere tijdsafhankelijke factoren. Alleen betrouwbaar berekende delen worden getoond.', moonAmbiguous:'De Maan wisselde die dag van teken. Daarom leggen we niet één emotioneel patroon vast en adviseren we beide mogelijkheden te observeren.',
       houseMethod:'De huizen zijn berekend volgens het Placidus-systeem met de exacte lokale tijd, coördinaten en historische tijdzone. De Ascendant wordt alleen gebruikt als de wiskundige cusp van huis 1 en vormt niet de basis van de psychologische interpretatie.', disclaimer:'Dit is geen diagnose of voorspelling. Vergelijk elk inzicht met echte observaties van het kind.', calculationError:'De kaart kon niet worden berekend. Controleer datum, tijd en gekozen plaats.', missingPlace:'Open het profiel opnieuw en kies een stad uit de suggestielijst voor een nauwkeurige berekening.',
       dominant:'Het element {element} is het sterkst in deze kaart. Het kleurt de algemene reactiestijl zonder andere kwaliteiten uit te sluiten.', houseLine:'{planet} in huis {house}: dit thema komt vooral tot uiting via {theme}.',
       aspectHard:'Het {aspect} tussen {a} en {b} geeft spanning tussen “{roleA}” en “{roleB}”. Een pauze, duidelijke grenzen en opnieuw mogen proberen zonder schaamte helpen hier.', aspectSoft:'Het {aspect} tussen {a} en {b} laat “{roleA}” en “{roleB}” samenwerken. Deze kwaliteit groeit door oefening en vertrouwen.', aspectConj:'De conjunctie van {a} en {b} verbindt “{roleA}” en “{roleB}” sterk. Reacties kunnen duidelijk zijn; vroeg herkennen helpt.', noStrongAspect:'Hier is geen enkel aspect dominant; teken, huis en echte reacties van het kind geven meer informatie.',
       strengthItems:['goed waarnemen','leren door ervaring','trouw aan eigen interesses','gevoel voor eigen tempo','herstellen met passende steun'], challengeHard:'Spannende aspecten betekenen geen probleem. Ze tonen een vaardigheid die meer tijd en veilige oefening kan vragen.', challengeBalance:'Als het kind weerstand toont of snel moe wordt, kijk eerst naar belasting en veiligheid.',
+      healthItems:['Een geboortehoroscoop kan geen ziekte vaststellen. Voor gezondheid zijn echte klachten, medisch onderzoek en advies van een arts bepalend.','Noteer veranderingen in slaap, eetlust, energie, pijn en gedrag: wanneer ze begonnen, hoelang ze duren en wat eraan voorafging.','Bespreek terugkerende of toenemende klachten met de kinderarts. Benauwdheid, verminderd bewustzijn, een aanval, hevige pijn of plotselinge verslechtering vragen om directe medische hulp.'],
       parentActions:['Benoem eerst wat u ziet en bied daarna pas een oplossing.','Leg één korte stap tegelijk uit en laat het kind daarna voordoen of navertellen.','Vergelijk het kind alleen met zijn of haar eigen eerdere resultaat.','Let bij school, leraar of trainer ook op de toon van de volwassene.','Toets elk advies aan observatie; de reactie van uw eigen kind is doorslaggevend.'],
       elementNames:{fire:'Vuur',earth:'Aarde',air:'Lucht',water:'Water'}, aspectNames:{conjunction:'conjunctie',sextile:'sextiel',square:'vierkant',trine:'driehoek',opposition:'oppositie'},
       role:{Sun:'wil en zelfgevoel',Moon:'veiligheid en emotie',Mercury:'denken en spreken',Venus:'genegenheid en contact',Mars:'actie en grenzen',Jupiter:'groei en vertrouwen',Saturn:'regels en zelfcontrole',Uranus:'vrijheid en verandering',Neptune:'verbeelding en gevoeligheid',Pluto:'intensiteit en innerlijke kracht'},
@@ -105,7 +109,7 @@
   };
 
   const BODY_NAMES = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
-  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',learning:'method',strengths:'home',challenges:'settings',social:'children',sport:'method',parents:'consultations',facts:'settings'};
+  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',learning:'method',strengths:'home',challenges:'settings',health:'consultations',social:'children',sport:'method',parents:'consultations',facts:'settings'};
 
   function lang() { return I18N[currentLanguage] ? currentLanguage : 'nl'; }
   function t() { return I18N[lang()]; }
@@ -250,7 +254,7 @@
     return found;
   }
   function aspectText(aspect) {
-    if (!aspect) return t().noStrongAspect;
+    if (!aspect) return '';
     const values = {a:t().planetNames[aspect.a],b:t().planetNames[aspect.b],aspect:t().aspectNames[aspect.type],roleA:t().role[aspect.a],roleB:t().role[aspect.b]};
     if (aspect.type === 'conjunction') return fill(t().aspectConj, values);
     return fill(['square','opposition'].includes(aspect.type) ? t().aspectHard : t().aspectSoft, values);
@@ -273,7 +277,15 @@
   function cuspDegreeText(longitude) { return degreeText({longitude, sign:signIndex(longitude)}); }
   function icon(name) { return `<img class="analysis-card-icon" src="assets/nav-icons/${ICONS[name]}.png?v=${VERSION}" alt="">`; }
   function section(name, body) { return `<article class="analysis-section analysis-${name}">${icon(name)}<div><h3>${esc(t()[name])}</h3>${body}</div></article>`; }
-  function paragraphs(items) { return items.filter(Boolean).map((item) => `<p>${esc(item)}</p>`).join(''); }
+  function paragraphs(items) {
+    const seen = new Set();
+    return items.filter(Boolean).filter((item) => {
+      const key = String(item).trim().toLocaleLowerCase();
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).map((item) => `<p>${esc(item)}</p>`).join('');
+  }
   function list(items) { return `<ul>${[...new Set(items.filter(Boolean))].map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`; }
 
   function buildAnalysis(child, chart) {
@@ -303,6 +315,7 @@
     content.push(section('learning', paragraphs([learningIntro, aspectText(mercuryAspect)])));
     content.push(section('strengths', list(strengths)));
     content.push(section('challenges', paragraphs([t().challengeHard, challengeAspect ? aspectText(challengeAspect) : '',t().challengeBalance])));
+    content.push(section('health', list(t().healthItems)));
     content.push(section('social', paragraphs([venusElement.social,houseText('Venus',chart),aspectText(venusAspect)])));
     content.push(section('sport', paragraphs([sportIntro,houseText('Mars',chart),aspectText(marsAspect)])));
     content.push(section('parents', list(t().parentActions)));

@@ -315,4 +315,11 @@
     document.body.classList.remove('child-modal-open');
     wizard = null;
   };
+
+  const previousChangeLanguage = window.changeLanguage;
+  window.changeLanguage = function changeLanguageWithOpenWizard(language, event) {
+    if (wizard) readCurrentStep();
+    previousChangeLanguage(language, event);
+    if (wizard) renderWizard();
+  };
 })();

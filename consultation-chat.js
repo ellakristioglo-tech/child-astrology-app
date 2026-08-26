@@ -89,6 +89,13 @@
     nl:[['sprint','vechtsport','hockey'],['gymnastiek','dans','zwemmen'],['atletiek','voetbal','basketbal'],['zwemmen','yoga','individuele training'],['gymnastiek','tennis','acrobatiek'],['fietsen','roeien','badminton'],['tennis','schermen','partnerdans'],['vechtsport','klimmen','boogschieten'],['wandelen','paardrijden','oriëntatie'],['duurloop','skiën','klimmen'],['fietsen','surfen','teamsport'],['zwemmen','dans','yoga']]
   };
 
+  const SAFETY = {
+    ru:{medical:'Я не сохраняю этот вопрос и не буду объяснять состояние ребёнка астрологией. Для симптомов, диагноза, лечения или психического состояния обратитесь к педиатру или профильному специалисту.',crisis:'Я не сохраняю этот вопрос. Если ребёнок может причинить вред себе или другому человеку либо есть непосредственная опасность, немедленно обратитесь в экстренную службу 112 и оставайтесь рядом с ребёнком.'},
+    ua:{medical:'Я не зберігаю це запитання й не пояснюватиму стан дитини астрологією. Щодо симптомів, діагнозу, лікування або психічного стану зверніться до педіатра чи профільного фахівця.',crisis:'Я не зберігаю це запитання. Якщо дитина може завдати шкоди собі або іншій людині чи є безпосередня небезпека, негайно телефонуйте 112 і залишайтеся поруч із дитиною.'},
+    en:{medical:'I will not save this question or explain a child’s condition through astrology. For symptoms, diagnosis, treatment or mental health, contact a paediatrician or qualified professional.',crisis:'I will not save this question. If the child may harm themselves or someone else, or there is immediate danger, call emergency services (112 in the EU) now and stay with the child.'},
+    nl:{medical:'Ik bewaar deze vraag niet en leg de toestand van een kind niet uit via astrologie. Neem voor symptomen, diagnose, behandeling of psychische gezondheid contact op met een kinderarts of bevoegde professional.',crisis:'Ik bewaar deze vraag niet. Kan het kind zichzelf of iemand anders iets aandoen, of is er direct gevaar? Bel dan onmiddellijk 112 en blijf bij het kind.'}
+  };
+
   function lang() { return ['ru','ua','en','nl'].includes(currentLanguage) ? currentLanguage : 'nl'; }
   function l() { return UI[lang()]; }
   function esc(value) { return String(value ?? '').replace(/[&<>'"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
@@ -112,6 +119,18 @@
     if (direct) return direct;
     const previous = String(previousQuestion || '').toLowerCase();
     return Object.keys(groups).find((key) => groups[key].test(previous)) || 'other';
+  }
+  function sensitiveKind(question) {
+    const value = String(question || '').toLowerCase();
+    if (/самоуб|суицид|поконч|убить себя|нашкодити собі|самогуб|suicid|kill myself|harm (himself|herself|themselves)|zelfmoord|zichzelf iets aandoen/.test(value)) return 'crisis';
+    if (/диагноз|диагност|лечен|лекарств|таблет|аутиз|adhd|сдвг|депресс|психиатр|діагноз|лікуван|ліки|аутиз|депрес|diagnos|treat|medicat|autis|depress|psychiatr|behandel|geneesmiddel/.test(value)) return 'medical';
+    return '';
+  }
+  function showSafety(kind) {
+    const box = document.getElementById('consultantMessages');
+    if (!box) return;
+    box.insertAdjacentHTML('beforeend', `<div class="consultant-message assistant consultant-safety">${esc(SAFETY[lang()][kind])}</div>`);
+    box.scrollTop = box.scrollHeight;
   }
   function relevantAspect(chart, body) {
     return chart.aspects?.find((a) => a.a === body || a.b === body) || null;
@@ -202,7 +221,7 @@
     root.querySelectorAll('.consultant-chip').forEach((button)=>button.addEventListener('click',()=>{const found=ui.chips.find(([key])=>key===button.dataset.topic);const input=document.getElementById('consultantQuestion');if(input&&found){input.value=found[1];input.focus();}}));
     root.querySelector('#consultantSend')?.addEventListener('click',sendQuestion);
     root.querySelector('#consultantQuestion')?.addEventListener('keydown',(event)=>{if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){event.preventDefault();sendQuestion();}});
-    root.querySelector('#consultantClear')?.addEventListener('click',()=>{if(!id)return;saveHistory(id,[]);renderConsultant();});
+    root.querySelector('#consultantClear')?.addEventListener('click',()=>{if(!id||!window.confirm(`${ui.clear}?`))return;saveHistory(id,[]);renderConsultant();});
   }
   function sendQuestion() {
     const input = document.getElementById('consultantQuestion');
@@ -210,6 +229,8 @@
     const child = children.find((item) => String(item.id) === id);
     const question = input?.value.trim();
     if (!child || !question) return;
+    const sensitive = sensitiveKind(question);
+    if (sensitive) { input.value = ''; showSafety(sensitive); return; }
     let chart;
     try { chart = window.calculateChildNatalChart(child,false); }
     catch (_) { const root=document.getElementById('parentConsultantApp'); root?.querySelector('.consultant-error')?.remove(); root?.querySelector('.consultant-controls')?.insertAdjacentHTML('afterend',`<div class="consultant-error">${esc(l().genericError)}</div>`); return; }

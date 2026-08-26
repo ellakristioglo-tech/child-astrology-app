@@ -7,14 +7,13 @@
   const LOCAL_KEY = 'child_astrology_local_analytics_v1';
   const OWNER_KEY = 'child_astrology_owner_analytics';
   const COOKIE_LIFETIME_SECONDS = 60 * 60 * 24 * 180;
+  const SAFE_TOPICS = new Set(['learning', 'communication', 'sport', 'other']);
   const ALLOWED_EVENTS = new Set([
     'app_open', 'section_view', 'child_profile_created', 'child_analysis_generated',
     'consultation_question', 'tarot_day_card', 'tarot_five_card',
     'scent_generated', 'scent_order_started'
   ]);
   const SAFE_PARAMS = new Set(['section', 'topic', 'language', 'mode', 'source']);
-  const SENSITIVE_TOPICS = new Set(['health', 'mental_health']);
-  const TOPIC_KEYS = new Set(['emotion', 'fear', 'learning', 'communication', 'sport', 'health', 'other']);
 
   const COPY = {
     ru: {
@@ -68,10 +67,10 @@
   };
 
   const TOPIC_LABELS = {
-    ru: {emotion:'Эмоции',fear:'Тревога и страх',learning:'Обучение',communication:'Общение',sport:'Спорт',health:'Здоровье (только на устройстве)',other:'Другое'},
-    ua: {emotion:'Емоції',fear:'Тривога і страх',learning:'Навчання',communication:'Спілкування',sport:'Спорт',health:'Здоров’я (лише на пристрої)',other:'Інше'},
-    en: {emotion:'Emotions',fear:'Anxiety and fear',learning:'Learning',communication:'Communication',sport:'Sport',health:'Health (device only)',other:'Other'},
-    nl: {emotion:'Emoties',fear:'Angst en spanning',learning:'Leren',communication:'Communicatie',sport:'Sport',health:'Gezondheid (alleen apparaat)',other:'Overig'}
+    ru: {learning:'Обучение',communication:'Общение',sport:'Спорт',other:'Другое'},
+    ua: {learning:'Навчання',communication:'Спілкування',sport:'Спорт',other:'Інше'},
+    en: {learning:'Learning',communication:'Communication',sport:'Sport',other:'Other'},
+    nl: {learning:'Leren',communication:'Communicatie',sport:'Sport',other:'Overig'}
   };
 
   function language() {
@@ -83,12 +82,26 @@
   function validMeasurementId() { return /^G-[A-Z0-9]{6,}$/i.test(String(CONFIG.measurementId || '').trim()); }
   function consentState() { return localStorage.getItem(CONSENT_KEY); }
   function consentGranted() { return consentState() === 'granted'; }
-  function readLocal() { try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '{"events":{},"topics":{}}'); } catch (_) { return {events:{},topics:{}}; } }
+  function publicTopic(topic) { return SAFE_TOPICS.has(topic) ? topic : 'other'; }
+  function readLocal() {
+    try {
+      const data = JSON.parse(localStorage.getItem(LOCAL_KEY) || '{"events":{},"topics":{}}');
+      const topics = {};
+      Object.entries(data.topics || {}).forEach(([key, value]) => {
+        const safe = publicTopic(key);
+        topics[safe] = (topics[safe] || 0) + (Number(value) || 0);
+      });
+      return {events:data.events || {},topics};
+    } catch (_) { return {events:{},topics:{}}; }
+  }
   function writeLocal(data) { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(data)); } catch (_) {} }
   function remember(eventName, params) {
     const data = readLocal();
     data.events[eventName] = (data.events[eventName] || 0) + 1;
-    if (eventName === 'consultation_question' && TOPIC_KEYS.has(params.topic)) data.topics[params.topic] = (data.topics[params.topic] || 0) + 1;
+    if (eventName === 'consultation_question' && params.topic) {
+      const topic = publicTopic(params.topic);
+      data.topics[topic] = (data.topics[topic] || 0) + 1;
+    }
     writeLocal(data);
   }
   function safeParams(params) {
@@ -101,7 +114,7 @@
   }
   function remoteParams(eventName, params) {
     const output = safeParams(params);
-    if (eventName === 'consultation_question' && SENSITIVE_TOPICS.has(output.topic)) delete output.topic;
+    if (eventName === 'consultation_question') output.topic = publicTopic(output.topic || 'other');
     return output;
   }
   function cleanGoogleCookies() {
@@ -228,8 +241,8 @@
     }
   }
 
-  window.AppAnalytics = {track, render:renderPanel, setConsent, openPreferences, isConnected:validMeasurementId};
-  document.addEventListener('app:consultation-question', (event) => track('consultation_question', {topic:event.detail?.topic || 'other'}));
+  window.AppAnalytics = {track, render:renderPanel, setConsent, openPreferences, getConsent:()=>consentState() || 'unset', resetConsent:()=>{localStorage.removeItem(CONSENT_KEY);renderPanel();renderConsent();}, isConnected:validMeasurementId};
+  document.addEventListener('app:consultation-question', (event) => track('consultation_question', {topic:publicTopic(event.detail?.topic || 'other')}));
   document.addEventListener('app:child-created', () => track('child_profile_created'));
   document.addEventListener('app:child-analysis', () => track('child_analysis_generated'));
   document.addEventListener('app:tarot-day-card', () => track('tarot_day_card'));

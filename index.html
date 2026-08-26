@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="icon-theme.css?v=20260825n">
     <link rel="stylesheet" href="child-analysis.css?v=20260825q">
     <link rel="stylesheet" href="tarot-thoth.css?v=20260826b">
+    <link rel="stylesheet" href="consultation-chat.css?v=20260826c">
 </head>
 <body>
     <div class="app">
@@ -64,8 +65,8 @@
             <section id="sports" class="section"><div class="card"><h2 class="card-title"><span data-lang="sports_title">Спорт по знаку Марса</span></h2><div class="info-block"><div class="info-title" data-lang="sports_intro">За спорт отвечает планета Марс. Найдите знак зодиака, где находится Марс в натальной карте вашего ребёнка.</div></div><div id="sportsContent"></div></div></section>
             <section id="learning" class="section"><div class="card"><h2 class="card-title">📚 <span data-lang="learning_title">Как обучать вашего ребёнка</span></h2><div class="info-block"><div class="info-title" data-lang="learning_intro">Меркурий в натальной карте показывает, как ребёнок учится и воспринимает информацию.</div></div><div id="learningContent"></div></div></section>
             <section id="tips" class="section"><div class="card"><h2 class="card-title">💡 <span data-lang="tips_title">10 советов для родителей</span></h2><div id="tipsContent"></div></div></section>
-            <section id="consultation" class="section"><div class="card"><h2 class="card-title"><span data-lang="consultation_title">Persoonlijke Consultatie</span></h2><div class="consultation-card"><div style="font-size:80px;margin-bottom:20px">📱</div><h3 style="color:var(--cosmic-purple);font-size:26px;margin-bottom:20px" data-lang="consultation_subtitle">Stuur Ella persoonlijk een bericht</h3><p style="margin-bottom:30px;line-height:1.6" data-lang="consultation_desc">Wil je jouw situatie persoonlijk bespreken? Open WhatsApp en stuur Ella een bericht.</p><a href="https://wa.me/31612554778" class="btn btn-primary" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#25D366,#128C7E);color:white"><span>📱</span><span data-lang="btn_whatsapp">Bericht via WhatsApp</span></a></div></div></section>
-            <section id="settings" class="section"><div class="card"><h2 class="card-title">⚙️ <span data-lang="settings_title">Instellingen</span></h2><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🌍 <span data-lang="settings_language">Taal / Language</span></h3><div class="language-buttons"><button class="lang-btn active" onclick="changeLanguage('nl',event)">NL</button><button class="lang-btn" onclick="changeLanguage('ru',event)">RU</button><button class="lang-btn" onclick="changeLanguage('ua',event)">UA</button><button class="lang-btn" onclick="changeLanguage('en',event)">EN</button></div></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🔒 <span data-lang="settings_privacy">Privacy</span></h3><p data-lang="settings_privacy_desc">Alle gegevens worden lokaal opgeslagen op je apparaat. Wij verzamelen geen persoonlijke informatie.</p></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">👤 <span data-lang="settings_about">Over de auteur</span></h3><p><strong>Ella Kristioglo</strong><br>Child Astrology specialist</p><p class="about-bio" data-lang="about_bio">Элла Кристиогло — коррекционный педагог и логопед, астролог и мама двух дочерей. В Child Astrology она соединяет профессиональный опыт работы с детьми, знания астрологии и практические наблюдения, чтобы помогать родителям лучше понимать характер, сильные стороны и эмоциональные потребности ребёнка.</p></div></div></section>
+            <section id="consultation" class="section"><div class="card consultation-shell"><div id="parentConsultantApp" aria-live="polite"></div></div></section>
+            <section id="settings" class="section"><div class="card"><h2 class="card-title">⚙️ <span data-lang="settings_title">Instellingen</span></h2><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🌍 <span data-lang="settings_language">Taal / Language</span></h3><div class="language-buttons"><button class="lang-btn active" onclick="changeLanguage('nl',event)">NL</button><button class="lang-btn" onclick="changeLanguage('ru',event)">RU</button><button class="lang-btn" onclick="changeLanguage('ua',event)">UA</button><button class="lang-btn" onclick="changeLanguage('en',event)">EN</button></div></div><div id="installGuideApp"></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🔒 <span data-lang="settings_privacy">Privacy</span></h3><p data-lang="settings_privacy_desc">Alle gegevens worden lokaal opgeslagen op je apparaat. Wij verzamelen geen persoonlijke informatie.</p></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">👤 <span data-lang="settings_about">Over de auteur</span></h3><p><strong>Ella Kristioglo</strong><br>Child Astrology specialist</p><p class="about-bio" data-lang="about_bio">Элла Кристиогло — коррекционный педагог и логопед, астролог и мама двух дочерей. В Child Astrology она соединяет профессиональный опыт работы с детьми, знания астрологии и практические наблюдения, чтобы помогать родителям лучше понимать характер, сильные стороны и эмоциональные потребности ребёнка.</p></div></div></section>
         </main>
     </div>
     <nav class="mobile-bottom-nav" aria-label="Primary navigation">
@@ -85,8 +86,9 @@
 <script src="vendor/astronomy.browser.min.js?v=20260825q"></script>
 <script src="app.js?v=20260825q"></script>
 <script src="child-modal.js?v=20260825r"></script>
-<script src="child-analysis.js?v=20260825u"></script>
+<script src="child-analysis.js?v=20260826c"></script>
     <script src="tarot-thoth.js?v=20260826b"></script>
+<script src="consultation-chat.js?v=20260826c"></script>
 <script src="icon-theme.js?v=20260825n"></script>
 </body>
 </html>

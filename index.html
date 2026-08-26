@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="consultation-chat.css?v=20260826c">
     <link rel="stylesheet" href="family-scent.css?v=20260826c">
     <link rel="stylesheet" href="analytics.css?v=20260826b">
+    <link rel="stylesheet" href="privacy-controls.css?v=20260826b">
 </head>
 <body>
     <div class="app">
@@ -69,7 +70,7 @@
             <section id="learning" class="section"><div class="card"><h2 class="card-title">📚 <span data-lang="learning_title">Как обучать вашего ребёнка</span></h2><div class="info-block"><div class="info-title" data-lang="learning_intro">Меркурий в натальной карте показывает, как ребёнок учится и воспринимает информацию.</div></div><div id="learningContent"></div></div></section>
             <section id="tips" class="section"><div class="card"><h2 class="card-title">💡 <span data-lang="tips_title">10 советов для родителей</span></h2><div id="tipsContent"></div></div></section>
             <section id="consultation" class="section"><div class="card consultation-shell"><div id="parentConsultantApp" aria-live="polite"></div></div></section>
-            <section id="settings" class="section"><div class="card"><h2 class="card-title">⚙️ <span data-lang="settings_title">Instellingen</span></h2><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🌍 <span data-lang="settings_language">Taal / Language</span></h3><div class="language-buttons"><button class="lang-btn active" onclick="changeLanguage('nl',event)">NL</button><button class="lang-btn" onclick="changeLanguage('ru',event)">RU</button><button class="lang-btn" onclick="changeLanguage('ua',event)">UA</button><button class="lang-btn" onclick="changeLanguage('en',event)">EN</button></div></div><div id="installGuideApp"></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🔒 <span data-lang="settings_privacy">Privacy</span></h3><p data-lang="settings_privacy_desc">Profiel- en geboortegegevens blijven op dit apparaat. Optionele gebruiksanalyse start alleen met uw toestemming.</p></div><div id="analyticsPanel"></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">👤 <span data-lang="settings_about">Over de auteur</span></h3><p><strong>Ella Kristioglo</strong><br>Child Astrology specialist</p><p class="about-bio" data-lang="about_bio">Элла Кристиогло — коррекционный педагог и логопед, астролог и мама двух дочерей. В Child Astrology она соединяет профессиональный опыт работы с детьми, знания астрологии и практические наблюдения, чтобы помогать родителям лучше понимать характер, сильные стороны и эмоциональные потребности ребёнка.</p></div></div></section>
+            <section id="settings" class="section"><div class="card"><h2 class="card-title">⚙️ <span data-lang="settings_title">Instellingen</span></h2><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🌍 <span data-lang="settings_language">Taal / Language</span></h3><div class="language-buttons"><button class="lang-btn active" onclick="changeLanguage('nl',event)">NL</button><button class="lang-btn" onclick="changeLanguage('ru',event)">RU</button><button class="lang-btn" onclick="changeLanguage('ua',event)">UA</button><button class="lang-btn" onclick="changeLanguage('en',event)">EN</button></div></div><div id="installGuideApp"></div><div id="privacyControls"></div><div id="analyticsPanel"></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">👤 <span data-lang="settings_about">Over de auteur</span></h3><p><strong>Ella Kristioglo</strong><br>Child Astrology specialist</p><p class="about-bio" data-lang="about_bio">Элла Кристиогло — коррекционный педагог и логопед, астролог и мама двух дочерей. В Child Astrology она соединяет профессиональный опыт работы с детьми, знания астрологии и практические наблюдения, чтобы помогать родителям лучше понимать характер, сильные стороны и эмоциональные потребности ребёнка.</p></div></div></section>
         </main>
     </div>
     <div class="mobile-methods-backdrop" data-mobile-methods-close aria-hidden="true"></div>
@@ -111,6 +112,7 @@
 <script src="icon-theme.js?v=20260825n"></script>
 <script src="analytics-config.js?v=20260826b"></script>
 <script src="analytics.js?v=20260826b"></script>
+<script src="privacy-controls.js?v=20260826b"></script>
 <script src="pwa-update.js?v=__APP_BUILD_VERSION__"></script>
 </body>
 </html>

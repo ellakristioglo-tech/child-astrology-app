@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Family Scent Code candle</title>
+  <defs>
+    <linearGradient id="bg" x1="22" y1="20" x2="229" y2="238" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#132f7a"/><stop offset=".55" stop-color="#57308d"/><stop offset="1" stop-color="#b04b9d"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="79" y1="56" x2="168" y2="205" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff4b5"/><stop offset=".52" stop-color="#ffd35a"/><stop offset="1" stop-color="#e6a52e"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="58" fill="url(#bg)"/>
+  <circle cx="128" cy="123" r="94" fill="none" stroke="#e8c765" stroke-width="3" opacity=".62"/>
+  <g fill="#fff5b3" filter="url(#glow)"><circle cx="54" cy="74" r="3"/><circle cx="203" cy="62" r="3"/><circle cx="209" cy="158" r="4"/><path d="M55 174l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></g>
+  <path d="M128 43c18 24 17 41 3 54-10 9-24 5-29-7-7-17 8-29 26-47z" fill="url(#gold)" filter="url(#glow)"/>
+  <path d="M128 61c8 12 7 20 1 26-5 4-11 2-13-4-3-8 4-14 12-22z" fill="#fffbe4"/>
+  <path d="M80 105h96l-10 104H90z" fill="#fcf0c9" stroke="#f1c557" stroke-width="5"/>
+  <path d="M97 124h62v57c-17 11-45 11-62 0z" fill="#fff9e9" opacity=".88"/>
+  <path d="M110 153c11-14 25-15 36 0-11 14-25 15-36 0z" fill="none" stroke="#7f55b6" stroke-width="4"/>
+  <circle cx="128" cy="153" r="5" fill="#efb939"/>
+</svg>

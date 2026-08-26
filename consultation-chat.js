@@ -131,11 +131,11 @@
     }
     return {text:parts.join(', '),aspectText,body,position};
   }
-  function responseFor(child, chart, question, history) {
+  function responseFor(child, chart, question, history, forcedTopic) {
     const locale = lang();
     const ui = l();
     const previousQuestion = [...(history || [])].reverse().find((item) => item.role === 'user')?.text;
-    const topic = detectTopic(question, previousQuestion);
+    const topic = forcedTopic || detectTopic(question, previousQuestion);
     const factor = factorText(chart, topic);
     const element = SIGN_ELEMENTS[factor.position?.sign ?? 0];
     const age = childAge(child);
@@ -150,11 +150,36 @@
     const why = topic === 'health' ? (age != null ? fill(ui.age,{age}) : '') : fill(ui.why,{factor:factor.text,aspect:factor.aspectText});
     return `${ui.headings.what}\n${what}\n\n${ui.headings.why}\n${why || ui.note}\n\n${ui.headings.try}\n${ui.actions[topic].map((item,index)=>`${index+1}. ${item}`).join('\n')}\n\n${ui.headings.watch}\n${ui.watch[topic]}`;
   }
+  function translatedHistory(id) {
+    const list = id ? getHistory(id) : [];
+    const child = children.find((item) => String(item.id) === String(id));
+    if (!child || !list.length) return list;
+    let chart;
+    try { chart = window.calculateChildNatalChart(child,false); }
+    catch (_) { return list; }
+    let latestQuestion = '';
+    return list.map((item,index) => {
+      if (item.role === 'user') {
+        latestQuestion = item.text || item.question || '';
+        return item;
+      }
+      if (item.role !== 'assistant') return item;
+      const question = item.question || latestQuestion || list[index - 1]?.text || '';
+      const topic = item.topic || detectTopic(question,'');
+      return {
+        ...item,
+        type:'chart-guidance',
+        question,
+        topic,
+        text:responseFor(child,chart,question,list.slice(0,index),topic)
+      };
+    });
+  }
   function messageHtml(item) { return `<div class="consultant-message ${item.role === 'user' ? 'user' : 'assistant'}">${esc(item.text)}</div>`; }
   function renderMessages(id) {
     const box = document.getElementById('consultantMessages');
     if (!box) return;
-    const list = id ? getHistory(id) : [];
+    const list = translatedHistory(id);
     box.innerHTML = list.length ? list.map(messageHtml).join('') : `<div class="consultant-empty"><strong>${esc(l().emptyTitle)}</strong>${esc(l().empty)}</div>`;
     box.scrollTop = box.scrollHeight;
   }
@@ -189,7 +214,12 @@
     try { chart = window.calculateChildNatalChart(child,false); }
     catch (_) { const root=document.getElementById('parentConsultantApp'); root?.querySelector('.consultant-error')?.remove(); root?.querySelector('.consultant-controls')?.insertAdjacentHTML('afterend',`<div class="consultant-error">${esc(l().genericError)}</div>`); return; }
     const history = getHistory(id);
-    history.push({role:'user',text:question},{role:'assistant',text:responseFor(child,chart,question,history)});
+    const previousQuestion = [...history].reverse().find((item) => item.role === 'user')?.text;
+    const topic = detectTopic(question,previousQuestion);
+    history.push(
+      {role:'user',text:question},
+      {role:'assistant',type:'chart-guidance',question,topic,language:lang(),text:responseFor(child,chart,question,history,topic)}
+    );
     saveHistory(id,history);
     input.value='';
     renderConsultant();

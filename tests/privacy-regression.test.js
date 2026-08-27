@@ -28,6 +28,19 @@ test('coordinates are removed before child data is persisted', () => {
   assert.doesNotMatch(beforeCalculation, /localStorage\.setItem\('children'/);
 });
 
+test('authority is confirmed for every child and the child privacy notice is linked', () => {
+  const privacy = read('privacy-controls.js');
+  const modal = read('child-modal.js');
+  const gate = privacy.slice(privacy.indexOf('function parentGate'), privacy.indexOf('function wrapAddChild'));
+  assert.doesNotMatch(gate, /if\s*\(localStorage\.getItem\(PARENT_KEY\)\)\s*\{next\(\);return\}/);
+  assert.match(gate, /const adultConfirmed=Boolean\(localStorage\.getItem\(PARENT_KEY\)\)/);
+  assert.match(gate, /legal\.html\?lang=\$\{language\(\)\}&doc=privacy/);
+  assert.match(gate, /next\(\{confirmedAt,version\}\)/);
+  assert.match(privacy, /childCheck:'Я подтверждаю, что имею право добавить данные этого ребёнка\.'/);
+  assert.match(modal, /authorityConfirmedAt: wizard\.authorityEvidence\.confirmedAt/);
+  assert.match(modal, /authorityConfirmationVersion: wizard\.authorityEvidence\.version/);
+});
+
 test('sensitive questions are blocked before storage and analytics', () => {
   const source = read('consultation-chat.js');
   const sensitive = source.indexOf('const sensitive = sensitiveKind(question)');

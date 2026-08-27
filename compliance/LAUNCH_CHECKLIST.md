@@ -6,8 +6,8 @@ Legend: **DONE** implemented/verified in code; **N/A** feature does not exist an
 
 | # | Requirement from report | Status | Evidence/action |
 |---:|---|---|---|
-| 1 | Parent-only onboarding | DONE | 18+/authority gate before Add Child |
-| 2 | Parent/legal-authority checkbox | DONE | Timestamped local confirmation; nickname guidance |
+| 1 | Parent-only onboarding | DONE | 18+ gate before the first Add Child action |
+| 2 | Parent/legal-authority checkbox | DONE | Confirmation for every new child; timestamp/version saved with that profile; nickname guidance and child-privacy link |
 | 3 | Nickname instead of legal name | DONE | Field and notice say nickname/full name not required |
 | 4 | Remove child photo | DONE | No photo field/upload |
 | 5 | Server-side geocoding | DONE by safer local equivalent | Bundled GeoNames search; no query leaves device |

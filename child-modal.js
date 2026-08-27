@@ -222,7 +222,7 @@
   function saveChildProfile() {
     if (!wizard) return;
     const place = wizard.data.place;
-    const child = { id: Date.now(), name: wizard.data.name, birthDate: wizard.data.birthDate, birthTime: wizard.data.birthTime, birthTimeUnknown: wizard.data.birthTimeUnknown, birthPlace: place.label, birthCity: place.city, birthRegion: place.region, birthCountry: place.country, birthCountryCode: place.countryCode, latitude: place.latitude, longitude: place.longitude, timezone: place.timezone, sunSign: '', moonSign: '', mercurySign: '', marsSign: '' };
+    const child = { id: Date.now(), name: wizard.data.name, birthDate: wizard.data.birthDate, birthTime: wizard.data.birthTime, birthTimeUnknown: wizard.data.birthTimeUnknown, birthPlace: place.label, birthCity: place.city, birthRegion: place.region, birthCountry: place.country, birthCountryCode: place.countryCode, latitude: place.latitude, longitude: place.longitude, timezone: place.timezone, authorityConfirmedAt: wizard.authorityEvidence.confirmedAt || '', authorityConfirmationVersion: wizard.authorityEvidence.version || '', sunSign: '', moonSign: '', mercurySign: '', marsSign: '' };
     children.push(child);
     try {
       window.calculateChildNatalChart(child, true);
@@ -249,9 +249,9 @@
     window.setTimeout(() => { toast.classList.remove('visible'); window.setTimeout(() => toast.remove(), 250); }, 2600);
   }
 
-  window.addChild = function addChildWizard() {
+  window.addChild = function addChildWizard(authorityEvidence = {}) {
     if (document.querySelector('.add-child-modal')) return;
-    wizard = { step: 0, data: { name: '', birthDate: '', birthTime: '', birthTimeUnknown: false, placeQuery: '', place: null }, modal: document.createElement('div') };
+    wizard = { step: 0, data: { name: '', birthDate: '', birthTime: '', birthTimeUnknown: false, placeQuery: '', place: null }, authorityEvidence, modal: document.createElement('div') };
     wizard.modal.className = 'add-child-modal';
     wizard.modal.innerHTML = '<div class="add-child-overlay"><div class="add-child-dialog" role="dialog" aria-modal="true"></div></div>';
     wizard.modal.querySelector('.add-child-overlay').addEventListener('click', (event) => { if (event.target.classList.contains('add-child-overlay')) closeAddChildModal(); });

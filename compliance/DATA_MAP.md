@@ -8,7 +8,8 @@ This map covers only the current GitHub Pages application. It has no account, ba
 
 | Data | Subject | Purpose | Storage | Recipient | Retention |
 |---|---|---|---|---|---|
-| Adult/authority confirmation + time | Parent/user | Prevent unauthorised child profiles | Browser localStorage | None | Until all app data is deleted |
+| Adult confirmation + time | Parent/user | Adult-directed eligibility | Browser localStorage | None | Until all app data is deleted |
+| Child-specific authority confirmation + time/version | Parent + child context | Accountability for each child profile | Inside that local child profile | None | Deleted with that child profile |
 | Child nickname | Child | Identify a profile in the UI | Browser localStorage | None | Until child/all data deletion |
 | Birth date and time | Child | Natal calculation | Browser localStorage | None | Until child/all data deletion |
 | Birth city, country, timezone | Child | Reproducible calculation and display | Browser localStorage | None | Until child/all data deletion |

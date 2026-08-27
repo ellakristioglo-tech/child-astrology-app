@@ -14,7 +14,8 @@ Version: 26 August 2026
 | Local analytics aggregate | Until all-data deletion | Delete all |
 | GA consent | Until changed/all-data deletion | Settings or Delete all |
 | Optional GA cookies | Up to 180 days | Withdrawal attempts removal for current domain |
-| Parent-authority record | Until all-data deletion | Delete all |
+| Adult confirmation | Until all-data deletion | Delete all |
+| Child-specific authority record | While that child profile exists | Delete Child or Delete all |
 
 There is no application backend or application backup. Browser/device backups are controlled by the user’s platform and are outside the app’s technical control; deleted app data must not be reintroduced by the operator because the operator never possesses it.
 

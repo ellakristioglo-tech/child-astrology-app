@@ -18,7 +18,7 @@ This map covers only the current GitHub Pages application. It has no account, ba
 | Notes written by user | Parent and potentially child | Parent observations | Browser localStorage | None | Until note/child/all data deletion |
 | Guide question and rule-based answer | Parent and potentially child | Local guidance | Browser localStorage | None | Maximum 90 days or manual deletion |
 | Sensitive/restricted question | Parent and potentially child | Safety interception | Not stored | None | Zero |
-| Family Scent result and participant nicknames | Users/children entered | Restore result | Browser localStorage | None | Maximum 90 days or manual deletion |
+| Parent Scent result and adult participant names | Adult parent/partner only | Restore adult candle result | Browser localStorage | None | Maximum 90 days or manual deletion |
 | Order name, contact and scent summary | Adult customer | Start a direct candle enquiry | Not stored by app | User-chosen WhatsApp/email and Ella | Determined outside the app after contact |
 | Language and analytics consent | User/device | Preferences and consent control | Browser localStorage | None | Until changed/all data deletion |
 | User-created JSON backup | Parent/user and child profiles included by the user | Device-to-device or old-domain migration | User-selected local file; imported into browser localStorage | None unless the user independently shares the file | Controlled and deleted by the user |
@@ -32,6 +32,7 @@ This map covers only the current GitHub Pages application. It has no account, ba
 - No advertising profiles, pixels or child-trait audiences.
 - No persistent coordinates.
 - No automatic attachment of child data to WhatsApp/email.
+- Parent Scent never reads child profiles and rejects participant birth dates less than 18 years ago.
 
 ## Data flow
 

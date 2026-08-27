@@ -10,7 +10,7 @@ Version: 27 August 2026
 | Normal guide history | Maximum 90 days | Automatic prune on read/write; manual clear; child/all cascade |
 | Sensitive/restricted prompt | Zero | Blocked before analytics/history/calculation |
 | Tarot | No history is stored | Nothing to delete |
-| Family Scent result | Maximum 90 days | Automatic expiry; regenerated/child/all deletion clears it |
+| Parent Scent result (adult parents/partners only) | Maximum 90 days | Automatic expiry; regeneration or all-data deletion clears it |
 | Local analytics aggregate | Until all-data deletion | Delete all |
 | GA consent | Until changed/all-data deletion | Settings or Delete all |
 | Optional GA cookies | Up to 180 days | Withdrawal attempts removal for current domain |
@@ -23,4 +23,4 @@ There is no application backend or operator-held backup. The user may download a
 
 ## Cascade requirements
 
-Deleting a child removes the child record, linked notes, that child’s guide history, selected-child pointer and any Family Scent result that may contain the nickname. Deleting all clears only known Child Astrology keys and analytics cookies; it does not wipe unrelated browser storage.
+Deleting a child removes the child record, linked notes, that child’s guide history and selected-child pointer. Parent Scent is independent and contains only adult data, so deleting a child does not affect it. Deleting all clears only known Child Astrology keys and analytics cookies; it does not wipe unrelated browser storage. The obsolete `familyScentCodeV1` value is deleted automatically when the adult-only module starts.

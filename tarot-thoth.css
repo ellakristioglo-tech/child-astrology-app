@@ -7,7 +7,7 @@
 .tarot-hero p{max-width:700px;line-height:1.6;color:rgba(255,255,255,.88)}
 .tarot-age{display:flex;align-items:flex-start;gap:12px;margin:22px 0 0;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.12);font-weight:700}
 .tarot-age input{width:22px;height:22px;flex:0 0 auto;accent-color:#f4d03f}
-.tarot-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.72fr);gap:20px;margin-top:22px}
+.tarot-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.72fr);gap:20px;margin-top:22px}.tarot-workspace-single{grid-template-columns:minmax(0,760px);justify-content:center}
 .tarot-panel{background:#fff;border:1px solid rgba(74,44,122,.16);border-radius:20px;padding:22px;box-shadow:0 10px 30px rgba(74,44,122,.08)}
 .tarot-panel h3{font-family:Georgia,'Times New Roman',serif;color:var(--cosmic-purple);font-size:24px;margin:0 0 8px}
 .tarot-muted{color:#667085;line-height:1.55;font-size:14px}

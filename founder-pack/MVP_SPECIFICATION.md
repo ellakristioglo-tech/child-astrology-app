@@ -35,8 +35,8 @@ Free, parent-directed, local-first web/PWA for the Netherlands and EU. No accoun
 
 ## Optional separated modules in this release
 
-- Tarot for reflection, 16+ gate, no diagnosis or fate claims.
-- Family Scent, locally calculated, with deliberate user-initiated contact only.
+- Tarot contains only one Card of the Day, with a 16+ gate and no questions, multi-card spreads, diagnosis or fate claims.
+- Parent Scent is restricted to adult parents/partners (18+), never reads child profiles, calculates locally and contacts Ella only after deliberate user action.
 
 They do not block the core journey and are reassessed independently before monetisation.
 
@@ -70,4 +70,4 @@ Required for personal calculation: nickname, birth date, birthplace; exact time 
 
 ## Later gates
 
-Accounts, cloud storage, external AI, payments, Family Scent sales or specialist partnerships require a new data map, DPIA/vendor review, updated Terms/Privacy and security testing before development is enabled.
+Accounts, cloud storage, external AI, payments, automated Parent Scent sales or specialist partnerships require a new data map, DPIA/vendor review, updated Terms/Privacy and security testing before development is enabled.

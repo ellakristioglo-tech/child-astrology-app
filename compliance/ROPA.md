@@ -35,7 +35,7 @@ Version: 26 August 2026
 
 ## Direct candle enquiry
 
-- Purpose: user-initiated contact about a Family Scent candle.
+- Purpose: user-initiated contact about an adult-only Parent Scent candle.
 - Data: adult name, contact and scent summary; no detailed birth data.
 - Recipients: Ella and the user-selected WhatsApp or email provider.
 - Trigger: explicit checkbox and button click.

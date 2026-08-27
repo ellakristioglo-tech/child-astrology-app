@@ -39,11 +39,19 @@
     return {...base,...overrides};
   }
 
+  function alignParentScent(ui,language){
+    const adultNotice={ru:'Parent Scent доступен только совершеннолетним родителям и партнёрам. Профили и данные детей в этом расчёте не используются.',ua:'Parent Scent доступний лише повнолітнім батькам і партнерам. Профілі та дані дітей у цьому розрахунку не використовуються.',en:'Parent Scent is only for adult parents and partners. Child profiles and child data are not used in this calculation.',nl:'Parent Scent is uitsluitend voor volwassen ouders en partners. Kinderprofielen en kindgegevens worden niet voor deze berekening gebruikt.'}[language];
+    const docs=ui.docs.map(doc=>doc.replaceAll('Family Scent','Parent Scent'));
+    docs[0]+=`<p><strong>18+:</strong> ${adultNotice}</p>`;
+    docs[2]+=`<p><strong>Parent Scent · 18+:</strong> ${adultNotice}</p>`;
+    return {...ui,docs};
+  }
+
   const params=new URLSearchParams(location.search);
   let language=['ru','ua','en','nl'].includes(params.get('lang'))?params.get('lang'):(localStorage.getItem('language')||'nl');
   let selected=Math.max(0,['privacy','cookies','terms','rights'].indexOf(params.get('doc')));
   function render(){
-    const ui=translated(language);document.documentElement.lang=language==='ua'?'uk':language;
+    const ui=alignParentScent(translated(language),language);document.documentElement.lang=language==='ua'?'uk':language;
     document.querySelectorAll('[data-language]').forEach((button)=>button.classList.toggle('active',button.dataset.language===language));
     document.getElementById('legalApp').innerHTML=`<section class="legal-hero"><h1>${ui.title}</h1><p>${ui.intro}</p><p>${OFFICIAL_SITE}</p><p class="legal-review">${REVIEW_VERSION[language]||ui.review}</p></section><nav class="legal-tabs">${ui.tabs.map((label,index)=>`<button type="button" data-doc="${index}" class="${index===selected?'active':''}">${label}</button>`).join('')}</nav><article class="legal-document">${ui.docs[selected]}<div class="legal-actions"><a href="index.html">${ui.back}</a><a href="index.html#settings">${ui.settings}</a></div></article>`;
     document.querySelectorAll('[data-doc]').forEach((button)=>button.addEventListener('click',()=>{selected=Number(button.dataset.doc);history.replaceState(null,'',`?lang=${language}&doc=${['privacy','cookies','terms','rights'][selected]}`);render();scrollTo({top:0,behavior:'smooth'})}));

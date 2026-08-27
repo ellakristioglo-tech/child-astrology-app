@@ -48,10 +48,10 @@ Legend: **DONE** implemented/verified in code; **N/A** feature does not exist an
 ## Additional deliverables
 
 - DONE: data map, RoPA, LIA draft, DPIA draft, retention/deletion, DSR, vendor register, incident plan, breach template, automated-content policy, Privacy/Cookies/Terms page.
-- DONE: 90-day history expiry, explicit Family Scent transmission checkbox, mobile Methods menu containing all desktop-only sections, CSP/referrer policy and local city dataset attribution.
+- DONE: 90-day history expiry, explicit Parent Scent transmission checkbox, adult-only 18+ gate with no child-profile access, mobile Methods menu containing all desktop-only sections, CSP/referrer policy and local city dataset attribution.
 - DONE: official `childastrologyapp.com` domain declared in the app and legal page; custom-domain JSON migration is available.
 - DONE: GA minimisation verified in the production property: Enhanced Measurement, Google Signals, user-provided data and granular location/device collection OFF; event/user retention 2 months; reset on new activity OFF.
-- DONE: Founder Pack fixes the product boundary: Child Code is the core journey; Family Scent and Tarot remain optional, separate modules and do not enter the core child profile.
+- DONE: Founder Pack fixes the product boundary: Child Code is the core journey; Tarot is limited to one Card of the Day (16+), while Parent Scent is adult-only (18+) and never enters or reads the core child profile.
 - HUMAN BLOCKER: controller and Dutch privacy counsel must sign the LIA/DPIA and confirm the four questions in `LEGAL_REVIEW_BRIEF.md`.
 - HUMAN BLOCKER: complete and retain the Google/GitHub role, DPA and transfer records listed in `VENDOR_REGISTER.md`.
 

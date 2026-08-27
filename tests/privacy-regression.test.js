@@ -159,7 +159,8 @@ test('Delete Child cascades to linked local records', () => {
   const storage = new Map([
     ['childAstrologyConsultationHistory', JSON.stringify({'1':[{role:'user',text:'x'}],'2':[{role:'user',text:'y'}]})],
     ['childAstrologyConsultationChild','1'],
-    ['familyScentCodeV1','result']
+    ['familyScentCodeV1','legacy child-linked result'],
+    ['parentScentCodeV2','adult-only result']
   ]);
   const localStorage = {getItem:(key)=>storage.has(key)?storage.get(key):null,setItem:(key,value)=>storage.set(key,String(value)),removeItem:(key)=>storage.delete(key)};
   const context = {
@@ -178,6 +179,30 @@ test('Delete Child cascades to linked local records', () => {
   assert.deepEqual(Object.keys(JSON.parse(storage.get('childAstrologyConsultationHistory'))),['2']);
   assert.equal(storage.has('childAstrologyConsultationChild'),false);
   assert.equal(storage.has('familyScentCodeV1'),false);
+  assert.equal(storage.get('parentScentCodeV2'),'adult-only result');
+});
+
+test('Tarot exposes only Card of the Day', () => {
+  const source = read('tarot-thoth.js');
+  const render = source.slice(source.indexOf('function resultHtml'), source.indexOf('const traitMap'));
+  const draw = source.slice(source.indexOf('function draw(){'), source.indexOf('const previousChangeLanguage'));
+  assert.match(render,/id="tarotDrawDay"/);
+  assert.doesNotMatch(render,/tarotDrawFive|tarotQuestion|tarotSignificator|tarotAdjectives/);
+  assert.match(draw,/randomCards\(1\)/);
+  assert.doesNotMatch(draw,/app:tarot-five-card|mode==='five'/);
+  assert.match(read('founder-pack/MVP_SPECIFICATION.md'),/only one Card of the Day/);
+});
+
+test('Parent Scent is adult-only and never reads child profiles', () => {
+  const source = read('family-scent.js');
+  assert.match(source,/const STORE='parentScentCodeV2'/);
+  assert.match(source,/const rolesFor=\{my:\['self'\],parents:\['self','partner'\]\}/);
+  assert.match(source,/id="scentAdultConfirm"/);
+  assert.match(source,/setFullYear\(d\.getFullYear\(\)-18\)/);
+  assert.match(source,/if\(p\.birthDate>adultDateMax\(\)\)return c\(\)\.adultDate/);
+  assert.doesNotMatch(source,/function savedChildren|data-saved-child|savedChildId|role==='child'|app:child-deleted/);
+  assert.match(source,/localStorage\.removeItem\(LEGACY_STORE\)/);
+  assert.match(read('privacy-controls.js'),/parentScentCodeV2/);
 });
 
 test('mobile Methods menu exposes every desktop-only section', () => {

@@ -41,6 +41,44 @@ test('authority is confirmed for every child and the child privacy notice is lin
   assert.match(modal, /authorityConfirmationVersion: wizard\.authorityEvidence\.version/);
 });
 
+test('JSON transfer restores portable data without importing consent or the general authority confirmation', () => {
+  const storage = new Map([
+    ['children', JSON.stringify([{id:1,name:'Old'}])],
+    ['notes', JSON.stringify([{id:2,childId:1,title:'Old note'}])],
+    ['child_astrology_analytics_consent_v2', 'granted'],
+    ['child_astrology_parent_confirmed_v1', JSON.stringify({confirmedAt:'old'})]
+  ]);
+  const localStorage = {
+    getItem:(key)=>storage.has(key)?storage.get(key):null,
+    setItem:(key,value)=>storage.set(key,String(value)),
+    removeItem:(key)=>storage.delete(key)
+  };
+  const window = {confirm:()=>true,alert(){}};
+  const context = {
+    window,localStorage,
+    document:{addEventListener(){},querySelector(){return null;},getElementById(){return null;}},
+    location:{origin:'https://childastrologyapp.com',reload(){}},
+    URL,Blob,Map,Event:function Event(type){this.type=type;},console,setTimeout
+  };
+  vm.runInNewContext(read('privacy-controls.js'), context);
+  const restored = window.PrivacyControls.restoreBackup({
+    app:'Child Astrology',
+    data:{
+      children:[{id:3,name:'New'}],
+      language:'nl',
+      child_astrology_analytics_consent_v2:'denied',
+      child_astrology_parent_confirmed_v1:{confirmedAt:'imported'}
+    }
+  }, false);
+  assert.equal(restored, true);
+  assert.deepEqual(JSON.parse(storage.get('children')), [{id:3,name:'New'}]);
+  assert.equal(storage.has('notes'), false);
+  assert.equal(storage.get('language'), 'nl');
+  assert.equal(storage.get('child_astrology_analytics_consent_v2'), 'granted');
+  assert.deepEqual(JSON.parse(storage.get('child_astrology_parent_confirmed_v1')), {confirmedAt:'old'});
+  assert.throws(()=>window.PrivacyControls.restoreBackup({app:'Other',data:{children:[]}},false),/invalid-backup/);
+});
+
 test('sensitive questions are blocked before storage and analytics', () => {
   const source = read('consultation-chat.js');
   const sensitive = source.indexOf('const sensitive = sensitiveKind(question)');
@@ -105,6 +143,12 @@ test('exports, retention, legal documents and safety records exist', () => {
   const privacy = read('privacy-controls.js');
   assert.match(privacy,/exportReadable/);
   assert.match(privacy,/child-astrology-readable/);
+  assert.match(privacy,/data-privacy="import"/);
+  assert.match(privacy,/restoreBackup/);
+  assert.doesNotMatch(privacy.slice(privacy.indexOf('const EXPORT_KEYS'),privacy.indexOf('const APP_KEYS')),/analytics_consent|PARENT_KEY/);
+  assert.match(read('privacy-import.css'),/display:\s*none/);
+  assert.match(read('index.html'),/rel="canonical" href="https:\/\/childastrologyapp\.com\/"/);
+  assert.equal(read('CNAME').trim(),'childastrologyapp.com');
   assert.match(read('family-scent.js'),/RETENTION_MS=90/);
   for (const file of ['legal.html','legal.js','compliance/DATA_MAP.md','compliance/ROPA.md','compliance/LIA.md','compliance/DPIA.md','compliance/VENDOR_REGISTER.md','compliance/RETENTION_AND_DELETION.md','compliance/DSR_PROCEDURE.md','compliance/INCIDENT_RESPONSE.md','compliance/BREACH_REGISTER_TEMPLATE.md','compliance/AI_POLICY.md','compliance/LAUNCH_CHECKLIST.md']) {
     assert.ok(fs.statSync(path.join(root,file)).size > 100,`${file} must be substantive`);

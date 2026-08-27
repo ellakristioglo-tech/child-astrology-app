@@ -1,6 +1,6 @@
 # Retention and deletion policy
 
-Version: 26 August 2026
+Version: 27 August 2026
 
 | Category | Retention rule | Deletion implementation |
 |---|---|---|
@@ -16,8 +16,9 @@ Version: 26 August 2026
 | Optional GA cookies | Up to 180 days | Withdrawal attempts removal for current domain |
 | Adult confirmation | Until all-data deletion | Delete all |
 | Child-specific authority record | While that child profile exists | Delete Child or Delete all |
+| User-created JSON backup | Until the user deletes the downloaded file | Controlled by the user; import replaces existing portable local data only after confirmation |
 
-There is no application backend or application backup. Browser/device backups are controlled by the user’s platform and are outside the app’s technical control; deleted app data must not be reintroduced by the operator because the operator never possesses it.
+There is no application backend or operator-held backup. The user may download and later import a local JSON backup. The import does not restore analytics consent or the separate general 18+ confirmation. Browser/device backups are controlled by the user’s platform and are outside the app’s technical control; deleted app data must not be reintroduced by the operator because the operator never possesses it.
 
 ## Cascade requirements
 

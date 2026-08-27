@@ -1,6 +1,6 @@
 # Launch checklist — current free local version
 
-Version: 26 August 2026
+Version: 27 August 2026
 
 Legend: **DONE** implemented/verified in code; **N/A** feature does not exist and is blocked from silent addition; **HUMAN** requires controller/lawyer/vendor action.
 
@@ -26,7 +26,7 @@ Legend: **DONE** implemented/verified in code; **N/A** feature does not exist an
 | 18 | Delete Account cascade | N/A + equivalent DONE | No account; Delete all clears all known app keys/cookies |
 | 19 | Delete AI history | DONE equivalent | “Delete question history” |
 | 20 | Delete Tarot history | DONE | Tarot history is never stored |
-| 21 | Export Data | DONE | JSON + readable HTML |
+| 21 | Export and restore data | DONE | JSON + readable HTML export; confirmed JSON import for custom-domain/device migration; analytics consent and separate general 18+ confirmation excluded from import |
 | 22 | Backup deletion lifecycle | N/A | No application backend/backups; local-only disclosure |
 | 23 | Cookie consent before optional trackers | DONE | GA script created only after consent; accept/reject/settings |
 | 24 | Subscription cancellation | N/A | No subscription or paywall |
@@ -41,6 +41,7 @@ Legend: **DONE** implemented/verified in code; **N/A** feature does not exist an
 
 - DONE: data map, RoPA, LIA draft, DPIA draft, retention/deletion, DSR, vendor register, incident plan, breach template, automated-content policy, Privacy/Cookies/Terms page.
 - DONE: 90-day history expiry, explicit Family Scent transmission checkbox, mobile Methods menu containing all desktop-only sections, CSP/referrer policy and local city dataset attribution.
+- DONE: official `childastrologyapp.com` domain declared in the app and legal page; custom-domain JSON migration is available.
 - HUMAN BLOCKER: controller and Dutch privacy counsel must sign the LIA/DPIA and confirm the four questions in `LEGAL_REVIEW_BRIEF.md`.
 - HUMAN BLOCKER: complete and retain the Google/GitHub role, DPA and transfer records listed in `VENDOR_REGISTER.md`.
 

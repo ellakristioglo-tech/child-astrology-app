@@ -1,6 +1,6 @@
 # Data map — current free local version
 
-Version: 26 August 2026
+Version: 27 August 2026
 
 Controller: Ella Kristioglo, Netherlands — ellakristioglo@gmail.com
 
@@ -21,6 +21,7 @@ This map covers only the current GitHub Pages application. It has no account, ba
 | Family Scent result and participant nicknames | Users/children entered | Restore result | Browser localStorage | None | Maximum 90 days or manual deletion |
 | Order name, contact and scent summary | Adult customer | Start a direct candle enquiry | Not stored by app | User-chosen WhatsApp/email and Ella | Determined outside the app after contact |
 | Language and analytics consent | User/device | Preferences and consent control | Browser localStorage | None | Until changed/all data deletion |
+| User-created JSON backup | Parent/user and child profiles included by the user | Device-to-device or old-domain migration | User-selected local file; imported into browser localStorage | None unless the user independently shares the file | Controlled and deleted by the user |
 | Allow-listed analytics event, language, broad category | User/device | Product usage measurement | Local aggregate; Google only after consent | Google Analytics | GA cookie maximum 180 days; property retention per configured GA controls |
 | IP/security request metadata | Visitor | Hosting/security | GitHub infrastructure | GitHub | Per GitHub policy |
 
@@ -39,3 +40,4 @@ This map covers only the current GitHub Pages application. It has no account, ba
 3. The chart, city/country and timezone are saved locally; coordinates are removed before persistence.
 4. All personalised features use the saved local chart.
 5. Optional analytics loads only after consent and receives allow-listed non-content events.
+6. A JSON backup can restore portable app data, including the child-specific timestamp already stored inside each profile. Analytics consent and the separate general 18+ confirmation are not imported and must be chosen again in the destination origin.

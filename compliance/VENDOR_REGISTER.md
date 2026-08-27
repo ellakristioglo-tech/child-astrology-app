@@ -1,10 +1,10 @@
 # Vendor and transfer register
 
-Version: 26 August 2026
+Version: 27 August 2026
 
 | Vendor/component | Function | Data | Runtime role/transfer | Contract/status |
 |---|---|---|---|---|
-| GitHub Pages / GitHub | Static hosting and service security | Visitor IP/request metadata; no app localStorage | GitHub infrastructure; locations per GitHub terms | Terms/privacy reviewed; document final role and DPA need before official launch |
+| GitHub Pages / GitHub | Static hosting for `childastrologyapp.com` and service security | Visitor IP/request metadata; no app localStorage | GitHub infrastructure; locations per GitHub terms | Custom domain configured; terms/privacy reviewed; document final role and DPA need before official launch |
 | Google Analytics 4 / Google Ireland Limited | Optional product analytics | Allow-listed event, language, broad category and Google technical data | Only after consent; transfers per applicable Google mechanism | GA configured; DPA/data-processing terms and transfer record require controller sign-off |
 | GeoNames dataset | Bundled city names, coordinates and timezone | No user query leaves device | Dataset only, no runtime processor | CC BY 4.0 attribution included; refresh/version periodically |
 | Astronomy Engine | Local ephemeris calculation | Birth inputs in device memory | Bundled local code; no network | MIT licence bundled |

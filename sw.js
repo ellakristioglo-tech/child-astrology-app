@@ -2,18 +2,28 @@ const BUILD_VERSION = '__APP_BUILD_VERSION__';
 const CACHE_PREFIX = 'child-astrology-';
 const CACHE_NAME = CACHE_PREFIX + BUILD_VERSION;
 const OFFLINE_SHELL = [
-    './', './index.html', './manifest.webmanifest',
-    './city-search.js', './assets/cities-15000.min.json',
-    './legal.html', './legal.css', './legal.js'
+    './', './index.html', './manifest.webmanifest', './app.css', './branding.css',
+    './child-modal.css', './mobile-nav.css', './icon-theme.css', './child-analysis.css',
+    './tarot-thoth.css', './consultation-chat.css', './family-scent.css', './analytics.css',
+    './privacy-controls.css', './privacy-import.css', './compliance.css',
+    './translations.js', './ui-translations-fix.js', './about-translations.js',
+    './sports-data.js', './learning-data.js', './tips-data.js',
+    './vendor/astronomy.browser.min.js', './app.js', './mobile-menu.js', './ui-bindings.js',
+    './city-search.js', './assets/cities-15000.min.json', './child-modal.js', './child-analysis.js',
+    './tarot-thoth.js', './consultation-chat.js', './family-scent.js', './icon-theme.js',
+    './analytics-config.js', './analytics.js', './privacy-controls.js', './pwa-update.js',
+    './assets/child-astrology-logo.jpeg', './assets/icon-192.png', './assets/icon-512.png',
+    './legal.html', './legal.css', './legal.js', './robots.txt', './sitemap.xml'
 ];
 
 self.addEventListener('install', function onInstall(event) {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(function cacheShell(cache) {
-                return cache.addAll(OFFLINE_SHELL);
+                return Promise.all(OFFLINE_SHELL.map(function cacheOne(url) {
+                    return cache.add(url).catch(function ignoreSinglePrecacheError() {});
+                }));
             })
-            .catch(function ignorePrecacheError() {})
             .then(function activateNow() {
                 return self.skipWaiting();
             })

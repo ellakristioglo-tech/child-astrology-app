@@ -37,6 +37,7 @@
   const TOTAL_STEPS = 5;
   const cityCache = new Map();
   let wizard = null;
+  let releaseModalFocus = () => {};
   let searchTimer = null;
 
   const copy = () => COPY[currentLanguage] || COPY.nl;
@@ -259,10 +260,13 @@
     document.body.appendChild(wizard.modal);
     document.body.classList.add('child-modal-open');
     renderWizard();
+    releaseModalFocus = window.AppModalFocus?.activate(wizard.modal, '.child-wizard-close') || releaseModalFocus;
   };
 
   window.closeAddChildModal = function closeAddChildModal() {
     window.clearTimeout(searchTimer);
+    releaseModalFocus();
+    releaseModalFocus = () => {};
     document.querySelector('.add-child-modal')?.remove();
     document.body.classList.remove('child-modal-open');
     wizard = null;

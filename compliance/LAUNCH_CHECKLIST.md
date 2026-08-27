@@ -36,12 +36,22 @@ Legend: **DONE** implemented/verified in code; **N/A** feature does not exist an
 | 28 | Security/audit logging | N/A for app backend | No backend; GitHub handles hosting security logs |
 | 29 | Rate limiting/account takeover protection | N/A | No auth/API/account |
 | 30 | Automated privacy/security tests | DONE | Node regression tests run before Pages deployment |
+| 31 | Product mission and parent-first positioning | DONE | `founder-pack/PRODUCT_VISION.md`; North Star is one useful action a parent can try today |
+| 32 | Eight-section Child Code | DONE | Personality, emotions, communication, learning, strengths, challenges, support and current age context |
+| 33 | Non-diagnostic language constitution | DONE | `founder-pack/CONTENT_ASTROLOGY_FRAMEWORK.md`; prohibited labels, certainty and future predictions are documented and regression-tested where technical |
+| 34 | Development/speech safety route | DONE | Speech delay, loss of skills and similar concerns are blocked before history/analytics; the local response gives a referral route plus dated Rijksoverheid/Thuisarts evidence links |
+| 35 | Founder Pack | DONE | Product Vision, Content & Astrology Framework, Child Safety & AI Rules and MVP Specification are versioned with the code |
+| 36 | Accessibility and keyboard operation | DONE | Native navigation/action buttons, visible focus, modal/menu focus traps, Escape close and reduced-motion support |
+| 37 | Public discovery and security contact | DONE | Description/OG metadata, `robots.txt`, `sitemap.xml` and `.well-known/security.txt` |
+| 38 | Strict script policy and offline reliability | DONE | Inline script execution removed; expanded resilient offline shell; the city dataset is generated during the build and all user searches stay local at runtime |
 
 ## Additional deliverables
 
 - DONE: data map, RoPA, LIA draft, DPIA draft, retention/deletion, DSR, vendor register, incident plan, breach template, automated-content policy, Privacy/Cookies/Terms page.
 - DONE: 90-day history expiry, explicit Family Scent transmission checkbox, mobile Methods menu containing all desktop-only sections, CSP/referrer policy and local city dataset attribution.
 - DONE: official `childastrologyapp.com` domain declared in the app and legal page; custom-domain JSON migration is available.
+- DONE: GA minimisation verified in the production property: Enhanced Measurement, Google Signals, user-provided data and granular location/device collection OFF; event/user retention 2 months; reset on new activity OFF.
+- DONE: Founder Pack fixes the product boundary: Child Code is the core journey; Family Scent and Tarot remain optional, separate modules and do not enter the core child profile.
 - HUMAN BLOCKER: controller and Dutch privacy counsel must sign the LIA/DPIA and confirm the four questions in `LEGAL_REVIEW_BRIEF.md`.
 - HUMAN BLOCKER: complete and retain the Google/GitHub role, DPA and transfer records listed in `VENDOR_REGISTER.md`.
 

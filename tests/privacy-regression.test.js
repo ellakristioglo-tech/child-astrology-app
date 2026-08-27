@@ -86,10 +86,62 @@ test('sensitive questions are blocked before storage and analytics', () => {
   const history = source.indexOf('history.push(', sensitive);
   assert.ok(sensitive > 0 && analytics > sensitive && history > analytics);
   assert.match(source, /ADHD|adhd/);
+  assert.match(source, /speech delay|spraakachterstand|задержк/);
+  assert.match(source, /return 'development'/);
+  assert.match(source, /rijksoverheid\.nl\/vraag-en-antwoord\/zwangerschap-en-geboorte/);
+  assert.match(source, /thuisarts\.nl\/slecht-horen\/ik-denk-dat-mijn-kind-slecht-hoort/);
+  assert.match(source, /Verified 27 August 2026/);
   assert.match(source, /sexual|сексуал/);
   assert.match(source, /RETENTION_MS = 90/);
   assert.match(source, /createdAt/);
   assert.doesNotMatch(source, /api\.openai\.com|anthropic\.com|generativelanguage\.googleapis\.com/);
+});
+
+test('navigation is keyboard native and script CSP has no unsafe inline exception', () => {
+  const html = read('index.html');
+  const scripts = ['index.html','app.js','child-analysis.js'].map(read).join('\n');
+  assert.doesNotMatch(scripts, /\bon[a-z]+\s*=/i);
+  assert.match(html, /script-src 'self' https:\/\/www\.googletagmanager\.com/);
+  assert.doesNotMatch(html, /script-src[^;]*'unsafe-inline'/);
+  assert.match(html, /<button[^>]+class="nav-link/);
+  assert.match(html, /<button[^>]+class="action-card/);
+  assert.match(html, /ui-bindings\.js/);
+  assert.match(read('ui-bindings.js'), /activateFocusTrap/);
+  assert.match(read('privacy-controls.js'), /AppModalFocus/);
+  assert.match(read('child-modal.js'), /AppModalFocus/);
+  assert.match(read('child-analysis.js'), /AppModalFocus/);
+});
+
+test('new domain has crawl, sharing and security discovery files', () => {
+  const html = read('index.html');
+  assert.match(html, /<html lang="nl">/);
+  assert.match(html, /meta name="description"/);
+  assert.match(html, /property="og:title"/);
+  assert.match(html, /property="og:image" content="https:\/\/childastrologyapp\.com\//);
+  assert.match(read('robots.txt'), /Sitemap: https:\/\/childastrologyapp\.com\/sitemap\.xml/);
+  assert.match(read('sitemap.xml'), /https:\/\/childastrologyapp\.com\//);
+  assert.match(read('.well-known/security.txt'), /Canonical: https:\/\/childastrologyapp\.com\/\.well-known\/security\.txt/);
+});
+
+test('founder pack fixes product scope and child safety boundaries', () => {
+  for (const file of [
+    'founder-pack/PRODUCT_VISION.md',
+    'founder-pack/CONTENT_ASTROLOGY_FRAMEWORK.md',
+    'founder-pack/CHILD_SAFETY_AI_RULES.md',
+    'founder-pack/MVP_SPECIFICATION.md'
+  ]) assert.ok(fs.statSync(path.join(root,file)).size > 1000,`${file} must be substantive`);
+  const specification = read('founder-pack/MVP_SPECIFICATION.md');
+  assert.match(specification,/No account, cloud database, payment, subscription or external AI/);
+  assert.match(read('child-analysis.js'), /ageContextSection/);
+});
+
+test('deployment builds a local city dataset and offline shell includes core code', () => {
+  const workflow = read('.github/workflows/pages.yml');
+  assert.match(workflow,/Build local city search data/);
+  assert.match(workflow,/scripts\/generate-cities\.mjs/);
+  const worker = read('sw.js');
+  assert.match(worker,/\.\/ui-bindings\.js/);
+  assert.match(worker,/\.\/assets\/cities-15000\.min\.json/);
 });
 
 test('analytics is consent-gated and strictly allow-listed', () => {

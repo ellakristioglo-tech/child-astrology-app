@@ -2,6 +2,7 @@
   'use strict';
 
   const groupedSections = new Set(['method', 'sports', 'learning', 'tips', 'consultation', 'settings']);
+  let releaseMenuFocus = () => {};
 
   function menu() { return document.getElementById('mobileMethodsMenu'); }
   function trigger() { return document.querySelector('.mobile-methods-trigger'); }
@@ -22,6 +23,8 @@
     backdrop()?.classList.remove('open');
     trigger()?.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('mobile-methods-open');
+    releaseMenuFocus();
+    releaseMenuFocus = () => {};
   }
 
   function toggleMobileMethods(event) {
@@ -37,7 +40,7 @@
     backdrop()?.classList.add('open');
     trigger()?.setAttribute('aria-expanded', 'true');
     document.body.classList.add('mobile-methods-open');
-    panel.querySelector('.mobile-method-option.active, .mobile-method-option')?.focus();
+    releaseMenuFocus = window.AppModalFocus?.activate(panel,'.mobile-method-option.active, .mobile-method-option') || releaseMenuFocus;
   }
 
   function openMobileMethodSection(sectionId, event) {

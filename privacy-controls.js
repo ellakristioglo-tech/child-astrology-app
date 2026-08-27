@@ -94,10 +94,12 @@
     document.querySelector('.parent-consent-modal')?.remove();const ui=t(),modal=document.createElement('div');modal.className='parent-consent-modal';
     const title=adultConfirmed?ui.childTitle:ui.parentTitle,text=adultConfirmed?ui.childText:ui.parentText,checkText=adultConfirmed?ui.childCheck:ui.parentCheck;
     modal.innerHTML=`<div class="parent-consent-overlay"><div class="parent-consent-dialog" role="dialog" aria-modal="true" aria-labelledby="parentConsentTitle"><button type="button" class="parent-consent-close" aria-label="${escapeHtml(ui.cancel)}">×</button><h2 id="parentConsentTitle">${escapeHtml(title)}</h2><p>${escapeHtml(text)}</p><p class="parent-consent-tip">${escapeHtml(ui.nickname)}</p><a class="parent-consent-policy-link" href="legal.html?lang=${language()}&doc=privacy" target="_blank" rel="noopener">${escapeHtml(ui.childPolicy)} →</a><label><input type="checkbox"> <span>${escapeHtml(checkText)}</span></label><div class="parent-consent-buttons"><button type="button" data-parent="cancel">${escapeHtml(ui.cancel)}</button><button type="button" data-parent="continue" disabled>${escapeHtml(ui.continue)}</button></div></div></div>`;
-    const close=()=>modal.remove(),check=modal.querySelector('input'),continueButton=modal.querySelector('[data-parent="continue"]');
+    let releaseFocus=()=>{};
+    const close=()=>{releaseFocus();modal.remove()},check=modal.querySelector('input'),continueButton=modal.querySelector('[data-parent="continue"]');
     check.addEventListener('change',()=>{continueButton.disabled=!check.checked});
     modal.querySelector('.parent-consent-close').addEventListener('click',close);modal.querySelector('[data-parent="cancel"]').addEventListener('click',close);
-    continueButton.addEventListener('click',()=>{const confirmedAt=new Date().toISOString(),version='2026-08-27';if(!adultConfirmed)localStorage.setItem(PARENT_KEY,JSON.stringify({confirmedAt,adult:true,authority:true,version}));close();next({confirmedAt,version})});document.body.appendChild(modal);
+    modal.addEventListener('keydown',(event)=>{if(event.key==='Escape')close()});
+    continueButton.addEventListener('click',()=>{const confirmedAt=new Date().toISOString(),version='2026-08-27';if(!adultConfirmed)localStorage.setItem(PARENT_KEY,JSON.stringify({confirmedAt,adult:true,authority:true,version}));close();next({confirmedAt,version})});document.body.appendChild(modal);releaseFocus=window.AppModalFocus?.activate(modal,'.parent-consent-close')||releaseFocus;
   }
   function wrapAddChild(){const original=window.addChild;if(typeof original!=='function'||original.__privacyWrapped)return;const wrapped=function(){parentGate((authorityEvidence)=>original(authorityEvidence))};wrapped.__privacyWrapped=true;window.addChild=wrapped}
   const previousChangeLanguage=window.changeLanguage;

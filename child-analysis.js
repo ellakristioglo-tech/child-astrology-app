@@ -12,7 +12,7 @@
   const I18N = {
     ru: {
       language:'Язык', fullAnalysis:'Полный разбор', recalculate:'Пересчитать карту', delete:'Удалить', noChildren:'Пока нет добавленных детей', unknownTime:'Время неизвестно', close:'Закрыть',
-      title:'Персональный разбор ребёнка', portrait:'Основной портрет', character:'Характер', emotions:'Эмоции и восстановление', communication:'Общение', speech:'Речь и Меркурий', learning:'Обучение', strengths:'Сильные стороны', challenges:'Что может даваться сложнее', health:'Самочувствие: что наблюдать', social:'Социализация', sport:'Спорт и движение', parents:'Что важно родителям', facts:'Расчёт карты', planets:'Планеты', aspects:'Основные аспекты', houses:'Дома',
+      title:'Персональный разбор ребёнка', portrait:'Основной портрет', character:'Характер', emotions:'Эмоции и восстановление', communication:'Общение', speech:'Речь и Меркурий', learning:'Обучение', strengths:'Сильные стороны', challenges:'Что может даваться сложнее', health:'Самочувствие: что наблюдать', social:'Социализация', sport:'Спорт и движение', parents:'Как поддерживать', ageContext:'Что важно сейчас', facts:'Расчёт карты', planets:'Планеты', aspects:'Основные аспекты', houses:'Дома',
       mercuryRetroIntro:'На момент рождения Меркурий двигался ретроградно. В астрологической традиции это связывают с более индивидуальным способом обдумывать и выражать мысли: ребёнок может дольше подбирать слова и отвечать после паузы — или, наоборот, говорить быстро, много и перескакивать между темами. Научных доказательств, что ретроградный Меркурий вызывает задержку речи или болтливость, нет. Это только гипотеза для наблюдения.',
       mercuryRetroSlow:'В этой карте больше оснований наблюдать внутреннюю подготовку речи: ребёнку может требоваться дополнительное время, чтобы понять вопрос, подобрать слово и сформулировать ответ.',
       mercuryRetroFast:'В этой карте больше оснований наблюдать быстрый речевой поток: мысль может опережать формулировку, поэтому ребёнок иногда перебивает, повторяется или резко меняет тему.',
@@ -40,7 +40,7 @@
     },
     ua: {
       language:'Мова', fullAnalysis:'Повний розбір', recalculate:'Перерахувати карту', delete:'Видалити', noChildren:'Поки немає доданих дітей', unknownTime:'Час невідомий', close:'Закрити',
-      title:'Персональний розбір дитини', portrait:'Основний портрет', character:'Характер', emotions:'Емоції та відновлення', communication:'Спілкування', speech:'Мовлення і Меркурій', learning:'Навчання', strengths:'Сильні сторони', challenges:'Що може даватися складніше', health:'Самопочуття: за чим спостерігати', social:'Соціалізація', sport:'Спорт і рух', parents:'Що важливо батькам', facts:'Розрахунок карти', planets:'Планети', aspects:'Основні аспекти', houses:'Будинки',
+      title:'Персональний розбір дитини', portrait:'Основний портрет', character:'Характер', emotions:'Емоції та відновлення', communication:'Спілкування', speech:'Мовлення і Меркурій', learning:'Навчання', strengths:'Сильні сторони', challenges:'Що може даватися складніше', health:'Самопочуття: за чим спостерігати', social:'Соціалізація', sport:'Спорт і рух', parents:'Як підтримувати', ageContext:'Що важливо зараз', facts:'Розрахунок карти', planets:'Планети', aspects:'Основні аспекти', houses:'Будинки',
       mercuryRetroIntro:'На момент народження Меркурій рухався ретроградно. В астрологічній традиції це пов’язують з індивідуальним способом обдумувати й висловлювати думки: дитина може довше добирати слова та відповідати після паузи — або, навпаки, говорити швидко, багато й перескакувати між темами. Наукових доказів, що ретроградний Меркурій спричиняє затримку мовлення чи балакучість, немає. Це лише гіпотеза для спостереження.',
       mercuryRetroSlow:'У цій карті більше підстав спостерігати внутрішню підготовку мовлення: дитині може бути потрібно більше часу, щоб зрозуміти запитання, дібрати слово й сформулювати відповідь.',
       mercuryRetroFast:'У цій карті більше підстав спостерігати швидкий мовленнєвий потік: думка може випереджати формулювання, тому дитина іноді перебиває, повторюється або різко змінює тему.',
@@ -62,7 +62,7 @@
     },
     en: {
       language:'Language', fullAnalysis:'Full child analysis', recalculate:'Recalculate chart', delete:'Delete', noChildren:'No children added yet', unknownTime:'Time unknown', close:'Close',
-      title:'Personal child analysis', portrait:'Core portrait', character:'Character', emotions:'Emotions and recovery', communication:'Communication', speech:'Speech and Mercury', learning:'Learning', strengths:'Strengths', challenges:'What may take more effort', health:'Wellbeing: what to observe', social:'Social life', sport:'Sport and movement', parents:'What parents should know', facts:'Chart calculation', planets:'Planets', aspects:'Major aspects', houses:'Houses',
+      title:'Personal child analysis', portrait:'Core portrait', character:'Character', emotions:'Emotions and recovery', communication:'Communication', speech:'Speech and Mercury', learning:'Learning', strengths:'Strengths', challenges:'What may take more effort', health:'Wellbeing: what to observe', social:'Social life', sport:'Sport and movement', parents:'How to support', ageContext:'What matters now', facts:'Chart calculation', planets:'Planets', aspects:'Major aspects', houses:'Houses',
       mercuryRetroIntro:'Mercury was retrograde at birth. Astrological tradition links this with an individual way of processing and expressing thoughts: a child may take longer to find words and answer after a pause, or may speak quickly, at length and move rapidly between topics. There is no scientific evidence that retrograde Mercury causes delayed speech or talkativeness. Treat this only as an observation prompt.',
       mercuryRetroSlow:'This chart gives more reason to observe internal preparation before speaking: the child may need extra time to understand a question, retrieve a word and shape an answer.',
       mercuryRetroFast:'This chart gives more reason to observe a fast flow of speech: thought may run ahead of wording, so the child may interrupt, repeat or switch topics abruptly.',
@@ -83,7 +83,7 @@
     },
     nl: {
       language:'Taal', fullAnalysis:'Volledige kindanalyse', recalculate:'Horoscoop opnieuw berekenen', delete:'Verwijderen', noChildren:'Nog geen kinderen toegevoegd', unknownTime:'Tijd onbekend', close:'Sluiten',
-      title:'Persoonlijke analyse van het kind', portrait:'Kernportret', character:'Karakter', emotions:'Emoties en herstel', communication:'Communicatie', speech:'Spraak en Mercurius', learning:'Leren', strengths:'Sterke kanten', challenges:'Wat meer moeite kan kosten', health:'Welzijn: waarop letten', social:'Socialisatie', sport:'Sport en beweging', parents:'Wat ouders moeten weten', facts:'Berekening van de kaart', planets:'Planeten', aspects:'Belangrijkste aspecten', houses:'Huizen',
+      title:'Persoonlijke analyse van het kind', portrait:'Kernportret', character:'Karakter', emotions:'Emoties en herstel', communication:'Communicatie', speech:'Spraak en Mercurius', learning:'Leren', strengths:'Sterke kanten', challenges:'Wat meer moeite kan kosten', health:'Welzijn: waarop letten', social:'Socialisatie', sport:'Sport en beweging', parents:'Hoe te ondersteunen', ageContext:'Wat nu belangrijk is', facts:'Berekening van de kaart', planets:'Planeten', aspects:'Belangrijkste aspecten', houses:'Huizen',
       mercuryRetroIntro:'Mercurius liep retrograde bij de geboorte. Binnen de astrologische traditie wordt dit verbonden met een eigen manier van denken en formuleren: een kind kan langer naar woorden zoeken en pas na een pauze antwoorden, of juist snel en veel praten en vlug van onderwerp wisselen. Er is geen wetenschappelijk bewijs dat een retrograde Mercurius een spraakachterstand of praatzucht veroorzaakt. Gebruik dit uitsluitend als observatiehypothese.',
       mercuryRetroSlow:'Deze horoscoop geeft meer aanleiding om op innerlijke voorbereiding van spraak te letten: het kind kan extra tijd nodig hebben om een vraag te begrijpen, een woord te vinden en een antwoord te formuleren.',
       mercuryRetroFast:'Deze horoscoop geeft meer aanleiding om op een snelle spraakstroom te letten: de gedachte kan voor de formulering uitlopen, waardoor het kind soms onderbreekt, herhaalt of plots van onderwerp verandert.',
@@ -207,7 +207,41 @@
   };
 
   const BODY_NAMES = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
-  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',speech:'consultations',learning:'method',activity:'method',strengths:'home',challenges:'settings',health:'consultations',social:'children',sport:'method',sensory:'consultations',parents:'consultations',facts:'settings'};
+  const ICONS = {portrait:'home',character:'children',emotions:'consultations',communication:'consultations',speech:'consultations',learning:'method',activity:'method',strengths:'home',challenges:'settings',health:'consultations',social:'children',sport:'method',sensory:'consultations',parents:'consultations',ageContext:'home',facts:'settings'};
+  const AGE_GUIDANCE = {
+    ru:[
+      [0,2,'Сейчас особенно важны совместная регуляция, повторяющийся ритм, телесная безопасность и спокойный взрослый рядом. Наблюдайте сигналы ребёнка и не превращайте карту в норму развития.'],
+      [3,5,'Сейчас помогают игра, короткие понятные правила, ограниченный выбор и предсказуемые переходы между занятиями.'],
+      [6,9,'Сейчас особенно полезны конкретная обратная связь, обучение маленькими шагами и чувство принадлежности дома и в школе.'],
+      [10,12,'Сейчас растёт потребность в самостоятельности. Объясняйте смысл границ, уважайте личное пространство и договаривайтесь о шагах вместе.'],
+      [13,15,'Сейчас важны уважительный диалог, право на собственное мнение, ясные границы и отсутствие фиксированных ярлыков личности.'],
+      [16,99,'Сейчас особенно важно говорить с подростком напрямую, уважать приватность и учитывать его самостоятельный голос в вопросах, которые касаются его данных и жизни.']
+    ],
+    ua:[
+      [0,2,'Зараз особливо важливі спільна регуляція, повторюваний ритм, тілесна безпека та спокійний дорослий поруч. Спостерігайте сигнали дитини й не перетворюйте карту на норму розвитку.'],
+      [3,5,'Зараз допомагають гра, короткі зрозумілі правила, обмежений вибір і передбачувані переходи між заняттями.'],
+      [6,9,'Зараз особливо корисні конкретний зворотний зв’язок, навчання малими кроками та відчуття належності вдома й у школі.'],
+      [10,12,'Зараз зростає потреба в самостійності. Пояснюйте сенс меж, поважайте особистий простір і домовляйтеся про кроки разом.'],
+      [13,15,'Зараз важливі шанобливий діалог, право на власну думку, чіткі межі й відсутність фіксованих ярликів.'],
+      [16,99,'Зараз особливо важливо говорити з підлітком напряму, поважати приватність і враховувати його самостійний голос у питаннях про його дані та життя.']
+    ],
+    en:[
+      [0,2,'Co-regulation, a repeating rhythm, physical safety and a calm adult nearby matter most now. Observe the child’s signals and never treat the chart as a developmental standard.'],
+      [3,5,'Play, short clear rules, limited choices and predictable transitions are especially helpful now.'],
+      [6,9,'Specific feedback, learning in small steps and a sense of belonging at home and school matter especially now.'],
+      [10,12,'The need for autonomy is growing. Explain the purpose of boundaries, respect private space and agree on steps together.'],
+      [13,15,'Respectful dialogue, room for an independent view, clear boundaries and freedom from fixed personality labels matter now.'],
+      [16,99,'Speak to the young person directly, respect privacy and include their independent voice in matters involving their data and life.']
+    ],
+    nl:[
+      [0,2,'Samen reguleren, een herhaalbaar ritme, lichamelijke veiligheid en een rustige volwassene in de buurt zijn nu het belangrijkst. Observeer signalen en gebruik de horoscoop nooit als ontwikkelingsnorm.'],
+      [3,5,'Spel, korte duidelijke regels, beperkte keuzes en voorspelbare overgangen helpen nu bijzonder goed.'],
+      [6,9,'Concrete feedback, leren in kleine stappen en zich thuis en op school verbonden voelen zijn nu belangrijk.'],
+      [10,12,'De behoefte aan zelfstandigheid groeit. Leg het doel van grenzen uit, respecteer privacy en spreek stappen samen af.'],
+      [13,15,'Respectvolle dialoog, ruimte voor een eigen mening, duidelijke grenzen en geen vaste persoonlijkheidslabels zijn nu belangrijk.'],
+      [16,99,'Spreek de jongere rechtstreeks aan, respecteer privacy en betrek zijn of haar zelfstandige stem bij zaken over eigen gegevens en leven.']
+    ]
+  };
 
   function lang() { return I18N[currentLanguage] ? currentLanguage : 'nl'; }
   function t() { return I18N[lang()]; }
@@ -467,6 +501,13 @@
     return age;
   }
 
+  function ageContextSection(child) {
+    const age = childAge(child);
+    if (age === null) return '';
+    const row = AGE_GUIDANCE[lang()].find(([minimum,maximum]) => age >= minimum && age <= maximum);
+    return row ? section('ageContext', paragraphs([row[2]])) : '';
+  }
+
   function activitySection(chart, child) {
     const guide = ACTIVITY_GUIDE[lang()];
     const strong = new Set(['conjunction','square','opposition']);
@@ -514,11 +555,12 @@
     content.push(activitySection(chart,child));
     content.push(section('strengths', list(strengths)));
     content.push(section('challenges', paragraphs([t().challengeHard, challengeAspect ? aspectText(challengeAspect) : '',t().challengeBalance])));
+    content.push(section('parents', list(t().parentActions)));
+    content.push(ageContextSection(child));
     content.push(section('health', list(t().healthItems)));
     content.push(section('social', paragraphs([venusElement.social,houseText('Venus',chart),aspectText(venusAspect)])));
     content.push(section('sport', paragraphs([sportIntro,houseText('Mars',chart),aspectText(marsAspect)])));
     content.push(sensorySection(chart));
-    content.push(section('parents', list(t().parentActions)));
     const planetRows = BODY_NAMES.map((body) => `<tr><td>${esc(t().planetNames[body])}${chart.positions[body].retrograde?' ℞':''}</td><td>${esc(degreeText(chart.positions[body]))}</td><td>${chart.positions[body].house||'—'}</td></tr>`).join('');
     const aspectRows = chart.aspects.slice(0,12).map((a) => `<li>${esc(t().planetNames[a.a])} — ${esc(t().planetNames[a.b])}: ${esc(t().aspectNames[a.type])}, ${a.orb.toFixed(2)}°</li>`).join('');
     const cuspRows = chart.knownTime && chart.houseCusps ? chart.houseCusps.map((cusp,index) => `<tr><td>${index+1}</td><td>${esc(cuspDegreeText(cusp))}</td></tr>`).join('') : '';
@@ -526,6 +568,7 @@
     return `<header class="analysis-hero"><div><span class="analysis-kicker">CHILD ASTROLOGY · Ella Kristioglo</span><h2>${esc(child.name)}</h2><p>${esc(t().title)}</p></div><button class="analysis-close" type="button" aria-label="${esc(t().close)}">×</button></header>${!chart.knownTime?`<div class="analysis-notice">${esc(t().reliableOnly)}</div>`:''}<div class="analysis-grid">${content.join('')}</div>${facts}<p class="analysis-disclaimer">${esc(t().disclaimer)}</p>`;
   }
 
+  let releaseAnalysisFocus = () => {};
   function openAnalysis(id, force, shouldTrack = true) {
     const child = children.find((item) => Number(item.id) === Number(id));
     if (!child) return;
@@ -541,9 +584,10 @@
     modal.querySelector('.child-analysis-overlay').addEventListener('click', (event) => { if (event.target.classList.contains('child-analysis-overlay')) closeAnalysis(); });
     modal.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeAnalysis(); });
     document.body.appendChild(modal); document.body.classList.add('analysis-open');
+    releaseAnalysisFocus = window.AppModalFocus?.activate(modal,'.analysis-close') || releaseAnalysisFocus;
     if (shouldTrack) document.dispatchEvent(new CustomEvent('app:child-analysis'));
   }
-  function closeAnalysis() { document.querySelector('.child-analysis-modal')?.remove(); document.body.classList.remove('analysis-open'); }
+  function closeAnalysis() { releaseAnalysisFocus(); releaseAnalysisFocus=()=>{}; document.querySelector('.child-analysis-modal')?.remove(); document.body.classList.remove('analysis-open'); }
 
   function renderChildren() {
     const grid = document.getElementById('childrenGrid');
@@ -553,7 +597,7 @@
       let chart = child.natalChart;
       try { chart = calculateChart(child, false); } catch (_) { chart = null; }
       const badges = chart ? ['Sun','Moon','Mercury','Mars'].map((body) => `<span class="zodiac-badge">${esc(t().planetNames[body])}${chart.positions[body].retrograde?' ℞':''}: ${esc(body==='Moon'&&chart.moonAmbiguous?chart.moonSigns.map(signName).join(' / '):signName(chart.positions[body].sign))}</span>`).join('') : '';
-      return `<article class="child-card"><div class="child-name">${esc(child.name)}</div>${child.birthDate?`<div class="child-info">${esc(child.birthDate)}</div>`:''}<div class="child-info">${child.birthTimeUnknown?esc(t().unknownTime):esc(child.birthTime||'')}</div>${child.birthPlace?`<div class="child-info">${esc(child.birthPlace)}</div>`:''}<div class="zodiac-badges">${badges}</div><div class="child-card-actions"><button class="btn btn-primary" type="button" onclick="showChildAnalysis(${Number(child.id)})">${esc(t().fullAnalysis)}</button><button class="btn btn-secondary" type="button" onclick="deleteChild(${Number(child.id)})">${esc(t().delete)}</button></div></article>`;
+      return `<article class="child-card"><div class="child-name">${esc(child.name)}</div>${child.birthDate?`<div class="child-info">${esc(child.birthDate)}</div>`:''}<div class="child-info">${child.birthTimeUnknown?esc(t().unknownTime):esc(child.birthTime||'')}</div>${child.birthPlace?`<div class="child-info">${esc(child.birthPlace)}</div>`:''}<div class="zodiac-badges">${badges}</div><div class="child-card-actions"><button class="btn btn-primary" type="button" data-action="show-child-analysis" data-child-id="${Number(child.id)}">${esc(t().fullAnalysis)}</button><button class="btn btn-secondary" type="button" data-action="delete-child" data-child-id="${Number(child.id)}">${esc(t().delete)}</button></div></article>`;
     }).join('');
   }
 

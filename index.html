@@ -1,27 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Child Astrology - EK | Ella Kristioglo</title>
+    <meta name="description" content="Child Astrology helpt ouders de talenten, emoties, communicatie en leerstijl van hun kind symbolisch te verkennen — zonder diagnoses of voorspellingen.">
     <meta name="theme-color" content="#1a1a3e">
     <meta name="referrer" content="no-referrer">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests">
     <meta name="apple-mobile-web-app-title" content="Child Astrology">
     <meta name="application-name" content="Child Astrology">
     <link rel="canonical" href="https://childastrologyapp.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Child Astrology">
+    <meta property="og:title" content="Child Astrology — Ella Kristioglo">
+    <meta property="og:description" content="Een zorgvuldige astrologische gids voor ouders: karakter, emoties, communicatie, leren en praktische ondersteuning.">
     <meta property="og:url" content="https://childastrologyapp.com/">
+    <meta property="og:image" content="https://childastrologyapp.com/assets/icon-512.png">
+    <meta property="og:image:alt" content="Child Astrology — Ella Kristioglo">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="manifest" href="manifest.webmanifest?v=20260825m">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=20260825m">
     <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png?v=20260825m">
-    <link rel="stylesheet" href="app.css?v=20260825n">
+    <link rel="stylesheet" href="app.css?v=20260827c">
     <link rel="stylesheet" href="branding.css?v=20260825e">
-    <link rel="stylesheet" href="child-modal.css?v=20260825g">
-    <link rel="stylesheet" href="mobile-nav.css?v=20260826h">
+    <link rel="stylesheet" href="child-modal.css?v=20260827c">
+    <link rel="stylesheet" href="mobile-nav.css?v=20260827c">
     <link rel="stylesheet" href="icon-theme.css?v=20260825n">
-    <link rel="stylesheet" href="child-analysis.css?v=20260826d">
+    <link rel="stylesheet" href="child-analysis.css?v=20260827c">
     <link rel="stylesheet" href="tarot-thoth.css?v=20260826b">
-    <link rel="stylesheet" href="consultation-chat.css?v=20260826h">
+    <link rel="stylesheet" href="consultation-chat.css?v=20260827d">
     <link rel="stylesheet" href="family-scent.css?v=20260826h">
     <link rel="stylesheet" href="analytics.css?v=20260826b">
     <link rel="stylesheet" href="privacy-controls.css?v=20260827b">
@@ -37,38 +45,38 @@
                 <div class="logo-subtitle">EK • Ella Kristioglo</div>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link active" data-section="home" onclick="showSection('home', event)"><span class="nav-icon"><img src="assets/nav-icons/home.png?v=20260825n" alt=""></span><span data-lang="nav_home">Home</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="children" onclick="showSection('children', event)"><span class="nav-icon"><img src="assets/nav-icons/children.png?v=20260825n" alt=""></span><span data-lang="nav_children">Mijn kinderen</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="family-scent" onclick="showSection('family-scent', event)"><span class="nav-icon"><img src="assets/nav-icons/scent.svg?v=20260826a" alt=""></span><span data-lang="nav_scent">Family Scent</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="tarot" onclick="showSection('tarot', event)"><span class="nav-icon"><img src="assets/nav-icons/tarot.png?v=20260825n" alt=""></span><span data-lang="nav_tarot">Tarot</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="method" onclick="showSection('method', event)"><span class="nav-icon"><img src="assets/nav-icons/method.png?v=20260825n" alt=""></span><span data-lang="nav_method">Methode</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="sports" onclick="showSection('sports', event)"><span class="nav-icon"><img src="assets/nav-icons/method.png?v=20260825n" alt=""></span><span data-lang="nav_sports">Спорт</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="learning" onclick="showSection('learning', event)"><span class="nav-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></span><span data-lang="nav_learning">Школа</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="tips" onclick="showSection('tips', event)"><span class="nav-icon"><img src="assets/nav-icons/home.png?v=20260825n" alt=""></span><span data-lang="nav_tips">10 советов</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="consultation" onclick="showSection('consultation', event)"><span class="nav-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></span><span data-lang="nav_consultation">Consultaties</span></a></li>
-                <li class="nav-item"><a class="nav-link" data-section="settings" onclick="showSection('settings', event)"><span class="nav-icon"><img src="assets/nav-icons/settings.png?v=20260825n" alt=""></span><span data-lang="nav_settings">Instellingen</span></a></li>
+                <li class="nav-item"><button type="button" class="nav-link active" data-section="home" aria-current="page"><span class="nav-icon"><img src="assets/nav-icons/home.png?v=20260825n" alt=""></span><span data-lang="nav_home">Home</span></button></li>
+                <li class="nav-item"><button type="button" class="nav-link" data-section="children"><span class="nav-icon"><img src="assets/nav-icons/children.png?v=20260825n" alt=""></span><span data-lang="nav_children">Mijn kinderen</span></button></li>
+                <li class="nav-item"><button type="button" class="nav-link" data-section="family-scent"><span class="nav-icon"><img src="assets/nav-icons/scent.svg?v=20260826a" alt=""></span><span data-lang="nav_scent">Family Scent</span></button></li>
+                <li class="nav-item"><button type="button" class="nav-link" data-section="tarot"><span class="nav-icon"><img src="assets/nav-icons/tarot.png?v=20260825n" alt=""></span><span data-lang="nav_tarot">Tarot</span></button></li>
+                <li class="nav-item"><button type="button" class="nav-link" data-section="method"><span class="nav-icon"><img src="assets/nav-icons/method.png?v=20260825n" alt=""></span><span data-lang="nav_method">Methode</span></button></li>
+                <li class="nav-item"><button type="button" class="nav-link" data-section="sports"><span class="nav-icon"><img src="assets/nav-icons/method.png?v=20260825n" alt=""></span><span data-lang="nav_sports">Sport</span></button></li>
+                <li class="nav-item"><button type="button" class="nav-link" data-section="learning"><span class="nav-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></span><span data-lang="nav_learning">School</span></button></li>
+                <li class="nav-item"><button type="button" class="nav-link" data-section="tips"><span class="nav-icon"><img src="assets/nav-icons/home.png?v=20260825n" alt=""></span><span data-lang="nav_tips">10 tips</span></button></li>
+                <li class="nav-item"><button type="button" class="nav-link" data-section="consultation"><span class="nav-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></span><span data-lang="nav_consultation">Consultaties</span></button></li>
+                <li class="nav-item"><button type="button" class="nav-link" data-section="settings"><span class="nav-icon"><img src="assets/nav-icons/settings.png?v=20260825n" alt=""></span><span data-lang="nav_settings">Instellingen</span></button></li>
             </ul>
         </nav>
         <main class="main-content">
             <div class="main-toolbar" aria-label="Language selection">
                 <span class="toolbar-language-label" data-analysis-label="language">Language</span>
                 <div class="main-language-buttons">
-                    <button class="lang-btn" data-language="ru" onclick="changeLanguage('ru',event)">RU</button>
-                    <button class="lang-btn" data-language="ua" onclick="changeLanguage('ua',event)">UA</button>
-                    <button class="lang-btn" data-language="en" onclick="changeLanguage('en',event)">EN</button>
-                    <button class="lang-btn" data-language="nl" onclick="changeLanguage('nl',event)">NL</button>
+                    <button type="button" class="lang-btn" data-language="ru">RU</button>
+                    <button type="button" class="lang-btn" data-language="ua">UA</button>
+                    <button type="button" class="lang-btn" data-language="en">EN</button>
+                    <button type="button" class="lang-btn" data-language="nl">NL</button>
                 </div>
             </div>
             <section id="home" class="section active">
                 <div class="quick-actions">
-                    <div class="action-card" onclick="showSection('children', event)"><div class="action-icon"><img src="assets/nav-icons/children.png?v=20260825n" alt=""></div><div class="action-title" data-lang="action_add_child">Добавить ребёнка</div><div class="action-desc" data-lang="action_add_child_desc">Создайте профиль и начните наблюдения</div></div>
-                    <div class="action-card" onclick="showSection('family-scent', event)"><div class="action-icon"><img src="assets/nav-icons/scent.svg?v=20260826a" alt=""></div><div class="action-title" data-lang="action_scent">Family Scent Code</div><div class="action-desc" data-lang="action_scent_desc">Один аромат, созданный по картам вашей семьи</div></div>
-                    <div class="action-card" onclick="showSection('tarot', event)"><div class="action-icon"><img src="assets/nav-icons/tarot.png?v=20260825n" alt=""></div><div class="action-title" data-lang="action_tarot">Tarot voor reflectie</div><div class="action-desc" data-lang="action_tarot_desc">Получите карту для размышлений</div></div>
-                    <div class="action-card" onclick="showSection('consultation', event)"><div class="action-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></div><div class="action-title" data-lang="action_consultation">Консультация</div><div class="action-desc" data-lang="action_consultation_desc">Свяжитесь с Эллой через WhatsApp</div></div>
+                    <button type="button" class="action-card" data-section="children"><span class="action-icon"><img src="assets/nav-icons/children.png?v=20260825n" alt=""></span><span class="action-title" data-lang="action_add_child">Kind toevoegen</span><span class="action-desc" data-lang="action_add_child_desc">Maak een profiel en begin met observeren</span></button>
+                    <button type="button" class="action-card" data-section="family-scent"><span class="action-icon"><img src="assets/nav-icons/scent.svg?v=20260826a" alt=""></span><span class="action-title" data-lang="action_scent">Family Scent Code</span><span class="action-desc" data-lang="action_scent_desc">Eén geur, samengesteld uit de kaarten van uw gezin</span></button>
+                    <button type="button" class="action-card" data-section="tarot"><span class="action-icon"><img src="assets/nav-icons/tarot.png?v=20260825n" alt=""></span><span class="action-title" data-lang="action_tarot">Tarot voor reflectie</span><span class="action-desc" data-lang="action_tarot_desc">Ontvang een kaart om over na te denken</span></button>
+                    <button type="button" class="action-card" data-section="consultation"><span class="action-icon"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""></span><span class="action-title" data-lang="action_consultation">Consultatie</span><span class="action-desc" data-lang="action_consultation_desc">Neem contact op met Ella via WhatsApp</span></button>
                 </div>
             </section>
-            <section id="children" class="section"><div class="card"><h2 class="card-title">👶 <span data-lang="children_title">Mijn kinderen</span></h2><div class="child-grid" id="childrenGrid"></div><button class="btn btn-primary" onclick="addChild()" style="margin-top:25px"><span>➕</span><span data-lang="btn_add_child">Kind toevoegen</span></button></div></section>
-            <section id="notes" class="section"><div class="card"><h2 class="card-title"><span data-lang="notes_title">Notes and observations</span></h2><div class="note-form"><h3 style="color:var(--cosmic-purple);margin-bottom:20px" data-lang="new_note_title">New note</h3><div class="form-group"><label data-lang="note_child">Child</label><select id="noteChildSelect"><option value="">Select child</option></select></div><div class="form-group"><label data-lang="note_title">Title</label><input type="text" id="noteTitle" data-lang="note_title_placeholder" placeholder="For example: Mood observation"></div><div class="form-group"><label data-lang="note_content">Content</label><textarea id="noteContent" data-lang="note_content_placeholder" placeholder="Describe your observations..."></textarea></div><div class="form-group"><label data-lang="note_tags">Tags (comma separated)</label><input type="text" id="noteTags" data-lang="note_tags_placeholder" placeholder="#behaviour #emotions #progress"></div><button class="btn btn-primary" onclick="saveNote()"><span>💾</span><span data-lang="btn_save_note">Save note</span></button></div><div id="notesList"></div></div></section>
+            <section id="children" class="section"><div class="card"><h2 class="card-title">👶 <span data-lang="children_title">Mijn kinderen</span></h2><div class="child-grid" id="childrenGrid"></div><button type="button" class="btn btn-primary add-child-button" data-action="add-child"><span aria-hidden="true">➕</span><span data-lang="btn_add_child">Kind toevoegen</span></button></div></section>
+            <section id="notes" class="section"><div class="card"><h2 class="card-title"><span data-lang="notes_title">Notities en observaties</span></h2><div class="note-form"><h3 style="color:var(--cosmic-purple);margin-bottom:20px" data-lang="new_note_title">Nieuwe notitie</h3><div class="form-group"><label for="noteChildSelect" data-lang="note_child">Kind</label><select id="noteChildSelect"><option value="">Kies een kind</option></select></div><div class="form-group"><label for="noteTitle" data-lang="note_title">Titel</label><input type="text" id="noteTitle" data-lang="note_title_placeholder" placeholder="Bijvoorbeeld: observatie van stemming"></div><div class="form-group"><label for="noteContent" data-lang="note_content">Inhoud</label><textarea id="noteContent" data-lang="note_content_placeholder" placeholder="Beschrijf uw observaties..."></textarea></div><div class="form-group"><label for="noteTags" data-lang="note_tags">Tags (gescheiden door komma)</label><input type="text" id="noteTags" data-lang="note_tags_placeholder" placeholder="#gedrag #emoties #ontwikkeling"></div><button type="button" class="btn btn-primary" data-action="save-note"><span aria-hidden="true">💾</span><span data-lang="btn_save_note">Notitie opslaan</span></button></div><div id="notesList"></div></div></section>
             <section id="family-scent" class="section"><div id="familyScentApp" aria-live="polite"></div></section>
             <section id="tarot" class="section"><div class="card tarot-section-card"><div id="thothTarotApp" class="thoth-tarot" aria-live="polite"></div></div></section>
             <section id="method" class="section"><div class="card"><h2 class="card-title">✨ <span data-lang="method_title">De 6-stappen Methode</span></h2><div class="method-step"><div class="step-number">1</div><div class="step-title" data-lang="method_step1_title">Observeer</div><div data-lang="method_step1_desc">Let op gedrag, emoties en reacties van uw kind zonder oordeel.</div></div><div class="method-step"><div class="step-number">2</div><div class="step-title" data-lang="method_step2_title">Verbind</div><div data-lang="method_step2_desc">Maak contact met uw eigen gevoel en dat van uw kind.</div></div><div class="method-step"><div class="step-number">3</div><div class="step-title" data-lang="method_step3_title">Reflecteer</div><div data-lang="method_step3_desc">Gebruik de tarotkaarten of astrologische inzichten.</div></div><div class="method-step"><div class="step-number">4</div><div class="step-title" data-lang="method_step4_title">Begrijp</div><div data-lang="method_step4_desc">Ontdek patronen en onderliggende behoeften.</div></div><div class="method-step"><div class="step-number">5</div><div class="step-title" data-lang="method_step5_title">Ondersteun</div><div data-lang="method_step5_desc">Kies bewuste manieren om uw kind te ondersteunen.</div></div><div class="method-step"><div class="step-number">6</div><div class="step-title" data-lang="method_step6_title">Evalueer</div><div data-lang="method_step6_desc">Kijk terug op wat heeft gewerkt en vier de vooruitgang!</div></div></div></section>
@@ -76,30 +84,30 @@
             <section id="learning" class="section"><div class="card"><h2 class="card-title">📚 <span data-lang="learning_title">Как обучать вашего ребёнка</span></h2><div class="info-block"><div class="info-title" data-lang="learning_intro">Меркурий в натальной карте показывает, как ребёнок учится и воспринимает информацию.</div></div><div id="learningContent"></div></div></section>
             <section id="tips" class="section"><div class="card"><h2 class="card-title">💡 <span data-lang="tips_title">10 советов для родителей</span></h2><div id="tipsContent"></div></div></section>
             <section id="consultation" class="section"><div class="card consultation-shell"><div id="parentConsultantApp" aria-live="polite"></div></div></section>
-            <section id="settings" class="section"><div class="card"><h2 class="card-title">⚙️ <span data-lang="settings_title">Instellingen</span></h2><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🌍 <span data-lang="settings_language">Taal / Language</span></h3><div class="language-buttons"><button class="lang-btn active" onclick="changeLanguage('nl',event)">NL</button><button class="lang-btn" onclick="changeLanguage('ru',event)">RU</button><button class="lang-btn" onclick="changeLanguage('ua',event)">UA</button><button class="lang-btn" onclick="changeLanguage('en',event)">EN</button></div></div><div id="installGuideApp"></div><div id="privacyControls"></div><div id="analyticsPanel"></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">👤 <span data-lang="settings_about">Over de auteur</span></h3><p><strong>Ella Kristioglo</strong><br>Child Astrology specialist</p><p class="about-bio" data-lang="about_bio">Элла Кристиогло — коррекционный педагог и логопед, астролог и мама двух дочерей. В Child Astrology она соединяет профессиональный опыт работы с детьми, знания астрологии и практические наблюдения, чтобы помогать родителям лучше понимать характер, сильные стороны и эмоциональные потребности ребёнка.</p></div></div></section>
+            <section id="settings" class="section"><div class="card"><h2 class="card-title">⚙️ <span data-lang="settings_title">Instellingen</span></h2><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">🌍 <span data-lang="settings_language">Taal / Language</span></h3><div class="language-buttons"><button type="button" class="lang-btn active" data-language="nl">NL</button><button type="button" class="lang-btn" data-language="ru">RU</button><button type="button" class="lang-btn" data-language="ua">UA</button><button type="button" class="lang-btn" data-language="en">EN</button></div></div><div id="installGuideApp"></div><div id="privacyControls"></div><div id="analyticsPanel"></div><div class="settings-group"><h3 style="color:var(--cosmic-purple);margin-bottom:20px">👤 <span data-lang="settings_about">Over de auteur</span></h3><p><strong>Ella Kristioglo</strong><br>Child Astrology specialist</p><p class="about-bio" data-lang="about_bio">Элла Кристиогло — коррекционный педагог и логопед, астролог и мама двух дочерей. В Child Astrology она соединяет профессиональный опыт работы с детьми, знания астрологии и практические наблюдения, чтобы помогать родителям лучше понимать характер, сильные стороны и эмоциональные потребности ребёнка.</p></div></div></section>
         </main>
     </div>
     <div class="mobile-methods-backdrop" data-mobile-methods-close aria-hidden="true"></div>
     <div class="mobile-methods-menu" id="mobileMethodsMenu" role="dialog" aria-modal="true" aria-labelledby="mobileMethodsTitle" hidden>
         <div class="mobile-methods-header">
             <strong id="mobileMethodsTitle" data-lang="nav_methods_menu">Methodes</strong>
-            <button type="button" class="mobile-methods-close" onclick="closeMobileMethods()" aria-label="Close">×</button>
+            <button type="button" class="mobile-methods-close" data-action="close-mobile-methods" aria-label="Close">×</button>
         </div>
         <div class="mobile-methods-grid">
-            <button type="button" class="mobile-method-option" data-section="method" onclick="openMobileMethodSection('method', event)"><img src="assets/nav-icons/method.png?v=20260825n" alt=""><span data-lang="nav_method">Methode</span></button>
-            <button type="button" class="mobile-method-option" data-section="sports" onclick="openMobileMethodSection('sports', event)"><img src="assets/nav-icons/method.png?v=20260825n" alt=""><span data-lang="nav_sports">Sport</span></button>
-            <button type="button" class="mobile-method-option" data-section="learning" onclick="openMobileMethodSection('learning', event)"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""><span data-lang="nav_learning">School</span></button>
-            <button type="button" class="mobile-method-option" data-section="tips" onclick="openMobileMethodSection('tips', event)"><img src="assets/nav-icons/home.png?v=20260825n" alt=""><span data-lang="nav_tips">10 tips</span></button>
-            <button type="button" class="mobile-method-option" data-section="consultation" onclick="openMobileMethodSection('consultation', event)"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""><span data-lang="nav_consultation">Consultaties</span></button>
-            <button type="button" class="mobile-method-option" data-section="settings" onclick="openMobileMethodSection('settings', event)"><img src="assets/nav-icons/settings.png?v=20260825n" alt=""><span data-lang="nav_settings">Instellingen</span></button>
+            <button type="button" class="mobile-method-option" data-section="method"><img src="assets/nav-icons/method.png?v=20260825n" alt=""><span data-lang="nav_method">Methode</span></button>
+            <button type="button" class="mobile-method-option" data-section="sports"><img src="assets/nav-icons/method.png?v=20260825n" alt=""><span data-lang="nav_sports">Sport</span></button>
+            <button type="button" class="mobile-method-option" data-section="learning"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""><span data-lang="nav_learning">School</span></button>
+            <button type="button" class="mobile-method-option" data-section="tips"><img src="assets/nav-icons/home.png?v=20260825n" alt=""><span data-lang="nav_tips">10 tips</span></button>
+            <button type="button" class="mobile-method-option" data-section="consultation"><img src="assets/nav-icons/consultations.png?v=20260825n" alt=""><span data-lang="nav_consultation">Consultaties</span></button>
+            <button type="button" class="mobile-method-option" data-section="settings"><img src="assets/nav-icons/settings.png?v=20260825n" alt=""><span data-lang="nav_settings">Instellingen</span></button>
         </div>
     </div>
     <nav class="mobile-bottom-nav" aria-label="Primary navigation">
-        <a class="mobile-nav-link nav-link active" data-section="home" onclick="showSection('home', event)" aria-label="Home"><img class="mobile-nav-icon" src="assets/nav-icons/home.png?v=20260825n" alt=""><span data-lang="nav_home">Home</span></a>
-        <a class="mobile-nav-link nav-link" data-section="children" onclick="showSection('children', event)" aria-label="Children"><img class="mobile-nav-icon" src="assets/nav-icons/children.png?v=20260825n" alt=""><span data-lang="nav_children_short">Children</span></a>
-        <a class="mobile-nav-link nav-link" data-section="family-scent" onclick="showSection('family-scent', event)" aria-label="Family Scent"><img class="mobile-nav-icon" src="assets/nav-icons/scent.svg?v=20260826a" alt=""><span data-lang="nav_scent_short">Scent</span></a>
-        <a class="mobile-nav-link nav-link" data-section="tarot" onclick="showSection('tarot', event)" aria-label="Tarot"><img class="mobile-nav-icon" src="assets/nav-icons/tarot.png?v=20260825n" alt=""><span data-lang="nav_tarot">Tarot</span></a>
-        <a class="mobile-nav-link mobile-methods-trigger" role="button" tabindex="0" onclick="toggleMobileMethods(event)" onkeydown="if(event.key==='Enter'||event.key===' '){toggleMobileMethods(event)}" aria-haspopup="dialog" aria-controls="mobileMethodsMenu" aria-expanded="false"><img class="mobile-nav-icon" src="assets/nav-icons/method.png?v=20260825n" alt=""><span data-lang="nav_methods_menu">Methods</span></a>
+        <button type="button" class="mobile-nav-link nav-link active" data-section="home" aria-label="Home" aria-current="page"><img class="mobile-nav-icon" src="assets/nav-icons/home.png?v=20260825n" alt=""><span data-lang="nav_home">Home</span></button>
+        <button type="button" class="mobile-nav-link nav-link" data-section="children" aria-label="Children"><img class="mobile-nav-icon" src="assets/nav-icons/children.png?v=20260825n" alt=""><span data-lang="nav_children_short">Children</span></button>
+        <button type="button" class="mobile-nav-link nav-link" data-section="family-scent" aria-label="Family Scent"><img class="mobile-nav-icon" src="assets/nav-icons/scent.svg?v=20260826a" alt=""><span data-lang="nav_scent_short">Scent</span></button>
+        <button type="button" class="mobile-nav-link nav-link" data-section="tarot" aria-label="Tarot"><img class="mobile-nav-icon" src="assets/nav-icons/tarot.png?v=20260825n" alt=""><span data-lang="nav_tarot">Tarot</span></button>
+        <button type="button" class="mobile-nav-link mobile-methods-trigger" data-action="toggle-mobile-methods" aria-haspopup="dialog" aria-controls="mobileMethodsMenu" aria-expanded="false"><img class="mobile-nav-icon" src="assets/nav-icons/method.png?v=20260825n" alt=""><span data-lang="nav_methods_menu">Methods</span></button>
     </nav>
 <script src="translations.js?v=20260825m"></script>
 <script src="ui-translations-fix.js?v=20260826c"></script>
@@ -108,18 +116,19 @@
 <script src="learning-data.js"></script>
 <script src="tips-data.js"></script>
 <script src="vendor/astronomy.browser.min.js?v=20260825q"></script>
-<script src="app.js?v=20260826h"></script>
-<script src="mobile-menu.js?v=20260826h"></script>
+<script src="app.js?v=20260827c"></script>
+<script src="mobile-menu.js?v=20260827c"></script>
 <script src="city-search.js?v=20260826h"></script>
-<script src="child-modal.js?v=20260827a"></script>
-<script src="child-analysis.js?v=20260826h"></script>
+<script src="child-modal.js?v=20260827c"></script>
+<script src="child-analysis.js?v=20260827c"></script>
     <script src="tarot-thoth.js?v=20260826b"></script>
-<script src="consultation-chat.js?v=20260826h"></script>
+<script src="consultation-chat.js?v=20260827d"></script>
 <script src="family-scent.js?v=20260826h"></script>
 <script src="icon-theme.js?v=20260825n"></script>
 <script src="analytics-config.js?v=20260826b"></script>
 <script src="analytics.js?v=20260826b"></script>
-<script src="privacy-controls.js?v=20260827b"></script>
+<script src="privacy-controls.js?v=20260827c"></script>
+<script src="ui-bindings.js?v=20260827c"></script>
 <script src="pwa-update.js?v=__APP_BUILD_VERSION__"></script>
 </body>
 </html>

@@ -20,6 +20,9 @@
 .consultant-message.user{align-self:flex-end;border-bottom-right-radius:5px;background:linear-gradient(135deg,#4a2c7a,#7545a4);color:#fff}
 .consultant-message.assistant{align-self:flex-start;border:1px solid rgba(74,44,122,.12);border-bottom-left-radius:5px;background:#fff;color:#293244;box-shadow:0 7px 22px rgba(44,31,79,.07)}
 .consultant-message.assistant strong{color:#45256f}
+.consultant-evidence{display:grid;gap:8px;margin-top:12px;padding-top:11px;border-top:1px solid rgba(74,44,122,.14)}
+.consultant-evidence>a{color:#4a2c7a;font-weight:750;text-decoration:underline;text-underline-offset:3px}
+.consultant-evidence>small{color:#6f7480}
 .consultant-compose{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}
 .consultant-compose textarea{min-height:58px;max-height:150px;padding:14px;resize:vertical}
 .consultant-send{align-self:stretch;min-width:120px;justify-content:center;margin:0}

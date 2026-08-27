@@ -1,0 +1,5 @@
+Contact: mailto:ellakristioglo@gmail.com
+Expires: 2027-08-27T23:59:59Z
+Preferred-Languages: nl, ru, uk, en
+Canonical: https://childastrologyapp.com/.well-known/security.txt
+Policy: https://childastrologyapp.com/legal.html?doc=privacy

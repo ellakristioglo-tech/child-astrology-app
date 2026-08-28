@@ -11,10 +11,100 @@
     en:{subtitle:'A personal scent only for adult parents and partners. Child profiles and child data are never used here.',choose:'Choose a format',modes:{my:['MY SCENT','Scent for one adult parent'],parents:['PARENTS SCENT','Shared scent for two adults']},adultConfirm:'I confirm that I am at least 18 years old and will enter data only for adults.',adultPrompt:'Confirm 18+ to open the form. Child profiles and child data are not used in the candle calculation.',adultRequired:'Confirm that you are at least 18 years old first.',details:'Adult birth details',help:'Planetary positions are calculated programmatically. AI does not invent the chart.',roles:{self:'Me / parent',partner:'Second parent / partner'},name:'Name',date:'Birth date',time:'Exact time',place:'Birth place',unknown:'Time unknown',cityHint:'Enter at least 3 letters and choose a city',cityLoading:'Searching for cities…',cityNone:'City not found',cityError:'City search is temporarily unavailable',calculate:'CREATE SCENT',working:'Calculating charts and the shared accord…',required:'Complete the name, date, time and selected city for every adult.',adultDate:'Every participant must be at least 18 years old.',result:'YOUR PARENT SCENT',top:'Top notes',heart:'Heart',base:'Base',story:'Your scent story',basis:'Why these notes',composition:'Scent code composition',metrics:['Moon connection','Venus harmony','Sun identity','Element balance','Natal signature'],facts:'Calculation basis',house:'house',orderTitle:'Create your personal candle',orderText:'Ella will receive the scent name, composition and code. Detailed birth data is not included in the message.',aboutLabel:'Tell us a little about you and your order',aboutPlaceholder:'Who the candle is for, the occasion, notes you love or dislike, scent sensitivity, delivery country…',aboutHint:'Optional. This text will only be added to your message to Ella.',messageTitle:'Parent Scent Code order',scentLabel:'Scent',extraLabel:'About the customer and preferences',whatsapp:'Order on WhatsApp',email:'Order by email',safety:'Adults only. The candle formula should use candle-safe fragrance oils within current IFRA limits. The scent creates atmosphere and is not a treatment or health product.',unknownFact:'time unknown — Ascendant and houses were omitted',asc:'Ascendant',savedLocal:'The calculation is saved on this device for 90 days.',noAstro:'The chart could not be calculated. Check the birth details and selected city.',members:'Adult participants'},
     nl:{subtitle:'Een persoonlijke geur uitsluitend voor volwassen ouders en partners. Kinderprofielen en kindgegevens worden hier niet gebruikt.',choose:'Kies een vorm',modes:{my:['MY SCENT','Geur voor één volwassen ouder'],parents:['PARENTS SCENT','Gezamenlijke geur voor twee volwassenen']},adultConfirm:'Ik bevestig dat ik 18 jaar of ouder ben en alleen gegevens van volwassenen invoer.',adultPrompt:'Bevestig 18+ om het formulier te openen. Kinderprofielen en kindgegevens worden niet gebruikt voor de kaars.',adultRequired:'Bevestig eerst dat u 18 jaar of ouder bent.',details:'Geboortegegevens van volwassenen',help:'Planeetstanden worden programmatisch berekend. AI verzint de horoscoop niet.',roles:{self:'Ik / ouder',partner:'Tweede ouder / partner'},name:'Naam',date:'Geboortedatum',time:'Exacte tijd',place:'Geboorteplaats',unknown:'Tijd onbekend',cityHint:'Vul minimaal 3 letters in en kies een plaats',cityLoading:'Plaatsen zoeken…',cityNone:'Plaats niet gevonden',cityError:'Plaats zoeken is tijdelijk niet beschikbaar',calculate:'MAAK GEUR',working:'Horoscopen en gezamenlijk akkoord berekenen…',required:'Vul voor elke volwassene naam, datum, tijd en een gekozen plaats in.',adultDate:'Elke deelnemer moet minstens 18 jaar oud zijn.',result:'YOUR PARENT SCENT',top:'Topnoten',heart:'Hart',base:'Basis',story:'Het verhaal van jullie geur',basis:'Waarom deze noten',composition:'Samenstelling van de geurcode',metrics:['Maanverbinding','Venusharmonie','Zonidentiteit','Elementenbalans','Geboorteprofiel'],facts:'Basis van de berekening',house:'huis',orderTitle:'Maak een persoonlijke kaars',orderText:'Ella ontvangt de geurnaam, samenstelling en code. Gedetailleerde geboortegegevens worden niet meegestuurd.',aboutLabel:'Vertel iets over jezelf en je bestelling',aboutPlaceholder:'Voor wie de kaars is, de gelegenheid, geliefde of ongewenste geurnoten, gevoeligheid voor geuren, land van bezorging…',aboutHint:'Optioneel. Deze tekst wordt alleen toegevoegd aan je bericht aan Ella.',messageTitle:'Bestelling Parent Scent Code',scentLabel:'Geur',extraLabel:'Over de klant en wensen',whatsapp:'Bestel via WhatsApp',email:'Bestel via e-mail',safety:'Alleen voor volwassenen. De kaarsformule hoort kaarsgeschikte fragrance oils binnen de actuele IFRA-limieten te gebruiken. De geur creëert sfeer en is geen behandeling of gezondheidsproduct.',unknownFact:'tijd onbekend — Ascendant en huizen zijn weggelaten',asc:'Ascendant',savedLocal:'De berekening wordt 90 dagen op dit apparaat bewaard.',noAstro:'De horoscoop kon niet worden berekend. Controleer de geboortegegevens en plaats.',members:'Volwassen deelnemers'}
   };
+  // The only fragrance oils that may appear in a generated candle are the oils
+  // currently in Ella's photographed stock list. Géranium is listed twice on
+  // the paper inventory, so it is represented once here as one unique scent.
   const NOTE={
-    bergamot:{name:'Bergamot',layer:'top',element:'fire'},bloodOrange:{name:'Blood Orange',layer:'top',element:'fire'},pinkPepper:{name:'Pink Pepper',layer:'top',element:'fire'},figLeaf:{name:'Fig Leaf',layer:'top',element:'earth'},greenMandarin:{name:'Green Mandarin',layer:'top',element:'earth'},sage:{name:'Clary Sage',layer:'top',element:'earth'},whiteTea:{name:'White Tea',layer:'top',element:'air'},petitgrain:{name:'Petitgrain',layer:'top',element:'air'},lavender:{name:'Lavender',layer:'top',element:'air'},pear:{name:'Pear',layer:'top',element:'water'},lotus:{name:'Lotus Mist',layer:'top',element:'water'},marine:{name:'Mineral Water',layer:'top',element:'water'},neroli:{name:'Neroli',layer:'heart',element:'fire'},saffron:{name:'Saffron',layer:'heart',element:'fire'},orangeBlossom:{name:'Orange Blossom',layer:'heart',element:'fire'},iris:{name:'Iris',layer:'heart',element:'earth'},violetLeaf:{name:'Violet Leaf',layer:'heart',element:'earth'},oatMilk:{name:'Oat Milk',layer:'heart',element:'earth'},jasmine:{name:'Jasmine',layer:'heart',element:'air'},linden:{name:'Linden Blossom',layer:'heart',element:'air'},freesia:{name:'Freesia',layer:'heart',element:'air'},fig:{name:'Fig',layer:'heart',element:'water'},rose:{name:'Soft Rose',layer:'heart',element:'water'},waterLily:{name:'Water Lily',layer:'heart',element:'water'},amber:{name:'Golden Amber',layer:'base',element:'fire'},benzoin:{name:'Benzoin',layer:'base',element:'fire'},tonka:{name:'Tonka Bean',layer:'base',element:'fire'},cedar:{name:'Cedarwood',layer:'base',element:'earth'},sandal:{name:'Sandalwood',layer:'base',element:'earth'},vetiver:{name:'Vetiver',layer:'base',element:'earth'},musk:{name:'Soft Musk',layer:'base',element:'air'},cashmere:{name:'Cashmere Wood',layer:'base',element:'air'},paleWoods:{name:'Pale Woods',layer:'base',element:'air'},incense:{name:'White Incense',layer:'base',element:'water'},vanilla:{name:'Dry Vanilla',layer:'base',element:'water'},patchouli:{name:'Patchouli',layer:'base',element:'water'}
+    oudWood:{name:'Oud Wood',layer:'base',element:'earth'},
+    pineapple:{name:'Pineapple',layer:'top',element:'water'},
+    vanilla:{name:'Vanilla',layer:'base',element:'water'},
+    eucalyptus:{name:'Eucalyptus',layer:'top',element:'air'},
+    smoothie:{name:'Smoothie',layer:'top',element:'water'},
+    oakmoss:{name:'Oakmoss',layer:'base',element:'earth'},
+    niaouli:{name:'Madagascar Niaouli',layer:'top',element:'air'},
+    cypress:{name:'Cypress',layer:'base',element:'earth'},
+    spicedOrange:{name:'Spiced Orange',layer:'top',element:'fire'},
+    creamyCaramel:{name:'Creamy Caramel',layer:'base',element:'fire'},
+    vetiver:{name:'Vetiver',layer:'base',element:'earth'},
+    cadeWood:{name:'Cade Wood',layer:'base',element:'earth'},
+    geranium:{name:'Geranium',layer:'heart',element:'earth'},
+    bergamot:{name:'Bergamot',layer:'top',element:'fire'},
+    blackberry:{name:'Blackberry',layer:'top',element:'water'},
+    rosewood:{name:'Rosewood',layer:'base',element:'earth'},
+    lebanonCedar:{name:'Lebanon Cedar',layer:'base',element:'earth'},
+    landesPine:{name:'Landes Pine',layer:'base',element:'earth'},
+    cola:{name:'Cola',layer:'top',element:'fire'},
+    magnolia:{name:'Magnolia',layer:'heart',element:'water'},
+    tobaccoLeaf:{name:'Tobacco Leaves',layer:'base',element:'earth'},
+    strawberryYogurt:{name:'Strawberry Yogurt',layer:'heart',element:'water'},
+    musk:{name:'Musk',layer:'base',element:'air'},
+    cannabis:{name:'Cannabis',layer:'heart',element:'earth'},
+    nagChampa:{name:'Nag Champa',layer:'base',element:'air'},
+    valenciaOrange:{name:'Valencia Orange',layer:'top',element:'fire'},
+    mimosa:{name:'Mimosa',layer:'heart',element:'air'},
+    lavender:{name:'Lavender',layer:'heart',element:'air'},
+    sageBasilMint:{name:'Sage, Basil & Mint',layer:'top',element:'earth'},
+    spicedVanilla:{name:'Spiced Vanilla',layer:'base',element:'fire'},
+    amber:{name:'Amber',layer:'base',element:'fire'},
+    grapefruit:{name:'Grapefruit',layer:'top',element:'fire'},
+    jasmineTea:{name:'Jasmine Tea',layer:'heart',element:'air'},
+    patchouli:{name:'Patchouli',layer:'base',element:'water'},
+    pepperPatchouli:{name:'Peppery Patchouli',layer:'base',element:'fire'},
+    mint:{name:'Mint',layer:'top',element:'air'},
+    eucalyptusGlobulus:{name:'Eucalyptus Globulus',layer:'top',element:'air'},
+    citrus:{name:'Citrus',layer:'top',element:'fire'},
+    watermelonMelon:{name:'Watermelon & Melon',layer:'top',element:'water'},
+    neroli:{name:'Neroli',layer:'heart',element:'fire'},
+    blackTeaVanilla:{name:'Black Tea & Vanilla',layer:'base',element:'air'},
+    greenTea:{name:'Green Tea',layer:'top',element:'earth'},
+    verbena:{name:'Verbena',layer:'top',element:'earth'},
+    cutGrass:{name:'Cut Grass',layer:'heart',element:'earth'},
+    orangeBlossom:{name:'Orange Blossom',layer:'heart',element:'fire'},
+    rose:{name:'Rose',layer:'heart',element:'water'},
+    mulledWine:{name:'Mulled Wine',layer:'heart',element:'fire'},
+    figLeaf:{name:'Fig Leaves',layer:'top',element:'earth'},
+    chlorophyllMint:{name:'Chlorophyll Mint',layer:'top',element:'air'},
+    orientalIncense:{name:'Oriental Incense',layer:'base',element:'water'},
+    greenApple:{name:'Green Apple',layer:'top',element:'earth'},
+    chaiLatte:{name:'Chai Latte Tea',layer:'heart',element:'fire'},
+    jasmine:{name:'Jasmine',layer:'heart',element:'air'},
+    mandarin:{name:'Mandarin',layer:'top',element:'fire'},
+    ylangYlang:{name:'Ylang-Ylang',layer:'heart',element:'water'},
+    thyme:{name:'Thyme',layer:'heart',element:'earth'},
+    cinnamon:{name:'Cinnamon',layer:'base',element:'fire'},
+    lilac:{name:'Lilac',layer:'heart',element:'air'},
+    citronella:{name:'Citronella',layer:'top',element:'air'},
+    sandalwood:{name:'Sandalwood',layer:'base',element:'earth'},
+    wildThyme:{name:'Wild Thyme',layer:'heart',element:'earth'},
+    coffee:{name:'Coffee',layer:'base',element:'fire'},
+    lemongrass:{name:'Lemongrass',layer:'top',element:'air'},
+    waterFlower:{name:'Water Flower',layer:'heart',element:'water'},
+    coconut:{name:'Coconut',layer:'base',element:'water'},
+    bergamotTea:{name:'Bergamot Tea',layer:'top',element:'air'}
   };
-  const BY_ELEMENT={fire:{top:['bergamot','bloodOrange','pinkPepper'],heart:['neroli','saffron','orangeBlossom'],base:['amber','benzoin','tonka']},earth:{top:['figLeaf','greenMandarin','sage'],heart:['iris','violetLeaf','oatMilk'],base:['cedar','sandal','vetiver']},air:{top:['whiteTea','petitgrain','lavender'],heart:['jasmine','linden','freesia'],base:['musk','cashmere','paleWoods']},water:{top:['pear','lotus','marine'],heart:['fig','rose','waterLily'],base:['incense','vanilla','patchouli']}};
+  const IN_STOCK=new Set(Object.keys(NOTE));
+  const BY_ELEMENT={
+    fire:{
+      top:['spicedOrange','bergamot','valenciaOrange','grapefruit','citrus','mandarin','cola'],
+      heart:['neroli','orangeBlossom','mulledWine','chaiLatte'],
+      base:['creamyCaramel','spicedVanilla','amber','pepperPatchouli','cinnamon','coffee']
+    },
+    earth:{
+      top:['figLeaf','greenApple','sageBasilMint','greenTea','verbena'],
+      heart:['cannabis','cutGrass','thyme','wildThyme','geranium'],
+      base:['oudWood','oakmoss','cypress','vetiver','cadeWood','rosewood','lebanonCedar','landesPine','tobaccoLeaf','sandalwood']
+    },
+    air:{
+      top:['eucalyptus','niaouli','mint','eucalyptusGlobulus','chlorophyllMint','citronella','lemongrass','bergamotTea'],
+      heart:['mimosa','lavender','jasmineTea','jasmine','lilac'],
+      base:['musk','blackTeaVanilla','nagChampa']
+    },
+    water:{
+      top:['pineapple','smoothie','blackberry','watermelonMelon'],
+      heart:['magnolia','strawberryYogurt','rose','ylangYlang','waterFlower'],
+      base:['vanilla','patchouli','orientalIncense','coconut']
+    }
+  };
   const REASON={
     ru:{fire:'вносит тепло, живость и семейное движение',earth:'даёт устойчивость, телесный уют и надёжную основу',air:'отражает лёгкость общения, ясность и пространство',water:'передаёт эмоциональную глубину, заботу и мягкую близость',balance:'выбрана как balancing note — она соединяет различия, не называя их плохими'},
     ua:{fire:'додає тепло, жвавість і сімейний рух',earth:'дає стійкість, тілесний затишок і надійну основу',air:'відображає легкість спілкування, ясність і простір',water:'передає емоційну глибину, турботу та м’яку близькість',balance:'обрана як balancing note — вона поєднує відмінності, не називаючи їх поганими'},
@@ -32,10 +122,16 @@
     nl:{'Golden Roots':'Gouden wortels','Luminous Air':'Stralende lucht','Amber Tide':'Ambergetij','Silver Garden':'Zilveren tuin','Velvet Roots':'Fluwelen wortels','Quiet Horizon':'Stille horizon','Solar Ember':'Zonnegloed','Deep Garden':'Diepe tuin','Clear Orbit':'Heldere baan','Moonlit Tide':'Maanlichtgetij'}
   };
   const NOTE_NAMES={
-    ru:{bergamot:'Бергамот',bloodOrange:'Красный апельсин',pinkPepper:'Розовый перец',figLeaf:'Лист инжира',greenMandarin:'Зелёный мандарин',sage:'Мускатный шалфей',whiteTea:'Белый чай',petitgrain:'Петитгрейн',lavender:'Лаванда',pear:'Груша',lotus:'Лотос',marine:'Минеральная вода',neroli:'Нероли',saffron:'Шафран',orangeBlossom:'Цветок апельсина',iris:'Ирис',violetLeaf:'Лист фиалки',oatMilk:'Овсяное молоко',jasmine:'Жасмин',linden:'Цвет липы',freesia:'Фрезия',fig:'Инжир',rose:'Нежная роза',waterLily:'Водяная лилия',amber:'Золотая амбра',benzoin:'Бензоин',tonka:'Бобы тонка',cedar:'Кедр',sandal:'Сандал',vetiver:'Ветивер',musk:'Мягкий мускус',cashmere:'Кашемировое дерево',paleWoods:'Светлая древесина',incense:'Белый ладан',vanilla:'Сухая ваниль',patchouli:'Пачули'},
-    ua:{bergamot:'Бергамот',bloodOrange:'Червоний апельсин',pinkPepper:'Рожевий перець',figLeaf:'Лист інжиру',greenMandarin:'Зелений мандарин',sage:'Мускатна шавлія',whiteTea:'Білий чай',petitgrain:'Петитгрейн',lavender:'Лаванда',pear:'Груша',lotus:'Лотос',marine:'Мінеральна вода',neroli:'Неролі',saffron:'Шафран',orangeBlossom:'Цвіт апельсина',iris:'Ірис',violetLeaf:'Лист фіалки',oatMilk:'Вівсяне молоко',jasmine:'Жасмин',linden:'Цвіт липи',freesia:'Фрезія',fig:'Інжир',rose:'Ніжна троянда',waterLily:'Водяна лілія',amber:'Золотий бурштин',benzoin:'Бензоїн',tonka:'Боби тонка',cedar:'Кедр',sandal:'Сандал',vetiver:'Ветивер',musk:'М’який мускус',cashmere:'Кашемірове дерево',paleWoods:'Світла деревина',incense:'Білий ладан',vanilla:'Суха ваніль',patchouli:'Пачулі'},
+    ru:{
+      oudWood:'Удовое дерево',pineapple:'Ананас',vanilla:'Ваниль',eucalyptus:'Эвкалипт',smoothie:'Смузи',oakmoss:'Дубовый мох',niaouli:'Ниаули Мадагаскара',cypress:'Кипарис',spicedOrange:'Пряный апельсин',creamyCaramel:'Сливочная карамель',vetiver:'Ветивер',cadeWood:'Кадовое дерево',geranium:'Герань',bergamot:'Бергамот',blackberry:'Ежевика',rosewood:'Розовое дерево',lebanonCedar:'Ливанский кедр',landesPine:'Ландская сосна',cola:'Кола',magnolia:'Магнолия',tobaccoLeaf:'Листья табака',strawberryYogurt:'Клубничный йогурт',musk:'Мускус',cannabis:'Каннабис',nagChampa:'Наг Чампа',valenciaOrange:'Апельсин Валенсия',mimosa:'Мимоза',lavender:'Лаванда',sageBasilMint:'Шалфей, базилик и мята',spicedVanilla:'Пряная ваниль',amber:'Амбра',grapefruit:'Грейпфрут',jasmineTea:'Жасминовый чай',patchouli:'Пачули',pepperPatchouli:'Пачули с перцем',mint:'Мята',eucalyptusGlobulus:'Эвкалипт шаровидный',citrus:'Цитрусы',watermelonMelon:'Арбуз и дыня',neroli:'Нероли',blackTeaVanilla:'Чёрный чай с ванилью',greenTea:'Зелёный чай',verbena:'Вербена',cutGrass:'Скошенная трава',orangeBlossom:'Цветок апельсина',rose:'Роза',mulledWine:'Глинтвейн',figLeaf:'Листья инжира',chlorophyllMint:'Хлорофилловая мята',orientalIncense:'Восточные благовония',greenApple:'Зелёное яблоко',chaiLatte:'Чай латте',jasmine:'Жасмин',mandarin:'Мандарин',ylangYlang:'Иланг-иланг',thyme:'Тимьян',cinnamon:'Корица',lilac:'Сирень',citronella:'Цитронелла',sandalwood:'Сандаловое дерево',wildThyme:'Дикий тимьян',coffee:'Кофе',lemongrass:'Лемонграсс',waterFlower:'Водяной цветок',coconut:'Кокос',bergamotTea:'Чай с бергамотом'
+    },
+    ua:{
+      oudWood:'Удове дерево',pineapple:'Ананас',vanilla:'Ваніль',eucalyptus:'Евкаліпт',smoothie:'Смузі',oakmoss:'Дубовий мох',niaouli:'Ніаулі з Мадагаскару',cypress:'Кипарис',spicedOrange:'Пряний апельсин',creamyCaramel:'Вершкова карамель',vetiver:'Ветивер',cadeWood:'Кадове дерево',geranium:'Герань',bergamot:'Бергамот',blackberry:'Ожина',rosewood:'Рожеве дерево',lebanonCedar:'Ліванський кедр',landesPine:'Ландська сосна',cola:'Кола',magnolia:'Магнолія',tobaccoLeaf:'Листя тютюну',strawberryYogurt:'Полуничний йогурт',musk:'Мускус',cannabis:'Канабіс',nagChampa:'Наг Чампа',valenciaOrange:'Апельсин Валенсія',mimosa:'Мімоза',lavender:'Лаванда',sageBasilMint:'Шавлія, базилік і м’ята',spicedVanilla:'Пряна ваніль',amber:'Амбра',grapefruit:'Грейпфрут',jasmineTea:'Жасминовий чай',patchouli:'Пачулі',pepperPatchouli:'Пачулі з перцем',mint:'М’ята',eucalyptusGlobulus:'Евкаліпт кулястий',citrus:'Цитруси',watermelonMelon:'Кавун і диня',neroli:'Неролі',blackTeaVanilla:'Чорний чай з ваніллю',greenTea:'Зелений чай',verbena:'Вербена',cutGrass:'Скошена трава',orangeBlossom:'Цвіт апельсина',rose:'Троянда',mulledWine:'Глінтвейн',figLeaf:'Листя інжиру',chlorophyllMint:'Хлорофілова м’ята',orientalIncense:'Східні пахощі',greenApple:'Зелене яблуко',chaiLatte:'Чай лате',jasmine:'Жасмин',mandarin:'Мандарин',ylangYlang:'Іланг-іланг',thyme:'Чебрець',cinnamon:'Кориця',lilac:'Бузок',citronella:'Цитронела',sandalwood:'Сандалове дерево',wildThyme:'Дикий чебрець',coffee:'Кава',lemongrass:'Лемонграс',waterFlower:'Водяна квітка',coconut:'Кокос',bergamotTea:'Чай з бергамотом'
+    },
     en:{},
-    nl:{bergamot:'Bergamot',bloodOrange:'Bloedsinaasappel',pinkPepper:'Roze peper',figLeaf:'Vijgenblad',greenMandarin:'Groene mandarijn',sage:'Scharlei',whiteTea:'Witte thee',petitgrain:'Petitgrain',lavender:'Lavendel',pear:'Peer',lotus:'Lotusnevel',marine:'Mineraalwater',neroli:'Neroli',saffron:'Saffraan',orangeBlossom:'Oranjebloesem',iris:'Iris',violetLeaf:'Viooltjesblad',oatMilk:'Havermelk',jasmine:'Jasmijn',linden:'Lindebloesem',freesia:'Freesia',fig:'Vijg',rose:'Zachte roos',waterLily:'Waterlelie',amber:'Gouden amber',benzoin:'Benzoë',tonka:'Tonkaboon',cedar:'Cederhout',sandal:'Sandelhout',vetiver:'Vetiver',musk:'Zachte musk',cashmere:'Kasjmierhout',paleWoods:'Licht hout',incense:'Witte wierook',vanilla:'Droge vanille',patchouli:'Patchoeli'}
+    nl:{
+      oudWood:'Oudhout',pineapple:'Ananas',vanilla:'Vanille',eucalyptus:'Eucalyptus',smoothie:'Smoothie',oakmoss:'Eikenmos',niaouli:'Niaouli uit Madagaskar',cypress:'Cipres',spicedOrange:'Gekruide sinaasappel',creamyCaramel:'Romige karamel',vetiver:'Vetiver',cadeWood:'Cadehout',geranium:'Geranium',bergamot:'Bergamot',blackberry:'Braam',rosewood:'Rozenhout',lebanonCedar:'Libanese ceder',landesPine:'Landes-den',cola:'Cola',magnolia:'Magnolia',tobaccoLeaf:'Tabaksbladeren',strawberryYogurt:'Aardbeienyoghurt',musk:'Muskus',cannabis:'Cannabis',nagChampa:'Nag Champa',valenciaOrange:'Valencia-sinaasappel',mimosa:'Mimosa',lavender:'Lavendel',sageBasilMint:'Salie, basilicum en munt',spicedVanilla:'Gekruide vanille',amber:'Amber',grapefruit:'Grapefruit',jasmineTea:'Jasmijnthee',patchouli:'Patchoeli',pepperPatchouli:'Peperpatchoeli',mint:'Munt',eucalyptusGlobulus:'Eucalyptus globulus',citrus:'Citrus',watermelonMelon:'Watermeloen en meloen',neroli:'Neroli',blackTeaVanilla:'Zwarte thee met vanille',greenTea:'Groene thee',verbena:'Verbena',cutGrass:'Gemaaid gras',orangeBlossom:'Oranjebloesem',rose:'Roos',mulledWine:'Glühwein',figLeaf:'Vijgenblad',chlorophyllMint:'Chlorofylmunt',orientalIncense:'Oosterse wierook',greenApple:'Groene appel',chaiLatte:'Chai latte',jasmine:'Jasmijn',mandarin:'Mandarijn',ylangYlang:'Ylang-ylang',thyme:'Tijm',cinnamon:'Kaneel',lilac:'Sering',citronella:'Citronella',sandalwood:'Sandelhout',wildThyme:'Wilde tijm',coffee:'Koffie',lemongrass:'Citroengras',waterFlower:'Waterbloem',coconut:'Kokos',bergamotTea:'Bergamotthee'
+    }
   };
   const ORDER_COPY={
     ru:{result:'АРОМАТ ДЛЯ РОДИТЕЛЕЙ',title:'Заказ Parent Scent Code',candle:'Свеча',forWhom:'Аромат составлен для',name:'Ваше имя',namePlaceholder:'Как к вам обращаться',contact:'Телефон или email',contactPlaceholder:'+31… или name@email.com',customer:'Заказчик',contactLine:'Контакт',hint:'Эти данные будут добавлены в сообщение Элле.'},
@@ -58,25 +154,130 @@
 
   function orderMessage(r,customerName,contact){const people=r.charts.map(x=>x.person.name).join(' · '),copy=c(),order=oc(),lines=[order.title,`${order.candle}: “${scentName(r.name)}”`,`${order.forWhom}: ${people}`,'',`${copy.top}: ${r.top.map(noteName).join(', ')}`,`${copy.heart}: ${r.heart.map(noteName).join(', ')}`,`${copy.base}: ${r.base.map(noteName).join(', ')}`,'',`${order.customer}: ${customerName.trim()}`,`${order.contactLine}: ${contact.trim()}`];return lines.join('\n')}
   function orderConsentText(){return lang()==='ru'?'Я понимаю, что имя, контакт и сообщение будут переданы Элле через выбранный WhatsApp или email.':lang()==='ua'?'Я розумію, що ім’я, контакт і повідомлення буде передано Еллі через вибраний WhatsApp або email.':lang()==='nl'?'Ik begrijp dat mijn naam, contactgegevens en bericht via de gekozen WhatsApp of e-mail aan Ella worden gestuurd.':'I understand that my name, contact details and message will be sent to Ella through the selected WhatsApp or email.'}
-  function localiseResultUi(){if(!state.result)return;const order=oc(),result=state.result;const name=document.querySelector('.scent-name');if(name)name.textContent=`“${scentName(result.name)}”`;document.querySelectorAll('.scent-layer strong').forEach((node,index)=>{const keys=[result.top,result.heart,result.base][index];if(keys)node.textContent=keys.map(noteName).join(' · ')});document.querySelectorAll('.scent-note-reason strong').forEach((node,index)=>{const keys=[result.top[0],result.heart[0],result.base[0],result.balancing].filter(Boolean);if(keys[index])node.textContent=noteName(keys[index])});const profile=document.querySelector('.scent-order-profile');if(profile)profile.innerHTML=`<label>${order.title}</label><div class="scent-order-fields"><label for="scentOrderName">${order.name}<input id="scentOrderName" autocomplete="name" placeholder="${esc(order.namePlaceholder)}"></label><label for="scentOrderContact">${order.contact}<input id="scentOrderContact" autocomplete="email" placeholder="${esc(order.contactPlaceholder)}"></label></div><small>${order.hint}</small><label class="scent-order-consent"><input id="scentOrderConsent" type="checkbox"> <span>${esc(orderConsentText())}</span></label><div class="scent-order-error" role="alert"></div>`}
+  function balanceLabel(){return {ru:'Балансирующая нота',ua:'Балансувальна нота',en:'Balancing note',nl:'Balansnoot'}[lang()]}
+  function localiseResultUi(){
+    if(!state.result)return;
+    const order=oc(),result=state.result;
+    const name=document.querySelector('.scent-name');
+    if(name)name.textContent=`“${scentName(result.name)}”`;
+    document.querySelectorAll('.scent-layer strong').forEach((node,index)=>{
+      const keys=[result.top,result.heart,result.base][index];
+      if(keys)node.textContent=keys.map(noteName).join(' · ');
+    });
+    document.querySelectorAll('.scent-note-reason strong').forEach((node,index)=>{
+      const keys=[result.top[0],result.heart[0],result.base[0],result.balancing].filter(Boolean);
+      if(keys[index])node.textContent=`${noteName(keys[index])}${index===3?` · ${balanceLabel()}`:''}`;
+    });
+    const profile=document.querySelector('.scent-order-profile');
+    if(profile)profile.innerHTML=`<label>${order.title}</label><div class="scent-order-fields"><label for="scentOrderName">${order.name}<input id="scentOrderName" autocomplete="name" placeholder="${esc(order.namePlaceholder)}"></label><label for="scentOrderContact">${order.contact}<input id="scentOrderContact" autocomplete="email" placeholder="${esc(order.contactPlaceholder)}"></label></div><small>${order.hint}</small><label class="scent-order-consent"><input id="scentOrderConsent" type="checkbox"> <span>${esc(orderConsentText())}</span></label><div class="scent-order-error" role="alert"></div>`;
+  }
   function bindOrderActions(){localiseResultUi();document.querySelectorAll('[data-scent-order]').forEach(button=>button.addEventListener('click',()=>{if(!state.result)return;const customerName=document.getElementById('scentOrderName')?.value||'',contact=document.getElementById('scentOrderContact')?.value||'',confirmed=document.getElementById('scentOrderConsent')?.checked;if(!customerName.trim()||!contact.trim()||!confirmed){document.querySelector('.scent-order-error').textContent=lang()==='ru'?'Введите имя и контакт, затем подтвердите передачу сообщения.':lang()==='ua'?'Вкажіть ім’я й контакт, потім підтвердьте передавання повідомлення.':lang()==='nl'?'Vul naam en contact in en bevestig daarna het verzenden van het bericht.':'Enter your name and contact details, then confirm sending the message.';return}document.querySelector('.scent-order-error').textContent='';const message=orderMessage(state.result,customerName,contact);document.dispatchEvent(new CustomEvent('app:scent-order',{detail:{mode:state.mode}}));if(button.dataset.scentOrder==='whatsapp'){window.open(`https://wa.me/31612554778?text=${encodeURIComponent(message)}`,'_blank','noopener')}else{window.location.href=`mailto:ellakristioglo@gmail.com?subject=${encodeURIComponent(`${oc().title} — ${scentName(state.result.name)}`)}&body=${encodeURIComponent(message)}`}}))}
   function scheduleCity(i,q,card){clearTimeout(state.searchTimers[i]);const status=card.querySelector('[data-city-status]'),results=card.querySelector('[data-city-results]');results.innerHTML='';if(q.trim().length<3){status.textContent=c().cityHint;return}status.innerHTML=`<span class="scent-spinner"></span>${c().cityLoading}`;state.searchTimers[i]=setTimeout(()=>searchCity(i,q.trim(),card),400)}
   async function searchCity(i,q,card){const status=card.querySelector('[data-city-status]'),results=card.querySelector('[data-city-results]');try{const cities=await window.LocalCitySearch.search(q,lang(),8);if(!cities.length){status.textContent=c().cityNone;status.classList.add('error');return}status.textContent='';status.classList.remove('error');results.innerHTML=cities.map((x,n)=>`<button type="button" class="scent-city-option" data-city="${n}"><strong>${esc(x.city)}</strong><small>${esc([x.region,x.country].filter(Boolean).join(' — '))}</small></button>`).join('');results.querySelectorAll('[data-city]').forEach(b=>b.addEventListener('click',()=>{const city=cities[Number(b.dataset.city)];state.people[i].place=city;state.people[i].placeQuery=city.label;card.querySelector('[data-field="placeQuery"]').value=city.label;status.textContent=`✓ ${city.label}`;results.innerHTML=''}))}catch(_){status.textContent=c().cityError;status.classList.add('error')}}
   function validate(){if(!state.ageConfirmed)return c().adultRequired;for(const p of state.people){if(!p.name||!p.birthDate||(!p.unknown&&!p.birthTime)||!p.place||!p.place.timezone)return c().required;if(p.birthDate>adultDateMax())return c().adultDate}return''}
   function angle(a,b){const d=Math.abs(a-b);return Math.min(d,360-d)}
   function aspectScore(a,b){const d=angle(a,b),targets=[0,60,90,120,180];const delta=Math.min(...targets.map(x=>Math.abs(x-d)));return Math.max(0,1-delta/12)}
-  function scoreNotes(charts){const scores={};const add=(key,value)=>scores[key]=(scores[key]||0)+value;charts.forEach(({chart})=>{const factors=[['Moon',30],['Venus',20],['Sun',15],['Mercury',10]];factors.forEach(([body,w])=>{const pos=chart.positions[body],el=ELEMENT[pos.sign],pool=BY_ELEMENT[el][body==='Moon'||body==='Venus'?'heart':body==='Mercury'?'top':'base'];pool.forEach((key,n)=>add(key,w*(1-(n*.16))));});if(chart.knownTime){const el=ELEMENT[Math.floor(chart.ascendant/30)%12];BY_ELEMENT[el].top.forEach((key,n)=>add(key,15*(1-n*.18)));const houseAccents={3:['whiteTea','petitgrain'],4:['fig','cedar','sandal'],5:['bergamot','neroli'],7:['rose','musk'],12:['lotus','incense']};['Moon','Venus','Sun','Mercury'].forEach(body=>(houseAccents[chart.positions[body].house]||[]).forEach((key,n)=>add(key,6*(1-n*.2))))}else{const el=ELEMENT[chart.positions.Moon.sign];BY_ELEMENT[el].heart.forEach((key,n)=>add(key,7*(1-n*.18)))}Object.entries(BY_ELEMENT[chart.dominantElement]).forEach(([layer,pool])=>pool.forEach((key,n)=>add(key,10*(1-n*.2))))});if(charts.length>1){for(let i=0;i<charts.length;i++)for(let j=i+1;j<charts.length;j++){const a=charts[i].chart.positions,b=charts[j].chart.positions;const links=[['Moon','Moon'],['Moon','Venus'],['Venus','Venus'],['Sun','Jupiter']];links.forEach(([x,y])=>{const strength=aspectScore(a[x].longitude,b[y].longitude);if(strength>.25){const el=ELEMENT[a[x].sign];BY_ELEMENT[el][x==='Sun'?'top':'heart'].forEach((k,n)=>add(k,12*strength*(1-n*.2)))}});const tension=Math.max(aspectScore(a.Moon.longitude,b.Saturn.longitude),aspectScore(a.Venus.longitude,b.Pluto.longitude));if(tension>.35){['cedar','sandal','whiteTea'].forEach((k,n)=>add(k,10*tension*(1-n*.2)))}}}return scores}
-  function pick(scores,layer,count=3){return Object.keys(NOTE).filter(k=>NOTE[k].layer===layer).sort((a,b)=>(scores[b]||0)-(scores[a]||0)).slice(0,count)}
+  function scoreNotes(charts){
+    const scores={};
+    const add=(key,value)=>{if(IN_STOCK.has(key))scores[key]=(scores[key]||0)+value};
+    const addPool=(pool,value,seed=0)=>{
+      const available=pool.filter(key=>IN_STOCK.has(key));
+      if(!available.length)return;
+      const start=Math.abs(Math.floor(Number(seed)||0))%available.length;
+      available.forEach((key,index)=>{
+        const rank=(index-start+available.length)%available.length;
+        add(key,value*Math.max(.2,1-rank*.14));
+      });
+    };
+    charts.forEach(({chart})=>{
+      const factors=[['Moon',30],['Venus',20],['Sun',15],['Mercury',10]];
+      factors.forEach(([body,weight])=>{
+        const pos=chart.positions[body],element=ELEMENT[pos.sign],layer=body==='Moon'||body==='Venus'?'heart':body==='Mercury'?'top':'base';
+        addPool(BY_ELEMENT[element][layer],weight,pos.longitude);
+      });
+      if(chart.knownTime){
+        const element=ELEMENT[Math.floor(chart.ascendant/30)%12];
+        addPool(BY_ELEMENT[element].top,15,chart.ascendant);
+        const houseAccents={3:['greenTea','bergamotTea'],4:['oakmoss','lebanonCedar','sandalwood'],5:['spicedOrange','neroli'],7:['rose','musk'],12:['waterFlower','orientalIncense']};
+        ['Moon','Venus','Sun','Mercury'].forEach(body=>(houseAccents[chart.positions[body].house]||[]).forEach((key,index)=>add(key,6*(1-index*.2))));
+      }else{
+        const moon=chart.positions.Moon,element=ELEMENT[moon.sign];
+        addPool(BY_ELEMENT[element].heart,7,moon.longitude);
+      }
+      Object.values(BY_ELEMENT[chart.dominantElement]).forEach((pool,index)=>addPool(pool,10,chart.positions.Sun.longitude+index*17));
+    });
+    if(charts.length>1){
+      for(let i=0;i<charts.length;i++)for(let j=i+1;j<charts.length;j++){
+        const a=charts[i].chart.positions,b=charts[j].chart.positions;
+        const links=[['Moon','Moon'],['Moon','Venus'],['Venus','Venus'],['Sun','Jupiter']];
+        links.forEach(([x,y])=>{
+          const strength=aspectScore(a[x].longitude,b[y].longitude);
+          if(strength>.25){
+            const element=ELEMENT[a[x].sign],layer=x==='Sun'?'top':'heart';
+            addPool(BY_ELEMENT[element][layer],12*strength,a[x].longitude+b[y].longitude);
+          }
+        });
+        const tension=Math.max(aspectScore(a.Moon.longitude,b.Saturn.longitude),aspectScore(a.Venus.longitude,b.Pluto.longitude));
+        if(tension>.35)['lebanonCedar','sandalwood','greenTea'].forEach((key,index)=>add(key,10*tension*(1-index*.2)));
+      }
+    }
+    return scores;
+  }
+  function pick(scores,layer,count=3){return [...IN_STOCK].filter(key=>NOTE[key].layer===layer).sort((a,b)=>(scores[b]||0)-(scores[a]||0)).slice(0,count)}
   function makeName(charts,scores){const counts={fire:0,earth:0,air:0,water:0};charts.forEach(x=>counts[x.chart.dominantElement]++);const order=Object.keys(counts).filter(x=>counts[x]>0).sort((a,b)=>counts[b]-counts[a]);const names={fire:{earth:'Golden Roots',air:'Luminous Air',water:'Amber Tide'},earth:{fire:'Golden Roots',air:'Silver Garden',water:'Velvet Roots'},air:{fire:'Luminous Air',earth:'Silver Garden',water:'Quiet Horizon'},water:{fire:'Amber Tide',earth:'Velvet Roots',air:'Quiet Horizon'}};return (order[1]&&names[order[0]][order[1]])||({fire:'Solar Ember',earth:'Deep Garden',air:'Clear Orbit',water:'Moonlit Tide'}[order[0]])}
   function composition(charts){let moon=30,venus=22,sun=18,elements=15,syn=15;if(charts.length>1){const links=[];for(let i=0;i<charts.length;i++)for(let j=i+1;j<charts.length;j++){links.push(aspectScore(charts[i].chart.positions.Moon.longitude,charts[j].chart.positions.Moon.longitude));links.push(aspectScore(charts[i].chart.positions.Venus.longitude,charts[j].chart.positions.Venus.longitude))}const avg=links.reduce((a,b)=>a+b,0)/(links.length||1);moon+=Math.round(avg*4);syn+=Math.round(avg*5);elements-=Math.round(avg*3);venus-=Math.round(avg*2);sun-=Math.round(avg*4)}const vals=[moon,venus,sun,elements,syn],sum=vals.reduce((a,b)=>a+b,0);return vals.map(x=>Math.round(x/sum*100)).map((x,i,a)=>i===a.length-1?100-a.slice(0,-1).reduce((p,q)=>p+q,0):x)}
   function story(result){const dom=result.dominant,balancing=result.balancing?noteName(result.balancing):'';const text={ru:`Аромат открывается ${REASON.ru[dom]}. Сердце композиции собрано вокруг лунных и венерианских связей — того, как ощущаются забота, близость и удовольствие. Древесная база символизирует границы, надёжность и возвращение к себе и друг к другу. ${result.balancing?`${balancing} добавлена как балансирующая нота для соединения контрастов.`:''}`,ua:`Аромат відкривається так, що ${REASON.ua[dom]}. Серце композиції зібране навколо місячних і венеріанських зв’язків — способу відчувати турботу, близькість і радість. Деревна база символізує межі, надійність і повернення до себе та одне до одного. ${result.balancing?`${balancing} додана як балансувальна нота для поєднання контрастів.`:''}`,en:`The scent opens with a note that ${REASON.en[dom]}. Its heart is built around Moon and Venus connections: how care, closeness and shared pleasure are experienced. A woody base represents boundaries, reliability and finding a way back to yourself and one another. ${result.balancing?`${balancing} acts as a balancing note for contrasting patterns.`:''}`,nl:`De geur opent met een noot die ${REASON.nl[dom]}. Het hart is opgebouwd rond Maan- en Venusverbindingen: hoe zorg, nabijheid en gezamenlijk plezier worden beleefd. Een houtachtige basis staat voor grenzen, betrouwbaarheid en terugkeren naar uzelf en elkaar. ${result.balancing?`${balancing} werkt als balancerende noot bij contrasterende patronen.`:''}`};return text[lang()]}
-  function calculate(){const error=validate(),err=document.querySelector('.scent-form-error');if(error){err.textContent=error;return}err.textContent='';const button=document.querySelector('.scent-calculate');button.disabled=true;button.innerHTML=`<span class="scent-spinner"></span>${c().working}`;setTimeout(()=>{try{const charts=state.people.map(p=>{const input={name:p.name,birthDate:p.birthDate,birthTime:p.birthTime,birthTimeUnknown:p.unknown,birthPlace:p.place.label,birthCity:p.place.city,birthRegion:p.place.region,birthCountry:p.place.country,birthCountryCode:p.place.countryCode,latitude:p.place.latitude,longitude:p.place.longitude,timezone:p.place.timezone};return {person:p,chart:window.calculateChildNatalChart(input,true)}});const scores=scoreNotes(charts),top=pick(scores,'top'),heart=pick(scores,'heart'),base=pick(scores,'base');const elementTotals={fire:0,earth:0,air:0,water:0};charts.forEach(x=>{elementTotals[x.chart.dominantElement]++});const elems=Object.keys(elementTotals).sort((a,b)=>elementTotals[b]-elementTotals[a]);const hasTension=charts.length>1&&charts.some((x,i)=>charts.slice(i+1).some(y=>aspectScore(x.chart.positions.Moon.longitude,y.chart.positions.Saturn.longitude)>.5));state.result={name:makeName(charts,scores),top,heart,base,charts,composition:composition(charts),dominant:elems[0],secondary:elems[1],balancing:hasTension?'whiteTea':null,createdAt:new Date().toISOString()};localStorage.setItem(STORE,JSON.stringify({mode:state.mode,result:serialiseResult(state.result)}));document.dispatchEvent(new CustomEvent('app:scent-generated',{detail:{mode:state.mode}}));document.getElementById('familyScentResult').innerHTML=resultMarkup(state.result);bindOrderActions();document.getElementById('familyScentResult').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){err.textContent=c().noAstro;console.error(e)}finally{button.disabled=false;button.textContent=c().calculate}},30)}
+  function calculate(){
+    const error=validate(),err=document.querySelector('.scent-form-error');
+    if(error){err.textContent=error;return}
+    err.textContent='';
+    const button=document.querySelector('.scent-calculate');
+    button.disabled=true;
+    button.innerHTML=`<span class="scent-spinner"></span>${c().working}`;
+    setTimeout(()=>{
+      try{
+        const charts=state.people.map(person=>{
+          const input={name:person.name,birthDate:person.birthDate,birthTime:person.birthTime,birthTimeUnknown:person.unknown,birthPlace:person.place.label,birthCity:person.place.city,birthRegion:person.place.region,birthCountry:person.place.country,birthCountryCode:person.place.countryCode,latitude:person.place.latitude,longitude:person.place.longitude,timezone:person.place.timezone};
+          return {person,chart:window.calculateChildNatalChart(input,true)};
+        });
+        const scores=scoreNotes(charts),top=pick(scores,'top'),heart=pick(scores,'heart'),base=pick(scores,'base');
+        const elementTotals={fire:0,earth:0,air:0,water:0};
+        charts.forEach(item=>{elementTotals[item.chart.dominantElement]++});
+        const elements=Object.keys(elementTotals).sort((a,b)=>elementTotals[b]-elementTotals[a]);
+        const hasTension=charts.length>1&&charts.some((item,index)=>charts.slice(index+1).some(other=>aspectScore(item.chart.positions.Moon.longitude,other.chart.positions.Saturn.longitude)>.5));
+        state.result={name:makeName(charts,scores),top,heart,base,charts,composition:composition(charts),dominant:elements[0],secondary:elements[1],balancing:hasTension?'greenTea':null,createdAt:new Date().toISOString()};
+        localStorage.setItem(STORE,JSON.stringify({mode:state.mode,result:serialiseResult(state.result)}));
+        document.dispatchEvent(new CustomEvent('app:scent-generated',{detail:{mode:state.mode}}));
+        document.getElementById('familyScentResult').innerHTML=resultMarkup(state.result);
+        bindOrderActions();
+        document.getElementById('familyScentResult').scrollIntoView({behavior:'smooth',block:'start'});
+      }catch(error){
+        err.textContent=c().noAstro;
+        console.error(error);
+      }finally{
+        button.disabled=false;
+        button.textContent=c().calculate;
+      }
+    },30);
+  }
   function serialiseResult(r){return {name:r.name,top:r.top,heart:r.heart,base:r.base,composition:r.composition,dominant:r.dominant,secondary:r.secondary,balancing:r.balancing,createdAt:r.createdAt,people:r.charts.map(x=>({name:x.person.name,role:x.person.role,knownTime:x.chart.knownTime,positions:Object.fromEntries(['Sun','Moon','Mercury','Venus'].map(b=>[b,{sign:x.chart.positions[b].sign,house:x.chart.positions[b].house}])),ascendant:x.chart.ascendant}))}}
+  function isStockResult(raw){return Boolean(raw&&['top','heart','base'].every(layer=>Array.isArray(raw[layer])&&raw[layer].length===3&&raw[layer].every(key=>IN_STOCK.has(key)))&&(!raw.balancing||IN_STOCK.has(raw.balancing)))}
   function restoreResult(raw){if(!raw)return null;return {...raw,charts:(raw.people||[]).map(x=>({person:{name:x.name,role:x.role},chart:{knownTime:x.knownTime,positions:x.positions,ascendant:x.ascendant}}))}}
   function noteReason(key){const n=NOTE[key];return `${REASON[lang()][n.element]}.`}
   function sign(i){return SIGNS[lang()][i]}
-  function resultMarkup(r){const people=r.charts.map(x=>x.person.name).join(' · '),layers=[['top',r.top],['heart',r.heart],['base',r.base]],facts=r.charts.map(x=>{const p=x.chart.positions,house=body=>x.chart.knownTime&&p[body].house?` · ${p[body].house} ${c().house}`:'';return `<div class="scent-fact"><strong>${esc(x.person.name)}</strong> — ☾ ${sign(p.Moon.sign)}${house('Moon')} · ♀ ${sign(p.Venus.sign)}${house('Venus')} · ☉ ${sign(p.Sun.sign)}${house('Sun')} · ☿ ${sign(p.Mercury.sign)}${house('Mercury')}${x.chart.knownTime&&x.chart.ascendant!=null?` · ${c().asc} ${sign(Math.floor(x.chart.ascendant/30)%12)}`:` · ${c().unknownFact}`}</div>`}).join('');return `<article class="scent-result"><div class="scent-result-top"><div><div class="scent-code">${c().result}</div><div class="scent-name">“${esc(r.name)}”</div><div class="scent-members-line">${c().members}: ${esc(people)}</div></div><div class="scent-bottle" aria-hidden="true"></div></div><div class="scent-pyramid">${layers.map(([layer,keys])=>`<div class="scent-layer"><span>${c()[layer]}</span><strong>${keys.map(k=>NOTE[k].name).join(' · ')}</strong></div>`).join('')}</div><div class="scent-story"><h4>${c().story}</h4>${story(r)}</div><div class="scent-note-reasons"><div class="scent-note-reason"><strong>${NOTE[r.top[0]].name}</strong><p>${noteReason(r.top[0])}</p></div><div class="scent-note-reason"><strong>${NOTE[r.heart[0]].name}</strong><p>${noteReason(r.heart[0])}</p></div><div class="scent-note-reason"><strong>${NOTE[r.base[0]].name}</strong><p>${noteReason(r.base[0])}</p></div>${r.balancing?`<div class="scent-note-reason"><strong>${NOTE[r.balancing].name} · Balancing note</strong><p>${REASON[lang()].balance}.</p></div>`:''}</div><div class="scent-balance"><h4>${c().composition}</h4>${c().metrics.map((label,i)=>`<div class="scent-meter"><span>${label}</span><div class="scent-meter-track"><i style="width:${r.composition[i]}%"></i></div><b>${r.composition[i]}%</b></div>`).join('')}</div><div class="scent-astro-facts"><h4>${c().facts}</h4>${facts}</div><div class="scent-order"><h4>${c().orderTitle}</h4><p>${c().orderText}</p><div class="scent-order-profile"><label for="scentOrderAbout">${c().aboutLabel}</label><textarea id="scentOrderAbout" maxlength="900" placeholder="${esc(c().aboutPlaceholder)}"></textarea><small>${c().aboutHint}</small></div><div class="scent-order-buttons"><button type="button" class="scent-order-btn whatsapp" data-scent-order="whatsapp">◉ ${c().whatsapp}</button><button type="button" class="scent-order-btn email" data-scent-order="email">✉ ${c().email}</button></div><small class="scent-safety">${c().safety}</small></div></article>`}
+  function resultMarkup(result){
+    const people=result.charts.map(item=>item.person.name).join(' · ');
+    const layers=[['top',result.top],['heart',result.heart],['base',result.base]];
+    const facts=result.charts.map(item=>{
+      const positions=item.chart.positions;
+      const house=body=>item.chart.knownTime&&positions[body].house?` · ${positions[body].house} ${c().house}`:'';
+      return `<div class="scent-fact"><strong>${esc(item.person.name)}</strong> — ☾ ${sign(positions.Moon.sign)}${house('Moon')} · ♀ ${sign(positions.Venus.sign)}${house('Venus')} · ☉ ${sign(positions.Sun.sign)}${house('Sun')} · ☿ ${sign(positions.Mercury.sign)}${house('Mercury')}${item.chart.knownTime&&item.chart.ascendant!=null?` · ${c().asc} ${sign(Math.floor(item.chart.ascendant/30)%12)}`:` · ${c().unknownFact}`}</div>`;
+    }).join('');
+    const pyramid=layers.map(([layer,keys])=>`<div class="scent-layer"><span>${c()[layer]}</span><strong>${keys.map(key=>esc(noteName(key))).join(' · ')}</strong></div>`).join('');
+    const balancing=result.balancing?`<div class="scent-note-reason"><strong>${esc(noteName(result.balancing))} · ${balanceLabel()}</strong><p>${REASON[lang()].balance}.</p></div>`:'';
+    return `<article class="scent-result"><div class="scent-result-top"><div><div class="scent-code">${c().result}</div><div class="scent-name">“${esc(scentName(result.name))}”</div><div class="scent-members-line">${c().members}: ${esc(people)}</div></div><div class="scent-bottle" aria-hidden="true"></div></div><div class="scent-pyramid">${pyramid}</div><div class="scent-story"><h4>${c().story}</h4>${story(result)}</div><div class="scent-note-reasons"><div class="scent-note-reason"><strong>${esc(noteName(result.top[0]))}</strong><p>${noteReason(result.top[0])}</p></div><div class="scent-note-reason"><strong>${esc(noteName(result.heart[0]))}</strong><p>${noteReason(result.heart[0])}</p></div><div class="scent-note-reason"><strong>${esc(noteName(result.base[0]))}</strong><p>${noteReason(result.base[0])}</p></div>${balancing}</div><div class="scent-balance"><h4>${c().composition}</h4>${c().metrics.map((label,index)=>`<div class="scent-meter"><span>${label}</span><div class="scent-meter-track"><i style="width:${result.composition[index]}%"></i></div><b>${result.composition[index]}%</b></div>`).join('')}</div><div class="scent-astro-facts"><h4>${c().facts}</h4>${facts}</div><div class="scent-order"><h4>${c().orderTitle}</h4><p>${c().orderText}</p><div class="scent-order-profile"><label for="scentOrderAbout">${c().aboutLabel}</label><textarea id="scentOrderAbout" maxlength="900" placeholder="${esc(c().aboutPlaceholder)}"></textarea><small>${c().aboutHint}</small></div><div class="scent-order-buttons"><button type="button" class="scent-order-btn whatsapp" data-scent-order="whatsapp">◉ ${c().whatsapp}</button><button type="button" class="scent-order-btn email" data-scent-order="email">✉ ${c().email}</button></div><small class="scent-safety">${c().safety}</small></div></article>`;
+  }
   window.renderFamilyScent=render;
-  document.addEventListener('DOMContentLoaded',()=>{localStorage.removeItem(LEGACY_STORE);try{const saved=JSON.parse(localStorage.getItem(STORE)||'null');const created=Date.parse(saved?.result?.createdAt||''),allowedMode=saved?.mode==='my'||saved?.mode==='parents',adultRoles=(saved?.result?.people||[]).every(person=>person.role==='self'||person.role==='partner');if(saved&&allowedMode&&adultRoles&&Number.isFinite(created)&&Date.now()-created<=RETENTION_MS){state.mode=saved.mode;state.result=restoreResult(saved.result)}else if(saved){localStorage.removeItem(STORE)}}catch(_){localStorage.removeItem(STORE)}render()});
+  document.addEventListener('DOMContentLoaded',()=>{localStorage.removeItem(LEGACY_STORE);try{const saved=JSON.parse(localStorage.getItem(STORE)||'null');const created=Date.parse(saved?.result?.createdAt||''),allowedMode=saved?.mode==='my'||saved?.mode==='parents',adultRoles=(saved?.result?.people||[]).every(person=>person.role==='self'||person.role==='partner');if(saved&&allowedMode&&adultRoles&&isStockResult(saved.result)&&Number.isFinite(created)&&Date.now()-created<=RETENTION_MS){state.mode=saved.mode;state.result=restoreResult(saved.result)}else if(saved){localStorage.removeItem(STORE)}}catch(_){localStorage.removeItem(STORE)}render()});
   const previousLanguage=window.changeLanguage;window.changeLanguage=function(language,event){previousLanguage(language,event);render()};
 })();

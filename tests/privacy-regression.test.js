@@ -221,6 +221,43 @@ test('Parent Scent is adult-only and never reads child profiles', () => {
   assert.match(read('privacy-controls.js'),/parentScentCodeV2/);
 });
 
+test('Parent Scent can output only the photographed in-stock fragrance oils', () => {
+  const source = read('family-scent.js');
+  const noteSource = source.match(/const NOTE=(\{[\s\S]*?\n  \});\n  const IN_STOCK/);
+  const poolSource = source.match(/const BY_ELEMENT=(\{[\s\S]*?\n  \});\n  const REASON/);
+  const namesSource = source.match(/const NOTE_NAMES=(\{[\s\S]*?\n  \});\n  const ORDER_COPY/);
+  assert.ok(noteSource && poolSource && namesSource, 'stock catalogue blocks must remain readable');
+
+  const notes = vm.runInNewContext(`(${noteSource[1]})`);
+  const pools = vm.runInNewContext(`(${poolSource[1]})`);
+  const names = vm.runInNewContext(`(${namesSource[1]})`);
+  const expected = [
+    'oudWood','pineapple','vanilla','eucalyptus','smoothie','oakmoss','niaouli','cypress','spicedOrange','creamyCaramel','vetiver','cadeWood','geranium','bergamot','blackberry','rosewood','lebanonCedar','landesPine','cola','magnolia','tobaccoLeaf','strawberryYogurt','musk','cannabis','nagChampa','valenciaOrange','mimosa','lavender','sageBasilMint','spicedVanilla','amber','grapefruit','jasmineTea','patchouli','pepperPatchouli','mint','eucalyptusGlobulus','citrus','watermelonMelon','neroli','blackTeaVanilla','greenTea','verbena','cutGrass','orangeBlossom','rose','mulledWine','figLeaf','chlorophyllMint','orientalIncense','greenApple','chaiLatte','jasmine','mandarin','ylangYlang','thyme','cinnamon','lilac','citronella','sandalwood','wildThyme','coffee','lemongrass','waterFlower','coconut','bergamotTea'
+  ];
+  assert.equal(expected.length, 66, 'the 67-line paper list contains one duplicate Géranium');
+  assert.deepEqual(new Set(Object.keys(notes)), new Set(expected));
+
+  const pooled = [];
+  for (const [element, layers] of Object.entries(pools)) {
+    for (const [layer, keys] of Object.entries(layers)) {
+      for (const key of keys) {
+        pooled.push(key);
+        assert.ok(notes[key], `${key} must exist in the stock catalogue`);
+        assert.equal(notes[key].element, element, `${key} must stay in its element pool`);
+        assert.equal(notes[key].layer, layer, `${key} must stay in its scent layer`);
+      }
+    }
+  }
+  assert.equal(pooled.length, expected.length, 'every stock scent must appear in exactly one scoring pool');
+  assert.deepEqual(new Set(pooled), new Set(expected));
+  for (const language of ['ru','ua','nl']) {
+    assert.deepEqual(new Set(Object.keys(names[language])), new Set(expected), `${language} must translate every stock scent`);
+  }
+  assert.match(source,/function pick\(scores,layer,count=3\)\{return \[\.\.\.IN_STOCK\]/);
+  assert.match(source,/balancing:hasTension\?'greenTea':null/);
+  assert.match(source,/isStockResult\(saved\.result\)/);
+});
+
 test('mobile Methods menu exposes every desktop-only section', () => {
   const html = read('index.html');
   for (const section of ['method','sports','learning','tips','consultation','settings']) {

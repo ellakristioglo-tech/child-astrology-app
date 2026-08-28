@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Tarot cards</title>
+  <defs>
+    <linearGradient id="bg" x1="22" y1="18" x2="232" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172b79"/><stop offset=".55" stop-color="#56308f"/><stop offset="1" stop-color="#a7469d"/>
+    </linearGradient>
+    <linearGradient id="card" x1="86" y1="69" x2="173" y2="205" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#312274"/><stop offset="1" stop-color="#111b51"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="95" y1="76" x2="169" y2="203" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff3a7"/><stop offset=".52" stop-color="#ffd35b"/><stop offset="1" stop-color="#e7a52e"/>
+    </linearGradient>
+    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="58" fill="url(#bg)"/>
+  <circle cx="128" cy="128" r="94" fill="none" stroke="#e9c969" stroke-width="3" opacity=".55"/>
+  <g fill="#fff2a0" filter="url(#glow)">
+    <circle cx="56" cy="63" r="3"/><circle cx="202" cy="72" r="3"/><circle cx="205" cy="174" r="3"/>
+    <path d="M54 175l3 7 7 3-7 3-3 7-3-7-7-3 7-3zM198 109l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>
+  </g>
+  <g transform="rotate(-13 105 141)">
+    <rect x="56" y="72" width="91" height="137" rx="13" fill="url(#card)" stroke="url(#gold)" stroke-width="6"/>
+    <rect x="67" y="84" width="69" height="113" rx="8" fill="none" stroke="#f6ce62" stroke-width="2" opacity=".8"/>
+    <path d="M109 116a29 29 0 1 0 0 50 25 25 0 1 1 0-50z" fill="url(#gold)"/>
+  </g>
+  <g transform="rotate(12 151 139)">
+    <rect x="108" y="68" width="91" height="137" rx="13" fill="url(#card)" stroke="url(#gold)" stroke-width="6"/>
+    <rect x="119" y="80" width="69" height="113" rx="8" fill="none" stroke="#f6ce62" stroke-width="2" opacity=".8"/>
+    <circle cx="153.5" cy="136.5" r="23" fill="url(#gold)" filter="url(#glow)"/>
+    <path d="M153.5 101l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#fff8cf"/>
+  </g>
+</svg>

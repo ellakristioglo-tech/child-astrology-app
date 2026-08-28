@@ -1,5 +1,5 @@
 (() => {
-  const version = '20260825n';
+  const version = '20260828d';
   const icons = {
     children: 'children',
     notes: 'consultations',
@@ -15,7 +15,8 @@
   const icon = (name, className = 'section-icon') => {
     const image = document.createElement('img');
     image.className = className;
-    image.src = `assets/nav-icons/${name}.png?v=${version}`;
+    const extension = name === 'tarot' ? 'svg' : 'png';
+    image.src = `assets/nav-icons/${name}.${extension}?v=${version}`;
     image.alt = '';
     image.setAttribute('aria-hidden', 'true');
     return image;

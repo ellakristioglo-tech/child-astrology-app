@@ -1,6 +1,6 @@
 # Launch checklist — current free local version
 
-Version: 27 August 2026
+Version: 28 August 2026
 
 Legend: **DONE** implemented/verified in code; **N/A** feature does not exist and is blocked from silent addition; **HUMAN** requires controller/lawyer/vendor action.
 
@@ -44,6 +44,10 @@ Legend: **DONE** implemented/verified in code; **N/A** feature does not exist an
 | 36 | Accessibility and keyboard operation | DONE | Native navigation/action buttons, visible focus, modal/menu focus traps, Escape close and reduced-motion support |
 | 37 | Public discovery and security contact | DONE | Description/OG metadata, `robots.txt`, `sitemap.xml` and `.well-known/security.txt` |
 | 38 | Strict script policy and offline reliability | DONE | Inline script execution removed; expanded resilient offline shell; the city dataset is generated during the build and all user searches stay local at runtime |
+| 39 | Distinct medical/development/travel/legal/emergency routes | DONE | Classified before chart calculation, history and analytics; blocked prompt text has zero retention |
+| 40 | Three-layer sensitive answer | DONE | Each route displays astrological boundary, verified-information boundary and responsible next step |
+| 41 | Health disclaimer at decision points | DONE | Visible in child-profile review, Terms and every medical/development safety answer |
+| 42 | No astrology-based diagnosis or causal health claim | DONE | Controlled templates plus explicit Mercury/ADHD safety language; regression-tested |
 
 ## Additional deliverables
 

@@ -1,6 +1,6 @@
 # Child Safety & Automated-Answer Rules
 
-Version: 27 August 2026
+Version: 28 August 2026
 
 ## Current architecture
 
@@ -17,8 +17,16 @@ Every parent question is classified **before** analytics, history or response ge
 | Ordinary astrology/parenting | emotions, communication, learning, sport | Symbolic context + practical observation. |
 | Development/speech | late speech, loss of skills, developmental delay | Do not save; no astrological explanation; refer to huisarts/consultatiebureau/logopedist and possible hearing assessment. |
 | Medical/mental health | symptoms, diagnosis, treatment, ADHD, autism, depression | Do not save; do not analyse; refer to qualified care. |
-| Restricted inference | religion, sexuality, IQ, dangerousness, death, legal/financial/school decision | Do not save; refuse the inference. |
-| Crisis/abuse | self-harm, violence, immediate danger | Do not save; advise immediate emergency help (112 in the EU) and staying with the child. |
+| Travel/booking | passport, visa, flight, booking, hotel | Do not save; no astrological answer; direct to current government/carrier/agent source. |
+| Legal | custody, court, rights, dispute | Do not save; no legal opinion; direct to Juridisch Loket or qualified lawyer. |
+| Restricted inference | religion, sexuality, IQ, dangerousness, death, financial/school decision | Do not save; refuse the inference. |
+| Emergency/abuse | self-harm, violence, immediate danger, breathing difficulty, unconsciousness, seizure | Do not save; advise immediate emergency help (112 in the EU) and staying with the child. |
+
+Every blocked response uses three visibly separated layers:
+
+1. **Astrological context** — states that astrology is not used to explain or decide the issue.
+2. **Verified information** — gives only the narrow factual boundary and dated official-source cards where appropriate.
+3. **When and where to get help** — identifies the responsible professional or organisation.
 
 ## Prohibited outputs
 

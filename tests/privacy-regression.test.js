@@ -87,14 +87,30 @@ test('sensitive questions are blocked before storage and analytics', () => {
   assert.ok(sensitive > 0 && analytics > sensitive && history > analytics);
   assert.match(source, /ADHD|adhd/);
   assert.match(source, /speech delay|spraakachterstand|задержк/);
-  assert.match(source, /return 'development'/);
+  for (const route of ['development','medical','travel','legal','restricted','emergency']) assert.match(source, new RegExp(`return '${route}'`));
+  assert.match(source, /const layers = \['astrology','evidence','help'\]/);
+  assert.match(source, /consultant-safety-layer/);
   assert.match(source, /rijksoverheid\.nl\/vraag-en-antwoord\/zwangerschap-en-geboorte/);
   assert.match(source, /thuisarts\.nl\/slecht-horen\/ik-denk-dat-mijn-kind-slecht-hoort/);
-  assert.match(source, /Verified 27 August 2026/);
+  assert.match(source, /nederlandwereldwijd\.nl\/reisadvies/);
+  assert.match(source, /rijksoverheid\.nl\/service\/contact\/contactgids\/j\/juridisch-loket/);
+  assert.match(source, /Verified 28 August 2026/);
   assert.match(source, /sexual|сексуал/);
   assert.match(source, /RETENTION_MS = 90/);
   assert.match(source, /createdAt/);
   assert.doesNotMatch(source, /api\.openai\.com|anthropic\.com|generativelanguage\.googleapis\.com/);
+});
+
+test('health boundary is visible in onboarding, terms and generated child analysis', () => {
+  const onboarding = read('child-modal.js');
+  const legal = read('legal.js');
+  const analysis = read('child-analysis.js');
+  assert.match(onboarding,/Не откладывайте консультацию квалифицированного специалиста/);
+  assert.match(onboarding,/Do not delay qualified professional care/);
+  assert.match(legal,/HEALTH_NOTICE/);
+  assert.match(legal,/не могут устанавливать причину особенностей развития ребёнка/);
+  assert.match(analysis,/Научных доказательств, что ретроградный Меркурий вызывает задержку речи[^.]*, нет/);
+  assert.match(analysis,/натальная карта определяет гиперактивность или СДВГ, нет: это не диагноз/);
 });
 
 test('navigation is keyboard native and script CSP has no unsafe inline exception', () => {

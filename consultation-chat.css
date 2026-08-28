@@ -21,6 +21,8 @@
 .consultant-message.assistant{align-self:flex-start;border:1px solid rgba(74,44,122,.12);border-bottom-left-radius:5px;background:#fff;color:#293244;box-shadow:0 7px 22px rgba(44,31,79,.07)}
 .consultant-message.assistant strong{color:#45256f}
 .consultant-evidence{display:grid;gap:8px;margin-top:12px;padding-top:11px;border-top:1px solid rgba(74,44,122,.14)}
+.consultant-safety-layer{margin:0 0 12px}.consultant-safety-layer:last-of-type{margin-bottom:0}.consultant-safety-layer strong{display:block;margin-bottom:3px;color:#4a2c7a}.consultant-safety-layer p{margin:0}
+.child-wizard-safety{margin:14px 0 0;padding:12px 14px;border-left:3px solid #d4af37;border-radius:10px;background:#fff8dc;color:#54461e;font-size:13px;line-height:1.5}
 .consultant-evidence>a{color:#4a2c7a;font-weight:750;text-decoration:underline;text-underline-offset:3px}
 .consultant-evidence>small{color:#6f7480}
 .consultant-compose{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}

@@ -1,6 +1,6 @@
 # MVP Specification
 
-Version: 27 August 2026
+Version: 28 August 2026
 
 ## Launch product
 
@@ -26,7 +26,8 @@ Free, parent-directed, local-first web/PWA for the Netherlands and EU. No accoun
 - Eight core Child Code outcomes.
 - Practical, non-diagnostic recommendations.
 - Deterministic local parent Q&A.
-- Pre-answer sensitive-query blocking.
+- Pre-answer safety routing for development, medical, travel, legal, restricted inference and emergency questions.
+- Three visibly separated safety layers: astrological boundary, verified information and responsible next step.
 - Dated official-source and referral cards for development/health safety routes; links open only after a deliberate user click.
 - Privacy dashboard: export/import/readable copy/delete history/delete child/delete all.
 - Four languages: NL, RU, UA, EN.
@@ -59,6 +60,7 @@ Required for personal calculation: nickname, birth date, birthplace; exact time 
 
 - Google scripts do not load before explicit analytics permission.
 - Sensitive question text is blocked before storage and analytics.
+- Blocked safety answers never use a chart and display all three safety layers.
 - All navigation and primary controls work with keyboard and visible focus.
 - Modal focus is contained; Escape closes; focus returns to the invoking control.
 - Unknown birth time produces no fabricated houses or Ascendant.

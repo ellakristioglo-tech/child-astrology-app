@@ -14,9 +14,12 @@ Input is classified locally before storage. Medical/mental-health symptoms and d
 - inference of health, religion, sexual orientation, intelligence, criminality/dangerousness or lifespan;
 - certainty claims such as “the chart proves”;
 - significant education, legal, financial, safety or health decisions;
+- travel-document, visa, booking, airline or hotel decisions;
 - manipulative or fear-based claims involving a child;
 - advertising or audience building from child traits.
 
 ## Future AI feature gate
 
 No external AI may be enabled until all are complete: new DPIA/LIA/data map; Article 6/9 assessment; controller/provider role review under the AI Act; Article 50 disclosure; minimum pseudonymous payload; pre-send sensitive classifier; output safety filter; DPA/subprocessors/transfers; EEA/ZDR settings where available; no training opt-in; 30-day-or-shorter provider retention; redacted logs; deletion/export integration; security and privacy regression tests; AI-literacy record; Dutch legal sign-off.
+
+The current local router separates development, medical, travel, legal, restricted-inference and emergency routes before analytics, history or chart calculation. Every blocked response displays three layers: the astrological boundary, verified-information boundary and responsible next step.

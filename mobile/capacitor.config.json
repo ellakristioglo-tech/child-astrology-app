@@ -1,0 +1,13 @@
+{
+  "appId": "com.childastrology.app",
+  "appName": "Child Astrology",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "ios": {
+    "contentInset": "automatic",
+    "preferredContentMode": "mobile"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

@@ -11,6 +11,16 @@
         'serviceWorker' in navigator && navigator.serviceWorker.controller
     );
 
+    function loadCurrentSupportCenter() {
+        const existing = document.querySelector('script[data-support-center-loader]');
+        if (existing) return;
+        const script = document.createElement('script');
+        script.src = './support-center.js?v=' + encodeURIComponent(CURRENT_BUILD);
+        script.async = false;
+        script.dataset.supportCenterLoader = '1';
+        document.body.appendChild(script);
+    }
+
     function reloadOnce() {
         if (reloadStarted) return;
         reloadStarted = true;
@@ -40,7 +50,6 @@
             }
             reloadOnce();
         } catch (error) {
-            // A failed check must never interrupt the app, especially while offline.
         } finally {
             checkInProgress = false;
         }
@@ -55,9 +64,10 @@
             );
             await registration.update().catch(function ignoreUpdateError() {});
         } catch (error) {
-            // The web app stays fully usable if service workers are unavailable.
         }
     }
+
+    loadCurrentSupportCenter();
 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.addEventListener('controllerchange', function onControllerChange() {

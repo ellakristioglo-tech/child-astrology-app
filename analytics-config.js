@@ -46,3 +46,32 @@ window.CHILD_ASTROLOGY_ANALYTICS = Object.freeze({
     if(event.target.closest('[data-language]'))window.setTimeout(render,80);
   });
 })();
+
+(function addTomaKristiogloCredit(){
+  'use strict';
+  function installStyle(){
+    if(document.getElementById('tomaKristiogloCreditStyle'))return;
+    const style=document.createElement('style');
+    style.id='tomaKristiogloCreditStyle';
+    style.textContent='.toma-kristioglo-credit{margin:22px 0 8px;text-align:center;color:rgba(255,255,255,.82);font-size:13px;font-weight:600;letter-spacing:.08em}.toma-kristioglo-credit::before{content:"✦ ";color:#d4af37}.toma-kristioglo-credit::after{content:" ✦";color:#d4af37}';
+    document.head.appendChild(style);
+  }
+  function renderCredit(){
+    const root=document.getElementById('familyScentApp');
+    if(!root)return;
+    installStyle();
+    let credit=root.querySelector('.toma-kristioglo-credit');
+    if(!credit){
+      credit=document.createElement('div');
+      credit.className='toma-kristioglo-credit';
+      root.appendChild(credit);
+    }
+    credit.textContent='Toma Kristioglo';
+  }
+  window.addEventListener('load',()=>{
+    const root=document.getElementById('familyScentApp');
+    if(!root)return;
+    renderCredit();
+    new MutationObserver(()=>renderCredit()).observe(root,{childList:true,subtree:false});
+  },{once:true});
+})();

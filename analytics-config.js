@@ -53,7 +53,7 @@ window.CHILD_ASTROLOGY_ANALYTICS = Object.freeze({
     if(document.getElementById('tomaKristiogloCreditStyle'))return;
     const style=document.createElement('style');
     style.id='tomaKristiogloCreditStyle';
-    style.textContent='.toma-kristioglo-credit{margin:22px 0 8px;text-align:center;color:rgba(255,255,255,.82);font-size:13px;font-weight:600;letter-spacing:.08em}.toma-kristioglo-credit::before{content:"✦ ";color:#d4af37}.toma-kristioglo-credit::after{content:" ✦";color:#d4af37}';
+    style.textContent='.toma-kristioglo-credit{margin:22px 0 8px;text-align:center;color:rgba(255,255,255,.82);font-size:13px;font-weight:600;letter-spacing:.06em}.toma-kristioglo-credit::before{content:"✦ ";color:#d4af37}.toma-kristioglo-credit::after{content:" ✦";color:#d4af37}';
     document.head.appendChild(style);
   }
   function renderCredit(){
@@ -66,7 +66,7 @@ window.CHILD_ASTROLOGY_ANALYTICS = Object.freeze({
       credit.className='toma-kristioglo-credit';
       root.appendChild(credit);
     }
-    credit.textContent='Toma Kristioglo';
+    credit.textContent='Scent concept by Toma Kristioglo';
   }
   window.addEventListener('load',()=>{
     const root=document.getElementById('familyScentApp');

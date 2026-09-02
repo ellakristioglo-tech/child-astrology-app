@@ -42,10 +42,61 @@
 
   window.AppModalFocus = { activate: activateFocusTrap };
 
+  const METHOD_COPY = {
+    ru: { title: 'Методы', method: 'Метод 6 шагов', sports: 'Спорт по Марсу', learning: 'Обучение по Меркурию', tips: '10 советов родителям', consultation: 'Помощник для родителей' },
+    ua: { title: 'Методи', method: 'Метод 6 кроків', sports: 'Спорт за Марсом', learning: 'Навчання за Меркурієм', tips: '10 порад батькам', consultation: 'Помічник для батьків' },
+    en: { title: 'Methods', method: '6-step Method', sports: 'Sports by Mars', learning: 'Learning by Mercury', tips: '10 Tips for Parents', consultation: 'Parent Guide' },
+    nl: { title: 'Methodes', method: '6-stappenmethode', sports: 'Sport via Mars', learning: 'Leren via Mercurius', tips: '10 tips voor ouders', consultation: 'Oudergids' }
+  };
+
+  function currentLanguage() {
+    const value = localStorage.getItem('language') || window.currentLanguage || 'nl';
+    return METHOD_COPY[value] ? value : 'nl';
+  }
+
+  function ensureMethodsHub() {
+    let section = document.getElementById('methods-hub');
+    if (!section) {
+      section = document.createElement('section');
+      section.id = 'methods-hub';
+      section.className = 'section';
+      document.querySelector('.main-content')?.appendChild(section);
+    }
+    const copy = METHOD_COPY[currentLanguage()];
+    section.innerHTML = `
+      <div class="card methods-hub-card">
+        <h2 class="card-title">✨ ${copy.title}</h2>
+        <div class="methods-hub-grid">
+          <button type="button" class="action-card" data-section="method"><span class="action-icon">✨</span><span class="action-title">${copy.method}</span></button>
+          <button type="button" class="action-card" data-section="sports"><span class="action-icon">🏃</span><span class="action-title">${copy.sports}</span></button>
+          <button type="button" class="action-card" data-section="learning"><span class="action-icon">📚</span><span class="action-title">${copy.learning}</span></button>
+          <button type="button" class="action-card" data-section="tips"><span class="action-icon">💡</span><span class="action-title">${copy.tips}</span></button>
+          <button type="button" class="action-card" data-section="consultation"><span class="action-icon">💬</span><span class="action-title">${copy.consultation}</span></button>
+        </div>
+      </div>`;
+    if (!document.getElementById('methodsHubStyles')) {
+      const style = document.createElement('style');
+      style.id = 'methodsHubStyles';
+      style.textContent = '.methods-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.methods-hub-grid .action-card{min-height:120px;width:100%;text-align:left}.methods-hub-grid .action-icon{font-size:30px}.methods-hub-grid .action-title{display:block;font-size:20px;line-height:1.2}@media(max-width:600px){.methods-hub-grid{grid-template-columns:1fr}.methods-hub-grid .action-card{min-height:94px}}';
+      document.head.appendChild(style);
+    }
+    return section;
+  }
+
+  function openMethodsHub(event) {
+    event?.preventDefault?.();
+    window.closeMobileMethods?.();
+    ensureMethodsHub();
+    window.showSection?.('methods-hub', event);
+  }
+
+  window.openMethodsHub = openMethodsHub;
+
   document.addEventListener('click', (event) => {
     const languageButton = event.target.closest('.lang-btn[data-language]');
     if (languageButton) {
       window.changeLanguage?.(languageButton.dataset.language, event);
+      if (document.getElementById('methods-hub')?.classList.contains('active')) ensureMethodsHub();
       return;
     }
 
@@ -62,7 +113,7 @@
     const action = actionButton.dataset.action;
     if (action === 'add-child') window.addChild?.();
     if (action === 'save-note') window.saveNote?.();
-    if (action === 'toggle-mobile-methods') window.toggleMobileMethods?.(event);
+    if (action === 'toggle-mobile-methods') openMethodsHub(event);
     if (action === 'close-mobile-methods') window.closeMobileMethods?.();
     if (action === 'show-child-analysis') window.showChildAnalysis?.(Number(actionButton.dataset.childId));
     if (action === 'delete-child') window.deleteChild?.(Number(actionButton.dataset.childId));

@@ -78,7 +78,7 @@
 (function loadSupportCenter(){
   if(document.querySelector('script[data-support-center]')) return;
   const script=document.createElement('script');
-  script.src='support-center.js?v=20260902a';
+  script.src='support-center.js?v=20260902b';
   script.defer=true;
   script.dataset.supportCenter='1';
   document.head.appendChild(script);

@@ -1,7 +1,7 @@
 (function setupMobileMethodsMenu() {
   'use strict';
 
-  const groupedSections = new Set(['method', 'sports', 'learning', 'tips', 'consultation', 'settings']);
+  const groupedSections = new Set(['method', 'sports', 'learning', 'tips', 'consultation', 'settings', 'support']);
   let releaseMenuFocus = () => {};
 
   function menu() { return document.getElementById('mobileMethodsMenu'); }
@@ -73,4 +73,13 @@
     const activeSection = document.querySelector('.section.active')?.id || 'home';
     syncActive(activeSection);
   });
+})();
+
+(function loadSupportCenter(){
+  if(document.querySelector('script[data-support-center]')) return;
+  const script=document.createElement('script');
+  script.src='support-center.js?v=20260902a';
+  script.defer=true;
+  script.dataset.supportCenter='1';
+  document.head.appendChild(script);
 })();

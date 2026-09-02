@@ -121,11 +121,22 @@
 
   window.openMethodsHub = openMethodsHub;
 
+  function restoreSection(sectionId) {
+    if (!sectionId) return;
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    if (!section.classList.contains('active')) window.showSection?.(sectionId);
+  }
+
   document.addEventListener('click', (event) => {
     const languageButton = event.target.closest('.lang-btn[data-language]');
     if (languageButton) {
+      const activeSectionId = document.querySelector('.section.active')?.id || 'home';
       window.changeLanguage?.(languageButton.dataset.language, event);
-      if (document.getElementById('methods-hub')?.classList.contains('active')) ensureMethodsHub();
+      if (activeSectionId === 'methods-hub') ensureMethodsHub();
+      restoreSection(activeSectionId);
+      window.setTimeout(() => restoreSection(activeSectionId), 0);
+      window.setTimeout(() => restoreSection(activeSectionId), 150);
       return;
     }
 

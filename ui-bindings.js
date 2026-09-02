@@ -1,6 +1,13 @@
 (function setupAccessibleUiBindings() {
   'use strict';
 
+  try {
+    Object.defineProperty(window, 'children', {
+      configurable: true,
+      get: function getCurrentChildren() { return typeof children !== 'undefined' ? children : []; }
+    });
+  } catch (_) {}
+
   const FOCUSABLE = [
     'a[href]',
     'button:not([disabled])',

@@ -128,15 +128,40 @@
     if (!section.classList.contains('active')) window.showSection?.(sectionId);
   }
 
+  function lockVisibleSection(sectionId) {
+    const sections = [...document.querySelectorAll('.section')];
+    sections.forEach((section) => {
+      section.dataset.languageSwitchDisplay = section.style.display || '';
+      if (section.id === sectionId) {
+        section.style.setProperty('display', 'block', 'important');
+      } else {
+        section.style.setProperty('display', 'none', 'important');
+      }
+    });
+    return function unlockVisibleSection() {
+      sections.forEach((section) => {
+        const previous = section.dataset.languageSwitchDisplay || '';
+        section.style.removeProperty('display');
+        if (previous) section.style.display = previous;
+        delete section.dataset.languageSwitchDisplay;
+      });
+    };
+  }
+
   document.addEventListener('click', (event) => {
     const languageButton = event.target.closest('.lang-btn[data-language]');
     if (languageButton) {
       const activeSectionId = document.querySelector('.section.active')?.id || 'home';
+      const unlockVisibleSection = lockVisibleSection(activeSectionId);
       window.changeLanguage?.(languageButton.dataset.language, event);
       if (activeSectionId === 'methods-hub') ensureMethodsHub();
       restoreSection(activeSectionId);
-      window.setTimeout(() => restoreSection(activeSectionId), 0);
-      window.setTimeout(() => restoreSection(activeSectionId), 150);
+      window.requestAnimationFrame(() => restoreSection(activeSectionId));
+      window.setTimeout(() => {
+        restoreSection(activeSectionId);
+        unlockVisibleSection();
+        restoreSection(activeSectionId);
+      }, 220);
       return;
     }
 

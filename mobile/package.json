@@ -1,0 +1,21 @@
+{
+  "name": "child-astrology-mobile",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "prepare:web": "node build-web.mjs",
+    "cap:sync": "npm run prepare:web && npx cap sync",
+    "cap:add:ios": "npm run prepare:web && npx cap add ios",
+    "cap:add:android": "npm run prepare:web && npx cap add android",
+    "open:ios": "npx cap open ios",
+    "open:android": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/ios": "^8.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.0.0"
+  }
+}

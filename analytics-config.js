@@ -99,3 +99,11 @@ window.CHILD_ASTROLOGY_ANALYTICS = Object.freeze({
     },0);
   });
 })();
+
+(function loadConsultationMethodFix(){
+  if(document.querySelector('script[data-consultation-method-fix]'))return;
+  const script=document.createElement('script');
+  script.src='consultation-method-fix.js?v=20260902c';
+  script.dataset.consultationMethodFix='1';
+  document.head.appendChild(script);
+})();

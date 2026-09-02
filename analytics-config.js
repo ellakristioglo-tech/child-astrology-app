@@ -75,3 +75,11 @@ window.CHILD_ASTROLOGY_ANALYTICS = Object.freeze({
     new MutationObserver(()=>renderCredit()).observe(root,{childList:true,subtree:false});
   },{once:true});
 })();
+
+(function loadPostConsentGuide(){
+  if(document.querySelector('script[data-post-consent-guide]'))return;
+  const script=document.createElement('script');
+  script.src='onboarding-guide.js?v=20260902b';
+  script.dataset.postConsentGuide='1';
+  document.head.appendChild(script);
+})();

@@ -83,3 +83,19 @@ window.CHILD_ASTROLOGY_ANALYTICS = Object.freeze({
   script.dataset.postConsentGuide='1';
   document.head.appendChild(script);
 })();
+
+(function makeAllConsultationChipsAnswer(){
+  'use strict';
+  document.addEventListener('click',function(event){
+    const chip=event.target.closest('.consultant-chip[data-topic]');
+    if(!chip||chip.disabled)return;
+    window.setTimeout(function(){
+      const input=document.getElementById('consultantQuestion');
+      const send=document.getElementById('consultantSend');
+      if(!input||!send||send.disabled)return;
+      if(!input.value.trim())input.value=chip.textContent.trim();
+      if(!input.value.trim())return;
+      send.click();
+    },0);
+  });
+})();

@@ -43,10 +43,10 @@
   window.AppModalFocus = { activate: activateFocusTrap };
 
   const METHOD_COPY = {
-    ru: { title: 'Методы', method: 'Метод 6 шагов', sports: 'Спорт по Марсу', learning: 'Обучение по Меркурию', tips: '10 советов родителям', consultation: 'Помощник для родителей' },
-    ua: { title: 'Методи', method: 'Метод 6 кроків', sports: 'Спорт за Марсом', learning: 'Навчання за Меркурієм', tips: '10 порад батькам', consultation: 'Помічник для батьків' },
-    en: { title: 'Methods', method: '6-step Method', sports: 'Sports by Mars', learning: 'Learning by Mercury', tips: '10 Tips for Parents', consultation: 'Parent Guide' },
-    nl: { title: 'Methodes', method: '6-stappenmethode', sports: 'Sport via Mars', learning: 'Leren via Mercurius', tips: '10 tips voor ouders', consultation: 'Oudergids' }
+    ru: { title: 'Методы', method: 'Метод 6 шагов', sports: 'Спорт по Марсу', learning: 'Обучение по Меркурию', tips: '10 советов родителям', consultation: 'Помощник для родителей', support: 'Поддержка' },
+    ua: { title: 'Методи', method: 'Метод 6 кроків', sports: 'Спорт за Марсом', learning: 'Навчання за Меркурієм', tips: '10 порад батькам', consultation: 'Помічник для батьків', support: 'Підтримка' },
+    en: { title: 'Methods', method: '6-step Method', sports: 'Sports by Mars', learning: 'Learning by Mercury', tips: '10 Tips for Parents', consultation: 'Parent Guide', support: 'Support' },
+    nl: { title: 'Methodes', method: '6-stappenmethode', sports: 'Sport via Mars', learning: 'Leren via Mercurius', tips: '10 tips voor ouders', consultation: 'Oudergids', support: 'Support' }
   };
 
   function currentLanguage() {
@@ -106,6 +106,7 @@
           <button type="button" class="methods-hub-button" data-section="learning"><span class="methods-hub-icon">📚</span><span class="methods-hub-label">${copy.learning}</span></button>
           <button type="button" class="methods-hub-button" data-section="tips"><span class="methods-hub-icon">💡</span><span class="methods-hub-label">${copy.tips}</span></button>
           <button type="button" class="methods-hub-button" data-section="consultation"><span class="methods-hub-icon">💬</span><span class="methods-hub-label">${copy.consultation}</span></button>
+          <button type="button" class="methods-hub-button" data-section="support"><span class="methods-hub-icon">🛟</span><span class="methods-hub-label">${copy.support}</span></button>
         </div>
       </div>`;
     return section;

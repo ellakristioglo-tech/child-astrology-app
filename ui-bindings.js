@@ -77,7 +77,28 @@
     if (!document.getElementById('methodsHubStyles')) {
       const style = document.createElement('style');
       style.id = 'methodsHubStyles';
-      style.textContent = '.methods-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.methods-hub-grid .action-card{min-height:120px;width:100%;text-align:left}.methods-hub-grid .action-icon{font-size:30px}.methods-hub-grid .action-title{display:block;font-size:20px;line-height:1.2}@media(max-width:600px){.methods-hub-grid{grid-template-columns:1fr}.methods-hub-grid .action-card{min-height:94px}}';
+      style.textContent = `
+        .methods-hub-card{display:block!important;width:100%;max-width:100%;padding:24px!important}
+        .methods-hub-card>.card-title{display:block!important;width:100%;margin:0 0 18px!important;text-align:left}
+        .methods-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%}
+        .methods-hub-grid .action-card{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-width:0;min-height:122px;height:auto;padding:18px 14px!important;text-align:center!important;border-radius:20px}
+        .methods-hub-grid .action-icon{display:block;font-size:34px;line-height:1}
+        .methods-hub-grid .action-title{display:block;width:100%;font-size:18px;line-height:1.2;text-align:center;overflow-wrap:anywhere}
+        @media(max-width:600px){
+          .methods-hub-card{padding:18px 14px!important}
+          .methods-hub-card>.card-title{font-size:28px!important;margin-bottom:14px!important}
+          .methods-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+          .methods-hub-grid .action-card{min-height:112px;padding:14px 10px!important;border-radius:18px}
+          .methods-hub-grid .action-icon{font-size:30px}
+          .methods-hub-grid .action-title{font-size:15px;line-height:1.18}
+          .methods-hub-grid .action-card:last-child:nth-child(odd){grid-column:1/-1;min-height:96px}
+        }
+        @media(max-width:360px){
+          .methods-hub-grid{gap:8px}
+          .methods-hub-grid .action-card{min-height:104px;padding:12px 8px!important}
+          .methods-hub-grid .action-title{font-size:14px}
+        }
+      `;
       document.head.appendChild(style);
     }
     return section;

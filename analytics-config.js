@@ -1,3 +1,16 @@
+// Force the current launch consent screen once for existing installations.
+// After the user confirms it, the gate will not repeat on every app open.
+(function refreshLaunchConsentOnce() {
+  const refreshKey = 'child_astrology_consent_refresh_20260902_v1';
+  const parentKey = 'child_astrology_parent_confirmed_v1';
+  try {
+    if (!localStorage.getItem(refreshKey)) {
+      localStorage.removeItem(parentKey);
+      localStorage.setItem(refreshKey, '1');
+    }
+  } catch (_) {}
+})();
+
 // Production GA4 stream for childastrologyapp.com
 window.CHILD_ASTROLOGY_ANALYTICS = Object.freeze({
   measurementId: 'G-SZHFB9KVM4',

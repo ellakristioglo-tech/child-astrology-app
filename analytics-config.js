@@ -107,3 +107,11 @@ window.CHILD_ASTROLOGY_ANALYTICS = Object.freeze({
   script.dataset.consultationMethodFix='1';
   document.head.appendChild(script);
 })();
+
+(function loadConsultationLanguageSync(){
+  if(document.querySelector('script[data-consultation-language-sync]'))return;
+  const script=document.createElement('script');
+  script.src='consultation-language-sync.js?v=20260902a';
+  script.dataset.consultationLanguageSync='1';
+  document.head.appendChild(script);
+})();

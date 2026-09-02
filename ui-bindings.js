@@ -54,7 +54,41 @@
     return METHOD_COPY[value] ? value : 'nl';
   }
 
+  function installMethodsHubStyles() {
+    let style = document.getElementById('methodsHubStyles');
+    if (!style) {
+      style = document.createElement('style');
+      style.id = 'methodsHubStyles';
+      document.head.appendChild(style);
+    }
+    style.textContent = `
+      #methods-hub{width:100%!important;max-width:100%!important}
+      #methods-hub .methods-hub-card{display:block!important;width:100%!important;max-width:100%!important;margin:20px 0!important;padding:22px!important;box-sizing:border-box!important}
+      #methods-hub .methods-hub-title{display:block!important;width:100%!important;margin:0 0 18px!important;color:var(--cosmic-purple);font-size:28px;font-weight:800;line-height:1.15;text-align:left!important}
+      #methods-hub .methods-hub-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important}
+      #methods-hub .methods-hub-button{appearance:none;-webkit-appearance:none;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;height:132px!important;min-height:132px!important;margin:0!important;padding:16px 12px!important;border:1px solid rgba(74,44,122,.10)!important;border-radius:20px!important;background:linear-gradient(135deg,#fff 0%,#faf8fd 100%)!important;box-shadow:0 8px 22px rgba(49,33,91,.08)!important;color:var(--cosmic-purple)!important;font:inherit!important;text-align:center!important;cursor:pointer!important;box-sizing:border-box!important}
+      #methods-hub .methods-hub-button:active{transform:scale(.98)}
+      #methods-hub .methods-hub-icon{display:block!important;font-size:32px!important;line-height:1!important;margin:0!important}
+      #methods-hub .methods-hub-label{display:block!important;width:100%!important;margin:0!important;font-size:17px!important;font-weight:800!important;line-height:1.15!important;text-align:center!important;overflow-wrap:anywhere!important;word-break:normal!important}
+      @media(max-width:600px){
+        #methods-hub .methods-hub-card{margin:8px 0 110px!important;padding:18px 14px!important;border-radius:22px!important}
+        #methods-hub .methods-hub-title{font-size:26px!important;margin:0 0 14px!important}
+        #methods-hub .methods-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+        #methods-hub .methods-hub-button{height:118px!important;min-height:118px!important;padding:12px 8px!important;border-radius:18px!important}
+        #methods-hub .methods-hub-icon{font-size:29px!important}
+        #methods-hub .methods-hub-label{font-size:15px!important;line-height:1.16!important}
+        #methods-hub .methods-hub-button:last-child{grid-column:1/-1!important;height:94px!important;min-height:94px!important;flex-direction:row!important;gap:12px!important}
+      }
+      @media(max-width:360px){
+        #methods-hub .methods-hub-grid{gap:8px!important}
+        #methods-hub .methods-hub-button{height:108px!important;min-height:108px!important;padding:10px 7px!important}
+        #methods-hub .methods-hub-label{font-size:14px!important}
+      }
+    `;
+  }
+
   function ensureMethodsHub() {
+    installMethodsHubStyles();
     let section = document.getElementById('methods-hub');
     if (!section) {
       section = document.createElement('section');
@@ -64,43 +98,16 @@
     }
     const copy = METHOD_COPY[currentLanguage()];
     section.innerHTML = `
-      <div class="card methods-hub-card">
-        <h2 class="card-title">✨ ${copy.title}</h2>
+      <div class="methods-hub-card card">
+        <h2 class="methods-hub-title">✨ ${copy.title}</h2>
         <div class="methods-hub-grid">
-          <button type="button" class="action-card" data-section="method"><span class="action-icon">✨</span><span class="action-title">${copy.method}</span></button>
-          <button type="button" class="action-card" data-section="sports"><span class="action-icon">🏃</span><span class="action-title">${copy.sports}</span></button>
-          <button type="button" class="action-card" data-section="learning"><span class="action-icon">📚</span><span class="action-title">${copy.learning}</span></button>
-          <button type="button" class="action-card" data-section="tips"><span class="action-icon">💡</span><span class="action-title">${copy.tips}</span></button>
-          <button type="button" class="action-card" data-section="consultation"><span class="action-icon">💬</span><span class="action-title">${copy.consultation}</span></button>
+          <button type="button" class="methods-hub-button" data-section="method"><span class="methods-hub-icon">✨</span><span class="methods-hub-label">${copy.method}</span></button>
+          <button type="button" class="methods-hub-button" data-section="sports"><span class="methods-hub-icon">🏃</span><span class="methods-hub-label">${copy.sports}</span></button>
+          <button type="button" class="methods-hub-button" data-section="learning"><span class="methods-hub-icon">📚</span><span class="methods-hub-label">${copy.learning}</span></button>
+          <button type="button" class="methods-hub-button" data-section="tips"><span class="methods-hub-icon">💡</span><span class="methods-hub-label">${copy.tips}</span></button>
+          <button type="button" class="methods-hub-button" data-section="consultation"><span class="methods-hub-icon">💬</span><span class="methods-hub-label">${copy.consultation}</span></button>
         </div>
       </div>`;
-    if (!document.getElementById('methodsHubStyles')) {
-      const style = document.createElement('style');
-      style.id = 'methodsHubStyles';
-      style.textContent = `
-        .methods-hub-card{display:block!important;width:100%;max-width:100%;padding:24px!important}
-        .methods-hub-card>.card-title{display:block!important;width:100%;margin:0 0 18px!important;text-align:left}
-        .methods-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%}
-        .methods-hub-grid .action-card{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-width:0;min-height:122px;height:auto;padding:18px 14px!important;text-align:center!important;border-radius:20px}
-        .methods-hub-grid .action-icon{display:block;font-size:34px;line-height:1}
-        .methods-hub-grid .action-title{display:block;width:100%;font-size:18px;line-height:1.2;text-align:center;overflow-wrap:anywhere}
-        @media(max-width:600px){
-          .methods-hub-card{padding:18px 14px!important}
-          .methods-hub-card>.card-title{font-size:28px!important;margin-bottom:14px!important}
-          .methods-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-          .methods-hub-grid .action-card{min-height:112px;padding:14px 10px!important;border-radius:18px}
-          .methods-hub-grid .action-icon{font-size:30px}
-          .methods-hub-grid .action-title{font-size:15px;line-height:1.18}
-          .methods-hub-grid .action-card:last-child:nth-child(odd){grid-column:1/-1;min-height:96px}
-        }
-        @media(max-width:360px){
-          .methods-hub-grid{gap:8px}
-          .methods-hub-grid .action-card{min-height:104px;padding:12px 8px!important}
-          .methods-hub-grid .action-title{font-size:14px}
-        }
-      `;
-      document.head.appendChild(style);
-    }
     return section;
   }
 

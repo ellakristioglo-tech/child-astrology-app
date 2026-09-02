@@ -6,9 +6,14 @@ const vm = require('node:vm');
 
 const ROOT = path.resolve(__dirname, '..');
 const read = (file) => fs.readFileSync(path.join(ROOT, file), 'utf8');
+const storageStub = {
+  getItem() { return null; },
+  setItem() {},
+  removeItem() {}
+};
 
 function evalWithExport(file, exportName, prelude = '') {
-  const context = {};
+  const context = { localStorage: storageStub };
   vm.createContext(context);
   const source = `${prelude}\n${read(file)}\nglobalThis.__value = ${exportName};`;
   vm.runInContext(source, context, { filename: file });
@@ -19,7 +24,7 @@ const languages = ['ru', 'ua', 'en', 'nl'];
 const signs = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
 
 test('all core UI languages expose the same launch-critical keys', () => {
-  const context = {};
+  const context = { localStorage: storageStub };
   vm.createContext(context);
   vm.runInContext(`${read('translations.js')}\n${read('ui-translations-fix.js').split('(function launchPolish')[0]}\nglobalThis.__translations = translations;`, context);
   const translations = context.__translations;
@@ -83,10 +88,12 @@ test('PWA update path is build-versioned and network-first', () => {
   const workflow = read('.github/workflows/pages.yml');
   const updater = read('pwa-update.js');
   const sw = read('sw.js');
+  const manifest = JSON.parse(read('manifest.webmanifest'));
   assert.match(workflow, /__APP_BUILD_VERSION__/);
   assert.match(updater, /registration\.update\(\)/);
   assert.match(updater, /version\.json/);
   assert.match(sw, /fetch\(request, \{ cache: 'no-store' \}\)/);
+  assert.equal(manifest.start_url, './');
 });
 
 test('privacy controls include export and import in all four languages', () => {

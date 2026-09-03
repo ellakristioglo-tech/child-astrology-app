@@ -88,13 +88,10 @@ jobs:
           <dict>
             <key>method</key>
             <string>app-store-connect</string>
-
             <key>signingStyle</key>
             <string>manual</string>
-
             <key>teamID</key>
             <string>${TEAM_ID}</string>
-
             <key>provisioningProfiles</key>
             <dict>
               <key>com.childastrology.app</key>
@@ -117,12 +114,14 @@ jobs:
             CODE_SIGN_IDENTITY="Apple Distribution" \
             PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
             PRODUCT_BUNDLE_IDENTIFIER=com.childastrology.app \
+            'CODE_SIGNING_ALLOWED[sdk=iphoneos*]'=YES \
+            'CODE_SIGNING_REQUIRED[sdk=iphoneos*]'=YES \
+            'CODE_SIGNING_ALLOWED[sdk=iphoneos*][target=Pods-*]'=NO \
             archive
 
       - name: Export IPA
         run: |
           mkdir -p "$RUNNER_TEMP/export"
-
           xcodebuild \
             -exportArchive \
             -archivePath "$RUNNER_TEMP/ChildAstrology.xcarchive" \

@@ -7,10 +7,10 @@
 (function () {
   'use strict';
 
-  /* ==== CONFIG — fill in after creating the Supabase project ====
-     Project Settings -> API :  Project URL  +  anon public key    */
-  var SUPABASE_URL = '';
-  var SUPABASE_ANON_KEY = '';
+  /* ==== CONFIG — Supabase project (Project Settings -> API) ====
+     The publishable/anon key is safe in client code. */
+  var SUPABASE_URL = 'https://hcxwzsvicihnkmlrsftv.supabase.co';
+  var SUPABASE_ANON_KEY = 'sb_publishable_2bOBvAgrLzuhfPH7LVA0nQ_qqxRJakF';
   /* ============================================================= */
 
   var AUTHED_KEY  = 'ca_authed';

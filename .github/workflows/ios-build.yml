@@ -38,23 +38,11 @@ jobs:
           KEYCHAIN_PASSWORD="$(openssl rand -hex 24)"
 
           echo "$P12_BASE64" | base64 --decode > "$CERTIFICATE_PATH"
-
           security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-
-          security import "$CERTIFICATE_PATH" \
-            -P "$P12_PASSWORD" \
-            -A \
-            -t cert \
-            -f pkcs12 \
-            -k "$KEYCHAIN_PATH"
-
-          security set-key-partition-list \
-            -S apple-tool:,apple: \
-            -k "$KEYCHAIN_PASSWORD" \
-            "$KEYCHAIN_PATH"
-
+          security import "$CERTIFICATE_PATH" -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security list-keychain -d user -s "$KEYCHAIN_PATH"
 
       - name: Install provisioning profile
@@ -63,42 +51,47 @@ jobs:
         run: |
           PROFILE_PATH="$RUNNER_TEMP/profile.mobileprovision"
           PROFILE_PLIST="$RUNNER_TEMP/profile.plist"
-
           echo "$PROVISION_PROFILE_BASE64" | base64 --decode > "$PROFILE_PATH"
-
           security cms -D -i "$PROFILE_PATH" > "$PROFILE_PLIST"
-
           PROFILE_UUID=$(/usr/libexec/PlistBuddy -c "Print :UUID" "$PROFILE_PLIST")
           PROFILE_NAME=$(/usr/libexec/PlistBuddy -c "Print :Name" "$PROFILE_PLIST")
           TEAM_ID=$(/usr/libexec/PlistBuddy -c "Print :TeamIdentifier:0" "$PROFILE_PLIST")
-
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
-          cp "$PROFILE_PATH" \
-            "$HOME/Library/MobileDevice/Provisioning Profiles/$PROFILE_UUID.mobileprovision"
-
+          cp "$PROFILE_PATH" "$HOME/Library/MobileDevice/Provisioning Profiles/$PROFILE_UUID.mobileprovision"
           echo "PROFILE_NAME=$PROFILE_NAME" >> "$GITHUB_ENV"
           echo "TEAM_ID=$TEAM_ID" >> "$GITHUB_ENV"
+
+      - name: Configure App signing
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          p = Path('ios/App/App.xcodeproj/project.pbxproj')
+          s = p.read_text()
+          team = os.environ['TEAM_ID']
+          profile = os.environ['PROFILE_NAME']
+          s = s.replace('CODE_SIGN_STYLE = Automatic;', 'CODE_SIGN_STYLE = Manual;')
+          s = s.replace('DEVELOPMENT_TEAM = "";', f'DEVELOPMENT_TEAM = {team};')
+          s = s.replace('DEVELOPMENT_TEAM = "";', f'DEVELOPMENT_TEAM = {team};')
+          marker = 'PRODUCT_BUNDLE_IDENTIFIER = com.childastrology.app;'
+          replacement = marker + f'\n\t\t\t\tDEVELOPMENT_TEAM = {team};\n\t\t\t\tCODE_SIGN_STYLE = Manual;\n\t\t\t\tCODE_SIGN_IDENTITY = "Apple Distribution";\n\t\t\t\tPROVISIONING_PROFILE_SPECIFIER = "{profile}";'
+          s = s.replace(marker, replacement)
+          p.write_text(s)
+          PY
 
       - name: Create export options
         run: |
           cat > "$RUNNER_TEMP/ExportOptions.plist" <<EOF
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-            <key>method</key>
-            <string>app-store-connect</string>
-            <key>signingStyle</key>
-            <string>manual</string>
-            <key>teamID</key>
-            <string>${TEAM_ID}</string>
-            <key>provisioningProfiles</key>
-            <dict>
-              <key>com.childastrology.app</key>
-              <string>${PROFILE_NAME}</string>
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>signingStyle</key><string>manual</string>
+            <key>teamID</key><string>${TEAM_ID}</string>
+            <key>provisioningProfiles</key><dict>
+              <key>com.childastrology.app</key><string>${PROFILE_NAME}</string>
             </dict>
-          </dict>
-          </plist>
+          </dict></plist>
           EOF
 
       - name: Archive iOS app
@@ -109,21 +102,12 @@ jobs:
             -configuration Release \
             -destination "generic/platform=iOS" \
             -archivePath "$RUNNER_TEMP/ChildAstrology.xcarchive" \
-            DEVELOPMENT_TEAM="$TEAM_ID" \
-            CODE_SIGN_STYLE=Manual \
-            CODE_SIGN_IDENTITY="Apple Distribution" \
-            PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
-            PRODUCT_BUNDLE_IDENTIFIER=com.childastrology.app \
-            'CODE_SIGNING_ALLOWED[sdk=iphoneos*]'=YES \
-            'CODE_SIGNING_REQUIRED[sdk=iphoneos*]'=YES \
-            'CODE_SIGNING_ALLOWED[sdk=iphoneos*][target=Pods-*]'=NO \
             archive
 
       - name: Export IPA
         run: |
           mkdir -p "$RUNNER_TEMP/export"
-          xcodebuild \
-            -exportArchive \
+          xcodebuild -exportArchive \
             -archivePath "$RUNNER_TEMP/ChildAstrology.xcarchive" \
             -exportPath "$RUNNER_TEMP/export" \
             -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"

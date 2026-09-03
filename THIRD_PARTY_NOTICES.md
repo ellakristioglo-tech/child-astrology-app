@@ -1,5 +1,14 @@
 # Third-party notices
 
+## supabase-js
+
+`vendor/supabase.js` is the official `@supabase/supabase-js` UMD build, used by
+`auth-gate.js` for e-mail one-time-code sign-in. Only the parent's e-mail address
+is sent to Supabase; child profile data stays in local storage.
+
+MIT License — Copyright (c) 2020 Supabase
+https://github.com/supabase/supabase-js
+
 ## GeoNames city data
 
 The bundled `assets/cities-15000.min.json` city list is derived from the

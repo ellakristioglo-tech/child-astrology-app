@@ -28,8 +28,9 @@
       hint:'We sturen je een korte code — geen wachtwoord nodig',
       continue:'Doorgaan', or:'of', apple:'Doorgaan met Apple', google:'Doorgaan met Google',
       privacy:'We plaatsen niets en sturen geen spam',
-      codeH1:'Controleer je e-mail', sentTo:'We hebben een 6-cijferige code gestuurd naar', change:'Wijzigen',
-      noMail:'Geen e-mail ontvangen?', resendIn:'Code opnieuw versturen over', resend:'Code opnieuw versturen',
+      codeH1:'Controleer je e-mail', sentTo:'We hebben een inlog-e-mail gestuurd naar', change:'Wijzigen',
+      linkHint:'Open de link in die e-mail op dit apparaat. Staat er een code in? Vul die hieronder in.',
+      noMail:'Geen e-mail ontvangen?', resendIn:'Opnieuw versturen over', resend:'Opnieuw versturen',
       spamNote:"Soms komt de e-mail in 'Reclame' of 'Spam' terecht",
       verify:'Bevestigen', openMail:'E-mail openen',
       errEmail:'Vul een geldig e-mailadres in', errCode:'Code onjuist — probeer het opnieuw',
@@ -42,8 +43,9 @@
       hint:'Пришлём короткий код — пароль не нужен',
       continue:'Продолжить', or:'или', apple:'Продолжить с Apple', google:'Продолжить с Google',
       privacy:'Мы ничего не публикуем и не шлём спам',
-      codeH1:'Проверьте почту', sentTo:'Мы отправили 6-значный код на', change:'Изменить',
-      noMail:'Не получили письмо?', resendIn:'Отправить код ещё раз через', resend:'Отправить код ещё раз',
+      codeH1:'Проверьте почту', sentTo:'Мы отправили письмо для входа на', change:'Изменить',
+      linkHint:'Откройте ссылку из письма на этом устройстве. Если в письме есть код — введите его ниже.',
+      noMail:'Не получили письмо?', resendIn:'Отправить ещё раз через', resend:'Отправить ещё раз',
       spamNote:'Иногда письмо попадает в «Промоакции» или «Спам»',
       verify:'Подтвердить', openMail:'Открыть почту',
       errEmail:'Введите корректный e-mail', errCode:'Код неверный — попробуйте ещё раз',
@@ -56,8 +58,9 @@
       hint:'Надішлемо короткий код — пароль не потрібен',
       continue:'Продовжити', or:'або', apple:'Продовжити з Apple', google:'Продовжити з Google',
       privacy:'Ми нічого не публікуємо й не надсилаємо спам',
-      codeH1:'Перевірте пошту', sentTo:'Ми надіслали 6-значний код на', change:'Змінити',
-      noMail:'Не отримали лист?', resendIn:'Надіслати код ще раз через', resend:'Надіслати код ще раз',
+      codeH1:'Перевірте пошту', sentTo:'Ми надіслали лист для входу на', change:'Змінити',
+      linkHint:'Відкрийте посилання з листа на цьому пристрої. Якщо в листі є код — введіть його нижче.',
+      noMail:'Не отримали лист?', resendIn:'Надіслати ще раз через', resend:'Надіслати ще раз',
       spamNote:'Іноді лист потрапляє в «Промоакції» або «Спам»',
       verify:'Підтвердити', openMail:'Відкрити пошту',
       errEmail:'Введіть коректний e-mail', errCode:'Код невірний — спробуйте ще раз',
@@ -70,8 +73,9 @@
       hint:'We’ll send a short code — no password needed',
       continue:'Continue', or:'or', apple:'Continue with Apple', google:'Continue with Google',
       privacy:'We never post anything and don’t send spam',
-      codeH1:'Check your e-mail', sentTo:'We’ve sent a 6-digit code to', change:'Change',
-      noMail:'Didn’t get the e-mail?', resendIn:'Resend code in', resend:'Resend code',
+      codeH1:'Check your e-mail', sentTo:'We’ve sent a sign-in e-mail to', change:'Change',
+      linkHint:'Open the link in that e-mail on this device. If it contains a code, enter it below.',
+      noMail:'Didn’t get the e-mail?', resendIn:'Resend in', resend:'Resend',
       spamNote:'Sometimes the e-mail lands in “Promotions” or “Spam”',
       verify:'Confirm', openMail:'Open mail',
       errEmail:'Enter a valid e-mail', errCode:'Wrong code — try again',
@@ -186,6 +190,7 @@
         '</svg></span>' +
         '<h1 class="ag-h1" data-i18n="codeH1"></h1>' +
         '<p class="ag-body"><span data-i18n="sentTo"></span><br><span class="ag-mail" id="agMailEcho"></span><button class="ag-edit" id="agChange" type="button" data-i18n="change"></button></p>' +
+        '<p class="ag-note" data-i18n="linkHint" style="max-width:320px"></p>' +
         '<div class="ag-otp" id="agOtp">' +
           '<input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" placeholder=" ">' +
           '<input type="text" inputmode="numeric" maxlength="1" placeholder=" ">' +
@@ -209,7 +214,9 @@
   function client() {
     if (sb) return sb;
     if (CONFIGURED && window.supabase && window.supabase.createClient) {
-      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'implicit' }
+      });
     }
     return sb;
   }
@@ -308,7 +315,7 @@
     continueBtn.disabled = true; continueBtn.textContent = tr('sending');
     var c = client();
     if (!c) { console.warn('[auth-gate] Supabase not configured — demo mode, no e-mail sent.'); proceed(); return; }
-    c.auth.signInWithOtp({ email: email, options: { shouldCreateUser: true } })
+    c.auth.signInWithOtp({ email: email, options: { shouldCreateUser: true, emailRedirectTo: location.origin } })
       .then(function (r) { r && r.error ? fail(r.error) : proceed(); })
       .catch(fail);
   }
@@ -453,8 +460,26 @@
     return false;
   }
 
+  /* magic-link return: supabase-js reads the #access_token from the URL and
+     fires SIGNED_IN. Also covers a session that is still valid from before. */
+  function initSession() {
+    var c = client();
+    if (!c) return;
+    c.auth.getSession().then(function (r) {
+      var s = r && r.data && r.data.session;
+      if (s && s.user) { currentEmail = s.user.email || currentEmail; finishAuth(); }
+    }).catch(function () {});
+    c.auth.onAuthStateChange(function (event, session) {
+      if (session && session.user && (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'INITIAL_SESSION')) {
+        currentEmail = session.user.email || currentEmail;
+        if (safeGet(AUTHED_KEY) !== '1' || !gate.hidden) finishAuth();
+      }
+    });
+  }
+
   function init() {
     build();
+    initSession();
     if (maybeShow()) return;
     var tries = 0;
     var poll = setInterval(function () {

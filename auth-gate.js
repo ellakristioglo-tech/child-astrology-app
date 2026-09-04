@@ -1,6 +1,7 @@
 /* ================================================================
-   Child Astrology — e-mail + 6-digit OTP sign-in gate
+   Child Astrology — e-mail sign-in gate
    Shows AFTER the compliance launch gate, BEFORE the app.
+   Layout matches the reference mockup: centered, minimal.
    No build step, no inline script (CSP-safe). Load order in
    index.html:  vendor/supabase.js  ->  auth-gate.js (defer)
    ================================================================ */
@@ -14,70 +15,45 @@
   /* ============================================================= */
 
   var AUTHED_KEY  = 'ca_authed';
-  var LANG_KEY    = 'language';                              // same key the app uses
+  var LANG_KEY    = 'language';
   var PARENT_KEY  = 'child_astrology_parent_confirmed_v1';   // set by the compliance gate
   var DEFAULT_LANG = 'nl';
   var LANGS = ['nl', 'ru', 'ua', 'en'];
-  var RESEND_SECONDS = 60;
 
   var I18N = {
     nl: {
       h1:'Maak kennis met de wereld van je kind',
-      f1:'Geboortehoroscoop van je kind', f2:'Karakter, emoties en behoeften', f3:'Sterke kanten en talenten',
-      emailLabel:'Je e-mailadres', emailPh:'naam@voorbeeld.nl',
-      hint:'We sturen je een korte code — geen wachtwoord nodig',
-      continue:'Doorgaan', or:'of', apple:'Doorgaan met Apple', google:'Doorgaan met Google',
-      privacy:'We plaatsen niets en sturen geen spam',
-      codeH1:'Controleer je e-mail', sentTo:'We hebben een inlog-e-mail gestuurd naar', change:'Wijzigen',
-      linkHint:'Open de link in die e-mail op dit apparaat. Staat er een code in? Vul die hieronder in.',
-      noMail:'Geen e-mail ontvangen?', resendIn:'Opnieuw versturen over', resend:'Opnieuw versturen',
-      spamNote:"Soms komt de e-mail in 'Reclame' of 'Spam' terecht",
-      verify:'Bevestigen', openMail:'E-mail openen',
+      sub:'Maak een profiel voor je kind en ontdek de geboortehoroscoop, karaktereigenschappen, emoties en talenten.',
+      emailPh:'Je e-mailadres', continue:'Doorgaan',
+      codeH1:'Controleer je e-mail', sentTo:'We hebben een 6-cijferige code gestuurd naar',
+      noMail:'Geen e-mail ontvangen?', resend:'Code opnieuw versturen', verify:'Bevestigen',
       errEmail:'Vul een geldig e-mailadres in', errCode:'Code onjuist — probeer het opnieuw',
       errSend:'Versturen mislukt — probeer het later opnieuw', sending:'Versturen…', checking:'Controleren…'
     },
     ru: {
       h1:'Познакомьтесь с миром вашего ребёнка',
-      f1:'Натальная карта ребёнка', f2:'Характер, эмоции и потребности', f3:'Сильные стороны и таланты',
-      emailLabel:'Ваш e-mail', emailPh:'name@example.com',
-      hint:'Пришлём короткий код — пароль не нужен',
-      continue:'Продолжить', or:'или', apple:'Продолжить с Apple', google:'Продолжить с Google',
-      privacy:'Мы ничего не публикуем и не шлём спам',
-      codeH1:'Проверьте почту', sentTo:'Мы отправили письмо для входа на', change:'Изменить',
-      linkHint:'Откройте ссылку из письма на этом устройстве. Если в письме есть код — введите его ниже.',
-      noMail:'Не получили письмо?', resendIn:'Отправить ещё раз через', resend:'Отправить ещё раз',
-      spamNote:'Иногда письмо попадает в «Промоакции» или «Спам»',
-      verify:'Подтвердить', openMail:'Открыть почту',
+      sub:'Создайте профиль ребёнка и откройте его натальную карту, особенности характера, эмоций и потенциала.',
+      emailPh:'Ваш e-mail', continue:'Продолжить',
+      codeH1:'Проверьте почту', sentTo:'Мы отправили 6-значный код на',
+      noMail:'Не получили письмо?', resend:'Отправить код ещё раз', verify:'Подтвердить',
       errEmail:'Введите корректный e-mail', errCode:'Код неверный — попробуйте ещё раз',
       errSend:'Не удалось отправить — попробуйте позже', sending:'Отправляем…', checking:'Проверяем…'
     },
     ua: {
       h1:'Пізнайте світ вашої дитини',
-      f1:'Натальна карта дитини', f2:'Характер, емоції та потреби', f3:'Сильні сторони й таланти',
-      emailLabel:'Ваш e-mail', emailPh:'name@example.com',
-      hint:'Надішлемо короткий код — пароль не потрібен',
-      continue:'Продовжити', or:'або', apple:'Продовжити з Apple', google:'Продовжити з Google',
-      privacy:'Ми нічого не публікуємо й не надсилаємо спам',
-      codeH1:'Перевірте пошту', sentTo:'Ми надіслали лист для входу на', change:'Змінити',
-      linkHint:'Відкрийте посилання з листа на цьому пристрої. Якщо в листі є код — введіть його нижче.',
-      noMail:'Не отримали лист?', resendIn:'Надіслати ще раз через', resend:'Надіслати ще раз',
-      spamNote:'Іноді лист потрапляє в «Промоакції» або «Спам»',
-      verify:'Підтвердити', openMail:'Відкрити пошту',
+      sub:'Створіть профіль дитини й відкрийте її натальну карту, особливості характеру, емоцій і потенціалу.',
+      emailPh:'Ваш e-mail', continue:'Продовжити',
+      codeH1:'Перевірте пошту', sentTo:'Ми надіслали 6-значний код на',
+      noMail:'Не отримали лист?', resend:'Надіслати код ще раз', verify:'Підтвердити',
       errEmail:'Введіть коректний e-mail', errCode:'Код невірний — спробуйте ще раз',
       errSend:'Не вдалося надіслати — спробуйте пізніше', sending:'Надсилаємо…', checking:'Перевіряємо…'
     },
     en: {
       h1:'Meet the world of your child',
-      f1:'Your child’s birth chart', f2:'Character, emotions and needs', f3:'Strengths and talents',
-      emailLabel:'Your e-mail', emailPh:'name@example.com',
-      hint:'We’ll send a short code — no password needed',
-      continue:'Continue', or:'or', apple:'Continue with Apple', google:'Continue with Google',
-      privacy:'We never post anything and don’t send spam',
-      codeH1:'Check your e-mail', sentTo:'We’ve sent a sign-in e-mail to', change:'Change',
-      linkHint:'Open the link in that e-mail on this device. If it contains a code, enter it below.',
-      noMail:'Didn’t get the e-mail?', resendIn:'Resend in', resend:'Resend',
-      spamNote:'Sometimes the e-mail lands in “Promotions” or “Spam”',
-      verify:'Confirm', openMail:'Open mail',
+      sub:'Create your child’s profile and discover their birth chart, character traits, emotions and potential.',
+      emailPh:'Your e-mail', continue:'Continue',
+      codeH1:'Check your e-mail', sentTo:'We’ve sent a 6-digit code to',
+      noMail:'Didn’t get the e-mail?', resend:'Resend code', verify:'Confirm',
       errEmail:'Enter a valid e-mail', errCode:'Wrong code — try again',
       errSend:'Could not send — try again later', sending:'Sending…', checking:'Checking…'
     }
@@ -86,7 +62,7 @@
   var MARKUP =
     '<div class="ag-sky" aria-hidden="true">' +
       '<svg class="ag-stars" viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice">' +
-        '<g stroke="#e6c9a0" stroke-width="0.6" stroke-opacity="0.22" fill="none" stroke-linejoin="round">' +
+        '<g stroke="#e6c9a0" stroke-width="0.6" stroke-opacity="0.2" fill="none" stroke-linejoin="round">' +
           '<polyline points="52,120 140,110 165,175 120,225 52,120"/>' +
           '<polyline points="250,60 288,104 340,120 315,150"/>' +
           '<polyline points="210,300 248,332 292,312 322,358"/>' +
@@ -101,8 +77,6 @@
           '<circle cx="350" cy="380" r=".8" opacity=".4"/><circle cx="180" cy="440" r=".9" opacity=".45"/>' +
           '<circle cx="60" cy="470" r="1" opacity=".5"/><circle cx="250" cy="480" r=".85" opacity=".4"/>' +
           '<circle cx="120" cy="500" r=".9" opacity=".45"/><circle cx="330" cy="510" r="1" opacity=".5"/>' +
-          '<circle cx="200" cy="540" r=".8" opacity=".4"/><circle cx="280" cy="560" r=".9" opacity=".45"/>' +
-          '<circle cx="150" cy="590" r=".85" opacity=".4"/><circle cx="70" cy="560" r=".8" opacity=".4"/>' +
           '<circle cx="20" cy="180" r=".9" opacity=".5"/><circle cx="370" cy="240" r="1" opacity=".55"/>' +
           '<circle cx="190" cy="210" r="1" opacity=".6"/><circle cx="270" cy="180" r=".9" opacity=".5"/>' +
         '</g>' +
@@ -114,74 +88,25 @@
           '<circle cx="340" cy="120" r="1.4" opacity=".8" style="animation:ag-tw 4.4s ease-in-out infinite .2s"/>' +
           '<circle cx="210" cy="300" r="1.3" opacity=".8"/><circle cx="248" cy="332" r="1.1" opacity=".7"/>' +
           '<circle cx="292" cy="312" r="1.4" opacity=".85" style="animation:ag-tw 3.6s ease-in-out infinite .8s"/>' +
-          '<circle cx="322" cy="358" r="1" opacity=".6"/>' +
         '</g>' +
-        '<g><circle cx="326" cy="74" r="13" fill="#f0dcc0" fill-opacity=".92"/><circle cx="320" cy="69" r="12" fill="#0c0d2c"/></g>' +
+        '<g><circle cx="330" cy="76" r="13" fill="#f0dcc0" fill-opacity=".9"/><circle cx="324" cy="71" r="12" fill="#0c0d2c"/></g>' +
       '</svg>' +
-      '<svg class="ag-horizon" viewBox="0 0 390 300" preserveAspectRatio="xMidYMax slice">' +
-        '<defs><radialGradient id="agGlow" cx="50%" cy="98%" r="62%">' +
-          '<stop offset="0%" stop-color="#f4a98c" stop-opacity=".5"/>' +
-          '<stop offset="42%" stop-color="#d1789a" stop-opacity=".2"/>' +
-          '<stop offset="100%" stop-color="#d1789a" stop-opacity="0"/>' +
-        '</radialGradient></defs>' +
-        '<rect x="0" y="0" width="390" height="300" fill="url(#agGlow)"/>' +
-        '<path d="M0,208 L54,150 L104,192 L156,120 L212,182 L280,132 L338,168 L390,140 L390,300 L0,300 Z" fill="#181430" fill-opacity=".82"/>' +
-        '<g fill="#070518">' +
-          '<circle cx="188" cy="206" r="4.6"/><circle cx="188" cy="216" r="4.6"/>' +
-          '<path d="M184,220 c-4,1 -7,4 -8,9 l-1,18 c0,2 2,3 4,3 l18,0 c2,0 4,-1 4,-3 l-1,-18 c-1,-5 -4,-8 -8,-9 z"/>' +
-          '<path d="M178,228 c-6,-2 -10,-7 -11,-14 c-.3,-2 1,-4 3,-4 c2,0 3,1 4,3 c1,4 4,7 8,8 z"/>' +
-          '<path d="M198,228 c6,-2 10,-7 11,-14 c.3,-2 -1,-4 -3,-4 c-2,0 -3,1 -4,3 c-1,4 -4,7 -8,8 z"/>' +
-        '</g>' +
-        '<path d="M0,246 L72,206 L140,242 L206,204 L276,246 L338,212 L390,236 L390,300 L0,300 Z" fill="#0b0920"/>' +
-      '</svg>' +
-      '<div class="ag-scrim"></div>' +
+      '<div class="ag-scene"></div>' +
     '</div>' +
 
     '<section class="ag-step" data-step="email">' +
-      '<div class="ag-dots"><span class="ag-dot on"></span><span class="ag-dot"></span><span class="ag-dot"></span><span class="ag-dot"></span></div>' +
-      '<div class="ag-brand">' +
-        '<svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#e6c9a0" stroke-width="1.3">' +
-          '<circle cx="20" cy="20" r="17"/>' +
-          '<path d="M25 10a10 10 0 1 0 0 20 8 8 0 0 1 0-20Z" stroke-linejoin="round"/>' +
-          '<circle cx="15" cy="16" r="1" fill="#e6c9a0" stroke="none"/><circle cx="17" cy="24" r=".8" fill="#e6c9a0" stroke="none"/>' +
-        '</svg>' +
-        '<span class="ag-wordmark"><b>CHILD</b><span>ASTROLOGY</span></span>' +
-      '</div>' +
+      '<img class="ag-logo" src="assets/auth-logo.jpg" alt="Child Astrology" width="188" height="157">' +
       '<h1 class="ag-h1" data-i18n="h1"></h1>' +
-      '<div class="ag-feats">' +
-        '<span class="ag-feat"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#e6c9a0" stroke-width="1.2"><circle cx="9" cy="9" r="7"/><circle cx="9" cy="9" r="3"/><path d="M9 2v3M9 13v3M2 9h3M13 9h3"/></svg><span data-i18n="f1"></span></span>' +
-        '<span class="ag-feat"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#e6c9a0" stroke-width="1.2"><path d="M14 9.5A5.5 5.5 0 1 1 7.5 4 4.3 4.3 0 0 0 14 9.5Z" stroke-linejoin="round"/></svg><span data-i18n="f2"></span></span>' +
-        '<span class="ag-feat"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#e6c9a0" stroke-width="1.2"><path d="M9 2l1.7 4.6L15 8l-4.3 1.4L9 14l-1.7-4.6L3 8l4.3-1.4z" stroke-linejoin="round"/></svg><span data-i18n="f3"></span></span>' +
-      '</div>' +
-      '<div class="ag-panel">' +
-        '<label class="ag-field">' +
-          '<span class="ag-lbl" data-i18n="emailLabel"></span>' +
-          '<span class="ag-inputwrap">' +
-            '<svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="#8b85a6" stroke-width="1.3"><rect x="2" y="4" width="14" height="10" rx="2"/><path d="M3 5l6 5 6-5"/></svg>' +
-            '<input id="agEmail" type="email" inputmode="email" autocomplete="email" spellcheck="false">' +
-          '</span>' +
-        '</label>' +
-        '<p class="ag-hint" data-i18n="hint"></p>' +
-        '<p class="ag-err" id="agEmailErr" role="alert"></p>' +
-        '<button class="ag-cta" id="agContinue" type="button" data-i18n="continue"></button>' +
-        '<div class="ag-or"><span data-i18n="or"></span></div>' +
-        '<button class="ag-social" type="button" data-provider="apple">' +
-          '<svg width="15" height="16" viewBox="0 0 16 17" fill="#e9e6f2"><path d="M10.8 9c0-1.7 1.4-2.5 1.5-2.6-.8-1.2-2.1-1.4-2.5-1.4-1.1-.1-2.1.6-2.6.6-.5 0-1.4-.6-2.3-.6-1.2 0-2.3.7-2.9 1.8-1.2 2.1-.3 5.3.9 7 .6.8 1.3 1.8 2.2 1.7.9 0 1.2-.6 2.3-.6s1.3.6 2.3.6c.9 0 1.5-.8 2.1-1.7.7-1 .9-1.9.9-2-.1 0-1.8-.7-1.8-2.6z"/><path d="M9.3 3.7c.5-.6.8-1.4.7-2.3-.7 0-1.5.5-2 1.1-.4.5-.8 1.3-.7 2.1.8.1 1.5-.4 2-.9z"/></svg>' +
-          '<span data-i18n="apple"></span>' +
-        '</button>' +
-        '<button class="ag-social" type="button" data-provider="google">' +
-          '<svg width="15" height="15" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.6 9.2c0-.6-.1-1.2-.2-1.8H9v3.5h4.8a4.1 4.1 0 0 1-1.8 2.7v2.2h2.9c1.7-1.6 2.7-3.9 2.7-6.6z"/><path fill="#34A853" d="M9 18c2.4 0 4.5-.8 6-2.2l-2.9-2.2c-.8.5-1.8.9-3.1.9-2.4 0-4.4-1.6-5.1-3.8H.9v2.3A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.9 10.7a5.4 5.4 0 0 1 0-3.4V5H.9a9 9 0 0 0 0 8l3-2.3z"/><path fill="#EA4335" d="M9 3.6c1.3 0 2.5.5 3.4 1.3l2.6-2.6A9 9 0 0 0 .9 5l3 2.3C4.6 5.2 6.6 3.6 9 3.6z"/></svg>' +
-          '<span data-i18n="google"></span>' +
-        '</button>' +
-        '<p class="ag-privacy"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="#8b85a6" stroke-width="1.2"><rect x="3" y="6" width="8" height="6" rx="1.2"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6"/></svg><span data-i18n="privacy"></span></p>' +
-      '</div>' +
+      '<p class="ag-sub" data-i18n="sub"></p>' +
+      '<div class="ag-input"><input id="agEmail" type="email" inputmode="email" autocomplete="email" spellcheck="false"></div>' +
+      '<p class="ag-err" id="agEmailErr" role="alert"></p>' +
+      '<button class="ag-cta" id="agContinue" type="button" data-i18n="continue"></button>' +
     '</section>' +
 
     '<section class="ag-step" data-step="code" hidden>' +
-      '<div class="ag-topbar">' +
-        '<button class="ag-back" id="agBack" type="button" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e6c9a0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>' +
-        '<div class="ag-dots"><span class="ag-dot"></span><span class="ag-dot on"></span><span class="ag-dot"></span><span class="ag-dot"></span></div>' +
-      '</div>' +
+      '<button class="ag-back" id="agBack" type="button" aria-label="Back">' +
+        '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c9a0" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>' +
+      '</button>' +
       '<div class="ag-mid">' +
         '<span class="ag-emblem"><svg width="76" height="76" viewBox="0 0 76 76" fill="none">' +
           '<circle cx="38" cy="38" r="35" stroke="#e6c9a0" stroke-opacity=".32" stroke-width="1"/>' +
@@ -189,24 +114,19 @@
           '<path d="M38 11l2.3 4.8 5.2.7-3.8 3.6.9 5.1-4.6-2.4-4.6 2.4.9-5.1-3.8-3.6 5.2-.7z" fill="#e6c9a0"/>' +
         '</svg></span>' +
         '<h1 class="ag-h1" data-i18n="codeH1"></h1>' +
-        '<p class="ag-body"><span data-i18n="sentTo"></span><br><span class="ag-mail" id="agMailEcho"></span><button class="ag-edit" id="agChange" type="button" data-i18n="change"></button></p>' +
-        '<p class="ag-note" data-i18n="linkHint" style="max-width:320px"></p>' +
+        '<p class="ag-body"><span data-i18n="sentTo"></span><br><span class="ag-mail" id="agMailEcho"></span></p>' +
         '<div class="ag-otp" id="agOtp">' +
-          '<input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" placeholder=" ">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder=" ">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder=" ">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder=" ">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder=" ">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder=" ">' +
+          '<input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
         '</div>' +
-        '<p class="ag-err" id="agCodeErr" role="alert" style="text-align:center"></p>' +
-        '<div class="ag-resend"><span data-i18n="noMail"></span><span class="ag-timer" id="agTimer"></span><button id="agResend" type="button" disabled data-i18n="resend"></button></div>' +
-        '<p class="ag-note" data-i18n="spamNote"></p>' +
+        '<p class="ag-err" id="agCodeErr" role="alert"></p>' +
+        '<div class="ag-resend"><span data-i18n="noMail"></span><button id="agResend" type="button" data-i18n="resend"></button></div>' +
       '</div>' +
-      '<div class="ag-foot">' +
-        '<button class="ag-cta" id="agVerify" type="button" disabled data-i18n="verify"></button>' +
-        '<button class="ag-ghost" id="agOpenMail" type="button" data-i18n="openMail"></button>' +
-      '</div>' +
+      '<button class="ag-cta" id="agVerify" type="button" data-i18n="verify"></button>' +
     '</section>';
 
   var CONFIGURED = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
@@ -221,9 +141,8 @@
     return sb;
   }
 
-  var gate, stepEmail, stepCode, emailInput, otpInputs, timerEl, resendBtn, verifyBtn, continueBtn, mailEcho;
+  var gate, stepEmail, stepCode, emailInput, otpInputs, resendBtn, verifyBtn, continueBtn, mailEcho;
   var currentEmail = '';
-  var countdown = null;
   var lang = DEFAULT_LANG;
 
   function q(sel, root) { return (root || gate).querySelector(sel); }
@@ -244,12 +163,12 @@
     lang = detectLang();
     qa('[data-i18n]').forEach(function (el) { el.textContent = tr(el.getAttribute('data-i18n')); });
     if (emailInput) emailInput.setAttribute('placeholder', tr('emailPh'));
-    if (timerEl && timerEl.dataset.seconds) renderTimer(+timerEl.dataset.seconds);
   }
 
   function showStep(step) {
     stepEmail.hidden = step !== 'email';
     stepCode.hidden = step !== 'code';
+    gate.classList.toggle('step-code', step === 'code');
     if (step === 'code') setTimeout(function () { try { otpInputs[0].focus(); } catch (e) {} }, 50);
   }
 
@@ -261,7 +180,6 @@
     setTimeout(function () { try { emailInput.focus(); } catch (e) {} }, 50);
   }
   function finishAuth() {
-    clearInterval(countdown);
     gate.hidden = true;
     document.body.classList.remove('ca-auth-open');
     safeSet(AUTHED_KEY, '1');
@@ -271,29 +189,6 @@
   }
 
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
-  function busy(btn, on, key) {
-    btn.disabled = on;
-    btn.dataset.i18n = on ? (key || 'sending') : btn.dataset.baseKey;
-    btn.textContent = tr(btn.dataset.i18n);
-  }
-
-  function renderTimer(sec) {
-    var m = Math.floor(sec / 60), s = sec % 60;
-    timerEl.dataset.seconds = sec;
-    timerEl.hidden = false;
-    timerEl.textContent = tr('resendIn') + ' ' + m + ':' + (s < 10 ? '0' : '') + s;
-  }
-  function startCountdown() {
-    var left = RESEND_SECONDS;
-    clearInterval(countdown);
-    resendBtn.disabled = true;
-    renderTimer(left);
-    countdown = setInterval(function () {
-      left--;
-      if (left <= 0) { clearInterval(countdown); timerEl.hidden = true; timerEl.removeAttribute('data-seconds'); resendBtn.disabled = false; }
-      else renderTimer(left);
-    }, 1000);
-  }
 
   function sendCode() {
     var email = emailInput.value.trim().toLowerCase();
@@ -304,7 +199,7 @@
     mailEcho.textContent = email;
 
     var proceed = function () {
-      clearOtp(); showStep('code'); startCountdown();
+      clearOtp(); showStep('code');
       continueBtn.disabled = false; continueBtn.textContent = tr('continue');
     };
     var fail = function (e) {
@@ -321,24 +216,24 @@
   }
 
   function codeValue() { return otpInputs.map(function (i) { return i.value; }).join(''); }
+  function firstEmpty() { for (var i = 0; i < otpInputs.length; i++) { if (!otpInputs[i].value) return otpInputs[i]; } return otpInputs[5]; }
   function clearOtp() {
     otpInputs.forEach(function (i) { i.value = ''; });
     q('#agOtp').classList.remove('err', 'ok');
-    verifyBtn.disabled = true;
     q('#agCodeErr').textContent = '';
   }
 
   function verifyCode() {
     var code = codeValue();
-    if (code.length < 6) return;
     var err = q('#agCodeErr');
+    if (code.length < 6) { try { firstEmpty().focus(); } catch (e) {} return; }
     err.textContent = '';
     verifyBtn.disabled = true; verifyBtn.textContent = tr('checking');
 
     var ok = function () {
       verifyBtn.textContent = tr('verify');
       q('#agOtp').classList.add('ok');
-      setTimeout(finishAuth, 500);
+      setTimeout(finishAuth, 450);
     };
     var bad = function (e) {
       verifyBtn.disabled = false; verifyBtn.textContent = tr('verify');
@@ -360,11 +255,10 @@
       input.addEventListener('input', function () {
         input.value = input.value.replace(/\D/g, '').slice(0, 1);
         if (input.value && idx < 5) otpInputs[idx + 1].focus();
-        verifyBtn.disabled = codeValue().length < 6;
         if (codeValue().length === 6) verifyCode();
       });
       input.addEventListener('keydown', function (e) {
-        if (e.key === 'Backspace' && !input.value && idx > 0) { otpInputs[idx - 1].focus(); otpInputs[idx - 1].value = ''; verifyBtn.disabled = true; e.preventDefault(); }
+        if (e.key === 'Backspace' && !input.value && idx > 0) { otpInputs[idx - 1].focus(); otpInputs[idx - 1].value = ''; e.preventDefault(); }
         else if (e.key === 'ArrowLeft' && idx > 0) otpInputs[idx - 1].focus();
         else if (e.key === 'ArrowRight' && idx < 5) otpInputs[idx + 1].focus();
       });
@@ -374,7 +268,6 @@
         var digits = raw.replace(/\D/g, '').slice(0, 6).split('');
         digits.forEach(function (d, i) { if (otpInputs[i]) otpInputs[i].value = d; });
         try { (otpInputs[digits.length] || otpInputs[5]).focus(); } catch (x) {}
-        verifyBtn.disabled = codeValue().length < 6;
         if (codeValue().length === 6) verifyCode();
       });
     });
@@ -392,39 +285,22 @@
     stepCode = q('.ag-step[data-step="code"]');
     emailInput = q('#agEmail');
     otpInputs = qa('#agOtp input');
-    timerEl = q('#agTimer');
     resendBtn = q('#agResend');
     verifyBtn = q('#agVerify');
     continueBtn = q('#agContinue');
     mailEcho = q('#agMailEcho');
-    continueBtn.dataset.baseKey = 'continue';
-    verifyBtn.dataset.baseKey = 'verify';
 
     applyI18n();
     wireOtp();
 
     continueBtn.addEventListener('click', sendCode);
     emailInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); sendCode(); } });
-    q('#agChange').addEventListener('click', function () { showStep('email'); try { emailInput.focus(); } catch (e) {} });
-    q('#agBack').addEventListener('click', function () { showStep('email'); });
-    resendBtn.addEventListener('click', function () { if (!resendBtn.disabled) sendCode(); });
-    q('#agOpenMail').addEventListener('click', function () {
-      var d = (currentEmail.split('@')[1] || '').toLowerCase();
-      var map = {
-        'gmail.com': 'https://mail.google.com', 'googlemail.com': 'https://mail.google.com',
-        'live.nl': 'https://outlook.live.com', 'outlook.com': 'https://outlook.live.com',
-        'hotmail.com': 'https://outlook.live.com', 'hotmail.nl': 'https://outlook.live.com',
-        'icloud.com': 'https://www.icloud.com/mail', 'me.com': 'https://www.icloud.com/mail',
-        'yahoo.com': 'https://mail.yahoo.com', 'ya.ru': 'https://mail.yandex.ru', 'yandex.ru': 'https://mail.yandex.ru'
-      };
-      window.open(map[d] || 'mailto:', '_blank', 'noopener');
-    });
-    qa('.ag-social').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var c = client();
-        if (!c) { console.warn('[auth-gate] social sign-in needs Supabase + an OAuth provider configured.'); return; }
-        c.auth.signInWithOAuth({ provider: b.getAttribute('data-provider'), options: { redirectTo: location.origin } });
-      });
+    verifyBtn.addEventListener('click', verifyCode);
+    q('#agBack').addEventListener('click', function () { showStep('email'); try { emailInput.focus(); } catch (e) {} });
+    resendBtn.addEventListener('click', function () {
+      resendBtn.disabled = true;
+      setTimeout(function () { resendBtn.disabled = false; }, 20000);
+      sendCode();
     });
 
     document.addEventListener('click', function (e) {
@@ -435,22 +311,15 @@
 
     var origChangeLanguage = window.changeLanguage;
     if (typeof origChangeLanguage === 'function' && !origChangeLanguage.__caAuthWrapped) {
-      var wrappedChangeLanguage = function () {
-        var result = origChangeLanguage.apply(this, arguments);
-        setTimeout(applyI18n, 0);
-        return result;
-      };
-      wrappedChangeLanguage.__caAuthWrapped = true;
-      window.changeLanguage = wrappedChangeLanguage;
+      var wrapped = function () { var r = origChangeLanguage.apply(this, arguments); setTimeout(applyI18n, 0); return r; };
+      wrapped.__caAuthWrapped = true;
+      window.changeLanguage = wrapped;
     }
   }
 
-  /* show only after the compliance launch gate is accepted */
   function complianceAccepted() {
-    try {
-      var v = JSON.parse(safeGet(PARENT_KEY) || 'null');
-      return !!(v && v.launchGate === true);
-    } catch (e) { return false; }
+    try { var v = JSON.parse(safeGet(PARENT_KEY) || 'null'); return !!(v && v.launchGate === true); }
+    catch (e) { return false; }
   }
   function complianceGateVisible() { return !!document.querySelector('.launch-gate'); }
 
@@ -460,8 +329,8 @@
     return false;
   }
 
-  /* magic-link return: supabase-js reads the #access_token from the URL and
-     fires SIGNED_IN. Also covers a session that is still valid from before. */
+  /* magic-link return: supabase-js reads the token from the URL and fires
+     SIGNED_IN; also covers a still-valid session from a previous visit. */
   function initSession() {
     var c = client();
     if (!c) return;

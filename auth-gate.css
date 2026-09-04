@@ -1,146 +1,128 @@
 /* ================================================================
-   Child Astrology — auth gate (e-mail + 6-cijferige code)
-   Dark celestial sign-in shown after the compliance launch gate.
-   Everything is scoped under #auth-gate and does not affect the app.
-   CSP-safe: no external fonts, no inline scripts.
+   Child Astrology — sign-in gate (e-mail + 6-digit code)
+   Matches the reference mockup: centered, minimal, dark celestial.
+   Uses the mockup logo (assets/auth-logo.jpg) and the mockup
+   illustration (assets/auth-scene1.jpg / auth-scene2.jpg).
+   Scoped under #auth-gate. CSP-safe: no external fonts / scripts.
    ================================================================ */
 
 body.ca-auth-open{overflow:hidden;touch-action:none;}
 
 #auth-gate{
   position:fixed;inset:0;z-index:2147483000;overflow:hidden;
-  background:#06061a;color:#f3f0f7;
+  background:#06061a;color:#f4f1f8;
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   -webkit-font-smoothing:antialiased;
 }
 #auth-gate[hidden]{display:none!important;}
 #auth-gate *,#auth-gate *::before,#auth-gate *::after{box-sizing:border-box;}
 
+/* ---- backdrop ---- */
 #auth-gate .ag-sky{
   position:absolute;inset:0;overflow:hidden;
-  background:radial-gradient(130% 72% at 50% 0%,#1b1f47 0%,#13153b 40%,#0a0a24 72%,#06061a 100%);
+  background:radial-gradient(140% 66% at 50% 0%,#232750 0%,#191d43 36%,#0d0d29 68%,#06061a 100%);
 }
 #auth-gate .ag-stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
-#auth-gate .ag-horizon{position:absolute;left:0;right:0;bottom:0;width:100%;height:300px;pointer-events:none;}
-#auth-gate .ag-scrim{
-  position:absolute;left:0;right:0;bottom:0;height:460px;pointer-events:none;
-  background:linear-gradient(180deg,rgba(6,6,20,0) 0%,rgba(6,6,20,.5) 50%,rgba(6,6,20,.88) 100%);
+
+/* the mockup illustration, anchored to the bottom, faded into the sky at its top edge */
+#auth-gate .ag-scene{
+  position:absolute;left:0;right:0;bottom:0;height:40vh;min-height:264px;pointer-events:none;
+  background:#0a0720 center bottom / cover no-repeat;
+  background-image:url(assets/auth-scene1.jpg);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.5) 46px,#000 120px,#000 100%);
+          mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.5) 46px,#000 120px,#000 100%);
 }
-@keyframes ag-tw{0%,100%{opacity:.22}50%{opacity:1}}
+#auth-gate.step-code .ag-scene{background-image:url(assets/auth-scene2.jpg);height:26vh;min-height:180px;}
+
+@keyframes ag-tw{0%,100%{opacity:.2}50%{opacity:1}}
 @keyframes ag-shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
 
+/* ---- step ---- */
 #auth-gate .ag-step{
-  position:absolute;inset:0;display:flex;flex-direction:column;gap:18px;
-  padding:calc(24px + env(safe-area-inset-top,0px)) 24px calc(28px + env(safe-area-inset-bottom,0px));
-  max-width:440px;margin:0 auto;
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:calc(40px + env(safe-area-inset-top,0px)) 26px calc(30px + env(safe-area-inset-bottom,0px));
+  width:100%;max-width:420px;margin:0 auto;
 }
 #auth-gate .ag-step[hidden]{display:none!important;}
 
-#auth-gate .ag-dots{display:flex;gap:6px;}
-#auth-gate .ag-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.22);}
-#auth-gate .ag-dot.on{width:20px;border-radius:3px;background:#e6c9a0;}
-
-#auth-gate .ag-topbar{display:flex;align-items:center;justify-content:space-between;}
-#auth-gate .ag-back{
-  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
-  border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);cursor:pointer;
+/* ---- brand logo (from the mockup) ---- */
+#auth-gate .ag-logo{
+  display:block;width:188px;height:auto;margin:0 auto;
+  mix-blend-mode:lighten;
 }
-
-#auth-gate .ag-brand{display:flex;align-items:center;gap:12px;}
-#auth-gate .ag-wordmark{display:flex;flex-direction:column;line-height:1.16;font-family:Georgia,"Times New Roman",serif;}
-#auth-gate .ag-wordmark b{font-weight:400;font-size:15px;letter-spacing:.22em;color:#f3f0f7;}
-#auth-gate .ag-wordmark span{font-size:9.5px;letter-spacing:.3em;color:#c9a77f;}
 
 #auth-gate .ag-h1{
-  margin:0;font-family:Georgia,"Times New Roman",serif;font-weight:400;
-  font-size:27px;line-height:1.26;letter-spacing:.01em;
+  margin:20px 0 0;font-weight:600;font-size:25px;line-height:1.32;letter-spacing:.005em;
+  max-width:284px;text-wrap:balance;
 }
-#auth-gate .ag-step[data-step="code"] .ag-h1{font-size:26px;text-align:center;}
+#auth-gate .ag-sub{
+  margin:14px 0 0;font-size:13.5px;line-height:1.62;color:#c2bcd6;max-width:298px;
+}
 
-#auth-gate .ag-feats{display:flex;flex-direction:column;gap:10px;}
-#auth-gate .ag-feat{display:flex;align-items:center;gap:11px;font-size:13px;color:#c4bfd8;}
-#auth-gate .ag-feat svg{flex:none;}
-
-#auth-gate .ag-panel{
-  margin-top:auto;display:flex;flex-direction:column;gap:14px;padding:20px;border-radius:20px;
-  background:rgba(17,15,37,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(230,201,160,.16);box-shadow:0 10px 44px rgba(0,0,0,.4);
+/* ---- e-mail field ---- */
+#auth-gate .ag-input{
+  margin-top:28px;width:100%;height:54px;border-radius:27px;display:flex;align-items:center;
+  padding:0 24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.17);
+  backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+  transition:border-color .15s,box-shadow .15s;
 }
-#auth-gate .ag-field{display:flex;flex-direction:column;gap:8px;}
-#auth-gate .ag-lbl{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#9b95b5;}
-#auth-gate .ag-inputwrap{
-  height:50px;border-radius:13px;display:flex;align-items:center;gap:9px;padding:0 15px;
-  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.14);
-}
-#auth-gate .ag-inputwrap:focus-within{border-color:#e8a184;box-shadow:0 0 0 3px rgba(232,161,132,.16);}
-#auth-gate .ag-inputwrap input{
+#auth-gate .ag-input:focus-within{border-color:#e8a184;box-shadow:0 0 0 3px rgba(232,161,132,.15);}
+#auth-gate .ag-input input{
   flex:1;min-width:0;height:100%;border:0;background:none;outline:none;
-  color:#f3f0f7;font-size:15px;font-family:inherit;
+  color:#f4f1f8;font-size:15px;font-family:inherit;text-align:left;
 }
-#auth-gate .ag-inputwrap input::placeholder{color:#7d7799;}
-#auth-gate .ag-hint{margin:-2px 0 0;font-size:12px;color:#9b95b5;}
-#auth-gate .ag-err{margin:-2px 0 0;font-size:12px;color:#f0a68c;min-height:1px;}
+#auth-gate .ag-input input::placeholder{color:#9089a8;}
 
+#auth-gate .ag-err{margin:10px 0 0;font-size:12.5px;color:#f4b199;min-height:16px;text-shadow:0 1px 3px rgba(0,0,0,.5);}
+
+/* ---- primary button ---- */
 #auth-gate .ag-cta{
-  height:52px;border:0;border-radius:26px;cursor:pointer;font-family:inherit;
-  font-size:15.5px;font-weight:600;letter-spacing:.02em;color:#3a1c14;
-  background:linear-gradient(180deg,#f3ac91 0%,#e78a6c 100%);
-  box-shadow:0 12px 28px rgba(231,138,108,.34);
+  margin-top:auto;width:100%;height:56px;border:0;border-radius:28px;cursor:pointer;
+  font-family:inherit;font-size:16px;font-weight:600;letter-spacing:.01em;color:#3a1c14;
+  background:linear-gradient(180deg,#f4ad92 0%,#e78a6c 100%);
+  box-shadow:0 14px 34px rgba(20,14,30,.5),0 4px 14px rgba(231,138,108,.3);
+  transition:opacity .15s;
 }
-#auth-gate .ag-cta[disabled]{opacity:.5;box-shadow:none;cursor:default;}
+#auth-gate .ag-cta[disabled]{opacity:.6;cursor:default;}
 
-#auth-gate .ag-or{display:flex;align-items:center;gap:12px;color:#8b85a6;font-size:11.5px;letter-spacing:.06em;}
-#auth-gate .ag-or::before,#auth-gate .ag-or::after{content:"";height:1px;flex:1;background:rgba(255,255,255,.1);}
-
-#auth-gate .ag-social{
-  height:48px;border-radius:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
-  color:#e9e6f2;font-family:inherit;font-size:14px;font-weight:500;
+/* ---- code step ---- */
+#auth-gate .ag-back{
+  position:absolute;top:calc(20px + env(safe-area-inset-top,0px));left:22px;
+  width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  background:none;border:0;cursor:pointer;padding:0;
 }
-#auth-gate .ag-social svg{flex:none;}
-#auth-gate .ag-privacy{display:flex;align-items:center;justify-content:center;gap:7px;margin:2px 0 0;font-size:11px;color:#8b85a6;}
-
-#auth-gate .ag-mid{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:14px;}
-#auth-gate .ag-emblem{filter:drop-shadow(0 0 20px rgba(230,201,160,.32));}
-#auth-gate .ag-body{margin:0;text-align:center;font-size:13.5px;line-height:1.55;color:#b4aecb;}
-#auth-gate .ag-body .ag-mail{color:#f3f0f7;font-weight:600;}
-#auth-gate .ag-edit{
-  background:none;border:0;color:#e8a184;font:inherit;font-weight:600;cursor:pointer;
-  text-decoration:underline;text-underline-offset:2px;padding:0 0 0 7px;
+#auth-gate .ag-mid{
+  display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:7vh;width:100%;
 }
-#auth-gate .ag-otp{display:flex;gap:9px;justify-content:center;margin-top:2px;}
+#auth-gate .ag-emblem{filter:drop-shadow(0 0 22px rgba(230,201,160,.34));}
+#auth-gate .ag-body{margin:0;font-size:14px;line-height:1.6;color:#c2bcd6;}
+#auth-gate .ag-body .ag-mail{display:inline-block;margin-top:4px;color:#e8a184;font-weight:600;}
+
+#auth-gate .ag-otp{display:flex;gap:10px;justify-content:center;margin-top:4px;}
 #auth-gate .ag-otp.err{animation:ag-shake .5s;}
 #auth-gate .ag-otp input{
-  width:45px;height:56px;border-radius:12px;text-align:center;
-  font-size:22px;font-weight:600;color:#f3f0f7;font-family:inherit;
-  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.14);outline:none;
+  width:44px;height:56px;border-radius:13px;text-align:center;
+  font-size:22px;font-weight:600;color:#f4f1f8;font-family:inherit;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.17);outline:none;
+  transition:border-color .15s,box-shadow .15s,background .15s;
 }
-#auth-gate .ag-otp input:not(:placeholder-shown){background:rgba(255,255,255,.07);border-color:rgba(230,201,160,.35);}
+#auth-gate .ag-otp input::placeholder{color:rgba(255,255,255,.2);}
 #auth-gate .ag-otp input:focus{
   border-color:#e6c9a0;background:rgba(230,201,160,.06);
-  box-shadow:0 0 0 3px rgba(230,201,160,.16),0 0 20px rgba(230,201,160,.32);
+  box-shadow:0 0 0 3px rgba(230,201,160,.15),0 0 18px rgba(230,201,160,.28);
 }
-#auth-gate .ag-otp.ok input{border-color:#93d4a4;background:rgba(147,212,164,.09);color:#e6f4ea;}
+#auth-gate .ag-otp.ok input{border-color:#93d4a4;background:rgba(147,212,164,.08);color:#e6f4ea;}
 
-#auth-gate .ag-resend{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12.5px;color:#8b85a6;margin-top:2px;}
-#auth-gate .ag-resend .ag-timer{color:#6f6a8a;}
+#auth-gate .ag-resend{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:6px;font-size:13px;color:#a49ec0;}
 #auth-gate .ag-resend button{
-  background:none;border:0;padding:0;font:inherit;font-size:12.5px;font-weight:600;
-  color:#e8a184;text-decoration:underline;text-underline-offset:2px;cursor:pointer;
+  background:none;border:0;padding:0;cursor:pointer;font:inherit;font-size:13.5px;font-weight:600;
+  color:#e8a184;text-decoration:underline;text-underline-offset:3px;
 }
-#auth-gate .ag-resend button[disabled]{display:none;}
-#auth-gate .ag-note{text-align:center;font-size:11.5px;color:#7d7799;margin:0;}
+#auth-gate .ag-resend button[disabled]{opacity:.45;cursor:default;text-decoration:none;}
 
-#auth-gate .ag-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;}
-#auth-gate .ag-ghost{
-  height:44px;border-radius:22px;background:none;border:1px solid rgba(255,255,255,.14);
-  color:#c4bfd8;font:inherit;font-size:13.5px;cursor:pointer;
+@media (max-width:360px){
+  #auth-gate .ag-otp input{width:40px;height:52px;font-size:20px;}
+  #auth-gate .ag-h1{font-size:23px;}
+  #auth-gate .ag-logo{width:168px;}
 }
-
-@media (max-width:390px){
-  #auth-gate .ag-otp input{width:42px;height:52px;font-size:20px;}
-  #auth-gate .ag-h1{font-size:24px;}
-}
-@media (prefers-reduced-motion:reduce){
-  #auth-gate *{animation:none!important;}
-}
+@media (prefers-reduced-motion:reduce){ #auth-gate *{animation:none!important;} }

@@ -11,6 +11,10 @@
      The publishable/anon key is safe in client code. */
   var SUPABASE_URL = 'https://hcxwzsvicihnkmlrsftv.supabase.co';
   var SUPABASE_ANON_KEY = 'sb_publishable_2bOBvAgrLzuhfPH7LVA0nQ_qqxRJakF';
+  /* Apple / Google buttons — set true only after you enable those
+     providers in Supabase (Authentication -> Providers). While false
+     the buttons and the "or" divider are not shown. */
+  var ENABLE_SOCIAL = false;
   /* ============================================================= */
 
   var AUTHED_KEY  = 'ca_authed';
@@ -387,6 +391,11 @@
     gate.hidden = true;
     gate.innerHTML = MARKUP;
     document.body.appendChild(gate);
+
+    if (!ENABLE_SOCIAL) {
+      qa('.ag-social').forEach(function (b) { b.remove(); });
+      var orRow = q('.ag-or'); if (orRow) orRow.remove();
+    }
 
     stepEmail = q('.ag-step[data-step="email"]');
     stepCode = q('.ag-step[data-step="code"]');

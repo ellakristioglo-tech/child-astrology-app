@@ -59,16 +59,6 @@
     }
   };
 
-  var EMBLEM =
-    '<svg width="46" height="46" viewBox="0 0 46 46" fill="none" stroke="#e6c9a0" stroke-width="1.2">' +
-      '<circle cx="23" cy="23" r="20"/>' +
-      '<path d="M30 12a12 12 0 1 0 0 22 9.5 9.5 0 0 1 0-22Z" stroke-linejoin="round"/>' +
-      '<circle cx="19" cy="30" r="3.4"/>' +
-      '<circle cx="16.5" cy="19" r="1" fill="#e6c9a0" stroke="none"/>' +
-      '<circle cx="34" cy="16" r=".9" fill="#e6c9a0" stroke="none"/>' +
-      '<circle cx="35" cy="30" r=".8" fill="#e6c9a0" stroke="none"/>' +
-    '</svg>';
-
   var MARKUP =
     '<div class="ag-sky" aria-hidden="true">' +
       '<svg class="ag-stars" viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice">' +
@@ -101,41 +91,11 @@
         '</g>' +
         '<g><circle cx="330" cy="76" r="13" fill="#f0dcc0" fill-opacity=".9"/><circle cx="324" cy="71" r="12" fill="#0c0d2c"/></g>' +
       '</svg>' +
-      '<svg class="ag-horizon" viewBox="0 0 390 340" preserveAspectRatio="xMidYMax slice">' +
-        '<defs>' +
-          '<radialGradient id="agGlow" cx="50%" cy="88%" r="62%">' +
-            '<stop offset="0%" stop-color="#ffc099" stop-opacity=".72"/>' +
-            '<stop offset="34%" stop-color="#f0869e" stop-opacity=".3"/>' +
-            '<stop offset="100%" stop-color="#f0869e" stop-opacity="0"/>' +
-          '</radialGradient>' +
-          '<radialGradient id="agHalo" cx="50%" cy="50%" r="50%">' +
-            '<stop offset="0%" stop-color="#ffd0a8" stop-opacity=".55"/>' +
-            '<stop offset="60%" stop-color="#ffb488" stop-opacity=".18"/>' +
-            '<stop offset="100%" stop-color="#ffb488" stop-opacity="0"/>' +
-          '</radialGradient>' +
-        '</defs>' +
-        '<rect x="0" y="0" width="390" height="340" fill="url(#agGlow)"/>' +
-        '<path d="M0,150 L60,86 L120,140 L180,66 L250,128 L320,80 L390,120 L390,340 L0,340 Z" fill="#241c44" opacity=".9"/>' +
-        '<path d="M0,196 L80,150 L150,188 L230,140 L300,186 L360,158 L390,182 L390,340 L0,340 Z" fill="#171134"/>' +
-        '<ellipse cx="195" cy="250" rx="86" ry="98" fill="url(#agHalo)"/>' +
-        '<g fill="#05030f" transform="translate(195,300) scale(1.75)">' +
-          '<ellipse cx="0" cy="-58" rx="6.4" ry="7"/>' +
-          '<path d="M-10,-50 Q0,-56 10,-50 L8,-2 Q0,2 -8,-2 Z"/>' +
-          '<path d="M-9,-48 Q-25,-53 -31,-76 Q-29,-81 -24,-78 Q-16,-58 -6,-52 Z"/>' +
-          '<path d="M9,-48 Q25,-53 31,-76 Q29,-81 24,-78 Q16,-58 6,-52 Z"/>' +
-          '<circle cx="0" cy="-85" r="8"/><circle cx="0" cy="-94" r="4.6"/>' +
-          '<path d="M-7,-87 Q-13,-85 -15,-79 Q-12,-78 -9,-81 Z"/>' +
-          '<path d="M7,-87 Q13,-85 15,-79 Q12,-78 9,-81 Z"/>' +
-        '</g>' +
-        '<path d="M0,250 L90,212 L170,248 L250,210 L330,250 L390,226 L390,340 L0,340 Z" fill="#0a0720"/>' +
-      '</svg>' +
-      '<div class="ag-scrim"></div>' +
+      '<div class="ag-scene"></div>' +
     '</div>' +
 
     '<section class="ag-step" data-step="email">' +
-      '<div class="ag-brand">' + EMBLEM +
-        '<span class="ag-wordmark"><b>CHILD</b><span>ASTROLOGY</span></span>' +
-      '</div>' +
+      '<img class="ag-logo" src="assets/auth-logo.jpg" alt="Child Astrology" width="188" height="157">' +
       '<h1 class="ag-h1" data-i18n="h1"></h1>' +
       '<p class="ag-sub" data-i18n="sub"></p>' +
       '<div class="ag-input"><input id="agEmail" type="email" inputmode="email" autocomplete="email" spellcheck="false"></div>' +
@@ -208,6 +168,7 @@
   function showStep(step) {
     stepEmail.hidden = step !== 'email';
     stepCode.hidden = step !== 'code';
+    gate.classList.toggle('step-code', step === 'code');
     if (step === 'code') setTimeout(function () { try { otpInputs[0].focus(); } catch (e) {} }, 50);
   }
 

@@ -10,6 +10,7 @@ const OFFLINE_SHELL = [
     './sports-data.js', './learning-data.js', './tips-data.js',
     './vendor/astronomy.browser.min.js', './vendor/supabase.js', './app.js', './mobile-menu.js', './ui-bindings.js',
     './auth-gate.css', './auth-gate.js',
+    './assets/auth-logo.jpg', './assets/auth-scene1.jpg', './assets/auth-scene2.jpg',
     './city-search.js', './assets/cities-15000.min.json', './child-modal.js', './child-analysis.js',
     './tarot-thoth.js', './consultation-chat.js', './family-scent.js', './icon-theme.js',
     './analytics-config.js', './analytics.js', './privacy-controls.js', './pwa-update.js',

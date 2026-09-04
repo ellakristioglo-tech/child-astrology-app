@@ -1,6 +1,8 @@
 /* ================================================================
    Child Astrology — sign-in gate (e-mail + 6-digit code)
    Matches the reference mockup: centered, minimal, dark celestial.
+   Uses the mockup logo (assets/auth-logo.jpg) and the mockup
+   illustration (assets/auth-scene1.jpg / auth-scene2.jpg).
    Scoped under #auth-gate. CSP-safe: no external fonts / scripts.
    ================================================================ */
 
@@ -18,44 +20,50 @@ body.ca-auth-open{overflow:hidden;touch-action:none;}
 /* ---- backdrop ---- */
 #auth-gate .ag-sky{
   position:absolute;inset:0;overflow:hidden;
-  background:radial-gradient(135% 70% at 50% 0%,#20244e 0%,#161a3f 38%,#0c0c28 70%,#06061a 100%);
+  background:radial-gradient(140% 66% at 50% 0%,#232750 0%,#191d43 36%,#0d0d29 68%,#06061a 100%);
 }
 #auth-gate .ag-stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
-#auth-gate .ag-horizon{position:absolute;left:0;right:0;bottom:0;width:100%;height:44vh;min-height:300px;pointer-events:none;}
-#auth-gate .ag-scrim{
-  position:absolute;left:0;right:0;bottom:0;height:42vh;pointer-events:none;
-  background:linear-gradient(180deg,rgba(6,6,20,0) 0%,rgba(6,6,20,.35) 55%,rgba(6,6,20,.8) 100%);
+
+/* the mockup illustration, anchored to the bottom, faded into the sky at its top edge */
+#auth-gate .ag-scene{
+  position:absolute;left:0;right:0;bottom:0;height:40vh;min-height:264px;pointer-events:none;
+  background:#0a0720 center bottom / cover no-repeat;
+  background-image:url(assets/auth-scene1.jpg);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.5) 46px,#000 120px,#000 100%);
+          mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.5) 46px,#000 120px,#000 100%);
 }
+#auth-gate.step-code .ag-scene{background-image:url(assets/auth-scene2.jpg);height:26vh;min-height:180px;}
+
 @keyframes ag-tw{0%,100%{opacity:.2}50%{opacity:1}}
 @keyframes ag-shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
 
 /* ---- step ---- */
 #auth-gate .ag-step{
   position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center;
-  padding:calc(46px + env(safe-area-inset-top,0px)) 26px calc(30px + env(safe-area-inset-bottom,0px));
+  padding:calc(40px + env(safe-area-inset-top,0px)) 26px calc(30px + env(safe-area-inset-bottom,0px));
   width:100%;max-width:420px;margin:0 auto;
 }
 #auth-gate .ag-step[hidden]{display:none!important;}
 
-/* ---- brand lockup ---- */
-#auth-gate .ag-brand{display:flex;align-items:center;gap:13px;}
-#auth-gate .ag-brand svg{flex:none;}
-#auth-gate .ag-wordmark{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2;font-family:Georgia,"Times New Roman",serif;}
-#auth-gate .ag-wordmark b{font-weight:400;font-size:17px;letter-spacing:.2em;color:#f4f1f8;}
-#auth-gate .ag-wordmark span{font-size:9px;letter-spacing:.36em;color:#c9a77f;}
+/* ---- brand logo (from the mockup) ---- */
+#auth-gate .ag-logo{
+  display:block;width:188px;height:auto;margin:0 auto;
+  mix-blend-mode:lighten;
+}
 
 #auth-gate .ag-h1{
-  margin:26px 0 0;font-weight:600;font-size:25px;line-height:1.32;letter-spacing:.005em;
-  max-width:280px;text-wrap:balance;
+  margin:20px 0 0;font-weight:600;font-size:25px;line-height:1.32;letter-spacing:.005em;
+  max-width:284px;text-wrap:balance;
 }
 #auth-gate .ag-sub{
-  margin:14px 0 0;font-size:13.5px;line-height:1.62;color:#b9b3d0;max-width:296px;
+  margin:14px 0 0;font-size:13.5px;line-height:1.62;color:#c2bcd6;max-width:298px;
 }
 
 /* ---- e-mail field ---- */
 #auth-gate .ag-input{
-  margin-top:30px;width:100%;height:54px;border-radius:27px;display:flex;align-items:center;
-  padding:0 24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
+  margin-top:28px;width:100%;height:54px;border-radius:27px;display:flex;align-items:center;
+  padding:0 24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.17);
+  backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
   transition:border-color .15s,box-shadow .15s;
 }
 #auth-gate .ag-input:focus-within{border-color:#e8a184;box-shadow:0 0 0 3px rgba(232,161,132,.15);}
@@ -63,16 +71,17 @@ body.ca-auth-open{overflow:hidden;touch-action:none;}
   flex:1;min-width:0;height:100%;border:0;background:none;outline:none;
   color:#f4f1f8;font-size:15px;font-family:inherit;text-align:left;
 }
-#auth-gate .ag-input input::placeholder{color:#8c86a6;}
+#auth-gate .ag-input input::placeholder{color:#9089a8;}
 
-#auth-gate .ag-err{margin:10px 0 0;font-size:12.5px;color:#f0a68c;min-height:16px;}
+#auth-gate .ag-err{margin:10px 0 0;font-size:12.5px;color:#f4b199;min-height:16px;text-shadow:0 1px 3px rgba(0,0,0,.5);}
 
 /* ---- primary button ---- */
 #auth-gate .ag-cta{
   margin-top:auto;width:100%;height:56px;border:0;border-radius:28px;cursor:pointer;
   font-family:inherit;font-size:16px;font-weight:600;letter-spacing:.01em;color:#3a1c14;
   background:linear-gradient(180deg,#f4ad92 0%,#e78a6c 100%);
-  box-shadow:0 14px 30px rgba(231,138,108,.32);transition:opacity .15s;
+  box-shadow:0 14px 34px rgba(20,14,30,.5),0 4px 14px rgba(231,138,108,.3);
+  transition:opacity .15s;
 }
 #auth-gate .ag-cta[disabled]{opacity:.6;cursor:default;}
 
@@ -83,10 +92,10 @@ body.ca-auth-open{overflow:hidden;touch-action:none;}
   background:none;border:0;cursor:pointer;padding:0;
 }
 #auth-gate .ag-mid{
-  display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:6vh;width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:7vh;width:100%;
 }
 #auth-gate .ag-emblem{filter:drop-shadow(0 0 22px rgba(230,201,160,.34));}
-#auth-gate .ag-body{margin:0;font-size:14px;line-height:1.6;color:#b9b3d0;}
+#auth-gate .ag-body{margin:0;font-size:14px;line-height:1.6;color:#c2bcd6;}
 #auth-gate .ag-body .ag-mail{display:inline-block;margin-top:4px;color:#e8a184;font-weight:600;}
 
 #auth-gate .ag-otp{display:flex;gap:10px;justify-content:center;margin-top:4px;}
@@ -94,7 +103,7 @@ body.ca-auth-open{overflow:hidden;touch-action:none;}
 #auth-gate .ag-otp input{
   width:44px;height:56px;border-radius:13px;text-align:center;
   font-size:22px;font-weight:600;color:#f4f1f8;font-family:inherit;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);outline:none;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.17);outline:none;
   transition:border-color .15s,box-shadow .15s,background .15s;
 }
 #auth-gate .ag-otp input::placeholder{color:rgba(255,255,255,.2);}
@@ -104,7 +113,7 @@ body.ca-auth-open{overflow:hidden;touch-action:none;}
 }
 #auth-gate .ag-otp.ok input{border-color:#93d4a4;background:rgba(147,212,164,.08);color:#e6f4ea;}
 
-#auth-gate .ag-resend{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:6px;font-size:13px;color:#9a94b4;}
+#auth-gate .ag-resend{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:6px;font-size:13px;color:#a49ec0;}
 #auth-gate .ag-resend button{
   background:none;border:0;padding:0;cursor:pointer;font:inherit;font-size:13.5px;font-weight:600;
   color:#e8a184;text-decoration:underline;text-underline-offset:3px;
@@ -114,5 +123,6 @@ body.ca-auth-open{overflow:hidden;touch-action:none;}
 @media (max-width:360px){
   #auth-gate .ag-otp input{width:40px;height:52px;font-size:20px;}
   #auth-gate .ag-h1{font-size:23px;}
+  #auth-gate .ag-logo{width:168px;}
 }
 @media (prefers-reduced-motion:reduce){ #auth-gate *{animation:none!important;} }

@@ -163,6 +163,31 @@ jobs:
           print(f'Wrote {path}')
           PY
 
+          KEY_PATH="$KEY_DIR/AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8"
+
+          echo "::group::App Store Connect credential diagnostics"
+          echo "KEY_ID length: ${#APP_STORE_CONNECT_KEY_ID} (App Store Connect key ids are 10 chars)"
+          echo "ISSUER_ID length: ${#APP_STORE_CONNECT_ISSUER_ID}"
+          if printf '%s' "$APP_STORE_CONNECT_ISSUER_ID" | grep -Eq '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'; then
+            echo "ISSUER_ID format: UUID (looks correct)"
+          else
+            echo "::warning::ISSUER_ID is not a UUID. It must be the Issuer ID from App Store Connect -> Users and Access -> Integrations -> App Store Connect API (top of the page), NOT the Key ID or the Team ID."
+          fi
+          echo "-- .p8 private key check --"
+          if openssl pkey -in "$KEY_PATH" -noout -text 2>/dev/null | grep -Eq 'prime256v1|P-256|256 bit'; then
+            echo ".p8 parses as an EC P-256 private key (correct for App Store Connect)"
+          else
+            echo "::warning::openssl could not parse the .p8 as an EC P-256 key. The APP_STORE_CONNECT_API_KEY secret is likely truncated or line-wrapped wrong. Paste the whole AuthKey_XXXXXXXXXX.p8 file, including the BEGIN/END lines."
+            openssl pkey -in "$KEY_PATH" -noout -text 2>&1 | head -3 || true
+          fi
+          echo "-- altool auth probe (list-providers) --"
+          xcrun altool --list-providers \
+            --apiKey "$APP_STORE_CONNECT_KEY_ID" \
+            --apiIssuer "$APP_STORE_CONNECT_ISSUER_ID" \
+            && echo "AUTH OK: the API key authenticates with Apple." \
+            || echo "::warning::altool --list-providers failed to authenticate (see error above). The API key / Key ID / Issuer ID combination is being rejected by Apple — regenerate the key and re-enter all three secrets (see run summary notes)."
+          echo "::endgroup::"
+
           IPA_PATH=$(find "$RUNNER_TEMP/export" -name '*.ipa' -print -quit)
           test -n "$IPA_PATH"
           echo "Uploading $IPA_PATH"

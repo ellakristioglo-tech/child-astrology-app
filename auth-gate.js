@@ -20,6 +20,12 @@
   var DEFAULT_LANG = 'nl';
   var LANGS = ['nl', 'ru', 'ua', 'en'];
 
+  /* App Store review sign-in: this address needs no e-mail — the fixed
+     code below signs straight in with an empty account, so a reviewer
+     can always get past the gate. Documented in App Review notes. */
+  var REVIEW_EMAIL = 'review@childastrologyapp.com';
+  var REVIEW_CODE  = '424242';
+
   var I18N = {
     nl: {
       h1:'Maak kennis met de wereld van je kind',
@@ -216,6 +222,8 @@
       clearOtp(); showStep('code');
       continueBtn.disabled = false; continueBtn.textContent = tr('continue');
     };
+
+    if (email === REVIEW_EMAIL) { proceed(); return; }   // App Store review: no e-mail sent
     var fail = function (e) {
       continueBtn.disabled = false; continueBtn.textContent = tr('continue');
       err.textContent = tr('errSend'); if (e) console.error('[auth-gate]', e);
@@ -260,6 +268,8 @@
         try { otpInputs[0].focus(); } catch (x) {}
       }, 450);
     };
+
+    if (currentEmail === REVIEW_EMAIL) { code === REVIEW_CODE ? ok() : bad(); return; }
 
     var c = client();
     if (!c) { /^\d{6}$/.test(code) ? ok() : bad(); return; }

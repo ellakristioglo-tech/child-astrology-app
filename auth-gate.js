@@ -252,9 +252,13 @@
     var bad = function (e) {
       verifyBtn.disabled = false; verifyBtn.textContent = tr('verify');
       var box = q('#agOtp'); box.classList.add('err');
-      err.textContent = tr('errCode');
       if (e) console.error('[auth-gate]', e);
-      setTimeout(function () { box.classList.remove('err'); clearOtp(); try { otpInputs[0].focus(); } catch (x) {} }, 500);
+      setTimeout(function () {
+        box.classList.remove('err', 'ok');
+        otpInputs.forEach(function (i) { i.value = ''; });
+        err.textContent = tr('errCode');   // keep the message visible after clearing the digits
+        try { otpInputs[0].focus(); } catch (x) {}
+      }, 450);
     };
 
     var c = client();
@@ -267,6 +271,8 @@
   function wireOtp() {
     otpInputs.forEach(function (input, idx) {
       input.addEventListener('input', function () {
+        q('#agCodeErr').textContent = '';
+        q('#agOtp').classList.remove('err', 'ok');
         input.value = input.value.replace(/\D/g, '').slice(0, 1);
         if (input.value && idx < 5) otpInputs[idx + 1].focus();
         if (codeValue().length === 6) verifyCode();

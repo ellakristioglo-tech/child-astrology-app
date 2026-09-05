@@ -25,8 +25,9 @@
       h1:'Maak kennis met de wereld van je kind',
       sub:'Maak een profiel voor je kind en ontdek de geboortehoroscoop, karaktereigenschappen, emoties en talenten.',
       emailPh:'Je e-mailadres', continue:'Doorgaan',
-      codeH1:'Controleer je e-mail', sentTo:'We hebben een 6-cijferige code gestuurd naar',
-      noMail:'Geen e-mail ontvangen?', resend:'Code opnieuw versturen', verify:'Bevestigen',
+      codeH1:'Controleer je e-mail', sentTo:'We hebben een e-mail gestuurd naar',
+      codeHint:'Open de link in de e-mail — of vul de 6-cijferige code hieronder in.',
+      noMail:'Geen e-mail ontvangen?', resend:'Opnieuw versturen', verify:'Bevestigen',
       errEmail:'Vul een geldig e-mailadres in', errCode:'Code onjuist — probeer het opnieuw',
       errSend:'Versturen mislukt — probeer het later opnieuw', sending:'Versturen…', checking:'Controleren…'
     },
@@ -34,8 +35,9 @@
       h1:'Познакомьтесь с миром вашего ребёнка',
       sub:'Создайте профиль ребёнка и откройте его натальную карту, особенности характера, эмоций и потенциала.',
       emailPh:'Ваш e-mail', continue:'Продолжить',
-      codeH1:'Проверьте почту', sentTo:'Мы отправили 6-значный код на',
-      noMail:'Не получили письмо?', resend:'Отправить код ещё раз', verify:'Подтвердить',
+      codeH1:'Проверьте почту', sentTo:'Мы отправили письмо на',
+      codeHint:'Откройте ссылку из письма — или введите 6-значный код ниже.',
+      noMail:'Не получили письмо?', resend:'Отправить ещё раз', verify:'Подтвердить',
       errEmail:'Введите корректный e-mail', errCode:'Код неверный — попробуйте ещё раз',
       errSend:'Не удалось отправить — попробуйте позже', sending:'Отправляем…', checking:'Проверяем…'
     },
@@ -43,8 +45,9 @@
       h1:'Пізнайте світ вашої дитини',
       sub:'Створіть профіль дитини й відкрийте її натальну карту, особливості характеру, емоцій і потенціалу.',
       emailPh:'Ваш e-mail', continue:'Продовжити',
-      codeH1:'Перевірте пошту', sentTo:'Ми надіслали 6-значний код на',
-      noMail:'Не отримали лист?', resend:'Надіслати код ще раз', verify:'Підтвердити',
+      codeH1:'Перевірте пошту', sentTo:'Ми надіслали лист на',
+      codeHint:'Відкрийте посилання з листа — або введіть 6-значний код нижче.',
+      noMail:'Не отримали лист?', resend:'Надіслати ще раз', verify:'Підтвердити',
       errEmail:'Введіть коректний e-mail', errCode:'Код невірний — спробуйте ще раз',
       errSend:'Не вдалося надіслати — спробуйте пізніше', sending:'Надсилаємо…', checking:'Перевіряємо…'
     },
@@ -52,8 +55,9 @@
       h1:'Meet the world of your child',
       sub:'Create your child’s profile and discover their birth chart, character traits, emotions and potential.',
       emailPh:'Your e-mail', continue:'Continue',
-      codeH1:'Check your e-mail', sentTo:'We’ve sent a 6-digit code to',
-      noMail:'Didn’t get the e-mail?', resend:'Resend code', verify:'Confirm',
+      codeH1:'Check your e-mail', sentTo:'We’ve sent an e-mail to',
+      codeHint:'Open the link in the e-mail — or enter the 6-digit code below.',
+      noMail:'Didn’t get the e-mail?', resend:'Resend', verify:'Confirm',
       errEmail:'Enter a valid e-mail', errCode:'Wrong code — try again',
       errSend:'Could not send — try again later', sending:'Sending…', checking:'Checking…'
     }
@@ -115,6 +119,7 @@
         '</svg></span>' +
         '<h1 class="ag-h1" data-i18n="codeH1"></h1>' +
         '<p class="ag-body"><span data-i18n="sentTo"></span><br><span class="ag-mail" id="agMailEcho"></span></p>' +
+        '<p class="ag-codehint" data-i18n="codeHint"></p>' +
         '<div class="ag-otp" id="agOtp">' +
           '<input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" placeholder="0">' +
           '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
@@ -179,10 +184,19 @@
     showStep('email');
     setTimeout(function () { try { emailInput.focus(); } catch (e) {} }, 50);
   }
+  var sessionWatch = null;
   function finishAuth() {
+    if (gate.hidden && safeGet(AUTHED_KEY) === '1') return;
+    if (sessionWatch) { clearInterval(sessionWatch); sessionWatch = null; }
     gate.hidden = true;
     document.body.classList.remove('ca-auth-open');
     safeSet(AUTHED_KEY, '1');
+    // a magic-link return leaves #access_token=... in the URL — clean it
+    try {
+      if (/access_token=|[?&]code=/.test(location.hash + location.search)) {
+        history.replaceState(null, document.title, location.pathname);
+      }
+    } catch (e) {}
     try { window.dispatchEvent(new CustomEvent('ca:authed', { detail: { email: currentEmail } })); } catch (e) {}
     if (window.CAApp && typeof window.CAApp.onAuthed === 'function') { try { window.CAApp.onAuthed(currentEmail); } catch (e) {} }
     if (typeof window.showSection === 'function') { try { window.showSection('home'); } catch (e) {} }
@@ -329,21 +343,37 @@
     return false;
   }
 
-  /* magic-link return: supabase-js reads the token from the URL and fires
-     SIGNED_IN; also covers a still-valid session from a previous visit. */
-  function initSession() {
+  /* Finish as soon as a Supabase session exists — no matter HOW it arrived:
+     - the user typed the 6-digit code (verifyOtp, handled in verifyCode)
+     - the user clicked the magic / confirm link in THIS tab
+       (detectSessionInUrl parses #access_token=... and fires SIGNED_IN)
+     - the user clicked the link in ANOTHER tab — the session lands in
+       localStorage (shared per-origin); the storage event + the poll
+       below pick it up here and close the gate too. */
+  function checkSession() {
     var c = client();
     if (!c) return;
     c.auth.getSession().then(function (r) {
       var s = r && r.data && r.data.session;
       if (s && s.user) { currentEmail = s.user.email || currentEmail; finishAuth(); }
     }).catch(function () {});
+  }
+  function initSession() {
+    var c = client();
+    if (!c) return;
+    checkSession();
     c.auth.onAuthStateChange(function (event, session) {
       if (session && session.user && (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'INITIAL_SESSION')) {
         currentEmail = session.user.email || currentEmail;
-        if (safeGet(AUTHED_KEY) !== '1' || !gate.hidden) finishAuth();
+        finishAuth();
       }
     });
+    // another tab (magic link) wrote the auth token — react here
+    window.addEventListener('storage', function (e) {
+      if (e.key && e.key.indexOf('-auth-token') !== -1 && e.newValue) checkSession();
+    });
+    // safety net: while the gate is open, re-check every 2.5 s
+    sessionWatch = setInterval(function () { if (!gate.hidden) checkSession(); else { clearInterval(sessionWatch); sessionWatch = null; } }, 2500);
   }
 
   function init() {

@@ -97,6 +97,7 @@ body.ca-auth-open{overflow:hidden;touch-action:none;}
 #auth-gate .ag-emblem{filter:drop-shadow(0 0 22px rgba(230,201,160,.34));}
 #auth-gate .ag-body{margin:0;font-size:14px;line-height:1.6;color:#c2bcd6;}
 #auth-gate .ag-body .ag-mail{display:inline-block;margin-top:4px;color:#e8a184;font-weight:600;}
+#auth-gate .ag-codehint{margin:-4px 0 0;font-size:12px;line-height:1.5;color:#8f89ab;max-width:290px;}
 
 #auth-gate .ag-otp{display:flex;gap:10px;justify-content:center;margin-top:4px;}
 #auth-gate .ag-otp.err{animation:ag-shake .5s;}

@@ -45,7 +45,7 @@ jobs:
           printf '{"version":"%s"}\n' "$GITHUB_SHA" > version.json
           sed -i "s/__APP_BUILD_VERSION__/${GITHUB_SHA}/g" index.html pwa-update.js sw.js
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: '.'
       - name: Deploy to GitHub Pages

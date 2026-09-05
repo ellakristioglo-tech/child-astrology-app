@@ -43,6 +43,22 @@ jobs:
       - name: Sync iOS project
         run: npx cap sync ios
 
+      - name: Raise iOS minimum version to 15.0 and stamp the build number
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: |
+          cd ios/App
+          # ITMS-90068: min OS must be >= 15.0 from spring 2027.
+          # Capacitor generates "platform :ios, '14.0'" as the first Podfile line.
+          sed -i '' -E "s/^platform :ios, '[0-9.]+'/platform :ios, '15.0'/" Podfile
+          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*;/IPHONEOS_DEPLOYMENT_TARGET = 15.0;/g' App.xcodeproj/project.pbxproj
+          # unique CFBundleVersion per run so re-uploads are never rejected as duplicates
+          plutil -replace CFBundleVersion -string "$BUILD_NUMBER" App/Info.plist
+          echo "--- Podfile platform ---";   grep -n "platform :ios" Podfile
+          echo "--- deployment targets ---"; grep -c "IPHONEOS_DEPLOYMENT_TARGET = 15.0;" App.xcodeproj/project.pbxproj || true
+          echo "--- CFBundleVersion ---";    plutil -extract CFBundleVersion raw App/Info.plist
+          pod install
+
       - name: Install signing certificate
         env:
           P12_BASE64: ${{ secrets.IOS_P12_BASE64 }}

@@ -43,7 +43,7 @@ jobs:
       - name: Sync iOS project
         run: npx cap sync ios
 
-      - name: Raise iOS minimum version to 15.0 and stamp the build number
+      - name: Raise iOS minimum version, make it iPhone-only, stamp the build number
         env:
           BUILD_NUMBER: ${{ github.run_number }}
         run: |
@@ -52,11 +52,15 @@ jobs:
           # Capacitor generates "platform :ios, '14.0'" as the first Podfile line.
           sed -i '' -E "s/^platform :ios, '[0-9.]+'/platform :ios, '15.0'/" Podfile
           sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*;/IPHONEOS_DEPLOYMENT_TARGET = 15.0;/g' App.xcodeproj/project.pbxproj
+          # iPhone-only (1). The UI is phone-first; avoids the iPad Pro screenshot
+          # requirement and an iPad-experience rejection. Capacitor defaults to "1,2".
+          sed -i '' 's/TARGETED_DEVICE_FAMILY = "[0-9,]*";/TARGETED_DEVICE_FAMILY = "1";/g' App.xcodeproj/project.pbxproj
           # unique CFBundleVersion per run so re-uploads are never rejected as duplicates
           plutil -replace CFBundleVersion -string "$BUILD_NUMBER" App/Info.plist
-          echo "--- Podfile platform ---";   grep -n "platform :ios" Podfile
-          echo "--- deployment targets ---"; grep -c "IPHONEOS_DEPLOYMENT_TARGET = 15.0;" App.xcodeproj/project.pbxproj || true
-          echo "--- CFBundleVersion ---";    plutil -extract CFBundleVersion raw App/Info.plist
+          echo "--- Podfile platform ---";    grep -n "platform :ios" Podfile
+          echo "--- deployment targets ---";  grep -c "IPHONEOS_DEPLOYMENT_TARGET = 15.0;" App.xcodeproj/project.pbxproj || true
+          echo "--- device family ---";       grep -c 'TARGETED_DEVICE_FAMILY = "1";' App.xcodeproj/project.pbxproj || true
+          echo "--- CFBundleVersion ---";     plutil -extract CFBundleVersion raw App/Info.plist
           pod install
 
       - name: Install signing certificate

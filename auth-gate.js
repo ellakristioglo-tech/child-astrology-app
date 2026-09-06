@@ -35,7 +35,9 @@
       codeHint:'Open de link in de e-mail — of vul de 6-cijferige code hieronder in.',
       noMail:'Geen e-mail ontvangen?', resend:'Opnieuw versturen', verify:'Bevestigen',
       errEmail:'Vul een geldig e-mailadres in', errCode:'Code onjuist — probeer het opnieuw',
-      errSend:'Versturen mislukt — probeer het later opnieuw', sending:'Versturen…', checking:'Controleren…'
+      errSend:'Versturen mislukt — probeer het later opnieuw', sending:'Versturen…', checking:'Controleren…',
+      reviewLead:'App Store-review — testaccount',
+      reviewHint:'Er wordt geen e-mail verzonden. Voer de 6-cijferige code uit de App Review-notities in.'
     },
     ru: {
       h1:'Познакомьтесь с миром вашего ребёнка',
@@ -45,7 +47,9 @@
       codeHint:'Откройте ссылку из письма — или введите 6-значный код ниже.',
       noMail:'Не получили письмо?', resend:'Отправить ещё раз', verify:'Подтвердить',
       errEmail:'Введите корректный e-mail', errCode:'Код неверный — попробуйте ещё раз',
-      errSend:'Не удалось отправить — попробуйте позже', sending:'Отправляем…', checking:'Проверяем…'
+      errSend:'Не удалось отправить — попробуйте позже', sending:'Отправляем…', checking:'Проверяем…',
+      reviewLead:'Проверка App Store — тестовый аккаунт',
+      reviewHint:'Письмо не отправляется. Введите 6-значный код из примечаний для проверки.'
     },
     ua: {
       h1:'Пізнайте світ вашої дитини',
@@ -55,7 +59,9 @@
       codeHint:'Відкрийте посилання з листа — або введіть 6-значний код нижче.',
       noMail:'Не отримали лист?', resend:'Надіслати ще раз', verify:'Підтвердити',
       errEmail:'Введіть коректний e-mail', errCode:'Код невірний — спробуйте ще раз',
-      errSend:'Не вдалося надіслати — спробуйте пізніше', sending:'Надсилаємо…', checking:'Перевіряємо…'
+      errSend:'Не вдалося надіслати — спробуйте пізніше', sending:'Надсилаємо…', checking:'Перевіряємо…',
+      reviewLead:'Перевірка App Store — тестовий акаунт',
+      reviewHint:'Лист не надсилається. Введіть 6-значний код із приміток для перевірки.'
     },
     en: {
       h1:'Meet the world of your child',
@@ -65,7 +71,9 @@
       codeHint:'Open the link in the e-mail — or enter the 6-digit code below.',
       noMail:'Didn’t get the e-mail?', resend:'Resend', verify:'Confirm',
       errEmail:'Enter a valid e-mail', errCode:'Wrong code — try again',
-      errSend:'Could not send — try again later', sending:'Sending…', checking:'Checking…'
+      errSend:'Could not send — try again later', sending:'Sending…', checking:'Checking…',
+      reviewLead:'App Store review — test account',
+      reviewHint:'No e-mail is sent. Enter the 6-digit code from the App Review notes.'
     }
   };
 
@@ -174,6 +182,19 @@
     lang = detectLang();
     qa('[data-i18n]').forEach(function (el) { el.textContent = tr(el.getAttribute('data-i18n')); });
     if (emailInput) emailInput.setAttribute('placeholder', tr('emailPh'));
+    applyReviewHint();
+  }
+
+  /* The review account never receives an e-mail (see sendCode). Replace the
+     "check your e-mail / open the link" copy on the code step so an App Store
+     reviewer isn't left waiting for a message that is never sent. No-op for
+     everyone else. */
+  function applyReviewHint() {
+    if (currentEmail !== REVIEW_EMAIL || !stepCode || stepCode.hidden) return;
+    var lead = q('.ag-body [data-i18n="sentTo"]');
+    if (lead) lead.textContent = tr('reviewLead');
+    var hint = q('.ag-codehint');
+    if (hint) hint.textContent = tr('reviewHint');
   }
 
   function showStep(step) {
@@ -219,7 +240,7 @@
     mailEcho.textContent = email;
 
     var proceed = function () {
-      clearOtp(); showStep('code');
+      clearOtp(); showStep('code'); applyReviewHint();
       continueBtn.disabled = false; continueBtn.textContent = tr('continue');
     };
 

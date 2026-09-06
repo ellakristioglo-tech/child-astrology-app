@@ -34,8 +34,26 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Build local city search data
+        shell: bash
+        run: |
+          # The birth-place picker (Add child, Parent Scent) reads this file at
+          # runtime. It is .gitignored and generated at deploy time — the Pages
+          # workflow does the same. Without it the bundled app cannot create a
+          # child profile, so fail loudly if it is missing.
+          curl --fail --silent --show-error --location \
+            https://download.geonames.org/export/dump/cities15000.zip \
+            --output "$RUNNER_TEMP/cities15000.zip"
+          unzip -q "$RUNNER_TEMP/cities15000.zip" cities15000.txt -d "$RUNNER_TEMP"
+          node scripts/generate-cities.mjs "$RUNNER_TEMP/cities15000.txt" assets/cities-15000.min.json
+          test -s assets/cities-15000.min.json
+          echo "cities dataset: $(wc -c < assets/cities-15000.min.json) bytes"
+
       - name: Prepare bundled web app
         run: npm run build:web
+
+      - name: Verify the city dataset made it into the bundle
+        run: test -s dist/assets/cities-15000.min.json
 
       - name: Create iOS project
         run: npx cap add ios

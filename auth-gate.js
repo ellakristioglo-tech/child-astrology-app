@@ -135,12 +135,12 @@
         '<p class="ag-body"><span data-i18n="sentTo"></span><br><span class="ag-mail" id="agMailEcho"></span></p>' +
         '<p class="ag-codehint" data-i18n="codeHint"></p>' +
         '<div class="ag-otp" id="agOtp">' +
-          '<input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" placeholder="0">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
-          '<input type="text" inputmode="numeric" maxlength="1" placeholder="0">' +
+          '<input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="6" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="6" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="6" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="6" placeholder="0">' +
+          '<input type="text" inputmode="numeric" maxlength="6" placeholder="0">' +
         '</div>' +
         '<p class="ag-err" id="agCodeErr" role="alert"></p>' +
         '<div class="ag-resend"><span data-i18n="noMail"></span><button id="agResend" type="button" data-i18n="resend"></button></div>' +
@@ -304,8 +304,19 @@
       input.addEventListener('input', function () {
         q('#agCodeErr').textContent = '';
         q('#agOtp').classList.remove('err', 'ok');
-        input.value = input.value.replace(/\D/g, '').slice(0, 1);
-        if (input.value && idx < 5) otpInputs[idx + 1].focus();
+        var digits = input.value.replace(/\D/g, '');
+        if (digits.length > 1) {
+          // iOS "one-time-code" autofill drops the whole code into one field;
+          // a full-length code fills from the start, a shorter run from here.
+          var start = digits.length >= otpInputs.length ? 0 : idx;
+          otpInputs.forEach(function (b, k) {
+            if (k >= start && k < start + digits.length) b.value = digits[k - start];
+          });
+          try { otpInputs[Math.min(start + digits.length, otpInputs.length) - 1].focus(); } catch (e) {}
+        } else {
+          input.value = digits;
+          if (digits && idx < otpInputs.length - 1) otpInputs[idx + 1].focus();
+        }
         if (codeValue().length === 6) verifyCode();
       });
       input.addEventListener('keydown', function (e) {

@@ -424,12 +424,42 @@
     }, 400);
   }
 
+  function wipeAuthLocal() {
+    try {
+      safeDel(AUTHED_KEY);
+      Object.keys(localStorage).forEach(function (k) {
+        if (k.indexOf('sb-') === 0 || k.indexOf('-auth-token') !== -1) {
+          try { localStorage.removeItem(k); } catch (e) {}
+        }
+      });
+    } catch (e) {}
+  }
+
+  /* App Store Guideline 5.1.1(v): in-app account deletion. Best-effort deletes
+     the Supabase auth user via the `delete-user` Edge Function, then always
+     signs out and clears the local session. The caller reloads. */
+  function deleteAccount() {
+    var c = client();
+    if (!c) { wipeAuthLocal(); return Promise.resolve(); }
+    return c.auth.getSession()
+      .then(function (r) {
+        var s = r && r.data && r.data.session;
+        if (!s) return null;
+        return c.functions.invoke('delete-user')
+          .catch(function (e) { console.warn('[auth-gate] delete-user failed', e); });
+      })
+      .catch(function () {})
+      .then(function () { return c.auth.signOut().catch(function () {}); })
+      .then(function () { wipeAuthLocal(); });
+  }
+
   window.CAAuth = {
     open: function () { openGate(); },
     isAuthed: function () { return safeGet(AUTHED_KEY) === '1'; },
     setLang: function (code) { if (I18N[code]) { lang = code; applyI18n(); } },
+    deleteAccount: function () { return deleteAccount(); },
     signOut: function () {
-      safeDel(AUTHED_KEY);
+      wipeAuthLocal();
       var c = client();
       if (c) c.auth.signOut().finally(function () { location.reload(); });
       else location.reload();

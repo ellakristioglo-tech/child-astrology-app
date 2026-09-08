@@ -1,10 +1,16 @@
 # Resolution Center reply — Guideline 4.3(b) (Design – Spam)
 
-Submission ID: c5a95203-1cd9-419d-8a1f-9ccd3a884fd5 · App: Child Astrology (renaming to Child Compass) · Version 1.0
+Submission ID: c5a95203-1cd9-419d-8a1f-9ccd3a884fd5 · App: Child Astrology · Version 1.0
 
 Paste the block below into the App Review conversation in App Store Connect
 when you resubmit build 1.0 (20). Keep it factual and specific; do not
 argue about the number of astrology apps in general.
+
+> **Note:** The app name stays **Child Astrology**. The listing text,
+> category and screenshots have been repositioned so it reads as what it
+> is — a parenting observation tool — rather than a horoscope app. The
+> appeal below therefore carries the argument; it does not lean on a
+> rename.
 
 ---
 
@@ -14,7 +20,7 @@ Thank you for the detailed review. We have made substantial changes for
 this build and would like to explain why we believe the app is not a
 duplicate of an existing category.
 
-**What the app is.** Child Compass is a structured observation tool for
+**What the app is.** Child Astrology is a structured observation tool for
 one adult parent or legal guardian to use about one specific child. Its
 core is a fixed six-step routine (observe, connect, reflect, understand,
 support, evaluate) and a private, on-device notebook where the parent
@@ -48,17 +54,24 @@ with links to official sources instead of advice.
 
 **Changes in this submission:**
 
-- App Store name changed from "Child Astrology" to "Child Compass".
 - Primary category changed to Education.
 - Subtitle, promotional text, keywords and description rewritten to lead
   with the observation method and the per-child notebook; astrology
-  mentions minimised and always framed as a symbolic vocabulary.
+  mentions minimised and always framed as a symbolic vocabulary, with an
+  explicit "what this is not" section (no horoscope feed, no
+  fortune-telling, no palmistry).
 - Screenshots replaced to show the method, the notebook, the
   plain-language summary, the professional hand-off and the privacy /
   delete-account screen — not the natal-chart wheel.
 - App icon finalised (Guideline 2.3.8): the previous build shipped the
   Capacitor template placeholder icon by mistake; this build embeds the
   final, fully opaque brand icon.
+
+We kept the name "Child Astrology" because it is the established brand of
+the parenting website the app is built from (childastrologyapp.com). The
+word "astrology" in the name describes the symbolic vocabulary the method
+uses, not a horoscope product; the repositioned listing and screenshots
+make the parenting purpose clear on the product page.
 
 A two-minute screen recording of the full flow on a physical device is
 attached to this thread.
@@ -79,6 +92,10 @@ Ella Kristioglo
   independent developer; the app is a genuine parenting tool, not a
   re-skin. We ask the Board to review the concept differentiation listed
   above."
-- Or accept Apple's suggestion in the rejection: the same product already
-  runs as an installable web app at `https://childastrologyapp.com`
-  ("Add to Home Screen"), and can stay there without an App Store listing.
+- If the Board also declines, the fallback Apple itself suggested in the
+  rejection: the same product already runs as an installable web app at
+  `https://childastrologyapp.com` ("Add to Home Screen"), and can stay
+  there without an App Store listing.
+- A rename to a parenting-only name (e.g. "Child Compass" / "Kindkompas")
+  remains the single highest-impact lever if you later decide the App
+  Store listing matters more than keeping the exact brand name.

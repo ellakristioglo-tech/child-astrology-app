@@ -13,22 +13,24 @@ App: Child Astrology · `com.childastrology.app` · author Ella Kristioglo
 
 ---
 
-## 0. Consider renaming the app (biggest single 4.3(b) risk)
+## 0. Name decision — keeping `Child Astrology`
 
-The word **"Astrology" in the app name** is the loudest signal that this
-is "another astrology app". Renaming materially improves the odds. The
-website/brand can stay `Child Astrology`; the App Store name can differ.
+Ella's decision (8 Sept 2026): **keep the App Store name `Child Astrology`**
+and keep the current brand icon. The website, brand and app name stay the
+same.
 
-Suggested names (pick one, then it must match the first screenshot's
-wordmark and the keywords):
+Consequence: the word "astrology" in the name is the loudest 4.3(b)
+signal, so the repositioning has to be carried by everything else — the
+Education category, a parenting-first subtitle/description, an explicit
+"what this is not" section, and screenshots that show the method and the
+notebook rather than the natal-chart wheel. The Resolution Center reply
+(`APP_REVIEW_APPEAL_43b.md`) makes the "not a horoscope app" argument
+directly.
 
-- **Child Compass** · nl **Kindkompas**
-- **Understand Your Child**
-- **Child Character Notes** · nl **Kindkarakter**
-- **Parent Observation Method**
-
-If Ella wants to keep `Child Astrology`, the appeal has to carry more
-weight — still doable, lower odds.
+If Apple still rejects under 4.3(b) after this build, the fallback levers
+(in order): formal appeal to the App Review Board, then a rename to a
+parenting-only name (e.g. **Child Compass** / nl **Kindkompas**), then
+ship as the existing PWA at `childastrologyapp.com` only.
 
 ---
 
@@ -36,7 +38,7 @@ weight — still doable, lower odds.
 
 | Field | Value |
 |---|---|
-| Name | `Child Compass` *(recommended)* — or keep `Child Astrology` |
+| Name | `Child Astrology` *(kept — see §0)* |
 | Bundle ID | `com.childastrology.app` *(unchanged — bundle ID is internal)* |
 | Primary language | Dutch *(or English — provide both, see §2)* |
 | Primary category | **Education** *(was Lifestyle; Education distances it from the "Lifestyle → astrology" bucket)* |
@@ -65,7 +67,7 @@ Privacy Policy URL: `https://childastrologyapp.com/legal.html?doc=privacy`
 
 **Description** (≤ 4000):
 ```
-Child Compass is a calm observation method for parents and legal guardians
+Child Astrology is a calm observation method for parents and legal guardians
 who want to understand their child as an individual — and choose one
 small, concrete way to support them today.
 
@@ -107,7 +109,7 @@ PRIVACY BY DESIGN
   data or your notes.
 
 FOR ADULTS
-Child Compass is for a parent, not for a child. You confirm you are 18+
+Child Astrology is for a parent, not for a child. You confirm you are 18+
 and legally entitled to add each child's details. The app does not
 replace professional advice — if you are worried about your child's
 development, health, speech or behaviour, please contact a qualified
@@ -138,12 +140,15 @@ consent screen.
 
 - Required: 6.9" iPhone (1320 × 2868) and 6.5" iPhone (1242 × 2688). One
   set can be scaled for the rest.
-- 4–6 frames from the **final** build, in the current dark celestial
-  style: (1) sign-in screen, (2) child profile / natal chart,
-  (3) Child Code outcome, (4) 6-step method, (5) parent question with the
-  safety boundary, (6) privacy dashboard.
-- No device frames with a fake status bar; use real screenshots.
-- Add a short caption strip per frame in the same visual style.
+- **Use the 4.3(b) frame order in §8 point 3** — lead with the 6-step
+  method and the notebook, NOT the natal-chart wheel. 5 frames:
+  (1) 6-step method, (2) child profile with notes, (3) plain-language
+  temperament summary, (4) "ask a question" with the professional
+  hand-off, (5) privacy / delete-account screen.
+- Real screenshots from the **final** build; no device frames with a fake
+  status bar.
+- Add a short one-line parenting caption per frame in the app's visual
+  style.
 
 ---
 
@@ -264,26 +269,30 @@ When all boxes pass: **Add build → Add for Review → Submit for Review**.
 
 Apple's position: too many astrology apps; ours "duplicates" them.
 
+**Name stays `Child Astrology` (§0).** No rename this round. That removes
+the highest-impact lever, so everything below has to do the work.
+
 **Do all of these together for the next submission (build 1.0 (20)+):**
 
-1. **Rename** the App Store name to a parenting name (§0). This is the
-   single highest-impact change.
-2. **Paste the repositioned copy** from §2 (subtitle, promo text,
+1. **Paste the repositioned copy** from §2 (subtitle, promo text,
    keywords, description) in every localisation. Keep the astrology
-   mentions minimal and always framed as "a symbolic vocabulary".
-3. **Move the primary category to Education** (§1).
-4. **Screenshots** must show the *method and notes*, not the star chart:
+   mentions minimal and always framed as "a symbolic vocabulary"; keep
+   the explicit "what this is not" paragraph.
+2. **Move the primary category to Education** (§1).
+3. **Screenshots** must show the *method and notes*, not the star chart:
    frame 1 = the 6-step method screen; frame 2 = a child profile with
    notes; frame 3 = the plain-language temperament summary; frame 4 = the
    "ask a question" screen with the professional hand-off; frame 5 = the
    privacy / delete-account screen. Put a one-line parenting caption on
    each. Do NOT lead with the natal-chart wheel.
-5. **Reply in Resolution Center** with the text in
+4. **Reply in Resolution Center** with the text in
    `APP_REVIEW_APPEAL_43b.md` when you resubmit.
-6. Fix the icon (Guideline 2.3.8) — handled in `ios-build.yml`
-   ("Install the real app icon" step) from build 1.0 (20).
+5. Icon (Guideline 2.3.8) — already handled in `ios-build.yml`
+   ("Install the real app icon" step), shipping from build 1.0 (20). The
+   brand icon is kept as-is; no redesign.
 
 If Apple still rejects under 4.3(b) after this, the remaining routes are:
-a formal appeal to the App Review Board (button in Resolution Center), or
-accept Apple's own suggestion and ship only as the existing PWA at
-`childastrologyapp.com` ("Add to Home Screen").
+a formal appeal to the App Review Board (button in Resolution Center),
+then a rename to a parenting-only name, then accept Apple's own
+suggestion and ship only as the existing PWA at `childastrologyapp.com`
+("Add to Home Screen").

@@ -58,6 +58,44 @@ jobs:
       - name: Create iOS project
         run: npx cap add ios
 
+      - name: Install the real app icon
+        shell: bash
+        run: |
+          # Without this the Capacitor template's placeholder icon ships to
+          # App Review (Guideline 2.3.8). resources/AppIcon-1024.png is the
+          # finalized, fully opaque 1024x1024 brand icon.
+          ICON_SRC="resources/AppIcon-1024.png"
+          test -s "$ICON_SRC"
+          # opaque, no alpha channel (iOS icons must not be transparent)
+          python3 - "$ICON_SRC" <<'PY'
+          import sys, struct
+          d = open(sys.argv[1], 'rb').read()
+          assert d[:8] == b'\x89PNG\r\n\x1a\n', 'not a PNG'
+          w = struct.unpack('>I', d[16:20])[0]; h = struct.unpack('>I', d[20:24])[0]
+          ctype = d[25]
+          assert (w, h) == (1024, 1024), f'icon must be 1024x1024, got {w}x{h}'
+          assert ctype in (0, 2), f'icon must have no alpha channel (PNG colour type {ctype})'
+          print(f'icon OK: {w}x{h}, colour type {ctype}')
+          PY
+          ICON_DIR="ios/App/App/Assets.xcassets/AppIcon.appiconset"
+          mkdir -p "$ICON_DIR"
+          rm -f "$ICON_DIR"/*.png
+          cp "$ICON_SRC" "$ICON_DIR/AppIcon-512@2x.png"
+          cat > "$ICON_DIR/Contents.json" <<'JSON'
+          {
+            "images" : [
+              {
+                "filename" : "AppIcon-512@2x.png",
+                "idiom" : "universal",
+                "platform" : "ios",
+                "size" : "1024x1024"
+              }
+            ],
+            "info" : { "author" : "xcode", "version" : 1 }
+          }
+          JSON
+          ls -l "$ICON_DIR"
+
       - name: Sync iOS project
         run: npx cap sync ios
 

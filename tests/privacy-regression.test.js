@@ -147,7 +147,8 @@ test('founder pack fixes product scope and child safety boundaries', () => {
     'founder-pack/MVP_SPECIFICATION.md'
   ]) assert.ok(fs.statSync(path.join(root,file)).size > 1000,`${file} must be substantive`);
   const specification = read('founder-pack/MVP_SPECIFICATION.md');
-  assert.match(specification,/No account, cloud database, payment, subscription or external AI/);
+  assert.match(specification,/Parent e-mail authentication is provided by Supabase/);
+  assert.match(specification,/no cloud child-profile database, payment, subscription or external AI/);
   assert.match(read('child-analysis.js'), /ageContextSection/);
 });
 

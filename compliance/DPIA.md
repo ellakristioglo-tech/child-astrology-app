@@ -1,19 +1,20 @@
 # Data Protection Impact Assessment — draft
 
-Version: 26 August 2026
+Version: 13 September 2026
 
 Status: completed engineering draft for the current free local version. Formal controller and Dutch legal sign-off remain required. The [Dutch DPA explains when a DPIA is required](https://www.autoriteitpersoonsgegevens.nl/themas/basis-avg/praktisch-avg/data-protection-impact-assessment-dpia).
 
 ## Scope and necessity
 
-The app creates symbolic child profiles from birth data. Children are vulnerable data subjects and the output can be perceived as profiling. This DPIA therefore treats the activity as high-risk enough to require documented assessment even though the current architecture has no backend or external AI.
+The app creates symbolic child profiles from birth data. Children are vulnerable data subjects and the output can be perceived as profiling. This DPIA therefore treats the activity as high-risk enough to require documented assessment. The architecture has Supabase parent authentication and account deletion, but no cloud child profiles or external AI.
 
-The service cannot produce a personalised natal chart without birth date/time and a location/timezone. Data minimisation removes legal name, photo, address, school, account and persistent coordinates. City search and calculation run locally.
+The service cannot produce a personalised natal chart without birth date/time and a location/timezone. Data minimisation removes legal name, photo, address, school and persistent coordinates. City search and calculation run locally. Parent e-mail/account data is processed separately only for authentication.
 
 ## Data flow and access
 
 - Personalised data: device localStorage only.
-- Operator/admin access: none.
+- Parent authentication: Supabase stores e-mail, user ID, session and security metadata; no child data is sent there.
+- Operator/admin access: no access to personalised child data; authorised Supabase project administrators may access account records.
 - External AI: none.
 - Optional analytics: separate consent; content/PII prohibited.
 - Hosting: public static files through GitHub Pages; GitHub may log visitor IP for security.
@@ -36,6 +37,9 @@ The service cannot produce a personalised natal chart without birth date/time an
 | XSS reads local data | High | Static app, dependency pinning, meta CSP, escaping, no inline user HTML | Medium |
 | User loses local data | Medium | JSON + readable export; clear warning that local data is not recoverable | Low |
 | Child turns 16 and rights ignored | High | direct privacy contact and DSR procedure | Low/Medium |
+| OTP account is taken over or abused | High | Supabase OTP verification, no fixed client bypass; rate-limit and auth-log settings require verification | Medium |
+| Account deletion fails but appears successful | High | UI erases local data only after authenticated Edge Function returns `{ ok: true }`; otherwise it preserves data and displays an error | Low/Medium |
+| Auth e-mail/log retention exceeds need | Medium | account deletion route and documented vendor-retention review | Medium until settings are verified |
 
 ## Proportionality and rights
 
@@ -43,7 +47,7 @@ Users receive layered notice, a full privacy/cookie/terms page, export, correcti
 
 ## Residual-risk decision
 
-No Critical residual risk remains in the implemented local architecture. Medium risks require monitoring and user communication. Adding any backend, AI, photos, payments, account sync, advertising or employee access invalidates this conclusion and blocks release pending a new DPIA.
+No Critical residual risk remains in the implemented local-first architecture. Medium risks require monitoring, user communication and verification of Supabase region, DPA, retention, rate limits, administrator access and deployed deletion function. Adding cloud child storage, external AI, photos, payments, account-linked sync, advertising or new employee access invalidates this conclusion and blocks release pending a new DPIA.
 
 ## Consultation/sign-off
 

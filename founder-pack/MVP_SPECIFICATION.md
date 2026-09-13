@@ -1,22 +1,22 @@
 # MVP Specification
 
-Version: 28 August 2026
+Version: 13 September 2026
 
 ## Launch product
 
-Free, parent-directed, local-first web/PWA for the Netherlands and EU. No account, cloud database, payment, subscription or external AI.
+Free, parent-directed, local-first web/PWA for the Netherlands and EU. Parent e-mail authentication is provided by Supabase; there is no cloud child-profile database, payment, subscription or external AI.
 
 ## Core journey
 
-1. Explore general information without entering child data.
+1. Confirm 18+, accept the terms, choose analytics consent and sign in with a real e-mail OTP.
 2. Choose to add a child.
-3. Confirm 18+ and legal authority for that child.
+3. Confirm legal authority for that child.
 4. Read the child-data notice.
 5. Enter nickname, date, optional exact time and birthplace.
 6. Calculate the chart locally.
 7. Read the eight core Child Code outcomes.
 8. Ask an ordinary parent question through the on-device safety router.
-9. Export, import or delete local data at any time.
+9. Export/import local data, delete one child, or delete the account and all data.
 
 ## P0 scope
 
@@ -44,7 +44,7 @@ They do not block the core journey and are reassessed independently before monet
 ## Explicitly not in this MVP
 
 - Child login or child-directed account.
-- Parent registration or email verification.
+- Passwords, social login or a client-side authentication bypass.
 - Cloud child profiles or cross-device sync.
 - External generative AI.
 - Medical/developmental screening or health score.
@@ -65,7 +65,7 @@ Required for personal calculation: nickname, birth date, birthplace; exact time 
 - Modal focus is contained; Escape closes; focus returns to the invoking control.
 - Unknown birth time produces no fabricated houses or Ascendant.
 - Delete Child cascades to notes and that child’s history.
-- Delete all removes only Child Astrology keys and its analytics cookies.
+- Delete Account removes the Supabase Auth user first, then only Child Astrology keys, auth tokens and analytics cookies; a server failure preserves data for retry.
 - JSON import never imports analytics consent or general adult confirmation.
 - Core functions work at mobile widths and after PWA update.
 - Legal, privacy, retention, incident and vendor records match the implemented version.

@@ -1,6 +1,6 @@
-# Launch checklist — current free local version
+# Launch checklist — current free local-first version
 
-Version: 28 August 2026
+Version: 13 September 2026
 
 Legend: **DONE** implemented/verified in code; **N/A** feature does not exist and is blocked from silent addition; **HUMAN** requires controller/lawyer/vendor action.
 
@@ -21,20 +21,20 @@ Legend: **DONE** implemented/verified in code; **N/A** feature does not exist an
 | 13 | Output diagnosis/certainty filter | DONE by controlled templates | No model output; restricted deterministic responses |
 | 14 | Persistent AI/automation disclosure | DONE accurately | Says local automated rules, not person/external AI |
 | 15 | No PII/prompts in logs | DONE for app | No app logging; analytics allow-list excludes content |
-| 16 | Child object authorization | N/A | No accounts/backend/remote child objects; device origin boundary only |
+| 16 | Child object authorization | N/A for remote child objects | Parent authentication exists, but child objects stay on-device and are never sent to Supabase; device origin boundary only |
 | 17 | Delete Child cascade | DONE | Child, notes, history, selection and scent cleared |
-| 18 | Delete Account cascade | N/A + equivalent DONE | No account; Delete all clears all known app keys/cookies |
+| 18 | Delete Account cascade | DONE in code + HUMAN VERIFY | Authenticated `delete-user` function must return `{ ok: true }` before local data/session are erased; verify production deployment and TestFlight end to end |
 | 19 | Delete AI history | DONE equivalent | “Delete question history” |
 | 20 | Delete Tarot history | DONE | Tarot history is never stored |
 | 21 | Export and restore data | DONE | JSON + readable HTML export; confirmed JSON import for custom-domain/device migration; analytics consent and separate general 18+ confirmation excluded from import |
-| 22 | Backup deletion lifecycle | N/A | No application backend/backups; local-only disclosure |
+| 22 | Backup deletion lifecycle | HUMAN | No cloud child-data backup; document Supabase Auth log/backup retention and deletion lifecycle |
 | 23 | Cookie consent before optional trackers | DONE | GA script created only after consent; accept/reject/settings |
 | 24 | Subscription cancellation | N/A | No subscription or paywall |
 | 25 | Statutory online withdrawal | N/A | No online contract/purchase; candle is direct enquiry |
-| 26 | Admin MFA/RBAC | N/A | No admin panel/backend |
-| 27 | Secret manager | N/A | No frontend secrets/API keys |
-| 28 | Security/audit logging | N/A for app backend | No backend; GitHub handles hosting security logs |
-| 29 | Rate limiting/account takeover protection | N/A | No auth/API/account |
+| 26 | Admin MFA/RBAC | HUMAN | No app admin panel; enforce MFA and least privilege for Supabase project administrators |
+| 27 | Secret manager | DONE in code + HUMAN VERIFY | Only the public publishable key is in the client; service-role key stays in the Edge Function environment; verify no privileged key in builds/logs |
+| 28 | Security/audit logging | HUMAN | GitHub handles hosting logs; Supabase Auth/function logs and retention need controller review |
+| 29 | Rate limiting/account takeover protection | HUMAN | Real Supabase OTP is required and the fixed client bypass is removed; verify OTP expiry, rate limits and abuse controls |
 | 30 | Automated privacy/security tests | DONE | Node regression tests run before Pages deployment |
 | 31 | Product mission and parent-first positioning | DONE | `founder-pack/PRODUCT_VISION.md`; North Star is one useful action a parent can try today |
 | 32 | Eight-section Child Code | DONE | Personality, emotions, communication, learning, strengths, challenges, support and current age context |
@@ -58,5 +58,6 @@ Legend: **DONE** implemented/verified in code; **N/A** feature does not exist an
 - DONE: Founder Pack fixes the product boundary: Child Code is the core journey; Tarot is limited to one Card of the Day (16+), while Parent Scent is adult-only (18+) and never enters or reads the core child profile.
 - HUMAN BLOCKER: controller and Dutch privacy counsel must sign the LIA/DPIA and confirm the four questions in `LEGAL_REVIEW_BRIEF.md`.
 - HUMAN BLOCKER: complete and retain the Google/GitHub role, DPA and transfer records listed in `VENDOR_REGISTER.md`.
+- HUMAN BLOCKER: complete the Supabase vendor/transfer/retention/admin-access records and verify the production `delete-user` function end to end.
 
-Do not silently add accounts, cloud sync, external AI, photos, payments/subscriptions, advertising or a new remote SDK. Each addition reopens the data map, LIA, DPIA, notices, vendor review and tests.
+Do not silently link the parent account to child profiles or add cloud sync, external AI, photos, payments/subscriptions, advertising or a new remote SDK. Each addition reopens the data map, LIA, DPIA, notices, vendor review and tests.

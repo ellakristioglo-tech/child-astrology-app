@@ -103,3 +103,25 @@ test('privacy controls include export and import in all four languages', () => {
     assert.match(source, new RegExp(`Object\\.assign\\(COPY\\.${language},\\{[\\s\\S]*?import:`));
   }
 });
+
+test('sign-in gate switches all four languages and has no client-side review bypass', () => {
+  const source = read('auth-gate.js');
+  for (const language of languages) {
+    assert.match(source, new RegExp(`data-auth-lang="${language}"`), `missing auth language ${language}`);
+  }
+  assert.match(source, /function selectLanguage\(code\)/);
+  assert.match(source, /signInWithOtp/);
+  assert.match(source, /verifyOtp/);
+  assert.doesNotMatch(source, /REVIEW_EMAIL|REVIEW_CODE|424242|review@childastrologyapp\.com/);
+});
+
+test('account deletion waits for explicit server confirmation before local erasure', () => {
+  const auth = read('auth-gate.js');
+  const privacy = read('privacy-controls.js');
+  const deletion = auth.slice(auth.indexOf('function deleteAccount'), auth.indexOf('window.CAAuth'));
+  assert.match(deletion, /r\.data\.ok !== true/);
+  assert.match(deletion, /throw failure/);
+  assert.ok(deletion.indexOf("functions.invoke('delete-user')") < deletion.indexOf('wipeAuthLocal()'));
+  assert.match(privacy, /deleteError:/);
+  assert.match(privacy, /Promise\.resolve\(window\.CAAuth\.deleteAccount\(\)\)\.then\(done\)\.catch\(failed\)/);
+});

@@ -17,6 +17,18 @@ body.ca-auth-open{overflow:hidden;touch-action:none;}
 #auth-gate[hidden]{display:none!important;}
 #auth-gate *,#auth-gate *::before,#auth-gate *::after{box-sizing:border-box;}
 
+#auth-gate .ag-language{
+  position:absolute;z-index:2;top:calc(16px + env(safe-area-inset-top,0px));right:16px;
+  display:flex;gap:5px;padding:4px;border:1px solid rgba(255,255,255,.14);border-radius:18px;
+  background:rgba(6,6,26,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+#auth-gate .ag-language button{
+  min-width:34px;height:28px;padding:0 7px;border:0;border-radius:14px;background:transparent;
+  color:#c2bcd6;font:600 11px/1 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;cursor:pointer;
+}
+#auth-gate .ag-language button.active{background:#e6c9a0;color:#2b2034;}
+#auth-gate .ag-language button:focus-visible{outline:2px solid #f4ad92;outline-offset:2px;}
+
 /* ---- backdrop ---- */
 #auth-gate .ag-sky{
   position:absolute;inset:0;overflow:hidden;

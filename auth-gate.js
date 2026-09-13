@@ -20,12 +20,6 @@
   var DEFAULT_LANG = 'nl';
   var LANGS = ['nl', 'ru', 'ua', 'en'];
 
-  /* App Store review sign-in: this address needs no e-mail — the fixed
-     code below signs straight in with an empty account, so a reviewer
-     can always get past the gate. Documented in App Review notes. */
-  var REVIEW_EMAIL = 'review@childastrologyapp.com';
-  var REVIEW_CODE  = '424242';
-
   var I18N = {
     nl: {
       h1:'Maak kennis met de wereld van je kind',
@@ -35,9 +29,7 @@
       codeHint:'Open de link in de e-mail — of vul de 6-cijferige code hieronder in.',
       noMail:'Geen e-mail ontvangen?', resend:'Opnieuw versturen', verify:'Bevestigen',
       errEmail:'Vul een geldig e-mailadres in', errCode:'Code onjuist — probeer het opnieuw',
-      errSend:'Versturen mislukt — probeer het later opnieuw', sending:'Versturen…', checking:'Controleren…',
-      reviewLead:'App Store-review — testaccount',
-      reviewHint:'Er wordt geen e-mail verzonden. Voer de 6-cijferige code uit de App Review-notities in.'
+      errSend:'Versturen mislukt — probeer het later opnieuw', sending:'Versturen…', checking:'Controleren…'
     },
     ru: {
       h1:'Познакомьтесь с миром вашего ребёнка',
@@ -47,9 +39,7 @@
       codeHint:'Откройте ссылку из письма — или введите 6-значный код ниже.',
       noMail:'Не получили письмо?', resend:'Отправить ещё раз', verify:'Подтвердить',
       errEmail:'Введите корректный e-mail', errCode:'Код неверный — попробуйте ещё раз',
-      errSend:'Не удалось отправить — попробуйте позже', sending:'Отправляем…', checking:'Проверяем…',
-      reviewLead:'Проверка App Store — тестовый аккаунт',
-      reviewHint:'Письмо не отправляется. Введите 6-значный код из примечаний для проверки.'
+      errSend:'Не удалось отправить — попробуйте позже', sending:'Отправляем…', checking:'Проверяем…'
     },
     ua: {
       h1:'Пізнайте світ вашої дитини',
@@ -59,9 +49,7 @@
       codeHint:'Відкрийте посилання з листа — або введіть 6-значний код нижче.',
       noMail:'Не отримали лист?', resend:'Надіслати ще раз', verify:'Підтвердити',
       errEmail:'Введіть коректний e-mail', errCode:'Код невірний — спробуйте ще раз',
-      errSend:'Не вдалося надіслати — спробуйте пізніше', sending:'Надсилаємо…', checking:'Перевіряємо…',
-      reviewLead:'Перевірка App Store — тестовий акаунт',
-      reviewHint:'Лист не надсилається. Введіть 6-значний код із приміток для перевірки.'
+      errSend:'Не вдалося надіслати — спробуйте пізніше', sending:'Надсилаємо…', checking:'Перевіряємо…'
     },
     en: {
       h1:'Meet the world of your child',
@@ -71,9 +59,7 @@
       codeHint:'Open the link in the e-mail — or enter the 6-digit code below.',
       noMail:'Didn’t get the e-mail?', resend:'Resend', verify:'Confirm',
       errEmail:'Enter a valid e-mail', errCode:'Wrong code — try again',
-      errSend:'Could not send — try again later', sending:'Sending…', checking:'Checking…',
-      reviewLead:'App Store review — test account',
-      reviewHint:'No e-mail is sent. Enter the 6-digit code from the App Review notes.'
+      errSend:'Could not send — try again later', sending:'Sending…', checking:'Checking…'
     }
   };
 
@@ -110,6 +96,13 @@
         '<g><circle cx="330" cy="76" r="13" fill="#f0dcc0" fill-opacity=".9"/><circle cx="324" cy="71" r="12" fill="#0c0d2c"/></g>' +
       '</svg>' +
       '<div class="ag-scene"></div>' +
+    '</div>' +
+
+    '<div class="ag-language" aria-label="Language">' +
+      '<button type="button" data-auth-lang="ru">RU</button>' +
+      '<button type="button" data-auth-lang="ua">UA</button>' +
+      '<button type="button" data-auth-lang="en">EN</button>' +
+      '<button type="button" data-auth-lang="nl">NL</button>' +
     '</div>' +
 
     '<section class="ag-step" data-step="email">' +
@@ -182,19 +175,20 @@
     lang = detectLang();
     qa('[data-i18n]').forEach(function (el) { el.textContent = tr(el.getAttribute('data-i18n')); });
     if (emailInput) emailInput.setAttribute('placeholder', tr('emailPh'));
-    applyReviewHint();
+    qa('[data-auth-lang]').forEach(function (button) {
+      var active = button.getAttribute('data-auth-lang') === lang;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
   }
 
-  /* The review account never receives an e-mail (see sendCode). Replace the
-     "check your e-mail / open the link" copy on the code step so an App Store
-     reviewer isn't left waiting for a message that is never sent. No-op for
-     everyone else. */
-  function applyReviewHint() {
-    if (currentEmail !== REVIEW_EMAIL || !stepCode || stepCode.hidden) return;
-    var lead = q('.ag-body [data-i18n="sentTo"]');
-    if (lead) lead.textContent = tr('reviewLead');
-    var hint = q('.ag-codehint');
-    if (hint) hint.textContent = tr('reviewHint');
+  function selectLanguage(code) {
+    if (LANGS.indexOf(code) < 0) return;
+    safeSet(LANG_KEY, code);
+    if (typeof window.changeLanguage === 'function') {
+      try { window.changeLanguage(code); } catch (e) {}
+    }
+    applyI18n();
   }
 
   function showStep(step) {
@@ -240,11 +234,10 @@
     mailEcho.textContent = email;
 
     var proceed = function () {
-      clearOtp(); showStep('code'); applyReviewHint();
+      clearOtp(); showStep('code');
       continueBtn.disabled = false; continueBtn.textContent = tr('continue');
     };
 
-    if (email === REVIEW_EMAIL) { proceed(); return; }   // App Store review: no e-mail sent
     var fail = function (e) {
       continueBtn.disabled = false; continueBtn.textContent = tr('continue');
       err.textContent = tr('errSend'); if (e) console.error('[auth-gate]', e);
@@ -252,7 +245,7 @@
 
     continueBtn.disabled = true; continueBtn.textContent = tr('sending');
     var c = client();
-    if (!c) { console.warn('[auth-gate] Supabase not configured — demo mode, no e-mail sent.'); proceed(); return; }
+    if (!c) { fail(new Error('Supabase authentication is not configured')); return; }
     c.auth.signInWithOtp({ email: email, options: { shouldCreateUser: true, emailRedirectTo: location.origin } })
       .then(function (r) { r && r.error ? fail(r.error) : proceed(); })
       .catch(fail);
@@ -290,10 +283,8 @@
       }, 450);
     };
 
-    if (currentEmail === REVIEW_EMAIL) { code === REVIEW_CODE ? ok() : bad(); return; }
-
     var c = client();
-    if (!c) { /^\d{6}$/.test(code) ? ok() : bad(); return; }
+    if (!c) { bad(new Error('Supabase authentication is not configured')); return; }
     c.auth.verifyOtp({ email: currentEmail, token: code, type: 'email' })
       .then(function (r) { r && r.error ? bad(r.error) : ok(); })
       .catch(bad);
@@ -354,6 +345,10 @@
 
     applyI18n();
     wireOtp();
+
+    qa('[data-auth-lang]').forEach(function (button) {
+      button.addEventListener('click', function () { selectLanguage(button.getAttribute('data-auth-lang')); });
+    });
 
     continueBtn.addEventListener('click', sendCode);
     emailInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); sendCode(); } });
@@ -446,20 +441,23 @@
     } catch (e) {}
   }
 
-  /* App Store Guideline 5.1.1(v): in-app account deletion. Best-effort deletes
-     the Supabase auth user via the `delete-user` Edge Function, then always
-     signs out and clears the local session. The caller reloads. */
+  /* App Store Guideline 5.1.1(v): in-app account deletion. Local data and the
+     session are cleared only after the Edge Function confirms server deletion. */
   function deleteAccount() {
     var c = client();
-    if (!c) { wipeAuthLocal(); return Promise.resolve(); }
+    if (!c) return Promise.reject(new Error('Supabase authentication is not configured'));
     return c.auth.getSession()
       .then(function (r) {
         var s = r && r.data && r.data.session;
-        if (!s) return null;
-        return c.functions.invoke('delete-user')
-          .catch(function (e) { console.warn('[auth-gate] delete-user failed', e); });
+        if (!s || !s.user) throw new Error('No authenticated session');
+        return c.functions.invoke('delete-user');
       })
-      .catch(function () {})
+      .then(function (r) {
+        if (!r || r.error || !r.data || r.data.ok !== true) {
+          var failure = (r && r.error) || new Error('Server did not confirm account deletion');
+          throw failure;
+        }
+      })
       .then(function () { return c.auth.signOut().catch(function () {}); })
       .then(function () { wipeAuthLocal(); });
   }
@@ -467,7 +465,7 @@
   window.CAAuth = {
     open: function () { openGate(); },
     isAuthed: function () { return safeGet(AUTHED_KEY) === '1'; },
-    setLang: function (code) { if (I18N[code]) { lang = code; applyI18n(); } },
+    setLang: function (code) { selectLanguage(code); },
     deleteAccount: function () { return deleteAccount(); },
     signOut: function () {
       wipeAuthLocal();

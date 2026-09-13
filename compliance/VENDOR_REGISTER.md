@@ -1,6 +1,6 @@
 # Vendor and transfer register
 
-Version: 27 August 2026
+Version: 13 September 2026
 
 | Vendor/component | Function | Data | Runtime role/transfer | Contract/status |
 |---|---|---|---|---|
@@ -10,7 +10,7 @@ Version: 27 August 2026
 | Astronomy Engine | Local ephemeris calculation | Birth inputs in device memory | Bundled local code; no network | MIT licence bundled |
 | WhatsApp / Meta | User-selected direct enquiry | Adult name/contact and scent summary | Independent user-initiated channel; no automatic child birth data | User chooses; provider terms apply |
 | User email provider/client | User-selected direct enquiry | Adult name/contact and scent summary | Independent user-initiated channel | User chooses; provider terms apply |
-| Supabase (Supabase Inc.) | Parent sign-in by e-mail one-time code (`auth-gate.js`) | Parent e-mail address and auth session/token only; **no child name, birth data, question text or derived profile** | Runtime processor: `signInWithOtp` / `verifyOtp` calls to `https://<project>.supabase.co`; sends the OTP e-mail. Project region and sub-processors per Supabase configuration | **Requires human completion before launch:** choose EU project region, accept Supabase DPA, record transfer mechanism, set auth/user retention, decide account-deletion (DSR) path, add to privacy notice. Disabled until `SUPABASE_URL` / `SUPABASE_ANON_KEY` are set |
+| Supabase (Supabase Inc.) | Parent sign-in by e-mail one-time code and authenticated self-service account deletion (`auth-gate.js`, `delete-user`) | Parent e-mail address, user ID, auth session/token and authentication/security metadata only; **no child name, birth data, question text or derived profile** | Active production processor at project `hcxwzsvicihnkmlrsftv`; `signInWithOtp` / `verifyOtp` sends and verifies OTP e-mail. The Edge Function uses the service-role key only server-side to delete the calling user | **Active; human evidence incomplete:** verify EU project region, accept/retain Supabase DPA, record transfer mechanism and sub-processors, set auth/log/backup retention and rate limits, restrict administrator access with MFA, and confirm `delete-user` is deployed |
 
 ## Not present in this version
 
@@ -21,5 +21,5 @@ No payment provider, subscription platform, OpenAI/LLM, advertising network, pus
 - Record exact legal entity/role for GitHub and Google.
 - Accept/retain current Google data-processing terms and record transfer mechanism.
 - Reconfirm the recorded GA minimisation settings after every property or stream change: consent gate, Enhanced Measurement OFF, Google Signals OFF, user-provided data OFF, granular location/device collection OFF, event/user retention 2 months and reset on new activity OFF.
-- Supabase: select EU region, sign/retain the Supabase DPA, record the transfer mechanism, define auth-data retention and the account-deletion (DSR) procedure, and reflect Supabase in DATA_MAP, ROPA, DPIA/LIA and the privacy notice before enabling it in production.
+- Supabase: verify the configured region, sign/retain the DPA, record the transfer mechanism/sub-processors, document auth/log/backup retention and rate limits, enforce administrator MFA/least privilege, and verify the `delete-user` Edge Function on production and TestFlight.
 - Reassess every vendor before adding a new SDK or remote API.

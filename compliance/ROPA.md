@@ -1,6 +1,17 @@
-# Record of processing activities — current free local version
+# Record of processing activities — current free local-first version
 
-Version: 26 August 2026
+Version: 13 September 2026
+
+## Parent account and authentication
+
+- Controller: Ella Kristioglo, Netherlands.
+- Purpose: create and authenticate an adult parent/legal-guardian account and allow in-app account deletion.
+- Data subjects: adult users.
+- Categories: e-mail address, Supabase user ID, session tokens and authentication/security metadata.
+- Proposed Article 6 basis: performance of the user-requested service (Article 6(1)(b)); Dutch legal confirmation required.
+- Processor: Supabase, Inc.; exact project region, DPA and transfer mechanism require controller verification.
+- Retention: until account deletion, subject to Supabase log/backup retention settings that must be recorded.
+- Safeguards: passwordless one-time code, no public client-side bypass, authenticated self-deletion Edge Function, and no child profile data in Supabase.
 
 ## Local child-profile and astrology functions
 
@@ -31,7 +42,7 @@ Version: 26 August 2026
 - Data: request/IP/security metadata handled by GitHub.
 - Vendor: GitHub Pages.
 - Basis/role: document GitHub role and terms in the vendor review.
-- Safeguards: HTTPS, no backend secrets, CSP/referrer policy, static files only.
+- Safeguards: HTTPS, no frontend secrets, CSP/referrer policy, static application files and a narrowly scoped authenticated deletion function.
 
 ## Direct candle enquiry
 

@@ -1,6 +1,6 @@
 # App Store Connect — App Privacy answers
 
-Version: 4 September 2026
+Version: 13 September 2026
 Controller: Ella Kristioglo, Netherlands — ellakristioglo@gmail.com
 Covers: `com.childastrology.app` (Capacitor wrapper around the childastrologyapp.com PWA)
 
@@ -103,21 +103,23 @@ The written policy must now also say — before submission — that:
 
 - [ ] Sign-in uses the parent's **e-mail address**, processed by **Supabase**
       (name the sub-processor / region), stored server-side; purpose =
-      authentication; retention = until the account is deleted.
-- [ ] A **Supabase user id** and session token are created for the account.
-- [ ] Everything else (child profile, birth data, chart, notes, Q&A,
+      authentication; retention = until the account is deleted. The live
+      notice names Supabase and the purpose; exact region/retention evidence
+      still requires controller verification.
+- [x] A **Supabase user id** and session token are created for the account.
+- [x] Everything else (child profile, birth data, chart, notes, Q&A,
       tarot, Parent Scent) stays **on the device** and is never uploaded.
-- [ ] **Google Analytics** is optional, off by default, and only collects
+- [x] **Google Analytics** is optional, off by default, and only collects
       the allow-listed non-content events listed in §2.
-- [ ] The app is **for adults / parents and legal guardians**; a child
+- [x] The app is **for adults / parents and legal guardians**; a child
       does not use it directly (see §6).
-- [ ] How to **delete the account and all data** (Settings → "Clear all"
-      wipes local data; deleting the Supabase account removes the e-mail —
-      provide the request route, e.g. the contact e-mail, until in-app
-      account deletion exists).
-- [ ] **Health disclaimer**: the app gives no medical advice and does not
+- [x] How to **delete the account and all data** (Settings → "Delete account
+      and data" calls the authenticated Supabase deletion function and erases
+      local data only after server confirmation; the privacy contact remains
+      the fallback route).
+- [x] **Health disclaimer**: the app gives no medical advice and does not
       collect health data (`HEALTH_NOTICE` in `legal.js`).
-- [ ] Contact for privacy requests: `ellakristioglo@gmail.com`.
+- [x] Contact for privacy requests: `ellakristioglo@gmail.com`.
 
 ## 6. Kids-category / age note
 
@@ -131,9 +133,9 @@ The written policy must now also say — before submission — that:
   their own e-mail; child data (a nickname and birth details) is entered by
   the parent and stays on the device."*
 
-## 7. Repo docs to update to match
+## 7. Remaining controller evidence
 
-`compliance/DATA_MAP.md`, `ROPA.md`, `LIA.md`, `DPIA.md` still say
-"no account, backend or external AI". Add the Supabase e-mail sign-in row
-(processor, EU region, DPA, retention, DSR path) — same follow-ups already
-listed in `compliance/VENDOR_REGISTER.md`.
+The repo records now include the Supabase e-mail sign-in and deletion flow.
+Controller evidence is still required for the exact project region, DPA,
+transfer mechanism, auth/log/backup retention, administrator access and the
+production deployment test of `delete-user`; see `VENDOR_REGISTER.md`.

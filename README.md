@@ -18,13 +18,15 @@ The application is a reflective and educational tool. It does not diagnose medic
 - Astronomy Engine, included under its original third-party license
 - Local GeoNames-derived city search data generated during deployment
 - Browser `localStorage` for on-device profiles, notes, calculations, and question history
+- Supabase passwordless e-mail authentication and an Edge Function for account deletion
 - Node.js regression tests
 - GitHub Actions and GitHub Pages
 - Optional Google Analytics 4, loaded only after consent
 
 ## Privacy architecture
 
-- No user accounts, application backend, remote database, payment flow, or external AI/LLM API
+- A parent account uses an e-mail address, Supabase user ID and session token; no child profile is stored in Supabase
+- The only application backend function deletes the signed-in parent's Supabase Auth account
 - Child profiles and free-text content remain in the browser on the user's device
 - Birthplace search uses a bundled dataset and does not send the query to a geocoding provider
 - Latitude and longitude are used in memory for a chart calculation and are removed before the child profile is stored

@@ -186,17 +186,12 @@ in-app text and `founder-pack/CONTENT_ASTROLOGY_FRAMEWORK.md`).
 
 **Sign-in required**: Yes — passwordless e-mail one-time code.
 
-**Demo account / how the reviewer signs in** — pick ONE and fill it in:
-
-- **Preferred:** add a test OTP in Supabase → Authentication (Email
-  provider settings → "Test OTP" / test accounts): e.g.
-  `review@childastrologyapp.com` → `424242`. Then in Review Notes:
-  *"Sign in with review@childastrologyapp.com. When asked for the
-  6-digit code, enter 424242 (test code, no e-mail is sent)."*
-- Fallback if that setting is unavailable: create a real inbox you
-  control for reviewers and put its address + how to retrieve the code
-  in the notes, or state that you will provide a fresh code within
-  minutes on request via Resolution Center.
+**Demo account / how the reviewer signs in:** create a real inbox you control
+for reviewers. Put its address and precise inbox-access instructions in App
+Review Notes so Apple can retrieve the Supabase OTP without contacting you.
+Do not publish a fixed code or client-side authentication bypass. If shared
+inbox access cannot be provided, arrange a fresh code through Resolution
+Center, understanding that this may delay review.
 
 **Review Notes** (paste, then adjust):
 ```

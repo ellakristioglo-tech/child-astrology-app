@@ -44,6 +44,5 @@ console.log(data, error);
 ```
 
 Expected while signed in: `{ ok: true }` and the account is gone. If the
-function is missing you get a 404 — the app falls back to signing out and
-wiping local data so the button still works, but deploy the function so the
-server‑side account is actually removed.
+function is missing or returns an error, the app keeps the session and local
+data, displays an error and allows retry or contact through the privacy route.

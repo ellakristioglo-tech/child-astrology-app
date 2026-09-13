@@ -11,6 +11,14 @@ test('city search is bundled and sends no birthplace query to a remote geocoder'
   const sources = ['index.html','city-search.js','child-modal.js','family-scent.js'].map(read).join('\n');
   assert.doesNotMatch(sources, /geocoding-api|open-meteo\.com/i);
   assert.match(read('index.html'), /city-search\.js/);
+  const cityPath = path.join(root, 'assets/cities-15000.min.json');
+  if (!fs.existsSync(cityPath)) {
+    const workflow = read('.github/workflows/ios-build.yml');
+    assert.match(workflow, /generate-cities\.mjs/);
+    assert.match(workflow, /test -s assets\/cities-15000\.min\.json/);
+    assert.match(read('.gitignore'), /^assets\/cities-15000\.min\.json$/m);
+    return;
+  }
   const cities = JSON.parse(read('assets/cities-15000.min.json'));
   assert.ok(cities.length > 20000);
   assert.ok(cities.some((row) => row[1] === 'Comrat' && row[7]));

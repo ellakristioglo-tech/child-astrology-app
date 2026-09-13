@@ -49,6 +49,9 @@ jobs:
           test -s assets/cities-15000.min.json
           echo "cities dataset: $(wc -c < assets/cities-15000.min.json) bytes"
 
+      - name: Run regression and iOS preflight checks
+        run: npm run test:ios
+
       - name: Prepare bundled web app
         run: npm run build:web
 

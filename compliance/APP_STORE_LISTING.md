@@ -1,6 +1,6 @@
 # App Store Connect — listing, age rating, pricing, review notes
 
-Version: 8 September 2026 — **repositioned for Guideline 4.3(b)**
+Version: 13 September 2026 — **repositioned for Guideline 4.3(b)**
 App: Child Astrology · `com.childastrology.app` · author Ella Kristioglo
 
 > **Why this rewrite:** Apple rejected build 1.0 (19) under Guideline
@@ -13,22 +13,12 @@ App: Child Astrology · `com.childastrology.app` · author Ella Kristioglo
 
 ---
 
-## 0. Consider renaming the app (biggest single 4.3(b) risk)
+## 0. Naming decision
 
-The word **"Astrology" in the app name** is the loudest signal that this
-is "another astrology app". Renaming materially improves the odds. The
-website/brand can stay `Child Astrology`; the App Store name can differ.
-
-Suggested names (pick one, then it must match the first screenshot's
-wordmark and the keywords):
-
-- **Child Compass** · nl **Kindkompas**
-- **Understand Your Child**
-- **Child Character Notes** · nl **Kindkarakter**
-- **Parent Observation Method**
-
-If Ella wants to keep `Child Astrology`, the appeal has to carry more
-weight — still doable, lower odds.
+The App Store and product name remains **Child Astrology**. This is a final
+product decision. Guideline 4.3(b) is addressed through the positioning,
+screenshots, six-step parent method, private notebook and review appeal below,
+not through a rename.
 
 ---
 
@@ -36,7 +26,7 @@ weight — still doable, lower odds.
 
 | Field | Value |
 |---|---|
-| Name | `Child Compass` *(recommended)* — or keep `Child Astrology` |
+| Name | `Child Astrology` |
 | Bundle ID | `com.childastrology.app` *(unchanged — bundle ID is internal)* |
 | Primary language | Dutch *(or English — provide both, see §2)* |
 | Primary category | **Education** *(was Lifestyle; Education distances it from the "Lifestyle → astrology" bucket)* |
@@ -65,7 +55,7 @@ Privacy Policy URL: `https://childastrologyapp.com/legal.html?doc=privacy`
 
 **Description** (≤ 4000):
 ```
-Child Compass is a calm observation method for parents and legal guardians
+Child Astrology is a calm observation method for parents and legal guardians
 who want to understand their child as an individual — and choose one
 small, concrete way to support them today.
 
@@ -107,7 +97,7 @@ PRIVACY BY DESIGN
   data or your notes.
 
 FOR ADULTS
-Child Compass is for a parent, not for a child. You confirm you are 18+
+Child Astrology is for a parent, not for a child. You confirm you are 18+
 and legally entitled to add each child's details. The app does not
 replace professional advice — if you are worried about your child's
 development, health, speech or behaviour, please contact a qualified
@@ -124,11 +114,54 @@ professional.
 **Keywords**:
 `opvoeding,kind begrijpen,temperament,emoties,leerstijl,oudergids,observeren,ontwikkeling,gezin,karakter`
 
-**Description**: translate the English block above, keeping the same
-section order and the "voor volwassen ouders / geen voorspellingen / geen
-horoscoopfeed / gegevens blijven op je apparaat / vervangt geen
-professioneel advies" phrasing already used in `legal.js` and the in-app
-consent screen.
+**Description**:
+```
+Child Astrology is een rustige observatiemethode voor ouders en wettelijke
+voogden die hun kind als individu willen begrijpen en vandaag één kleine,
+concrete manier van ondersteuning willen kiezen.
+
+De app is opgebouwd rond een vaste routine in zes stappen: observeren,
+verbinden, reflecteren, begrijpen, ondersteunen en evalueren. Daarnaast is er
+een privéruimte voor je eigen notities over één specifiek kind. Astrologie
+wordt alleen gebruikt als een vaste symbolische taal voor temperament en
+behoeften. De app doet geen voorspellingen en geeft geen medische,
+psychologische, logopedische of onderwijskundige beoordeling.
+
+WAT JE KUNT DOEN
+• Bewaar een privéprofiel per kind met een roepnaam, geboortegegevens en je
+  eigen gestructureerde notities over stemming, gedrag en ontwikkeling.
+• Gebruik de methode in zes stappen om één observatie om te zetten in één
+  ondersteunende actie.
+• Lees een duidelijke samenvatting van temperament, emotionele stijl,
+  communicatie en leerstijl, met praktische niet-klinische suggesties.
+• Vind ideeën voor beweging, school en dagelijkse situaties.
+• Stel een gewone opvoedvraag en ontvang een vast antwoord dat op het apparaat
+  wordt samengesteld. Bij gevoelige onderwerpen verwijst de app naar een
+  gekwalificeerde professional of officiële bron.
+• Gebruik optionele, duidelijk gescheiden onderdelen voor volwassenen: één
+  reflectiekaart per dag en Parent Scent. Deze onderdelen gebruiken nooit de
+  gegevens van je kind.
+
+WAT DE APP NIET IS
+Er is geen dagelijkse horoscoopfeed, waarzeggerij, handlezen of inhoud over
+wat er in de toekomst zal gebeuren. De nadruk ligt op een herhaalbare
+opvoedmethode en je eigen notities. Deze blijven volledig op je apparaat.
+
+PRIVACY BY DESIGN
+• Elk kinderprofiel, elke notitie, berekening en vraag blijft op je apparaat
+  en wordt niet geüpload.
+• Inloggen gebruikt alleen je e-mailadres en een eenmalige code. Je kunt je
+  account en alle lokale gegevens verwijderen via Instellingen.
+• Optionele analytics staat standaard uit en ontvangt nooit namen,
+  geboortegegevens of notities.
+
+VOOR VOLWASSENEN
+Child Astrology is bedoeld voor een ouder, niet voor een kind. Je bevestigt dat
+je 18 jaar of ouder bent en bevoegd bent om de gegevens van elk kind toe te
+voegen. De app vervangt geen professioneel advies. Neem bij zorgen over de
+ontwikkeling, gezondheid, spraak of het gedrag van je kind contact op met een
+gekwalificeerde professional.
+```
 
 *(RU / UA store localisations optional; only add ones you can proofread.)*
 
@@ -182,16 +215,15 @@ in-app text and `founder-pack/CONTENT_ASTROLOGY_FRAMEWORK.md`).
 
 ## 6. App Review Information (item 11)
 
-**Contact**: Ella Kristioglo · `ellakristioglo@gmail.com` · [phone].
+**Contact**: Ella Kristioglo · `ellakristioglo@gmail.com` · use the verified
+telephone number already saved in App Store Connect.
 
 **Sign-in required**: Yes — passwordless e-mail one-time code.
 
-**Demo account / how the reviewer signs in:** create a real inbox you control
-for reviewers. Put its address and precise inbox-access instructions in App
-Review Notes so Apple can retrieve the Supabase OTP without contacting you.
-Do not publish a fixed code or client-side authentication bypass. If shared
-inbox access cannot be provided, arrange a fresh code through Resolution
-Center, understanding that this may delay review.
+**Demo account / how the reviewer signs in:** registration is open. The reviewer
+enters any e-mail address whose inbox they can access and uses the six-digit
+Supabase OTP delivered to that inbox. No pre-created account, shared password,
+fixed code or client-side authentication bypass is required.
 
 **Review Notes** (paste, then adjust):
 ```
@@ -259,10 +291,10 @@ When all boxes pass: **Add build → Add for Review → Submit for Review**.
 
 Apple's position: too many astrology apps; ours "duplicates" them.
 
-**Do all of these together for the next submission (build 1.0 (20)+):**
+**Do all of these together for the next submission:**
 
-1. **Rename** the App Store name to a parenting name (§0). This is the
-   single highest-impact change.
+1. **Keep the App Store name `Child Astrology`** and use the parenting-focused
+   subtitle and first screenshot to explain the app's purpose immediately.
 2. **Paste the repositioned copy** from §2 (subtitle, promo text,
    keywords, description) in every localisation. Keep the astrology
    mentions minimal and always framed as "a symbolic vocabulary".

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "test": "node --test tests/*.test.js",
+    "test:ios": "npm test && node scripts/ios-preflight.mjs",
     "build:web": "node scripts/prepare-web.mjs",
     "ios:sync": "npm run build:web && npx cap sync ios"
   },

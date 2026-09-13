@@ -1,6 +1,6 @@
 # Resolution Center reply — Guideline 4.3(b) (Design – Spam)
 
-Submission ID: c5a95203-1cd9-419d-8a1f-9ccd3a884fd5 · App: Child Astrology (renaming to Child Compass) · Version 1.0
+Submission ID: c5a95203-1cd9-419d-8a1f-9ccd3a884fd5 · App: Child Astrology · Version 1.0
 
 Paste the block below into the App Review conversation in App Store Connect
 when you resubmit build 1.0 (20). Keep it factual and specific; do not
@@ -14,7 +14,7 @@ Thank you for the detailed review. We have made substantial changes for
 this build and would like to explain why we believe the app is not a
 duplicate of an existing category.
 
-**What the app is.** Child Compass is a structured observation tool for
+**What the app is.** Child Astrology is a structured observation tool for
 one adult parent or legal guardian to use about one specific child. Its
 core is a fixed six-step routine (observe, connect, reflect, understand,
 support, evaluate) and a private, on-device notebook where the parent
@@ -48,7 +48,9 @@ with links to official sources instead of advice.
 
 **Changes in this submission:**
 
-- App Store name changed from "Child Astrology" to "Child Compass".
+- The established App Store name **Child Astrology** is retained. The subtitle,
+  description and screenshots now lead with the structured parenting method
+  and private notebook so the product's purpose is immediately clear.
 - Primary category changed to Education.
 - Subtitle, promotional text, keywords and description rewritten to lead
   with the observation method and the per-child notebook; astrology

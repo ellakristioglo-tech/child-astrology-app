@@ -8,7 +8,7 @@ Paste the block below into **App Store Connect → App Review → (this submissi
 
 Hello,
 
-Thank you for the review. The requested information follows. Items 2–6 should also be added to the App Review Information Notes field. Before sending, replace the bracketed sign-in details below with a real reviewer inbox that receives Supabase OTP messages and confirm the current build number.
+Thank you for the review. The requested information follows. Items 2–6 should also be added to the App Review Information Notes field. This response applies to the current build created from commit `26af2be` or later.
 
 **1. Screen recording**
 A screen recording captured on a physical iPhone running the current iOS, with the current TestFlight build installed, is attached. In order it shows: launching the app; the one‑time adult gate (confirm "I am 18+", accept the Terms, choose Allow/Don't allow for optional analytics); e‑mail sign‑in using the reviewer inbox and the 6‑digit code delivered by Supabase; the Home screen; creating a child profile (parental‑authority confirmation, then nickname, birth date, birth time, birth‑place search, Save) and the resulting symbolic natal chart; the Tarot "card of the day" and the adults‑only "Parent Scent" feature; and finally Settings › Privacy › "Delete account and data", which deletes the sign‑in account on the server and erases all local data, returning the app to the sign‑in screen. The app has no user‑generated content shared between users and no paid content or in‑app purchases.
@@ -18,7 +18,7 @@ Child Astrology is a private reflection tool for adult parents and legal guardia
 
 **3. Setup and access instructions**
 - Launch the app. Complete the one‑time gate: tick "I am 18+", tick "I accept the Terms", choose "Allow" or "Don't allow" for optional analytics, tap "Open app".
-- Sign in: enter `[REVIEWER INBOX]`, tap Continue, retrieve the Supabase message from `[INBOX ACCESS INSTRUCTIONS]`, enter the delivered 6-digit code and tap Confirm. The app has no fixed or client-side review code.
+- Sign in: enter any e-mail address whose inbox you can access, tap Continue, retrieve the Supabase message in that inbox, enter the delivered 6-digit code and tap Confirm. Registration is open and no pre-created account is required. The app has no fixed or client-side review code.
 - On Home tap "Add a child". Confirm the parental‑authority statement. Enter any nickname, a birth date, a birth time (or tick "time unknown"), then type at least 3 letters of a city (e.g. "Rotterdam") and pick a result. Tap Save. The symbolic natal chart is generated on device.
 - All other sections (Tarot, Parent Scent, Method, Sport, School, 10 tips, Consultations, Settings) are on the bottom navigation.
 - Account/data deletion: Settings › Privacy › "Delete account and data". "Sign out" behaviour is included in the same action.

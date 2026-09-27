@@ -8,7 +8,7 @@ Paste the block below into **App Store Connect → App Review → (this submissi
 
 Hello,
 
-Thank you for the review. The requested information follows. Items 2–6 should also be added to the App Review Information Notes field. This response applies to the current build created from commit `26af2be` or later.
+Thank you for the review. The requested information follows. Items 2–6 should also be added to the App Review Information Notes field. This response applies to the new build produced from the current `main` branch after the iOS release-readiness checks pass; replace this sentence with the exact build number shown in App Store Connect before sending.
 
 **1. Screen recording**
 A screen recording captured on a physical iPhone running the current iOS, with the current TestFlight build installed, is attached. In order it shows: launching the app; the one‑time adult gate (confirm "I am 18+", accept the Terms, choose Allow/Don't allow for optional analytics); e‑mail sign‑in using the reviewer inbox and the 6‑digit code delivered by Supabase; the Home screen; creating a child profile (parental‑authority confirmation, then nickname, birth date, birth time, birth‑place search, Save) and the resulting symbolic natal chart; the Tarot "card of the day" and the adults‑only "Parent Scent" feature; and finally Settings › Privacy › "Delete account and data", which deletes the sign‑in account on the server and erases all local data, returning the app to the sign‑in screen. The app has no user‑generated content shared between users and no paid content or in‑app purchases.

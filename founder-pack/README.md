@@ -9,7 +9,8 @@ This pack is the product source of truth for the current free, local-first relea
 3. [Child Safety & Automated-Answer Rules](CHILD_SAFETY_AI_RULES.md)
 4. [MVP Specification](MVP_SPECIFICATION.md)
 
-Public brand: **Child Astrology — Ella Kristioglo**.
+Public brand: **Child Astrology — Vera Eluna**. The legal controller remains
+**Ella Kristioglo** in privacy and compliance documents.
 Core personalised experience: **«Код ребёнка» / Child Code**.
 
 If code, marketing copy or a future feature conflicts with this pack, the safer and narrower rule in this pack wins until the documents are deliberately revised.

@@ -1,1 +1,4 @@
 assets/cities-15000.min.json
+node_modules/
+dist/
+ios/

@@ -3,7 +3,7 @@
 Submission ID: c5a95203-1cd9-419d-8a1f-9ccd3a884fd5 · App: Child Astrology · Version 1.0
 
 Paste the block below into the App Review conversation in App Store Connect
-when you resubmit build 1.0 (20). Keep it factual and specific; do not
+when you resubmit the next verified build (21 or later). Keep it factual and specific; do not
 argue about the number of astrology apps in general.
 
 ---

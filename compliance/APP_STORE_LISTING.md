@@ -182,7 +182,23 @@ gekwalificeerde professional.
 
 ## 4. Age Rating questionnaire (item 9)
 
-Answer honestly; expected result **4+** (at most 9+).
+Answer honestly in the current questionnaire. The app's own onboarding and
+Terms require an adult parent/guardian, so after completing the content
+questions choose **Override to Higher Age Rating → 18+**. This keeps the App
+Store rating aligned with the in-app 18+ policy; do not select Made for Kids.
+
+The current questionnaire also asks about in-app controls, capabilities,
+medical/wellness topics and violent themes. Recheck the live wording in App
+Store Connect at submission time. For the present build:
+
+- Parental controls / age assurance: **Yes** only where Apple describes the
+  app's mandatory 18+ self-attestation; do not claim verified-ID assurance.
+- User-generated content, messaging between users, advertising and unrestricted
+  web access: **No**.
+- Medical or treatment information: **None** — the app does not diagnose or
+  recommend treatment and routes sensitive questions to official sources.
+- Wellness topics: answer according to Apple's displayed examples; the product
+  contains general parent-observation material but no clinical wellness program.
 
 - Cartoon/Fantasy Violence, Realistic Violence, Sexual Content, Nudity,
   Profanity, Alcohol/Tobacco/Drugs, Horror/Fear, Mature/Suggestive: **None**
@@ -192,7 +208,7 @@ Answer honestly; expected result **4+** (at most 9+).
   app routes medical questions to official sources instead of answering).
 - Unrestricted Web Access: **No** (external links open the system browser
   only after a deliberate tap; there is no in-app browser).
-- Made for Kids: **No**.
+- Made for Kids: **No**; override the calculated rating to **18+**.
 - Data collection for advertising / tracking: **No**.
 
 If the questionnaire asks about "fortune telling / horoscopes": describe
@@ -210,6 +226,12 @@ in-app text and `founder-pack/CONTENT_ASTROLOGY_FRAMEWORK.md`).
   territories in a later version once reviewed for those markets.
 - Pre-orders: no. Release: **Manually release this version** after
   approval, so you control the go-live moment.
+
+Before selecting EU availability, complete the Digital Services Act trader
+declaration in **Business → Agreements → Compliance → Digital Services Act**.
+The account holder must decide the trader status. If declaring trader status,
+Apple requires verified public contact details (address or P.O. Box for an
+individual, phone number and e-mail) and supporting documentation.
 
 ---
 
@@ -308,7 +330,8 @@ Apple's position: too many astrology apps; ours "duplicates" them.
 5. **Reply in Resolution Center** with the text in
    `APP_REVIEW_APPEAL_43b.md` when you resubmit.
 6. Fix the icon (Guideline 2.3.8) — handled in `ios-build.yml`
-   ("Install the real app icon" step) from build 1.0 (20).
+   ("Install the real app icon" step) in every build produced by the current
+   workflow (build 21 or later).
 
 If Apple still rejects under 4.3(b) after this, the remaining routes are:
 a formal appeal to the App Review Board (button in Resolution Center), or

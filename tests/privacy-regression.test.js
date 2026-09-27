@@ -14,6 +14,8 @@ test('language changes refresh dynamic post-login screens', () => {
   assert.match(read('onboarding-guide.js'), /addEventListener\('app:language-changed'/);
   assert.match(read('ui-bindings.js'), /addEventListener\('app:language-changed'/);
   assert.match(read('support-center.js'), /addEventListener\('app:language-changed'/);
+  assert.match(read('onboarding-guide.js'), /\.launch-gate,\.auth-gate/);
+  assert.match(read('onboarding-guide.js'), /post-consent-guide'\)\?\.remove\(\)/);
 });
 
 test('iOS dependencies and App Store instructions are reproducible and current', () => {

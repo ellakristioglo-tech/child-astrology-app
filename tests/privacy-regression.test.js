@@ -7,6 +7,31 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const read = (name) => fs.readFileSync(path.join(root, name), 'utf8');
 
+test('language changes refresh dynamic post-login screens', () => {
+  const app = read('app.js');
+  assert.match(app, /app:language-changed/);
+  assert.match(app, /btn\.dataset\.language===lang/);
+  assert.match(read('onboarding-guide.js'), /addEventListener\('app:language-changed'/);
+  assert.match(read('ui-bindings.js'), /addEventListener\('app:language-changed'/);
+  assert.match(read('support-center.js'), /addEventListener\('app:language-changed'/);
+});
+
+test('iOS dependencies and App Store instructions are reproducible and current', () => {
+  const packageJson = JSON.parse(read('package.json'));
+  const packageLock = JSON.parse(read('package-lock.json'));
+  for (const dependency of ['@capacitor/core','@capacitor/ios']) {
+    assert.equal(packageJson.dependencies[dependency], '7.6.9');
+    assert.equal(packageLock.packages[`node_modules/${dependency}`].version, '7.6.9');
+  }
+  assert.equal(packageJson.devDependencies['@capacitor/cli'], '7.6.9');
+  assert.equal(packageLock.packages['node_modules/@capacitor/cli'].version, '7.6.9');
+  assert.match(read('.github/workflows/ios-build.yml'), /run: npm ci/);
+  const listing = read('compliance/APP_STORE_LISTING.md');
+  assert.match(listing, /Override to Higher Age Rating → 18\+/);
+  assert.match(listing, /Digital Services Act trader/);
+  assert.doesNotMatch(`${listing}\n${read('compliance/APP_REVIEW_APPEAL_43b.md')}`, /build 1\.0 \(20\)/);
+});
+
 test('city search is bundled and sends no birthplace query to a remote geocoder', () => {
   const sources = ['index.html','city-search.js','child-modal.js','family-scent.js'].map(read).join('\n');
   assert.doesNotMatch(sources, /geocoding-api|open-meteo\.com/i);

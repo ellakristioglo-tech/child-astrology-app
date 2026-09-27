@@ -184,4 +184,8 @@
     if (action === 'delete-child') window.deleteChild?.(Number(actionButton.dataset.childId));
     if (action === 'delete-note') window.deleteNote?.(Number(actionButton.dataset.noteId));
   });
+
+  document.addEventListener('app:language-changed', () => {
+    if (document.querySelector('#methods-hub.active')) ensureMethodsHub();
+  });
 })();

@@ -154,6 +154,7 @@
       setTimeout(refreshLanguage,120);
     });
     window.addEventListener('storage',(event)=>{if(event.key==='language')refreshLanguage();});
+    document.addEventListener('app:language-changed',refreshLanguage);
   }
 
   function init(){addStyle();addSection();addNavigation();bindNavigation();refreshLanguage();}

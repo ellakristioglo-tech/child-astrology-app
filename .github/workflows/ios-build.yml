@@ -32,7 +32,7 @@ jobs:
           esac
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build local city search data
         shell: bash

@@ -171,8 +171,8 @@
   function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function safeDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
 
-  function applyI18n() {
-    lang = detectLang();
+  function applyI18n(forcedLang) {
+    lang = LANGS.indexOf(forcedLang) >= 0 ? forcedLang : detectLang();
     qa('[data-i18n]').forEach(function (el) { el.textContent = tr(el.getAttribute('data-i18n')); });
     if (emailInput) emailInput.setAttribute('placeholder', tr('emailPh'));
     qa('[data-auth-lang]').forEach(function (button) {
@@ -188,7 +188,16 @@
     if (typeof window.changeLanguage === 'function') {
       try { window.changeLanguage(code); } catch (e) {}
     }
-    applyI18n();
+    // Apply synchronously as well.  The app-level language function emits an
+    // event, but the gate must not depend on wrapper/load ordering.
+    applyI18n(code);
+  }
+
+  function setApplicationBlocked(blocked) {
+    ['.app', '.mobile-bottom-nav', '#mobileMethodsMenu'].forEach(function (selector) {
+      var element = document.querySelector(selector);
+      if (element) element.toggleAttribute('inert', blocked);
+    });
   }
 
   function showStep(step) {
@@ -202,6 +211,7 @@
     if (!gate.hidden) return;
     gate.hidden = false;
     document.body.classList.add('ca-auth-open');
+    setApplicationBlocked(true);
     showStep('email');
     setTimeout(function () { try { emailInput.focus(); } catch (e) {} }, 50);
   }
@@ -211,6 +221,7 @@
     if (sessionWatch) { clearInterval(sessionWatch); sessionWatch = null; }
     gate.hidden = true;
     document.body.classList.remove('ca-auth-open');
+    setApplicationBlocked(false);
     safeSet(AUTHED_KEY, '1');
     // a magic-link return leaves #access_token=... in the URL — clean it
     try {
@@ -360,18 +371,12 @@
       sendCode();
     });
 
-    document.addEventListener('click', function (e) {
-      var t = e.target.closest ? e.target.closest('[data-language],[data-gate-lang]') : null;
-      if (t) setTimeout(applyI18n, 0);
-    }, true);
+    document.addEventListener('app:language-changed', function (event) {
+      var next = event && event.detail && event.detail.language;
+      if (LANGS.indexOf(next) >= 0) safeSet(LANG_KEY, next);
+      applyI18n(next);
+    });
     window.addEventListener('storage', function (e) { if (e.key === LANG_KEY) applyI18n(); });
-
-    var origChangeLanguage = window.changeLanguage;
-    if (typeof origChangeLanguage === 'function' && !origChangeLanguage.__caAuthWrapped) {
-      var wrapped = function () { var r = origChangeLanguage.apply(this, arguments); setTimeout(applyI18n, 0); return r; };
-      wrapped.__caAuthWrapped = true;
-      window.changeLanguage = wrapped;
-    }
   }
 
   function complianceAccepted() {

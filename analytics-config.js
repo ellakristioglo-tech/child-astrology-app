@@ -79,7 +79,7 @@ window.CHILD_ASTROLOGY_ANALYTICS = Object.freeze({
 (function loadPostConsentGuide(){
   if(document.querySelector('script[data-post-consent-guide]'))return;
   const script=document.createElement('script');
-  script.src='onboarding-guide.js?v=20260902b';
+  script.src='onboarding-guide.js?v=20261005a';
   script.dataset.postConsentGuide='1';
   document.head.appendChild(script);
 })();

@@ -14,8 +14,12 @@ test('language changes refresh dynamic post-login screens', () => {
   assert.match(read('onboarding-guide.js'), /addEventListener\('app:language-changed'/);
   assert.match(read('ui-bindings.js'), /addEventListener\('app:language-changed'/);
   assert.match(read('support-center.js'), /addEventListener\('app:language-changed'/);
-  assert.match(read('onboarding-guide.js'), /\.launch-gate,\.auth-gate/);
-  assert.match(read('onboarding-guide.js'), /post-consent-guide'\)\?\.remove\(\)/);
+  const guide = read('onboarding-guide.js');
+  assert.match(guide, /AUTHED_KEY='ca_authed'/);
+  assert.match(guide, /auth&&!auth\.hidden/);
+  assert.match(guide, /!authenticated\(\)\|\|blockingGate\(\)/);
+  assert.match(guide, /setAppInert\(true\)/);
+  assert.doesNotMatch(guide, /\.launch-gate,\.auth-gate/);
 });
 
 test('iOS dependencies and App Store instructions are reproducible and current', () => {

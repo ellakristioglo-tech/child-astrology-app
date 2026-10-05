@@ -110,9 +110,24 @@ test('sign-in gate switches all four languages and has no client-side review byp
     assert.match(source, new RegExp(`data-auth-lang="${language}"`), `missing auth language ${language}`);
   }
   assert.match(source, /function selectLanguage\(code\)/);
+  assert.match(source, /applyI18n\(code\)/);
+  assert.match(source, /addEventListener\('app:language-changed'/);
+  assert.doesNotMatch(source, /__caAuthWrapped/);
+  assert.match(source, /setApplicationBlocked\(true\)/);
+  assert.match(source, /setApplicationBlocked\(false\)/);
   assert.match(source, /signInWithOtp/);
   assert.match(source, /verifyOtp/);
   assert.doesNotMatch(source, /REVIEW_EMAIL|REVIEW_CODE|424242|review@childastrologyapp\.com/);
+});
+
+test('launch gate language switching is event-driven and keeps entered consent choices', () => {
+  const source = read('ui-translations-fix.js');
+  assert.match(source, /addEventListener\('app:language-changed'/);
+  assert.doesNotMatch(source, /originalLanguage/);
+  assert.doesNotMatch(source, /window\.changeLanguage=wrapped/);
+  assert.match(source, /previous=\{adult:/);
+  assert.match(source, /adult\.checked=previous\.adult/);
+  assert.match(source, /terms\.checked=previous\.terms/);
 });
 
 test('account deletion waits for explicit server confirmation before local erasure', () => {

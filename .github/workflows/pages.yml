@@ -38,7 +38,7 @@ jobs:
       - name: Privacy and security regression tests
         run: node --test tests/*.test.js
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Prepare automatic app updates
         shell: bash
         run: |

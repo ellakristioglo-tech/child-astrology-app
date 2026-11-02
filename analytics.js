@@ -198,9 +198,18 @@
     document.body.appendChild(backdrop);
     backdrop.querySelector('#analyticsPreferenceToggle').focus();
   }
+  function launchConsentPending() {
+    // The launch gate owns the first choice, including before its delayed render.
+    try {
+      const parent = JSON.parse(localStorage.getItem('child_astrology_parent_confirmed_v1') || 'null');
+      return !parent || parent.launchGate !== true;
+    } catch (_) { return true; }
+  }
   function renderConsent() {
     document.getElementById('analyticsConsentPrompt')?.remove();
-    if (!validMeasurementId() || consentState()) return;
+    if (!validMeasurementId() || consentState() || launchConsentPending() ||
+        document.querySelector('.launch-gate') ||
+        document.querySelector('#auth-gate:not([hidden])')) return;
     const ui = text();
     const box = document.createElement('div');
     box.id = 'analyticsConsentPrompt';
@@ -242,6 +251,8 @@
   }
 
   window.AppAnalytics = {track, render:renderPanel, setConsent, openPreferences, getConsent:()=>consentState() || 'unset', resetConsent:()=>{localStorage.removeItem(CONSENT_KEY);renderPanel();renderConsent();}, isConnected:validMeasurementId};
+  document.addEventListener('app:launch-gate-changed', renderConsent);
+  document.addEventListener('app:language-changed', () => { renderPanel(); renderConsent(); });
   document.addEventListener('app:consultation-question', (event) => track('consultation_question', {topic:publicTopic(event.detail?.topic || 'other')}));
   document.addEventListener('app:child-created', () => track('child_profile_created'));
   document.addEventListener('app:child-analysis', () => track('child_analysis_generated'));

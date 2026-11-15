@@ -49,7 +49,8 @@
   }
 
   const params=new URLSearchParams(location.search);
-  let language=['ru','ua','en','nl'].includes(params.get('lang'))?params.get('lang'):(localStorage.getItem('language')||'nl');
+  function supportedLanguage(value){return value==='uk'?'ua':['ru','ua','en','nl'].includes(value)?value:null;}
+  let language=supportedLanguage(params.get('lang'))||supportedLanguage(localStorage.getItem('language'))||'nl';
   let selected=Math.max(0,['privacy','cookies','terms','rights'].indexOf(params.get('doc')));
   function render(){
     const ui=alignParentScent(translated(language),language);document.documentElement.lang=language==='ua'?'uk':language;
